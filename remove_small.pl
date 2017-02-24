@@ -1,4 +1,5 @@
-#!/usr/bin/perl
+####download perl script from http://www.bioinformatics-made-simple.com/2012/07/how-to-filter-sequence-by-their-length.html######
+#!/usr/bin/perl 
 use strict;
 use warnings;
  
