@@ -1,0 +1,73 @@
+################1) standard N50 statistics ######################
+total transcripts: 1078742
+############################################################
+1) N50 to get an idea the number of transcript and genes
+############################################################
+################################
+## Counts of transcripts, etc.
+################################
+Total trinity 'genes':  571975
+Total trinity transcripts:      1078742
+Percent GC: 44.30
+########################################
+Stats based on ALL transcript contigs:
+########################################
+        Contig N10: 3847
+        Contig N20: 2499
+        Contig N30: 1770
+        Contig N40: 1268
+        Contig N50: 910
+
+        Median contig length: 351
+        Average contig: 624.52
+        Total assembled bases: 673696009
+#####################################################
+## Stats based on ONLY LONGEST ISOFORM per 'GENE':
+#####################################################
+        Contig N10: 3145
+        Contig N20: 1936
+        Contig N30: 1296
+        Contig N40: 920
+        Contig N50: 677
+
+        Median contig length: 330
+        Average contig: 538.29
+        Total assembled bases: 307888670
+######################################
+
+#######################################
+2) remove smaller-length (<300bp) transcripts 
+#######################################
+ perl remove_small.pl 300 Amm_alltissues.fasta > Amm_alltissues_longer300.fasta
+ grep '>' Amm_alltissues_longer300.fasta | wc -l
+ 649210 (40% are smaller transcripts)
+ #############reevaluate this filtered transcriptome#####################
+ ################################
+## Counts of transcripts, etc.
+################################
+Total trinity 'genes':  326180
+Total trinity transcripts:      649210
+Percent GC: 44.04
+
+########################################
+Stats based on ALL transcript contigs:
+########################################
+
+        Contig N10: 4207
+        Contig N20: 2810
+        Contig N30: 2069
+        Contig N40: 1558
+        Contig N50: 1176
+
+        Median contig length: 546
+        Average contig: 877.74
+        Total assembled bases: 569839424
+
+
+#####################################################
+## Stats based on ONLY LONGEST ISOFORM per 'GENE':
+#####################################################
+
+        Contig N10: 3542
+        Contig N20: 2293
+ 
