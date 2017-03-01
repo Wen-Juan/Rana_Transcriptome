@@ -70,4 +70,7 @@ Stats based on ALL transcript contigs:
 
         Contig N10: 3542
         Contig N20: 2293
- 
+3) remove redundancy of transcript:
+total transcript: 471129
+############################and########################
+
