@@ -70,7 +70,17 @@ Stats based on ALL transcript contigs:
 
         Contig N10: 3542
         Contig N20: 2293
-3) remove redundancy of transcript:
-total transcript: 471129
+        
+3) based on longer300.fasta, select most expressed + tpm>3
+#########gene number:301849#############################
+
+4) based on longer300.fasta, select most expressed + tpm>4
+#########gene number: 271124 #############################
+
+5) based on previous one, adding percentage 30
+#########gene number: 258959 #############################
+        
+6) remove redundancy of transcript: 0.85
+total transcript: 
 ############################and########################
 
