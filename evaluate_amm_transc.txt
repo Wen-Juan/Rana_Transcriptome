@@ -112,3 +112,23 @@ Representing:
         21      Fragmented BUSCOs
         32      Missing BUSCOs
         429     Total BUSCO groups searched
+
+#########Mel's single clutch BUSCO#########
+Summarized benchmarks in BUSCO notation:
+        C:91%[D:52%],F:1.6%,M:6.5%,n:429
+
+Representing:
+        169     Complete Single-copy BUSCOs
+        225     Complete Duplicated BUSCOs
+        7       Fragmented BUSCOs
+        28      Missing BUSCOs
+        429     Total BUSCO groups searched
+#########after filtering##################
+      C:75%[D:9.3%],F:2.0%,M:22%,n:429
+
+Representing:
+        284     Complete Single-copy BUSCOs
+        40      Complete Duplicated BUSCOs
+        9       Fragmented BUSCOs
+        96      Missing BUSCOs
+        429     Total BUSCO groups searched
