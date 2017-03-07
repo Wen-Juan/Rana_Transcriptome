@@ -83,4 +83,32 @@ Stats based on ALL transcript contigs:
 6) remove redundancy of transcript: 0.85
 total transcript: 
 ############################and########################
+#########gene number:241516############################
 
+7) remove transcript smaller than 350bp,
+#########gene number: 204057#############################
+
+The result for Amm_alltissues.fasta is
+
+Summarized benchmarks in BUSCO notation:
+        C:95%[D:84%],F:1.3%,M:3.0%,n:429
+
+Representing:
+        46      Complete Single-copy BUSCOs
+        364     Complete Duplicated BUSCOs
+        6       Fragmented BUSCOs
+        13      Missing BUSCOs
+        429     Total BUSCO groups searched
+
+
+The result for amm_all_longer300_mostexp_tpm4_perc30_removdupl0.8.fasta is
+
+Summarized benchmarks in BUSCO notation:
+        C:87%[D:52%],F:4.8%,M:7.4%,n:429
+
+Representing:
+        150     Complete Single-copy BUSCOs
+        226     Complete Duplicated BUSCOs
+        21      Fragmented BUSCOs
+        32      Missing BUSCOs
+        429     Total BUSCO groups searched
