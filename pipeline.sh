@@ -137,9 +137,63 @@ do
 kallisto quant -i /scratch/beegfs/weekly/wjma/Amm_RNAseq/rt_TE_spain.idx -o ./${f%%_pairedR1.fastq} -b 100 ${f%%_pairedR1.fastq}_pairedR1.fastq ${f%%_pairedR1.fastq}_pairedR2.fastq
 done
 
+#####5.expression count matrix and differential expression analysis######################
+###############comparison between Ammarnas XX female and XY male brains 
+module add UHTS/Assembler/trinityrnaseq/2.4.0
+module add R/3.3.2
+/software/UHTS/Assembler/trinityrnaseq/2.4.0/util/abundance_estimates_to_matrix.pl \
+--est_method kallisto --out_prefix Amm_FM_brain \
+--name_sample_by_basedir \
+A10FB/abundance.tsv \
+A10MB/abundance.tsv \
+A15FB/abundance.tsv \
+A15MB/abundance.tsv \
+A16FB/abundance.tsv \
+A16MB/abundance.tsv \
+Am2MB/abundance.tsv \
+Am4FB/abundance.tsv \
+Am6FB/abundance.tsv \
+Am6MB/abundance.tsv
 
+###############comparison among Ammarnas XY brain, liver and testis
+module add UHTS/Assembler/trinityrnaseq/2.4.0
+module add R/3.3.2
+/software/UHTS/Assembler/trinityrnaseq/2.4.0/util/abundance_estimates_to_matrix.pl \
+--est_method kallisto --out_prefix Amm_XY_BLT \
+--name_sample_by_basedir \
+A10MB/abundance.tsv \
+A15MB/abundance.tsv \
+A15ML1/abundance.tsv \
+A15MT1/abundance.tsv \
+A16MB/abundance.tsv \
+Am1MT1/abundance.tsv \
+Am2MB/abundance.tsv \
+Am2ML1/abundance.tsv \
+Am2MT1/abundance.tsv \
+Am4ML1/abundance.tsv \
+Am4MT1/abundance.tsv \
+Am6MB/abundance.tsv \
+Am6ML1/abundance.tsv \
+Am6MT1/abundance.tsv
 
-
+###############comparison among Ammarnas XY brain, liver and testis
+module add UHTS/Assembler/trinityrnaseq/2.4.0
+module add R/3.3.2
+/software/UHTS/Assembler/trinityrnaseq/2.4.0/util/abundance_estimates_to_matrix.pl \
+--est_method kallisto --out_prefix Amm_TV_froglets \
+--name_sample_by_basedir \
+Am1_434_L5/abundance.tsv \
+Am2_434_L4/abundance.tsv \
+Am2_463_L3/abundance.tsv \
+Am4_434_L3/abundance.tsv \
+Am4_461_L7/abundance.tsv \
+Am6_462_L6/abundance.tsv \
+Tv1_432_L2/abundance.tsv \
+Tv1_463_L6/abundance.tsv \
+Tv2_461_L3/abundance.tsv \
+Tv2_461_L5/abundance.tsv \
+Tv2_464_L3/abundance.tsv \
+Tv3_431_L7/abundance.tsv
 
 
 
