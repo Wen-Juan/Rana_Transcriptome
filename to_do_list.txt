@@ -5,3 +5,6 @@
 #23.02.2017
 1) troubleshooting bowtie2 output and check the mapping statistics.
 2) running kallisto.
+
+#19042017
+busy with grant writing, will carry on after this proposal submission.
