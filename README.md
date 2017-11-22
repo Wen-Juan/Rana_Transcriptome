@@ -56,4 +56,6 @@ Am2_233_L1/abundance.tsv \
 Am2_274_L1/abundance.tsv \
 ...
 
-# Analyse differential (sex-biased) gene expression with edgeR.
+# Step 3 Analyse differential (sex-biased) gene expression with edgeR.
+
+# Step 4 Gene divergence analysis (dN/dS), with PRANK v140603 and codeml in PAML.
