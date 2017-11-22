@@ -3,8 +3,8 @@ This projects intends to make a complete transcriptome, including 5 developmenta
 
 # A brief pipeline for this project is as follows:
 
-# Step1: Transcriptome assembly # by Mellisa Toups
-AmmMT_HIMin1.fasta - full transciptome-masked using Dan db at 75% - 61,835 transcripts
+# Step1: Transcriptome assembly with Trinity
+AmmMT_HIMin1.fasta - full transciptome-masked using Dan's db at 75% - 61,835 transcripts
 #sample used to assembly:
 Froglets:
 Am2_231_L1
@@ -21,19 +21,20 @@ A12FB - brain
 A8FL1 - liver
 A8FO2 - ovaries
 
-#Step2: Kalliso to quantify gene expression.
+# Step2: Quantifying abundances of transcripts from RNA-Seq with Kallisto
 #separate developmental stages and adult tissues
 Total samples:
 developmental stages: 5
 stage female male: at least 3 per sex per stage, 35 samples in total.
 adults:
 9 pairs, 3 tissues, 29 libraries (almost 5 replicates per tissue per sex)
-
 #Step2.1: developmental stages
+
 # index the transcriptome
 module add UHTS/Analysis/kallisto/0.43.0
 kallisto index -i am_transcripts.idx /scratch/beegfs/monthly/wjma/amm_rna/expression/AmmMT_HIMin1.fasta
-#count the counts of RNAseq
+
+# quantify transcript counts
 #for each stage, do the quantification using the following scripts.
 module add UHTS/Analysis/kallisto/0.43.0
 for f in Am2_23*_pairedR1.fastq
@@ -43,7 +44,7 @@ done
 ...
 #Step2.2:adult tissues for quantifying gene expression.
 
-#Step3:gene expression matrix generation.
+# Create gene expression matrix.
 module add UHTS/Assembler/trinityrnaseq/2.4.0
 module add UHTS/Analysis/kallisto/0.43.0
 module add R/3.3.2
@@ -54,3 +55,5 @@ Am2_231_L1/abundance.tsv \
 Am2_233_L1/abundance.tsv \
 Am2_274_L1/abundance.tsv \
 ...
+
+# Analyse differential (sex-biased) gene expression with edgeR.
