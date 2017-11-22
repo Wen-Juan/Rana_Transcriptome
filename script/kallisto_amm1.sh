@@ -12,10 +12,10 @@
 #BSUB -J kallistoamm1.sh
 
 #loading necessary modules and databases
-module add UHTS/Analysis/kallisto/0.43.0
 
-for f in Am*_pairedR1.fastq
+module add UHTS/Analysis/kallisto/0.43.0
+for f in Am2_23*_pairedR1.fastq
 do
-kallisto quant -i /scratch/beegfs/weekly/wjma/Amm_RNAseq/rt_amm_all.idx -o ./${f%%_pairedR1.fastq} -b 100 ${f%%_pairedR1.fastq}_pairedR1.fastq ${f%%_pairedR1.fastq}_pairedR2.fastq
+kallisto quant -i /scratch/beegfs/monthly/wjma/amm_rna/expression/am_transcripts.idx -o /scratch/beegfs/monthly/wjma/amm_rna/expression/kallisto_am/${f%%_pairedR1.fastq} -b 1000 ${f%%_pairedR1.fastq}_pairedR1.fastq ${f%%_pairedR1.fastq}_pairedR2.fastq
 done
 

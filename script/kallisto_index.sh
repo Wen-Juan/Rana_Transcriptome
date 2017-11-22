@@ -13,5 +13,4 @@
 
 #loading necessary modules and databases
 module add UHTS/Analysis/kallisto/0.43.0
-
-kallisto index -i rt_amm_devonly.idx /scratch/beegfs/monthly/wjma/rtRNAseq/all/ref_tseries/Amm_devonly.fasta
+kallisto index -i am_transcripts.idx /scratch/beegfs/monthly/wjma/amm_rna/expression/AmmMT_HIMin1.fasta
