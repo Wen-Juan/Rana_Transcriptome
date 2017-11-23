@@ -1,0 +1,3 @@
+model_coefficients	FO/MT
+F_O	-1
+M_T	1
