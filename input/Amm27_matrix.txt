@@ -1,0 +1,3 @@
+model_coefficients	M27/F27
+Am_27_M	1
+Am_27_F	-1

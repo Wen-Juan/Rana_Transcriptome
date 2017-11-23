@@ -1,0 +1,10 @@
+sample	pop	stage	sex	group
+"Am2_314"	"Am"	"31"	"F"	"Am_31_F"
+"Am2_315"	"Am"	"31"	"M"	"Am_31_M"
+"Am2_316"	"Am"	"31"	"M"	"Am_31_M"
+"Am2_318"	"Am"	"31"	"F"	"Am_31_F"
+"Am4_314"	"Am"	"31"	"F"	"Am_31_F"
+"Am4_317"	"Am"	"31"	"M"	"Am_31_M"
+"Am5_311"	"Am"	"31"	"F"	"Am_31_F"
+"Am5_312"	"Am"	"31"	"M"	"Am_31_M"
+"Am5_313"	"Am"	"31"	"M"	"Am_31_M"

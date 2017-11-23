@@ -1,0 +1,7 @@
+model_coefficients	FB/MB	FL/ML	FO/MT
+F_B	-1	0	0
+M_B	1	0	0
+F_L	0	-1	0
+M_L	0	1	0
+F_O	0	0	-1
+M_T	0	0	1

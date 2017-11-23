@@ -1,0 +1,7 @@
+sample	pop	stage	sex	group
+"Am2_463"	"Am"	"46"	"M"	"Am_46_M"
+"Am2_464"	"Am"	"46"	"F"	"Am_46_F"
+"Am4_461"	"Am"	"46"	"M"	"Am_46_M"
+"Am5_461"	"Am"	"46"	"M"	"Am_46_M"
+"Am6_462"	"Am"	"46"	"M"	"Am_46_M"
+"Am6_464"	"Am"	"46"	"F"	"Am_46_F"

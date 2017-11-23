@@ -1,0 +1,7 @@
+sample	pop	stage	sex	group
+"Am2_274"	"Am"	"27"	"F"	"Am_27_F"
+"Am2_275"	"Am"	"27"	"M"	"Am_27_M"
+"Am4_271"	"Am"	"27"	"F"	"Am_27_F"
+"Am4_272"	"Am"	"27"	"M"	"Am_27_M"
+"Am5_273"	"Am"	"27"	"F"	"Am_27_F"
+"Am5_274"	"Am"	"27"	"M"	"Am_27_M"
