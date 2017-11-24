@@ -45,12 +45,20 @@ venn.plot <- venn.diagram(list(Brain = as.character(fbis_brain), Ovary = as.char
                           cat.cex = 1.5,
                           rotation.degree = 65)
 
+venn.plot <- venn.diagram(list(Brain = as.character(fbis_brain), Ovary = as.character(fbis_ovary), Liver = as.character(fbis_liver)), filename =NULL,
+                          #fill=rainbow(5),
+                          fill=c("orange","red","black"),
+                          ext.line.lwd = 3,
+                          cex = 1.5,
+                          cat.cex = 1.5,
+                          rotation.degree = 65)
+
 ## to draw to the screen:
 grid.arrange(gTree(children=venn.plot),ncol = 1 )
 
 ## to output to pdf
 venn_fbias_out <- arrangeGrob(gTree(children=venn.plot),ncol = 1 )
-ggsave(file="shared_fbias_adults.pdf", venn_fbias_out, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_fbias_tissues.pdf", venn_fbias_out, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
 
 #for shared male-biased genes
 mbias <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/male_bias_stages.txt", header = TRUE)
@@ -83,10 +91,18 @@ venn.plot <- venn.diagram(list(Brain = as.character(mbis_brain), Testis = as.cha
                           cat.cex = 1.5,
                           rotation.degree = 65)
 
+venn.plot <- venn.diagram(list(Brain = as.character(mbis_brain), Testis = as.character(mbis_testis), Liver = as.character(mbis_liver)), filename =NULL,
+                          #fill=rainbow(5),
+                          fill=c("orange","red","black"),
+                          ext.line.lwd = 3,
+                          cex = 1.5,
+                          cat.cex = 1.5,
+                          rotation.degree = 65)
+
 ## to draw to the screen:
 grid.arrange(gTree(children=venn.plot),ncol = 1 )
 ## to output to pdf
-venn_mbias_out <- arrangeGrob(gTree(children=venn.plot.2),ncol = 1 )
+venn_mbias_out <- arrangeGrob(gTree(children=venn.plot),ncol = 1 )
 ggsave(file="shared_mbias_adults.pdf", venn_mbias_out, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
 
 #for shared unbiased genes
