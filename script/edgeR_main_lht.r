@@ -73,7 +73,7 @@ write(summary(rowSums(cpm(sum10)/ncol(sum10))), filter_file, append=T, sep='\t',
 # spec <- dgl[rowSums(cpm(dgl)>=2) > 3,] # The gene must be expressed in at least 3 libaries (remove sex specific genes)
 dgl <- dgl[aveLogCPM(dgl) > 0,] # filter by average reads
 #dgl <- dgl[rowSums(cpm(dgl)>=2) > 3,] #the 5 means there are 10 libraries in total with 5 males and 5 females
-dgl <- dgl[rowSums(cpm(dgl)>1) >= 3,]
+dgl <- dgl[rowSums(cpm(dgl)>1) >= 1,]
 
 write(paste("dgl"), filter_file, append=T)
 write(paste(nrow(dgl), "_", sep=""), filter_file, append=T)
@@ -97,8 +97,8 @@ col.M43 <- rgb(88/255, 135/255, 37/255, 3/4)
 col.F43 <- rgb(88/255, 135/255, 37/255, 3/4)
 #col.R43 <- rgb(88/255, 135/255, 37/255, 3/4) #for tvedora
 col.M46 <- rgb(113/255, 250/255, 241/255, 3/4)
-col.F46 <- rgb(113/255, 250/255, 241/255, 3/4)
-#col.R46 <- rgb(113/255, 250/255, 241/255, 3/4)
+#col.F46 <- rgb(113/255, 250/255, 241/255, 3/4)
+col.SR46 <- rgb(113/255, 250/255, 241/255, 3/4)
 
 pdf(file.path(outpath,paste('MDS_', sub_analyse, '.pdf', sep="")), width=8, height=8)
 par(mar=c(5,5,4,3))
@@ -107,7 +107,7 @@ y <- dgl
 colnames(y) <- paste(colnames(y), design$group, sep="\n")
 #cols = c(col.M23, col.F23,col.M27,col.F27, col.M31, col.F31,col.M43,col.F43,col.R43,col.M46,col.F46,col.R46)#for tvedora
 #cols = c(col.M23, col.F23,col.U23,col.M27,col.F27,col.U27, col.M31, col.F31,col.U31,col.M43,col.F43,col.M46,col.F46,col.MF46) #for argovie
-cols = c(col.M23, col.F23,col.M27,col.F27, col.M31, col.F31,col.M43,col.F43,col.M46,col.F46) #for ammarnas
+cols = c(col.M23, col.F23,col.M27,col.F27, col.M31, col.F31,col.M43,col.F43,col.M46,col.SR46) #for ammarnas
 #pchs = c(18,5,18,5,18,5,18,5,16,18,5,16) #for tvedora
 pchs = c(18,5,18,5,18,5,18,5,18,5)
 plotMDS(y, pch=pchs[design$group],col=cols[design$group], cex=2.0, main="Ammarnas MDS plot",cex.main=1, cex.lab=1,lty=2, lwd=3)
