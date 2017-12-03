@@ -44,7 +44,7 @@ df <-data.frame(dn_ds)
 head(df)
 theme_update(plot.title = element_text(hjust = 0.5))
 
-#dn/ds plot
+#dn/ds plot for Faster-X
 ggplot(dn_ds, aes(x=reorder(type,dNdS), y=dNdS, fill=type)) + 
   scale_fill_manual(values = c("grey","firebrick2")) +
   theme(legend.position="none") +
