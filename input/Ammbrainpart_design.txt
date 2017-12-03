@@ -1,0 +1,7 @@
+sample	pop	stage	sex	group
+A17MB	Amm	adult	M	M_B
+A16MB	Amm	adult	M	M_B
+A15MB	Amm	adult	F	M_B
+A15FB	Amm	adult	F	F_B
+A10FB	Amm	adult	M	F_B
+A8MB	Amm	adult	M	M_B
