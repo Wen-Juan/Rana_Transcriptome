@@ -1,1 +1,0 @@
-GO category	GO	Term	Annotated	Significant	Expected	topGO (Fisher)	classic (Fisher)

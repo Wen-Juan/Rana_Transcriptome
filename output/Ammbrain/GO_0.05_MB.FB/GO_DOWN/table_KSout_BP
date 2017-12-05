@@ -1,4 +1,0 @@
-GO.ID	Term	Annotated	Significant	Expected	Rank in topgoFisher	topgoKS	topgoFisher	classicFisher	cluster
-GO:0010817	regulation of hormone levels	8	0	0.22	13	0.0017	1	1	out_BP
-GO:0032101	regulation of response to external stimu...	5	0	0.13	14	0.0045	1	1	out_BP
-GO:0007267	cell-cell signaling	11	0	0.3	15	0.0058	1	1	out_BP

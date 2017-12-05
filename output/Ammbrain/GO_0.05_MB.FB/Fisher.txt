@@ -1,3 +1,0 @@
-GO category	GO	Term	Annotated	Significant	Expected	topGO (Fisher)	classic (Fisher)
-BP	GO:0019752	carboxylic acid metabolic process	13	3	0.49	0.008	0.008
-BP	GO:0043043	peptide biosynthetic process	19	3	0.72	0.030	0.025

@@ -1,0 +1,21 @@
+# LSBATCH: User input
+#!/bin/bash
+
+#BSUB -L /bin/bash
+#BSUB -o flagstat_am.out
+#BUSB -e flagstat_am.err
+#BSUB -u wenjuan.ma@unil.ch
+#BSUB -N
+#BSUB -n 20
+#BSUB -R "span[ptile=20]"
+#BSUB -R "rusage[mem=30000]"
+#BSUB -M 30000000
+#BSUB -J flagstat_Am_fi.sh
+
+module add UHTS/Analysis/samtools/1.3
+samtools flagstat Am4_461_L7.bam > Am4_461_L7_flagstat.txt &
+samtools flagstat Am6_464_L8.bam > Am6_464_L8_flagstat.txt 
+
+
+pool2b_newXXm_max3.bam 
+pool3anew_Yb1a_v2.bam 

@@ -1,3 +1,0 @@
-GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
-GO:0019752	carboxylic acid metabolic process	13	3	0.35	24	0.0025	0.076	0.0025	out_BP
-GO:0043043	peptide biosynthetic process	19	2	0.51	40	0.0238	0.137	0.0822	out_BP
