@@ -113,3 +113,19 @@ A8FO2/abundance.tsv \
 A8MB/abundance.tsv \
 A8ML1/abundance.tsv \
 A8MT1/abundance.tsv
+
+Step3: #mapping one XX and one XY individuals with highest reads, and then covert SNP positions to the reference transcriptome to generate one XX and one XY transcriptomes.
+#mapping with bwa aln
+module add UHTS/Aligner/bwa/0.7.13
+bwa aln -n 0.04 -o 1 -d 12 -t 20 -M 3 AmmMT_HIMin1.fasta Am4_461_L7_pairedR1.fastq > ./Am4_461_L7_pairedR1.sai
+bwa aln -n 0.04 -o 1 -d 12 -t 20 -M 3 AmmMT_HIMin1.fasta Am4_461_L7_pairedR2.fastq > ./Am4_461_L7_pairedR2.sai
+
+module add UHTS/Aligner/bwa/0.7.13
+bwa sampe -a 500 -n 3 -N 10 -P AmmMT_HIMin1.fasta Am4_461_L7_pairedR1.sai Am4_461_L7_pairedR2.sai Am4_461_L7_pairedR1.fastq Am4_461_L7_pairedR2.fastq > ./Am4_461_L7.sam
+
+module add UHTS/Analysis/samtools/1.3
+samtools view -q 20 -bS Am4_461_L7.sam | samtools sort -o Am4_461_L7.bam
+
+#conver SNPs to the positions in the reference transcriptome
+module add UHTS/Analysis/samtools/1.3
+samtools mpileup -d8000 -q 25 -Q 30 -uf AmmMT_HIMin1.fasta Am4_461_L7.bam | bcftools call -c | vcfutils.pl vcf2fq > Amm_transcriptome_XY_v2.fq
