@@ -1,0 +1,200 @@
+>X04297.1 Human mRNA for Na,K-ATPase alpha-subunit
+>X63071.1 H.sapiens mRNA for novel DNA binding protein
+>X57778.1 H.sapiens mRNA for E-1 beta subunit of pyruvate dehydrogenase complex
+>X60489.1 Human mRNA for elongation factor-1-beta
+>X04409.1 Human mRNA for coupling protein G(s) alpha-subunit (alpha-S1) (stimulatory regulatory component Gs of adenylyl cyclase)
+>X03473.1 Human gene for histone H1(0)
+>X02457.1 Human mRNA fragment for HLA-A2 class I antigen
+>X65488.1 H.sapiens U21.1 mRNA
+>X63564.1 H.sapiens mRNA for RNA polymerase II largest subunit
+>X15729.1 Human mRNA for nuclear p68 protein
+>X70944.1 H.sapiens mRNA for PTB-associated splicing factor
+>X02996.1 Adenovirus type 5 left 32% of the genome (coordinates 0% to 32.39% as measured by 
+>M92439.1 Homo sapiens leucine-rich PPR-motif containing protein (LRPPRC) mRNA, complete cds
+>M55265.1 Human casein kinase II alpha subunit mRNA, complete cds
+>M84326.1 Human ADP-ribosylation factor 1 mRNA, complete cds
+>M74002.1 Human arginine-rich nuclear protein mRNA, complete cds
+>M34175.1 Human beta adaptin mRNA, complete cds
+>M58485.1 Human lysosomal membrane glycoprotein CD63 mRNA
+>M93008.1 Human L-isoaspartyl/D-aspartyl protein carboxyl methyltransferase isozyme II mRNA, complete cds
+>M34539.1 Human FK506-binding protein (FKBP) mRNA, complete cds
+>M94362.1 Human lamin B2 (LAMB2) mRNA, partial cds
+>J04031.1 Human methylenetetrahydrofolate dehydrogenase- methenyltetrahydrofolate cyclohydrolase-formyltetrahydrofolate synthetase mRNA, complete cds
+>D13748.1 Homo sapiens mRNA for eukaryotic initiation factor 4AI, complete cds
+>S54005.1 thymosin beta-10 [human, metastatic melanoma cell line, mRNA, 453 nt]
+>D13118.1 Homo sapiens P1 mRNA for ATP synthase subunit c, complete cds
+>D14696.1 Homo sapiens KIAA0108 mRNA
+>D14697.1 Homo sapiens KIAA1293 mRNA
+>D13641.1 Homo sapiens mRNA for KIAA0016 gene, complete cds
+>M31520.1 Human ribosomal protein S24 mRNA
+>M63573.1 Human secreted cyclophilin-like protein (SCYLP) mRNA, complete cds
+>L04636.1 Homo sapiens pre-mRNA splicing factor 2 p32 subunit (SF2p32) mRNA, complete cds
+>M96982.1 Homo sapiens U2 snRNP auxiliary factor small subunit, complete cds
+>M33680.1 Human 26-kDa cell surface protein TAPA-1 mRNA, complete cds
+>L21936.1 Human succinate dehydrogenase flavoprotein subunit (SDH) mRNA, complete cds
+>S62140.1 TLS=translocated in liposarcoma [human, mRNA, 1824 nt]
+>L10910.1 Homo sapiens splicing factor (CC1.3) mRNA, complete cds
+>X74870.1 H.sapiens gene for RNA pol II largest subunit, exons 23-29
+>D21853.1 Homo sapiens KIAA0111 mRNA
+>X74104.1 H.sapiens mRNA for TRAP beta subunit
+>X78669.1 H.sapiens ERC-55 mRNA
+>D38076.1 Homo sapiens RanBP1 mRNA for Ran-binding protein 1, complete cds
+>D14710.1 Homo sapiens mRNA for ATP synthase alpha subunit, complete cds
+>D16431.1 Homo sapiens mRNA for hepatoma-derived growth factor, complete cds
+>X66397.1 H.sapiens tpr mRNA
+>D45887.1 Homo sapiens mRNA for calmodulin, complete cds
+>U18121.1 Homo sapiens p136 (K88dsRBP) mRNA, complete cds
+>D63880.1 Homo sapiens mRNA for KIAA0159 gene
+>X91788.1 H.sapiens mRNA for Icln protein
+>X83218.1 H.sapiens mRNA for ATP synthase
+>X86691.1 H.sapiens mRNA for 218kD Mi-2 protein
+>X72018.1 H.sapiens hTGR 1 mRNA
+>L76191.1 Homo sapiens interleukin-1 receptor-associated kinase (IRAK) mRNA, complete cds
+>U41387.1 Human Gu protein mRNA, partial cds
+>L48723.1 Homo sapiens (clone hh13) protein tyrosine phosphatase (ptp-IV1a, PTP-IV1) gene, partial cds
+>D55716.1 Homo sapiens mRNA for P1cdc47, complete cds
+>S81003.1 L-UBC=ubiquitin conjugating enzyme [human, odontogenic keratocysts, mRNA Partial, 683 nt]
+>D86978.1 Homo sapiens mRNA for KIAA0225 gene
+>U50523.1 Human BRCA2 region, mRNA sequence CG037
+>D87914.1 Homo sapiens hAZ-brain mRNA for ornithine decarboxylase antizyme, complete cds
+>U51334.1 Human putative RNA binding protein (RBP56) mRNA, complete cds
+>U70322.1 Human transportin (TRN) mRNA, complete cds
+>U79287.1 Human clone 23867 mRNA sequence
+>D89667.1 Homo sapiens mRNA for c-myc binding protein, complete cds
+>U81006.1 Human p76 mRNA, complete cds
+>U51586.1 Human siah binding protein 1 (SiahBP1) mRNA, partial cds
+>U90915.1 Human clone 23600 cytochrome c oxidase subunit IV mRNA, complete cds
+>U91930.1 Homo sapiens AP-3 complex delta subunit mRNA, complete cds
+>D84557.1 Homo sapiens mRNA for HsMcm6, complete cds
+>Y13374.1 Homo sapiens mRNA for putatively prenylated protein
+>Y14946.1 Homo sapiens mRNA for SPIN protein
+>X93209.1 H.sapiens mRNA for NRD1 convertase
+>U96132.1 Homo sapiens amyloid beta-peptide binding protein (ERAB) mRNA, complete cds
+>D67025.1 Homo sapiens mRNA for proteasome subunit p58, complete cds
+>U94175.1 Homo sapiens mammary tumor-associated protein INT6 (INT6) mRNA, complete cds
+>U59435.1 Human cell cycle protein p38-2G4 homolog (hG4-1) mRNA, complete cds
+>AF000364.1 Homo sapiens heterogeneous nuclear ribonucleoprotein R mRNA, complete cds
+>Z97056.1 Human DNA sequence from clone RP3-434P1 on chromosome 22, complete sequence
+>AF053070.1 Homo sapiens NADH:ubiquinone dehydrogenase 51 kDa subunit (NDUFV1) mRNA, nuclear gene encoding mitochondrial protein, complete cds
+>X70649.1 Homo sapiens DDX1 gene, complete CDS
+>AF063020.1 Homo sapiens lens epithelium-derived growth factor mRNA, complete cds
+>AF047473.1 Homo sapiens testis mitotic checkpoint BUB3 (BUB3) mRNA, complete cds
+>AF070539.1 Homo sapiens clone 24433 myelodysplasia/myeloid leukemia factor 2 mRNA, complete cds
+>AF070540.1 Homo sapiens clone 24647 putative nuclear protein mRNA, partial cds
+>D87686.1 Homo sapiens KIAA0017 mRNA for KIAA0017 protein
+>AF083190.1 Homo sapiens SPF31 (SPF31) mRNA, complete cds
+>AF043250.1 Homo sapiens mitochondrial outer membrane protein (TOM40) mRNA, nuclear gene encoding mitochondrial protein, complete cds
+>AF026166.1 Homo sapiens chaperonin-containing TCP-1 beta subunit homolog mRNA, complete cds
+>U35832.1 Human anthracycline-associated resistance ARX mRNA, complete cds
+>AF121855.1 Homo sapiens sorting nexin 5 (SNX5) mRNA, complete cds
+>AF100615.1 Homo sapiens chromosome 15 MRG15 protein (MRG15) mRNA, complete cds
+>AF084458.1 Homo sapiens sec61 homolog mRNA, complete cds
+>AL050331.11 Human DNA sequence from clone RP3-486I3 on chromosome 6q22.1-22.3, complete sequence
+>X62153.2 H.sapiens mRNA for P1 protein (P1.h)
+>AF124727.1 Homo sapiens acinusS mRNA, complete cds
+>AF191018.1 Homo sapiens E2IG3 (E2IG3) mRNA, complete cds
+>AL035425.13 Human DNA sequence from clone RP6-24A23 on chromosome Xq22.2-23, complete sequence
+>AF112213.1 Homo sapiens putative Rab5-interacting protein mRNA, complete cds
+>Y12711.2 Homo sapiens mRNA for putative progesterone binding protein
+>AK000221.1 Homo sapiens cDNA FLJ20214 fis, clone COLF2014, highly similar to NUCL_HUMAN NUCLEOLIN
+>AK000315.1 Homo sapiens cDNA FLJ20308 fis, clone HEP07264
+>AK000620.1 Homo sapiens cDNA FLJ20613 fis, clone KAT05486, highly similar to M36340 Human ADP-ribosylation factor 1
+>AK000775.1 Homo sapiens cDNA FLJ20768 fis, clone COL06883, highly similar to AL049703 Human gene from PAC 179D3
+>AB032261.1 Homo sapiens Scd mRNA for stearoyl-CoA desaturase, complete cds
+>AF215935.1 Homo sapiens proteasome regulatory particle subunit p44S10 mRNA, complete cds
+>AL360191.1 Homo sapiens mRNA full length insert cDNA clone EUROIMAGE 781354
+>AB037675.1 Homo sapiens pcnp mRNA for PEST-containing nuclear protein, complete cds
+>AF261085.1 Homo sapiens glyceraldehyde-3-phosphate dehydrogenase (GADPH) mRNA, complete cds
+>AF286598.1 Homo sapiens angiomotin mRNA, complete cds
+>AF283771.2 Homo sapiens clone TCBAP0774 mRNA sequence
+>AK022914.1 Homo sapiens cDNA FLJ12852 fis, clone NT2RP2003445
+>AK025328.1 Homo sapiens cDNA: FLJ21675 fis, clone COL09090, highly similar to AF119857 Homo sapiens PRO1855 mRNA
+>AK025331.1 Homo sapiens cDNA: FLJ21678 fis, clone COL09196
+>AK025459.1 Homo sapiens cDNA: FLJ21806 fis, clone HEP00829, highly similar to HSTRA1 Human tra1 mRNA for human homologue of murine tumor rejection antigen gp96
+>AK026558.1 Homo sapiens cDNA: FLJ22905 fis, clone KAT05654, highly similar to HUMRPL18A Homo sapiens ribosomal protein L18 (RPL18) mRNA
+>AK026568.1 Homo sapiens cDNA: FLJ22915 fis, clone KAT06354, highly similar to HUMQM Human Wilm's tumor-related protein (QM) mRNA
+>AK026926.1 Homo sapiens cDNA: FLJ23273 fis, clone HEP02611, highly similar to HSU79278 Human protein disulfide isomerase-related protein P5 mRNA
+>AL353804.22 Human DNA sequence from clone RP13-216E22 on chromosome Xq13.1-21.1, complete sequence
+>AL512708.1 Homo sapiens mRNA; cDNA DKFZp762J035 (from clone DKFZp762J035)
+>AB014731.1 Homo sapiens mRNA for SMAP-3, complete cds
+>BC000192.1 Homo sapiens dihydrofolate reductase, mRNA (cDNA clone MGC:857 IMAGE:3352539), complete cds
+>BC000266.1 Homo sapiens NADH dehydrogenase (ubiquinone) 1 alpha subcomplex, 1, 7.5kDa, mRNA (cDNA clone MGC:2066 IMAGE:3352028), complete cds
+>BC001142.1 Homo sapiens copine I, mRNA (cDNA clone MGC:1142 IMAGE:3502122), complete cds
+>BC001378.1 Homo sapiens coiled-coil domain containing 86, mRNA (cDNA clone MGC:2574 IMAGE:3051044), complete cds
+>X80199.2 Homo sapiens MLN51 mRNA
+>BC002609.1 Homo sapiens chromobox homolog 1 (HP1 beta homolog Drosophila), mRNA (cDNA clone MGC:1267 IMAGE:3140815), complete cds
+>BC002997.1 Homo sapiens proteasome (prosome, macropain) 26S subunit, non-ATPase, 2, mRNA (cDNA clone MGC:3871 IMAGE:2905429), complete cds
+>BC001747.1 Homo sapiens proteasome (prosome, macropain) 26S subunit, non-ATPase, 13, mRNA (cDNA clone MGC:672 IMAGE:3535807), complete cds
+>BC001932.1 Homo sapiens proteasome (prosome, macropain) 26S subunit, ATPase, 5, mRNA (cDNA clone MGC:3997 IMAGE:2820259), complete cds
+>BC001955.1 Synthetic construct Homo sapiens ribosomal protein S10, mRNA (cDNA clone MGC:4389 IMAGE:2905318), complete cds
+>BC003394.1 Homo sapiens heterogeneous nuclear ribonucleoprotein C (C1/C2), mRNA (cDNA clone MGC:5418 IMAGE:3447724), complete cds
+>BC000138.2 Homo sapiens heterogeneous nuclear ribonucleoprotein M, mRNA (cDNA clone MGC:5136 IMAGE:2900532), complete cds
+>BC000934.2 Homo sapiens eukaryotic translation initiation factor 2, subunit 2 beta, 38kDa, mRNA (cDNA clone MGC:5085 IMAGE:3447202), complete cds
+>BC003145.1 Homo sapiens ribosomal protein L36a-like, mRNA (cDNA clone MGC:3918 IMAGE:2957923), complete cds
+>AF212248.1 Homo sapiens CDA09 mRNA, complete cds
+>AC007318.4 Homo sapiens BAC clone RP11-420C9 from 2, complete sequence
+>BC004975.1 Homo sapiens cyclin I, mRNA (cDNA clone MGC:3795 IMAGE:2957878), complete cds
+>BC004978.1 Homo sapiens tripartite motif-containing 28, mRNA (cDNA clone MGC:3849 IMAGE:2906325), complete cds
+>BC004982.1 Homo sapiens glucose phosphate isomerase, mRNA (cDNA clone MGC:3935 IMAGE:2906270), complete cds
+>BC005230.1 Homo sapiens ubiquinol-cytochrome c reductase binding protein, mRNA (cDNA clone MGC:12253 IMAGE:3961169), complete cds
+>BC005294.1 Homo sapiens 15 kDa selenoprotein, mRNA (cDNA clone MGC:12358 IMAGE:4041321), complete cds
+>BC005391.1 Homo sapiens ribosomal protein SA, mRNA (cDNA clone MGC:12521 IMAGE:3997019), complete cds
+>BC005942.1 Homo sapiens barrier to autointegration factor 1, mRNA (cDNA clone MGC:14564 IMAGE:4074168), complete cds
+>BC006124.1 Homo sapiens IMP (inosine monophosphate) dehydrogenase 2, mRNA (cDNA clone MGC:13021 IMAGE:3545693), complete cds
+>BC006849.1 Homo sapiens THO complex 3, mRNA (cDNA clone MGC:5469 IMAGE:3451612), complete cds
+>BC007062.1 Homo sapiens peroxiredoxin 3, mRNA (cDNA clone MGC:12511 IMAGE:3960644), complete cds
+>BC007200.1 Homo sapiens acidic (leucine-rich) nuclear phosphoprotein 32 family, member A, mRNA (cDNA clone MGC:12667 IMAGE:3677623), complete cds
+>BC007282.1 Homo sapiens arginine-rich, mutated in early stage tumors, mRNA (cDNA clone IMAGE:3343642), partial cds
+>BC007585.1 Homo sapiens v-myb myeloblastosis viral oncogene homolog (avian)-like 2, mRNA (cDNA clone MGC:15600 IMAGE:3162656), complete cds
+>BC007612.1 Homo sapiens prosaposin, mRNA (cDNA clone MGC:15695 IMAGE:3351606), complete cds
+>BC008090.1 Homo sapiens activating transcription factor 4 (tax-responsive enhancer element B67), mRNA (cDNA clone MGC:9337 IMAGE:3454473), complete cds
+>BC008991.1 Homo sapiens guanine nucleotide binding protein (G protein), beta polypeptide 1, mRNA (cDNA clone MGC:18208 IMAGE:4155946), complete cds
+>BC009062.1 Homo sapiens, clone IMAGE:3875076, mRNA, partial cds
+>AL135744.4 Human chromosome 14 DNA sequence BAC R-524O1 of library RPCI-11 from chromosome 14 of Homo sapiens (Human), complete sequence
+>AY026895.1 Homo sapiens NREBP mRNA, complete cds
+>BC010038.1 Homo sapiens phosphoglycerate mutase 1 (brain), mRNA (cDNA clone MGC:19732 IMAGE:3604026), complete cds
+>BC010354.1 Homo sapiens growth hormone inducible transmembrane protein, mRNA (cDNA clone MGC:13359 IMAGE:4093037), complete cds
+>BC010623.1 Homo sapiens nuclear factor (erythroid-derived 2)-like 1, mRNA (cDNA clone MGC:9037 IMAGE:3871147), complete cds
+>BC010915.1 Homo sapiens glutathione S-transferase pi 1, mRNA (cDNA clone MGC:13474 IMAGE:3960700), complete cds
+>BC010919.1 Homo sapiens ribosomal protein L35, mRNA (cDNA clone MGC:13488 IMAGE:4251487), complete cds
+>BC010949.1 Homo sapiens ribosomal protein L35a, mRNA (cDNA clone MGC:13603 IMAGE:4107948), complete cds
+>BC011262.1 Homo sapiens phosphoglycerate dehydrogenase, mRNA (cDNA clone MGC:18226 IMAGE:4156703), complete cds
+>AC011611.26 Homo sapiens 12 BAC RP11-290L1 (Roswell Park Cancer Institute Human BAC Library) complete sequence
+>BC013432.1 Homo sapiens COBW domain containing 1, mRNA (cDNA clone MGC:14814 IMAGE:4133722), complete cds
+>BC014314.1 Homo sapiens HCLS1 associated protein X-1, mRNA (cDNA clone MGC:22696 IMAGE:3931852), complete cds
+>BC014334.1 Homo sapiens proteasome maturation protein, mRNA (cDNA clone MGC:22874 IMAGE:4045091), complete cds
+>BC014433.1 Homo sapiens protein disulfide isomerase family A, member 3, mRNA (cDNA clone MGC:2159 IMAGE:3542405), complete cds
+>BC014657.1 Homo sapiens synapse associated protein 1, SAP47 homolog (Drosophila), mRNA (cDNA clone MGC:20415 IMAGE:4640905), complete cds
+>BC014837.1 Homo sapiens ribosomal protein L15, mRNA (cDNA clone MGC:5220 IMAGE:2901238), complete cds
+>BC015405.1 Homo sapiens ribosomal protein S5, mRNA (cDNA clone MGC:21949 IMAGE:4390892), complete cds
+>BC015500.1 Homo sapiens endothelial differentiation-related factor 1, mRNA (cDNA clone MGC:9058 IMAGE:3903539), complete cds
+>BC015782.1 Homo sapiens heterogeneous nuclear ribonucleoprotein U (scaffold attachment factor A), mRNA (cDNA clone MGC:23593 IMAGE:4857112), complete cds
+>AF419845.1 Homo sapiens cyclin-dependent kinase inhibitor-related protein (P15RS) mRNA, complete cds
+>BC009600.1 Homo sapiens heterogeneous nuclear ribonucleoprotein A1, mRNA (cDNA clone MGC:14692 IMAGE:4134638), complete cds
+>BC010273.1 Homo sapiens phosphoribosylaminoimidazole carboxylase, phosphoribosylaminoimidazole succinocarboxamide synthetase, mRNA (cDNA clone MGC:5024 IMAGE:2900848), complete cds
+>BC010281.1 Homo sapiens ADP-ribosylation factor-like 6 interacting protein 1, mRNA (cDNA clone MGC:5360 IMAGE:3048642), complete cds
+>BC016045.1 Homo sapiens actin, beta, mRNA (cDNA clone MGC:20387 IMAGE:4564532), complete cds
+>BC016051.1 Homo sapiens brix domain containing 5, mRNA (cDNA clone MGC:22954 IMAGE:4853072), complete cds
+>AK055168.1 Homo sapiens cDNA FLJ30606 fis, clone CTONG2000330, highly similar to Probable global transcription activator SNF2L4 (EC 3.6.1.-)
+>AK056123.1 Homo sapiens cDNA FLJ31561 fis, clone NT2RI2001410
+>AK056225.1 Homo sapiens cDNA FLJ31663 fis, clone NT2RI2004504, highly similar to MYOTROPHIN
+>AK057859.1 Homo sapiens cDNA FLJ25130 fis, clone CBR06630, highly similar to OVARIAN GRANULOSA CELL 13.0 KDA PROTEIN HGR74
+>AK058050.1 Homo sapiens cDNA FLJ25321 fis, clone TST00273, highly similar to PROTEASOME COMPONENT C5 (EC 3.4.99.46)
+>AC089983.23 Homo sapiens 12 BAC RP11-818F20 (Roswell Park Cancer Institute Human BAC Library) complete sequence
+>AL590559.3 Human DNA sequence from clone RP11-393N21 on chromosome 1, complete sequence
+>BC016354.1 Homo sapiens ferritin, light polypeptide, mRNA (cDNA clone MGC:24480 IMAGE:4092360), complete cds
+>BC016467.1 Homo sapiens FK506 binding protein 10, 65 kDa, mRNA (cDNA clone MGC:16809 IMAGE:4154344), complete cds
+>BC016643.1 Homo sapiens selenophosphate synthetase 2, mRNA (cDNA clone MGC:18017 IMAGE:3923979), complete cds
+>BC016928.1 Homo sapiens ornithine aminotransferase (gyrate atrophy), mRNA (cDNA clone MGC:21248 IMAGE:3913352), complete cds
+>BC016971.1 Homo sapiens 5'-nucleotidase, cytosolic III-like, mRNA (cDNA clone MGC:21670 IMAGE:3885455), complete cds
+>BC017389.1 Homo sapiens melanoma antigen family A, 3, mRNA (cDNA clone MGC:23695 IMAGE:4047542), complete cds
+>BC018129.1 Homo sapiens phosphoserine aminotransferase 1, mRNA (cDNA clone MGC:9290 IMAGE:3883843), complete cds
+>BC018616.1 Homo sapiens ribosomal protein S19, mRNA (cDNA clone MGC:31751 IMAGE:4867036), complete cds
+>BC019276.1 Homo sapiens NADH dehydrogenase (ubiquinone) 1 beta subcomplex, 8, 19kDa, mRNA (cDNA clone MGC:3748 IMAGE:2822781), complete cds
+>BC019312.1 Homo sapiens ARD1 homolog A, N-acetyltransferase (S. cerevisiae), mRNA (cDNA clone MGC:4332 IMAGE:2820955), complete cds
+>BC020079.1 Homo sapiens lamin B receptor, mRNA (cDNA clone MGC:9041 IMAGE:3925138), complete cds
+>BC019906.1 Homo sapiens eukaryotic translation initiation factor 2, subunit 3 gamma, 52kDa, mRNA (cDNA clone MGC:29889 IMAGE:4419438), complete cds
+>BC020493.1 Homo sapiens calreticulin, mRNA (cDNA clone MGC:10100 IMAGE:3898550), complete cds
+>BC021102.1 Homo sapiens zinc finger CCCH-type containing 15, mRNA (cDNA clone MGC:31837 IMAGE:5020890), complete cds
+>BC020818.1 Homo sapiens Sjogren syndrome antigen B (autoantigen La), mRNA (cDNA clone MGC:23872 IMAGE:4338551), complete cds
+>BC021683.1 Homo sapiens peroxiredoxin 1, mRNA (cDNA clone MGC:24196 IMAGE:3681912), complete cds
