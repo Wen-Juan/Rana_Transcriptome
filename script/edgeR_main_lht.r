@@ -73,7 +73,7 @@ write(summary(rowSums(cpm(sum10)/ncol(sum10))), filter_file, append=T, sep='\t',
 # spec <- dgl[rowSums(cpm(dgl)>=2) > 3,] # The gene must be expressed in at least 3 libaries (remove sex specific genes)
 dgl <- dgl[aveLogCPM(dgl) > 0,] # filter by average reads
 #dgl <- dgl[rowSums(cpm(dgl)>=2) > 3,] #the 5 means there are 10 libraries in total with 5 males and 5 females
-dgl <- dgl[rowSums(cpm(dgl)>1) >= 1,]
+#dgl <- dgl[rowSums(cpm(dgl)>1) >= 3,]
 
 write(paste("dgl"), filter_file, append=T)
 write(paste(nrow(dgl), "_", sep=""), filter_file, append=T)

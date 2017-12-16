@@ -1,0 +1,4 @@
+DE_numbers	
+NUM_DE	324
+NUM_UP_DE	142
+NUM_DOWN_DE	182
