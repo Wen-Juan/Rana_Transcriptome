@@ -1,0 +1,4 @@
+DE_numbers	
+NUM_DE	1284
+NUM_UP_DE	67
+NUM_DOWN_DE	1217
