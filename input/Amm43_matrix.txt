@@ -1,3 +1,0 @@
-model_coefficients	M43/F43
-Am_43_M	1
-Am_43_F	-1

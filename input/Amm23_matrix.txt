@@ -1,3 +1,0 @@
-model_coefficients	M23/F23
-Am_23_M	1
-Am_23_F	-1

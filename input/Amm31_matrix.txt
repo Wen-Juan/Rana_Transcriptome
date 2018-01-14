@@ -1,3 +1,0 @@
-model_coefficients	M31/F31
-Am_31_M	1
-Am_31_F	-1
