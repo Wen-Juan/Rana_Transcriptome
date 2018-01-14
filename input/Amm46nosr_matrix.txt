@@ -1,3 +1,0 @@
-model_coefficients	M46/F46
-Am_46_M	1
-Am_46_F	-1
