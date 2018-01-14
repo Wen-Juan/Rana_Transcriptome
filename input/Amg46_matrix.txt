@@ -1,4 +1,4 @@
-model_coefficients	M46/F46	M46/SR46	SR46/F46
+model_coefficients	XY46/XX46	XY46/SR46	SR46/XX46
 Am_46_M	1	1	0
 Am_46_F	-1	0	-1
 Am_46_SR	0	-1	1

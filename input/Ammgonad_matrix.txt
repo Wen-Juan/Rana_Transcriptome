@@ -1,3 +1,0 @@
-model_coefficients	MT/FO
-F_O	-1
-M_T	1

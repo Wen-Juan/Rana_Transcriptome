@@ -1,3 +1,0 @@
-model_coefficients	ML/FL
-F_L	-1
-M_L	1
