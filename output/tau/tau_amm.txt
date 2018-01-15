@@ -1,4 +1,4 @@
-Tissue_specific_index	Tissue_name
+ID	Tissue_specific_index	Tissue_name
 TRINITY_DN143736_c0_g1_i1	0.804356584868825	Brain_mean
 TRINITY_DN115740_c0_g2_i1	0.822105084588801	Brain_mean
 TRINITY_DN127333_c1_g1_i5	0.430111862969589	G46_M_mean
