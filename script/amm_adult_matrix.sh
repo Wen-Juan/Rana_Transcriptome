@@ -15,26 +15,3 @@ A6MT1/abundance.tsv \
 A8FO2/abundance.tsv \
 A8MT1/abundance.tsv \
 A12MT1/abundance.tsv
-
-
-
-A12FL1_pairedR1.fastq.gz
-A12ML1_pairedR1.fastq.gz
-A15ML1_pairedR1.fastq.gz
-A17FL1_pairedR1.fastq.gz
-A17ML1_pairedR1.fastq.gz
-
-_pairedR1.fastq.gz
-A2FL1_pairedR1.fastq.gz
-_pairedR1.fastq.gz
-_pairedR1.fastq.gz
-_pairedR1.fastq.gz
-A7FL1_pairedR1.fastq.gz
-A8FL1_pairedR1.fastq.gz
-_pairedR1.fastq.gz
-
-A8ML1_pairedR1.fastq.gz
-_pairedR1.fastq.gz
-
-
-pairedR1.fastq.gz

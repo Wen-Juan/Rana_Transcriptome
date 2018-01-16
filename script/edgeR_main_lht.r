@@ -29,11 +29,11 @@ FDR2use = as.numeric(paste(args[2]))
 # sub_analyse <- 'Amm27'
 # FDR2use  <- 0.05
 
-datapath <- "~/my_postdoc/useful_scripts/Rana_Transcriptome/input/"
-outpath <- paste("~/my_postdoc/useful_scripts/Rana_Transcriptome/output/", sub_analyse, sep="")
+datapath <- "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/"
+outpath <- paste("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/", sub_analyse, sep="")
 dir.create(file.path(outpath))
 
-annotation <- read.delim(file.path(datapath, "Amnew_annotation.txt"), sep="\t", header=TRUE, stringsAsFactors=FALSE) # BRM_annotation.txt annotation_out.txt
+annotation <- read.delim(file.path(datapath, "amm88perc_annotation.txt"), sep="\t", header=TRUE, stringsAsFactors=FALSE) # BRM_annotation.txt annotation_out.txt
 
 count <- read.table(file.path(datapath, paste(sub_analyse,'_count.txt', sep="")), header=T, row.names=1)
 count <- round(count, digits=0)
@@ -73,7 +73,7 @@ write(summary(rowSums(cpm(sum10)/ncol(sum10))), filter_file, append=T, sep='\t',
 # spec <- dgl[rowSums(cpm(dgl)>=2) > 3,] # The gene must be expressed in at least 3 libaries (remove sex specific genes)
 dgl <- dgl[aveLogCPM(dgl) > 0,] # filter by average reads
 #dgl <- dgl[rowSums(cpm(dgl)>=2) > 3,] #the 5 means there are 10 libraries in total with 5 males and 5 females
-dgl <- dgl[rowSums(cpm(dgl)>1) >= 3,]
+dgl <- dgl[rowSums(cpm(dgl)>1) >1,]
 
 write(paste("dgl"), filter_file, append=T)
 write(paste(nrow(dgl), "_", sep=""), filter_file, append=T)
