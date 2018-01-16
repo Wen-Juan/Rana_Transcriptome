@@ -1,6 +1,10 @@
 #intall R packages and load libraries
-install.packages("ggplot2")
-
+library(ggplot2)
+library(plyr)
+install.packages("devtools")
+library(devtools)
+install_github("easyGgplot2", "kassambara")
+library(easyGgplot2)
 library("ggplot2")
 
 
@@ -82,8 +86,11 @@ write.table(s2, file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcripto
 s3 <- subset(tau_amm,tau_amm[,2]<=0.2)
 write.table(s3, file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_log_TSI0.2.txt",row.names=TRUE, sep="\t", quote= FALSE)
 
-#load data from folder
-g46_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G46_sb_un_tau_match_fi.txt", header = TRUE)
+##############
+#load data from folder G46
+##############
+
+g46_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G46_tau/G46_sb_un_tau_match_fi.txt", header = TRUE)
 str(g46_tau)
 
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_g46.pdf", width=8, height=8)
@@ -92,6 +99,23 @@ ggplot(g46_tau, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("f
 geom_boxplot() +
 labs(x='Sex bias', y='Tau')
 
+dev.off()
+
+#scatter plot
+abs_g46_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G46_tau/G46_abssb_un_tau_match_fi.txt", header = TRUE)
+str(abs_g46_tau)
+
+#with color
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g46_sb_colors1.pdf", width=8, height=8)
+ggplot2.scatterplot(data=abs_g46_tau, xName='abslogFC.XY46.XX46',yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
+  labs(x="LogFC.XY46.XX46)", y="Tau", color ="bias")
+dev.off()
+
+#without color
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g46_sb.pdf", width=8, height=8)
+ggplot2.scatterplot(data=abs_g46_tau, xName='abslogFC.XY46.XX46',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="LogFC.XY46.XX46)", y="Tau") +
+  scale_fill_manual(values = c("grey40"))
 dev.off()
 
 #stats
@@ -103,3 +127,45 @@ wilcox.test(g46_tau$tau[g46_tau$bias=='male'],g46_tau$tau[g46_tau$bias=='female'
 
 wilcox.test(g46_tau$tau[g46_tau$bias=='unbias'],g46_tau$tau[g46_tau$bias=='female'],exact = FALSE)
 #W = 26901000, p-value < 2.2e-16
+
+###########
+#for sex-biased genes and tau in gonad tissues
+##########
+##boxplot
+gonad_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Gonad_tau/gonad_fc1_sb_unbias_tau.txt", header = TRUE)
+str(gonad_tau)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_gonad_sb.pdf", width=8, height=8)
+ggplot(gonad_tau, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias") +
+  geom_boxplot() +
+  labs(x='Sex bias', y='Tau') +
+  scale_x_discrete(labels=c("XX", "XY", "unbias")) +
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+
+dev.off()
+
+##correlation scatter plot
+abs_gonad_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Gonad_tau/gonad_fc1_abssb_unbias_tau.txt", header = TRUE)
+str(abs_gonad_tau)
+
+#with color
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_gonad_sb_colors1.pdf", width=8, height=8)
+ggplot2.scatterplot(data=abs_gonad_tau, xName='abslogFC.XYtestis.XXovary',yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
+  labs(x="LogFC(XYtestis/XXovary)", y="Tau", color ="bias")
+dev.off()
+
+#without color
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_gonad_sb.pdf", width=8, height=8)
+ggplot2.scatterplot(data=abs_gonad_tau, xName='abslogFC.XYtestis.XXovary',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="LogFC(XYtestis/XXovary)", y="Tau") +
+  scale_fill_manual(values = c("grey40"))
+
+ dev.off()
+
+wilcox.test(gonad_tau$tau[gonad_tau$bias=='male'],gonad_tau$tau[gonad_tau$bias=='unbias'],exact = FALSE) 
+#W = 33823000, p-value < 2.2e-16
+wilcox.test(gonad_tau$tau[gonad_tau$bias=='female'],gonad_tau$tau[gonad_tau$bias=='unbias'],exact = FALSE) 
+#W = 38865000, p-value < 2.2e-16
+wilcox.test(gonad_tau$tau[gonad_tau$bias=='male'],gonad_tau$tau[gonad_tau$bias=='female'],exact = FALSE) 
+#W = 10587000, p-value < 2.2e-16
