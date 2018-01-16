@@ -169,3 +169,61 @@ wilcox.test(gonad_tau$tau[gonad_tau$bias=='female'],gonad_tau$tau[gonad_tau$bias
 #W = 38865000, p-value < 2.2e-16
 wilcox.test(gonad_tau$tau[gonad_tau$bias=='male'],gonad_tau$tau[gonad_tau$bias=='female'],exact = FALSE) 
 #W = 10587000, p-value < 2.2e-16
+
+##########
+#####gonad tau and dnds
+##########
+gonad_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Gonad_tau/gonad_fc1_tau_dnds_subset_sorted.txt", header = TRUE)
+str(gonad_tau_dnds)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/gonad_sb_dnds.pdf", width=8, height=8)
+ggplot(gonad_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias") +
+  geom_boxplot() +
+  ylim(0,0.5) +
+  labs(x='Sex bias', y='dN/dS') +
+  scale_x_discrete(labels=c("XX", "XY", "unbias")) +
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+dev.off()
+
+wilcox.test(gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='female'],gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 2430100, p-value = 0.002517
+
+wilcox.test(gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='male'],gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 1855500, p-value = 0.06863
+
+wilcox.test(gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='female'],gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='male'],exact = FALSE) 
+#W = 1349300, p-value = 0.3569
+
+#with color
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_dnds_colors1.pdf", width=8, height=8)
+ggplot2.scatterplot(data=gonad_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
+  labs(x="dNdS", y="Tau", color ="bias")
+dev.off()
+
+#without color
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_dnds.pdf", width=8, height=8)
+ggplot2.scatterplot(data=gonad_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="dNdS", y="Tau") +
+  scale_fill_manual(values = c("grey40"))
+
+dev.off()
+
+cor.test(gonad_tau_dnds$dNdS, gonad_tau_dnds$tau, method=c("pearson"))
+
+######
+#t = 8.0396, df = 5778, p-value = 1.085e-15
+# cor 
+#0.1051791
+######
+
+cor.test(gonad_tau_dnds$abslogFC.XYtestis.XXovary, gonad_tau_dnds$tau, method=c("pearson"))
+#t = 35.609, df = 5778, p-value < 2.2e-16
+#0.4242161
+
+cor.test(gonad_tau_dnds$abslogFC.XYtestis.XXovary, gonad_tau_dnds$dNdS, method=c("pearson"))
+#t = 8.0656, df = 5778, p-value = 8.792e-16
+#     cor 
+#0.1055151 
+
+cor.test(gonad_tau_dnds$abslogFC.XYtestis.XXovary, gonad_tau_dnds$dNdS, method=c("pearson"))
