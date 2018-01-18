@@ -12,98 +12,170 @@ setwd <-'/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/'
 datapath <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/'
 results <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/'
 
-#for shared female-biased genes
-fivestages_fbias <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/female_bias_stages.txt", header = TRUE)
-str(fivestages_fbias)
+#for tissues from developmental stages, shared female-biased genes
+all_sbias <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/venn_diag/de_0.05_1_Am_alltissues.txt", header = TRUE)
+str(all_sbias)
 
-adults_fbias <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/female_bias_adults.txt", header = TRUE)
-str(adults_fbias)
+##############
+############## LARVA
+##############
 
-#fbis_g23 <- fivestages_fbias$trans[fivestages_fbias$stage=='G23']
-fbis_brain <- adults_fbias$trans[adults_fbias$stage=='Brain']
-#fbis_g27 <- fivestages_fbias$trans[fivestages_fbias$stage=='G27']
-fbis_ovary <- adults_fbias$trans[adults_fbias$stage=='Ovary']
-#fbis_g31 <- fivestages_fbias$trans[fivestages_fbias$stage=='G31']
-fbis_liver <- adults_fbias$trans[adults_fbias$stage=='Liver']
-fbis_g43 <- adults_fbias$trans[adults_fbias$stage=='G43']
-fbis_g46 <- adults_fbias$trans[adults_fbias$stage=='G46']
+#################
+#######larva shared sex-biased genes
+#################
+larva_sbias <- subset(all_sbias,all_sbias$tissue!='adult')
+str(larva_sbias)
+
+sbias_g23 <- larva_sbias$gid[larva_sbias$stage=='G23']
+sbias_g27 <- larva_sbias$gid[larva_sbias$stage=='G27']
+sbias_g31 <- larva_sbias$gid[larva_sbias$stage=='G31']
+sbias_g43 <- larva_sbias$gid[larva_sbias$stage=='G43']
+sbias_g46 <- larva_sbias$gid[larva_sbias$stage=='G46']
+
+venn.plot0 <- venn.diagram(list(G23 = as.character(sbias_g23), G27 = as.character(sbias_g27), G31 = as.character(sbias_g31), G43=as.character(sbias_g43), G46=as.character(sbias_g46)), filename =NULL,
+                           fill=c("orange","red","black","green","blue"),
+                           ext.line.lwd = 3,
+                           cex = 2,
+                           cat.cex = 2,
+                           rotation.degree = 65)
+
+grid.arrange(gTree(children=venn.plot0),ncol = 1 )
+
+venn_fbias_out0 <- arrangeGrob(gTree(children=venn.plot0),ncol = 1 )
+ggsave(file="shared_sbias_larva.pdf", venn_fbias_out0, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+
+##################
+#######larvae shared female-biased genes
+#################
+larva_fbias <- subset(larva_sbias,larva_sbias$sexbias!='male')
+str(larva_fbias)
+
+fbis_g23 <- larva_fbias$gid[larva_fbias$stage=='G23']
+fbis_g27 <- larva_fbias$gid[larva_fbias$stage=='G27']
+fbis_g31 <- larva_fbias$gid[larva_fbias$stage=='G31']
+fbis_g43 <- larva_fbias$gid[larva_fbias$stage=='G43']
+fbis_g46 <- larva_fbias$gid[larva_fbias$stage=='G46']
 
 venn.plot <- venn.diagram(list(G23 = as.character(fbis_g23), G27 = as.character(fbis_g27), G31 = as.character(fbis_g31), G43=as.character(fbis_g43), G46=as.character(fbis_g46)), filename =NULL,
-                          #fill=rainbow(5),
                           fill=c("orange","red","black","green","blue"),
                           ext.line.lwd = 3,
                           cex = 2,
                           cat.cex = 2,
                           rotation.degree = 65)
-
-
-venn.plot <- venn.diagram(list(Brain = as.character(fbis_brain), Ovary = as.character(fbis_ovary), Liver = as.character(fbis_liver), G43=as.character(fbis_g43), G46=as.character(fbis_g46)), filename =NULL,
-                          #fill=rainbow(5),
-                          fill=c("orange","red","black","green","blue"),
-                          ext.line.lwd = 3,
-                          cex = 1.5,
-                          cat.cex = 1.5,
-                          rotation.degree = 65)
-
-venn.plot <- venn.diagram(list(Brain = as.character(fbis_brain), Ovary = as.character(fbis_ovary), Liver = as.character(fbis_liver)), filename =NULL,
-                          #fill=rainbow(5),
-                          fill=c("orange","red","black"),
-                          ext.line.lwd = 3,
-                          cex = 1.5,
-                          cat.cex = 1.5,
-                          rotation.degree = 65)
-
 ## to draw to the screen:
 grid.arrange(gTree(children=venn.plot),ncol = 1 )
 
 ## to output to pdf
 venn_fbias_out <- arrangeGrob(gTree(children=venn.plot),ncol = 1 )
-ggsave(file="shared_fbias_tissues.pdf", venn_fbias_out, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_fbias_larva.pdf", venn_fbias_out, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
 
-#for shared male-biased genes
-mbias <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/male_bias_stages.txt", header = TRUE)
-str(mbias)
 
-mbias_adult <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/male_bias_adults.txt", header = TRUE)
-str(mbias_adult)
+##############
+#######larva shared male-biased genes
+##############
+larva_mbias <- subset(larva_sbias,larva_sbias$sexbias!='female')
+str(larva_mbias)
 
-#mbis_g23 <- mbias$trans[mbias$stage=='G23']
-mbis_brain <- mbias_adult$trans[mbias_adult$stage=='Brain']
-#mbis_g27 <- mbias$trans[mbias$stage=='G27']
-mbis_liver <- mbias_adult$trans[mbias_adult$stage=='Liver']
-#mbis_g31 <- mbias$trans[mbias$stage=='G31']
-mbis_testis <- mbias_adult$trans[mbias_adult$stage=='Testis']
-mbis_g43 <- mbias_adult$trans[mbias_adult$stage=='G43']
-mbis_g46 <- mbias_adult$trans[mbias_adult$stage=='G46']
+mbias_g23 <- larva_mbias$gid[larva_mbias$stage=='G23']
+mbias_g27 <- larva_mbias$gid[larva_mbias$stage=='G27']
+mbias_g31 <- larva_mbias$gid[larva_mbias$stage=='G31']
+mbias_g43 <- larva_mbias$gid[larva_mbias$stage=='G43']
+mbias_g46 <- larva_mbias$gid[larva_mbias$stage=='G46']
 
-venn.plot.2 <- venn.diagram(list(G23 = as.character(mbis_g23),G27 = as.character(mbis_g27), G31 = as.character(mbis_g31), G43=as.character(mbis_g43), G46=as.character(mbis_g46)), filename =NULL,
+venn.plot1 <- venn.diagram(list(G23 = as.character(mbias_g23), G27 = as.character(mbias_g27), G31 = as.character(mbias_g31), G43=as.character(mbias_g43), G46=as.character(mbias_g46)), filename =NULL,
                           fill=c("orange","red","black","green","blue"),
                           ext.line.lwd = 3,
                           cex = 2,
                           cat.cex = 2,
                           rotation.degree = 65)
 
-venn.plot <- venn.diagram(list(Brain = as.character(mbis_brain), Testis = as.character(mbis_testis), Liver = as.character(mbis_liver), G43=as.character(mbis_g43), G46=as.character(mbis_g46)), filename =NULL,
-                          #fill=rainbow(5),
-                          fill=c("orange","red","black","green","blue"),
-                          ext.line.lwd = 3,
-                          cex = 1.5,
-                          cat.cex = 1.5,
-                          rotation.degree = 65)
+grid.arrange(gTree(children=venn.plot1),ncol = 1 )
 
-venn.plot <- venn.diagram(list(Brain = as.character(mbis_brain), Testis = as.character(mbis_testis), Liver = as.character(mbis_liver)), filename =NULL,
-                          #fill=rainbow(5),
-                          fill=c("orange","red","black"),
-                          ext.line.lwd = 3,
-                          cex = 1.5,
-                          cat.cex = 1.5,
-                          rotation.degree = 65)
+venn_fbias_out1 <- arrangeGrob(gTree(children=venn.plot1),ncol = 1 )
+ggsave(file="shared_mbias_larva.pdf", venn_fbias_out1, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
 
-## to draw to the screen:
-grid.arrange(gTree(children=venn.plot),ncol = 1 )
-## to output to pdf
-venn_mbias_out <- arrangeGrob(gTree(children=venn.plot),ncol = 1 )
-ggsave(file="shared_mbias_adults.pdf", venn_mbias_out, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+##############
+############## ADULT
+##############
+
+#################
+#######adult shared sex-biased genes
+#################
+adult_sbias <- subset(all_sbias,all_sbias$tissue!='larva')
+str(adult_sbias)
+
+adult_gonad <- adult_sbias$gid[adult_sbias$stage=='Gonad']
+adult_brain <- adult_sbias$gid[adult_sbias$stage=='Brain']
+adult_liver <- adult_sbias$gid[adult_sbias$stage=='Liver']
+
+
+venn.plot2 <- venn.diagram(list(Gonad = as.character(adult_gonad), Brain = as.character(adult_brain), Liver = as.character(adult_liver)), filename =NULL,
+                           fill=c("orange","green","blue"),
+                           ext.line.lwd = 3,
+                           cex = 2,
+                           cat.cex = 2,
+                           rotation.degree = 65)
+
+grid.arrange(gTree(children=venn.plot2),ncol = 1 )
+
+venn_fbias_out2 <- arrangeGrob(gTree(children=venn.plot2),ncol = 1 )
+ggsave(file="shared_sbias_adult.pdf", venn_fbias_out2, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+
+
+#################
+#######adult shared female-biased genes
+#################
+adult_fbias <- subset(adult_sbias,adult_sbias$sexbias!='male')
+str(adult_fbias)
+
+adult_fgonad <- adult_fbias$gid[adult_fbias$stage=='Gonad']
+adult_fbrain <- adult_fbias$gid[adult_fbias$stage=='Brain']
+adult_fliver <- adult_fbias$gid[adult_fbias$stage=='Liver']
+
+
+venn.plot3 <- venn.diagram(list(Gonad = as.character(adult_fgonad), Brain = as.character(adult_fbrain), Liver = as.character(adult_fliver)), filename =NULL,
+                           fill=c("orange","green","blue"),
+                           ext.line.lwd = 3,
+                           cex = 1.5,
+                           cat.cex = 1.5,
+                           rotation.degree = 65)
+
+grid.arrange(gTree(children=venn.plot3),ncol = 1 )
+
+venn_fbias_out3 <- arrangeGrob(gTree(children=venn.plot3),ncol = 1 )
+ggsave(file="shared_fbias_adult.pdf", venn_fbias_out3, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+
+#################
+#######adult shared male-biased genes
+#################
+adult_mbias <- subset(adult_sbias,adult_sbias$sexbias!='female')
+str(adult_mbias)
+
+adult_mgonad <- adult_mbias$gid[adult_mbias$stage=='Gonad']
+adult_mbrain <- adult_mbias$gid[adult_mbias$stage=='Brain']
+adult_mliver <- adult_mbias$gid[adult_mbias$stage=='Liver']
+
+
+venn.plot4 <- venn.diagram(list(Gonad = as.character(adult_mgonad), Brain = as.character(adult_mbrain), Liver = as.character(adult_mliver)), filename =NULL,
+                           fill=c("orange","green","blue"),
+                           ext.line.lwd = 3,
+                           cex = 1.5,
+                           cat.cex = 1.5,
+                           rotation.degree = 65)
+
+grid.arrange(gTree(children=venn.plot4),ncol = 1 )
+
+venn_fbias_out4 <- arrangeGrob(gTree(children=venn.plot4),ncol = 1 )
+ggsave(file="shared_mbias_adult.pdf", venn_fbias_out4, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+
+
+#################
+################# G46 vs gonad (the two tissues with high number of sex-biased genes)
+#################
+
+#######adult shared male-biased genes
+#################
+
 
 #for shared unbiased genes
 fivestages_unbias <- read.table("/Users/Wen-Juan/git/rana_transcriptome/input/sex_bias/share_unbias.txt", header = TRUE)
