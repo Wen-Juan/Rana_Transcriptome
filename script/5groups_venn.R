@@ -173,54 +173,79 @@ ggsave(file="shared_mbias_adult.pdf", venn_fbias_out4, path = "/Users/Wen-Juan/m
 ################# G46 vs gonad (the two tissues with high number of sex-biased genes)
 #################
 
-#######adult shared male-biased genes
+################
+#######G46 and gonad shared sex-biased genes
+################
+adult_sbias <- subset(all_sbias,all_sbias$tissue!='larva')
+adult_sgonad <- adult_sbias$gid[adult_sbias$stage=='Gonad']
+str(adult_sgonad)
+larva_sbias <- subset(all_sbias,all_sbias$tissue!='adult')
+sbias_g46 <- larva_sbias$gid[larva_sbias$stage=='G46']
+head(sbias_g46)
+
+venn.plot5 <- venn.diagram(list(Gonad = as.character(adult_sgonad), G46 = as.character(sbias_g46)), filename =NULL,
+                           fill=c("green","blue"),
+                           ext.line.lwd = 3,
+                           cex = 1.5,
+                           cat.cex = 1.5)
+
+grid.arrange(gTree(children=venn.plot5),ncol = 1 )
+
+venn_fbias_out5 <- arrangeGrob(gTree(children=venn.plot5),ncol = 1 )
+ggsave(file="shared_sbias_G46gonad.pdf", venn_fbias_out5, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+
+################
+#######G46 and gonad shared female-biased genes
+################
+adult_fbias <- subset(adult_sbias,adult_sbias$sexbias!='male')
+adult_fgonad <- adult_fbias$gid[adult_fbias$stage=='Gonad']
+larva_fbias <- subset(larva_sbias,larva_sbias$sexbias!='male')
+fbias_g46 <- larva_fbias$gid[larva_fbias$stage=='G46']
+
+venn.plot6 <- venn.diagram(list(Gonad = as.character(adult_fgonad), G46 = as.character(fbias_g46)), filename =NULL,
+                           fill=c("green","blue"),
+                           ext.line.lwd = 3,
+                           cex = 1.5,
+                           cat.cex = 1.5)
+
+grid.arrange(gTree(children=venn.plot6),ncol = 1 )
+
+venn_fbias_out6 <- arrangeGrob(gTree(children=venn.plot6),ncol = 1 )
+ggsave(file="shared_fbias_G46gonad.pdf", venn_fbias_out6, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+
+################
+#######G46 and gonad shared male-biased genes
+################
+
+venn.plot7 <- venn.diagram(list(Gonad = as.character(adult_mgonad), G46 = as.character(mbias_g46)), filename =NULL,
+                           fill=c("green","blue"),
+                           ext.line.lwd = 3,
+                           cex = 1.5,
+                           cat.cex = 1.5)
+
+grid.arrange(gTree(children=venn.plot7),ncol = 1 )
+
+venn_fbias_out7 <- arrangeGrob(gTree(children=venn.plot7),ncol = 1 )
+ggsave(file="shared_mbias_G46gonad.pdf", venn_fbias_out7, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+
+
 #################
+################# shared sex-biased genes between G43, G46 and adult tissues.
+#################
+venn.plot8 <- venn.diagram(list(G43 = as.character(sbias_g43), G46 = as.character(sbias_g46), Gonad = as.character(adult_gonad), Liver=as.character(adult_liver), Brain=as.character(adult_brain)), filename =NULL,
+                           fill=c("orange","red","black","green","blue"),
+                           ext.line.lwd = 3,
+                           cex = 1.5,
+                           cat.cex = 1.5,
+                           rotation.degree = 65)
+
+grid.arrange(gTree(children=venn.plot8),ncol = 1 )
+
+venn_fbias_out8 <- arrangeGrob(gTree(children=venn.plot8),ncol = 1 )
+ggsave(file="shared_sbias_g43g46adults.pdf", venn_fbias_out8, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
 
 
-#for shared unbiased genes
-fivestages_unbias <- read.table("/Users/Wen-Juan/git/rana_transcriptome/input/sex_bias/share_unbias.txt", header = TRUE)
-str(fivestages_unbias)
 
-unbias_g23 <- fivestages_unbias$unbiased[fivestages_unbias$stage=='G23']
-unbias_g27 <- fivestages_unbias$unbiased[fivestages_unbias$stage=='G27']
-unbias_g31 <- fivestages_unbias$unbiased[fivestages_unbias$stage=='G31']
-unbias_g43 <- fivestages_unbias$unbiased[fivestages_unbias$stage=='G43']
-unbias_g46 <- fivestages_unbias$unbiased[fivestages_unbias$stage=='G46']
-
-venn.plot <- venn.diagram(list(G23 = as.character(unbias_g23), G27 = as.character(unbias_g27), G31 = as.character(unbias_g31), G43=as.character(unbias_g43), G46=as.character(unbias_g46)), filename =NULL,
-                          cat.col=c("orange","red","black","green","blue"),
-                          fill=c("orange","red","black","green","blue"),
-                          ext.line.lwd = 3,
-                          cex = 1.5,
-                          cat.cex = 2.5,
-                          rotation.degree = 60)
-
-grid.arrange(gTree(children=venn.plot),ncol = 1 )
-
-venn_unbias_out <- arrangeGrob(gTree(children=venn.plot),ncol = 1 )
-ggsave(file="shared_unbias.pdf", venn_unbias_out, path = "/Users/Wen-Juan/git/rana_transcriptome/input/sex_bias/")
-
-
-#for shared sex-biased and unbiased genes between G43 and G46
-g4346_fbias <- read.table("/Users/Wen-Juan/git/rana_transcriptome/input/sex_bias/G4346_unbias_sb.txt", header = TRUE)
-str(g4346_fbias)
-
-sb_g43 <- g4346_fbias$trans[g4346_fbias$stage=='G43_sb']
-unbis_g43 <- g4346_fbias$trans[g4346_fbias$stage=='G43_unbias']
-sb_g46 <- g4346_fbias$trans[g4346_fbias$stage=='G46_sb']
-unbis_g46 <- g4346_fbias$trans[g4346_fbias$stage=='G46_unbias']
-
-venn.plot.1 <- venn.diagram(list(G43_SB = as.character(sb_g43),G43_UN = as.character(unbis_g43),G46_SB=as.character(sb_g46),G46_UN=as.character(unbis_g46)), filename =NULL,
-                          fill=c("red","green","orange","blue"),
-                          ext.line.lwd = 3,
-                          cex = 1.5,
-                          cat.cex = 2)
-
-## to draw to the screen:
-grid.arrange(gTree(children=venn.plot.1),ncol = 1 )
-## to output to pdf
-venn_shareg4346_out <- arrangeGrob(gTree(children=venn.plot.1),ncol = 1 )
-ggsave(file="G4346_shared.pdf", venn_shareg4346_out, path = "/Users/Wen-Juan/git/rana_transcriptome/input/sex_bias/")
 
 
 
