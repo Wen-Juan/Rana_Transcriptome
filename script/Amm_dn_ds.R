@@ -8,11 +8,11 @@ library(easyGgplot2)
 
 
 #set up the working directory
-setwd("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/")
+setwd("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds")
 #results directoy
 setwd("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
 
-dn_ds_all<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/amm_dnds_all_mod.txt", header = T)
+dn_ds_all<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds/all_dnds_exp_sorted.txt", header = T)
 str(dn_ds_all)
 
 sex_auto<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexauto_dnds_all.txt", header = T)
@@ -85,33 +85,8 @@ wilcox.test(dn_ds$dNdS~dn_ds$type)
 #alternative hypothesis: true location shift is not equal to 0
 
 #boxplot
-
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_dnds_all.pdf")
-ggplot(dn_ds_all, aes(x=sb, y=dnds,fill=(sb))) + 
-  geom_boxplot(notch = FALSE) +
-  scale_fill_manual(values = c("firebrick2","dodgerblue2","grey")) +
-  theme(legend.position="none") +
-  facet_grid(~stage) +
-  scale_x_discrete(labels=c("F", "M", "Un"),name="Sex bias") +
-  scale_y_continuous(name = "dN/dS", limits = c(0,1)) + 
-  theme(axis.title.x = element_text(size=12,colour = "black"),axis.title.y = element_text(size=12,colour = "black")) +
-  theme(axis.text.x = element_text(colour="black",size=10),axis.text.y = element_text(colour="black",size=10))
-dev.off()
-
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_dn_all.pdf")
-ggplot(dn_ds_all, aes(x=sb, y=dn,fill=(sb))) + 
-  geom_boxplot(notch = FALSE) +
-  scale_fill_manual(values = c("firebrick2","dodgerblue2","grey")) +
-  theme(legend.position="none") +
-  facet_grid(~stage) +
-  scale_x_discrete(labels=c("F", "M", "Unbias"),name="Sex bias") +
-  scale_y_continuous(name = "dN", limits = c(0,1.25)) + 
-  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
-  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
-dev.off()
-
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_ds_all.pdf")
-ggplot(dn_ds_all, aes(x=sb, y=ds,fill=(sb))) + 
+ggplot(dn_ds_all, aes(x=sexbias, y=dnds,fill=(sexbias))) + 
   geom_boxplot(notch = FALSE) +
   scale_fill_manual(values = c("firebrick2","dodgerblue2","grey")) +
   theme(legend.position="none") +
@@ -127,25 +102,25 @@ G43 <- subset(dn_ds_all, dn_ds_all$stage=='G43')
 G46 <- subset(dn_ds_all, dn_ds_all$stage=='G46')
 
 #G43
-wilcox.test(G43$dnds[G43$sb=='F-bias'], G43$dnds[G43$sb=='M-bias']) # NA
-wilcox.test(G43$dnds[G43$sb=='F-bias'], G43$dnds[G43$sb=='unbias']) #w=146,740,p=2.357e-06
-wilcox.test(G43$dnds[G43$sb=='M-bias'], G43$dnds[G43$sb=='unbias']) #W=46,368, P=0.0001
+wilcox.test(G43$dnds[G43$sexbias=='female'], G43$dnds[G43$sexbias=='male']) # W = 60, p-value = 0.9149
+wilcox.test(G43$dnds[G43$sexbias=='F-bias'], G43$dnds[G43$sexbias=='unbias']) #w=146,740,p=2.357e-06
+wilcox.test(G43$dnds[G43$sexbias=='M-bias'], G43$dnds[G43$sexbias=='unbias']) #W=46,368, P=0.0001
 
-wilcox.test(G43$dn[G43$sb=='M-bias'], G43$dn[G43$sb=='F-bias']) #W=400, P=0.50
-wilcox.test(G43$dn[G43$sb=='F-bias'], G43$dn[G43$sb=='unbias']) #w=149,610,p=4.37e-07
-wilcox.test(G43$dn[G43$sb=='M-bias'], G43$dn[G43$sb=='unbias']) #W=45,380, P=0.0003
+wilcox.test(G43$dn[G43$sexbias=='M-bias'], G43$dn[G43$sexbias=='F-bias']) #W=400, P=0.50
+wilcox.test(G43$dn[G43$sexbias=='F-bias'], G43$dn[G43$sexbias=='unbias']) #w=149,610,p=4.37e-07
+wilcox.test(G43$dn[G43$sexbias=='M-bias'], G43$dn[G43$sexbias=='unbias']) #W=45,380, P=0.0003
 
-wilcox.test(G43$ds[G43$sb=='F-bias'], G43$ds[G43$sb=='M-bias']) #w=392,p=0.58
-wilcox.test(G43$ds[G43$sb=='M-bias'], G43$ds[G43$sb=='unbias']) #W=31,912, P=0.53
-wilcox.test(G43$ds[G43$sb=='F-bias'], G43$ds[G43$sb=='unbias']) #W=127,050, P=0.01
+wilcox.test(G43$ds[G43$sexbias=='F-bias'], G43$ds[G43$sexbias=='M-bias']) #w=392,p=0.58
+wilcox.test(G43$ds[G43$sexbias=='M-bias'], G43$ds[G43$sexbias=='unbias']) #W=31,912, P=0.53
+wilcox.test(G43$ds[G43$sexbias=='F-bias'], G43$ds[G43$sexbias=='unbias']) #W=127,050, P=0.01
 #G46
-wilcox.test(G46$dnds[G46$sb=='F-bias'], G46$dnds[G46$sb=='M-bias']) # p=0.32
-wilcox.test(G46$dnds[G46$sb=='F-bias'], G46$dnds[G46$sb=='unbias']) #w=1,217,200,p=0.033
-wilcox.test(G46$dnds[G46$sb=='M-bias'], G46$dnds[G46$sb=='unbias']) #W=793,870, P=0.36
+wilcox.test(G46$dnds[G46$sexbias=='F-bias'], G46$dnds[G46$sexbias=='M-bias']) # p=0.32
+wilcox.test(G46$dnds[G46$sexbias=='F-bias'], G46$dnds[G46$sexbias=='unbias']) #w=1,217,200,p=0.033
+wilcox.test(G46$dnds[G46$sexbias=='M-bias'], G46$dnds[G46$sexbias=='unbias']) #W=793,870, P=0.36
 
-wilcox.test(G46$dn[G46$sb=='F-bias'], G46$dn[G46$sb=='M-bias']) # p=0.35
-wilcox.test(G46$dn[G46$sb=='F-bias'], G46$dn[G46$sb=='unbias']) #w=1,228,200,p=0.09
-wilcox.test(G46$dn[G46$sb=='M-bias'], G46$dn[G46$sb=='unbias']) #W=765,140, P=0.01
+wilcox.test(G46$dn[G46$sexbias=='F-bias'], G46$dn[G46$sexbias=='M-bias']) # p=0.35
+wilcox.test(G46$dn[G46$sexbias=='F-bias'], G46$dn[G46$sexbias=='unbias']) #w=1,228,200,p=0.09
+wilcox.test(G46$dn[G46$sexbias=='M-bias'], G46$dn[G46$sexbias=='unbias']) #W=765,140, P=0.01
 
 wilcox.test(G46$ds[G46$sb=='F-bias'], G46$ds[G46$sb=='M-bias']) # 948,180, 4.39e-09
 wilcox.test(G46$ds[G46$sb=='F-bias'], G46$ds[G46$sb=='unbias']) #w=1,299,500,p=0.30
