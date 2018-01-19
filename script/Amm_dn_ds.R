@@ -15,78 +15,75 @@ setwd("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figur
 dn_ds_all<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds/all_dnds_exp_sorted.txt", header = T)
 str(dn_ds_all)
 
-sex_auto<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexauto_dnds_all.txt", header = T)
+sex_auto<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds/sexchr_auto_dnds_all.txt", header = T)
 str(sex_auto)
 head(sex_auto)
 
 #dn/ds plot for Faster-X
+###all chromosome separately
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_fasterX_10chr.pdf", width=10)
+ggplot(sex_auto, aes(x=chrid, y=dNdS, fill=chrid)) + 
+  scale_fill_manual(values = c("firebrick2","firebrick2","grey","grey","grey","grey","grey","grey","grey","grey")) +
+  theme(legend.position="none") +
+  geom_boxplot() +
+  ylim(0,0.5) +
+  labs(x='Chromosome', y='dn/ds') +
+  theme(axis.text=element_text(size=12, color="black"),text = element_text(size=15,color="black"))
+dev.off()
+
+#sex chromosome vs autosomes
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_fasterX.pdf")
-ggplot(sex_auto, aes(x=chrid, y=dNdS, fill=chrid)) + 
+ggplot(sex_auto, aes(x=chrtype, y=dNdS, fill=chrtype)) + 
   scale_fill_manual(values = c("grey","firebrick2")) +
   theme(legend.position="none") +
   geom_boxplot() +
+  ylim(0,0.5) +
   labs(x='Chromosome', y='dn/ds') +
   scale_x_discrete(labels = c("Autosome","Sex chromosome")) +
   theme(axis.text=element_text(size=12, color="black"),text = element_text(size=15,color="black"))
 dev.off()
-
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_fasterX0.3.pdf")
-ggplot(sex_auto, aes(x=chrid, y=dNdS, fill=chrid)) + 
-  scale_fill_manual(values = c("grey","firebrick2")) +
-  theme(legend.position="none") +
-  geom_boxplot() +
-  scale_y_continuous(limits = c(0,0.3)) + 
-  labs(x='Chromosome', y='dn/ds') +
-  scale_x_discrete(labels = c("Autosome","Sex chromosome")) +
-  theme(axis.text=element_text(size=12, color="black"),text = element_text(size=15,color="black"))
-dev.off()
-
-wilcox.test(sex_auto$dNdS[sex_auto$chrid=='sexchr'], sex_auto$dNdS[sex_auto$chrid=='Auto'])
-mean(sex_auto$dNdS[sex_auto$chrid=='sexchr'])
-mean(sex_auto$dNdS[sex_auto$chrid=='Auto'])
-#####
-#data:  sex_auto$dNdS[sex_auto$chrid == "sexchr"] and sex_auto$dNdS[sex_auto$chrid == "Auto"]
-#W = 5362300, p-value = 0.05547
-#####
 
 ###if separate to compare Chr01, Chr02 and autosome
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_fasterX_chr0102.pdf")
-ggplot(sex_auto, aes(x=chr, y=dNdS, fill=chrid)) + 
+ggplot(sex_auto, aes(x=twosexchr, y=dNdS, fill=twosexchr)) + 
   scale_fill_manual(values = c("grey","firebrick2","firebrick2")) +
   theme(legend.position="none") +
   geom_boxplot() +
+  ylim(0,0.5) +
   labs(x='Chromosome', y='dn/ds') +
   scale_x_discrete(labels = c("Autosome","Chr01","Chr02")) +
   theme(axis.text=element_text(size=12, color="black"),text = element_text(size=15,color="black"))
 dev.off()
 
-mean(sex_auto$dNdS[sex_auto$chr=='Chr01'])  #0.08347266
-mean(sex_auto$dNdS[sex_auto$chr=='Chr02']) #0.08477808
-mean(sex_auto$dNdS[sex_auto$chr=='Auto'])  #0.08184848
+mean(sex_auto$dNdS[sex_auto$chrid=='Chr01'])  #0.08367571
+mean(sex_auto$dNdS[sex_auto$chrid=='Chr02']) # 0.08482178
+mean(sex_auto$dNdS[sex_auto$chrtype=='Autosome'])  #0.08202889
 
-wilcox.test(sex_auto$dNdS[sex_auto$chr=='Chr01'], sex_auto$dNdS[sex_auto$chr=='Auto'])
-#data:  sex_auto$dNdS[sex_auto$chr == "Chr01"] and sex_auto$dNdS[sex_auto$chr == "Auto"]
-#W = 2883300, p-value = 0.2996
-wilcox.test(sex_auto$dNdS[sex_auto$chr=='Chr02'], sex_auto$dNdS[sex_auto$chr=='Auto'])
-#data:  sex_auto$dNdS[sex_auto$chr == "Chr02"] and sex_auto$dNdS[sex_auto$chr == "Auto"]
-#W = 2478900, p-value = 0.05034
-#alternative hypothesis: true location shift is not equal to 0
-wilcox.test(sex_auto$dNdS[sex_auto$chr=='Chr01'], sex_auto$dNdS[sex_auto$chr=='Chr02'])
+wilcox.test(sex_auto$dNdS[sex_auto$twosexchr=='Autosome'], sex_auto$dNdS[sex_auto$twosexchr=='Chr01'])
+#W = 2745200, p-value = 0.2957
+wilcox.test(sex_auto$dNdS[sex_auto$twosexchr=='Chr02'], sex_auto$dNdS[sex_auto$twosexchr=='Autosome'])
+#W = 2453400, p-value = 0.06201
+wilcox.test(sex_auto$dNdS[sex_auto$twosexchr=='Chr01'], sex_auto$dNdS[sex_auto$twosexchr=='Chr02'])
 #data:  sex_auto$dNdS[sex_auto$chr == "Chr01"] and sex_auto$dNdS[sex_auto$chr == "Chr02"]
-#W = 569420, p-value = 0.4188
-
-#G46
-qqnorm(log(dn_ds$dNdS)) #unlikely normal distribution
-
-wilcox.test(dn_ds$dNdS~dn_ds$type)
-#Wilcoxon rank sum test with continuity correction
-#data:  dn_ds$dNdS by dn_ds$type
-#W = 4191400, p-value = 0.2871
-#alternative hypothesis: true location shift is not equal to 0
+#W = 566390, p-value = 0.4656
 
 #boxplot
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_ds_all.pdf")
+#dn/ds
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_dnds_all.pdf", width=10)
 ggplot(dn_ds_all, aes(x=sexbias, y=dnds,fill=(sexbias))) + 
+  geom_boxplot(notch = FALSE) +
+  scale_fill_manual(values = c("firebrick2","dodgerblue2","grey")) +
+  theme(legend.position="none") +
+  facet_grid(~stage) +
+  scale_x_discrete(labels=c("F", "M", "Unbias"),name="Sex bias") +
+  scale_y_continuous(name = "dN/dS", limits = c(0,0.6)) + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+dev.off()
+
+#ds
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_ds_all.pdf", width=10)
+ggplot(dn_ds_all, aes(x=sexbias, y=ds,fill=(sexbias))) + 
   geom_boxplot(notch = FALSE) +
   scale_fill_manual(values = c("firebrick2","dodgerblue2","grey")) +
   theme(legend.position="none") +
@@ -97,34 +94,51 @@ ggplot(dn_ds_all, aes(x=sexbias, y=dnds,fill=(sexbias))) +
   theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
 dev.off()
 
+#dn
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_dn_all.pdf", width=10)
+ggplot(dn_ds_all, aes(x=sexbias, y=dn,fill=(sexbias))) + 
+  geom_boxplot(notch = FALSE) +
+  scale_fill_manual(values = c("firebrick2","dodgerblue2","grey")) +
+  theme(legend.position="none") +
+  facet_grid(~stage) +
+  scale_x_discrete(labels=c("F", "M", "Unbias"),name="Sex bias") +
+  scale_y_continuous(name = "dN", limits = c(0,1)) + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+dev.off()
+
 G31 <- subset(dn_ds_all, dn_ds_all$stage=='G31')
 G43 <- subset(dn_ds_all, dn_ds_all$stage=='G43')
 G46 <- subset(dn_ds_all, dn_ds_all$stage=='G46')
+gonad <- subset(dn_ds_all, dn_ds_all$stage=='Gonad')
+liver <- subset(dn_ds_all, dn_ds_all$stage=='Liver')
+brain <- subset(dn_ds_all, dn_ds_all$stage=='Brain')
+
 
 #G43
 wilcox.test(G43$dnds[G43$sexbias=='female'], G43$dnds[G43$sexbias=='male']) # W = 60, p-value = 0.9149
-wilcox.test(G43$dnds[G43$sexbias=='F-bias'], G43$dnds[G43$sexbias=='unbias']) #w=146,740,p=2.357e-06
-wilcox.test(G43$dnds[G43$sexbias=='M-bias'], G43$dnds[G43$sexbias=='unbias']) #W=46,368, P=0.0001
+wilcox.test(G43$dnds[G43$sexbias=='female'], G43$dnds[G43$sexbias=='unbias']) #W = 202960, p-value = 6.255e-06
+wilcox.test(G43$dnds[G43$sexbias=='male'], G43$dnds[G43$sexbias=='unbias']) #W = 14262, p-value = 0.2533. This is not correct, as only 3 male values.
 
-wilcox.test(G43$dn[G43$sexbias=='M-bias'], G43$dn[G43$sexbias=='F-bias']) #W=400, P=0.50
-wilcox.test(G43$dn[G43$sexbias=='F-bias'], G43$dn[G43$sexbias=='unbias']) #w=149,610,p=4.37e-07
-wilcox.test(G43$dn[G43$sexbias=='M-bias'], G43$dn[G43$sexbias=='unbias']) #W=45,380, P=0.0003
-
-wilcox.test(G43$ds[G43$sexbias=='F-bias'], G43$ds[G43$sexbias=='M-bias']) #w=392,p=0.58
-wilcox.test(G43$ds[G43$sexbias=='M-bias'], G43$ds[G43$sexbias=='unbias']) #W=31,912, P=0.53
-wilcox.test(G43$ds[G43$sexbias=='F-bias'], G43$ds[G43$sexbias=='unbias']) #W=127,050, P=0.01
 #G46
-wilcox.test(G46$dnds[G46$sexbias=='F-bias'], G46$dnds[G46$sexbias=='M-bias']) # p=0.32
-wilcox.test(G46$dnds[G46$sexbias=='F-bias'], G46$dnds[G46$sexbias=='unbias']) #w=1,217,200,p=0.033
-wilcox.test(G46$dnds[G46$sexbias=='M-bias'], G46$dnds[G46$sexbias=='unbias']) #W=793,870, P=0.36
+wilcox.test(G46$dnds[G46$sexbias=='male'], G46$dnds[G46$sexbias=='unbias']) #W = 441010, p-value = 8.044e-08
+wilcox.test(G46$dnds[G46$sexbias=='female'], G46$dnds[G46$sexbias=='unbias']) #W = 4095500, p-value = 0.1994
+wilcox.test(G46$dnds[G46$sexbias=='female'], G46$dnds[G46$sexbias=='male']) #W = 95099, p-value = 3.095e-06
 
-wilcox.test(G46$dn[G46$sexbias=='F-bias'], G46$dn[G46$sexbias=='M-bias']) # p=0.35
-wilcox.test(G46$dn[G46$sexbias=='F-bias'], G46$dn[G46$sexbias=='unbias']) #w=1,228,200,p=0.09
-wilcox.test(G46$dn[G46$sexbias=='M-bias'], G46$dn[G46$sexbias=='unbias']) #W=765,140, P=0.01
+#gonad
+wilcox.test(gonad$dnds[gonad$sexbias=='male'], gonad$dnds[gonad$sexbias=='unbias']) #W = 1855500, p-value = 0.06863
+wilcox.test(gonad$dnds[gonad$sexbias=='female'], gonad$dnds[gonad$sexbias=='unbias']) #W = 2430100, p-value = 0.002517
+wilcox.test(gonad$dnds[gonad$sexbias=='female'], gonad$dnds[gonad$sexbias=='male']) #W = 1349300, p-value = 0.3569
 
-wilcox.test(G46$ds[G46$sb=='F-bias'], G46$ds[G46$sb=='M-bias']) # 948,180, 4.39e-09
-wilcox.test(G46$ds[G46$sb=='F-bias'], G46$ds[G46$sb=='unbias']) #w=1,299,500,p=0.30
-wilcox.test(G46$ds[G46$sb=='M-bias'], G46$ds[G46$sb=='unbias']) #W=719,350, P=1.00e-07
+#brain
+wilcox.test(brain$dnds[brain$sexbias=='male'], brain$dnds[brain$sexbias=='unbias']) #W = 103310, p-value = 0.1372
+wilcox.test(brain$dnds[brain$sexbias=='female'], brain$dnds[brain$sexbias=='unbias']) #W = 24332, p-value = 0.1197
+wilcox.test(brain$dnds[brain$sexbias=='female'], brain$dnds[brain$sexbias=='male']) #W = 74, p-value = 0.04881
+
+#liver
+wilcox.test(liver$dnds[liver$sexbias=='male'],liver$dnds[liver$sexbias=='unbias']) #W = 123380, p-value = 0.005197
+wilcox.test(liver$dnds[liver$sexbias=='female'],liver$dnds[liver$sexbias=='unbias']) #W = 81166, p-value = 0.0796
+wilcox.test(liver$dnds[liver$sexbias=='female'],liver$dnds[liver$sexbias=='male']) #W = 426.5, p-value = 0.7359
 
 #combined all sex biased in three stages.
 ggplot2.boxplot(data=dn_ds_all, xName='sb', yName='dnds', group='sb', groupColors=c("firebrick2","dodgerblue2","grey"), ylim=c(0,0.1))
