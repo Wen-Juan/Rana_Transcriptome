@@ -20,11 +20,10 @@ chr2.data <- subset(map.data, map.data$chr!='Chr01')
 group1.expr.minus <- (map.data$Am2_463 + map.data$Am4_461 + map.data$Am6_462) / 3 #XY group #G46
 group2.expr.minus <- map.data$Am5_461 #XX group #G46
 
-
 group1.expr <- group1.expr.minus + abs(min(c(group1.expr.minus, group2.expr.minus)))
 group2.expr <- group2.expr.minus + abs(min(c(group1.expr.minus, group2.expr.minus)))
 
-map.data$ratio <- group1.expr/group2.expr
+map.data$ratio <- log(group1.expr/group2.expr)
 
 map.data$ratio[mapply(is.infinite, map.data$ratio)] <- NA
 
@@ -45,16 +44,16 @@ auto <-c(chr03,chr04,chr05,chr06,chr07,chr08,chr09,chr10)
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/dc_xy_xx_testis.pdf", width=8, height=8)
 ggplot(map.data, aes(x=chr, y=ratio, fill=chr)) +
   scale_fill_manual(values = c("red","red","grey","grey","grey","grey","grey","grey","grey","grey")) +
-  scale_y_continuous(limits = c(0,2)) + 
+  scale_y_continuous(limits = c(-1,1)) + 
   geom_boxplot() +
-  labs(x='Chromosome', y='Ratio of XY/XX gene expression') +
+  labs(x='Chromosome', y='Log(XY/XX) gene expression') +
   theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
   theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
 
 dev.off()
 
 wilcox.test(map.data$ratio[map.data$chr=='Chr01'],map.data$ratio[map.data$chr!='Chr01'],exact = FALSE) #W = 2004300, p-value = 0.5562
-wilcox.test(map.data$ratio[map.data$chr=='Chr02'],auto,exact = FALSE) #W = 1465600, p-value = 0.2975
+wilcox.test(map.data$ratio[map.data$chr=='Chr02'],auto,exact = FALSE) #W = 1459700, p-value = 0.3911
 wilcox.test(sexchr,auto,exact = FALSE) #W = 3147100, p-value = 0.2423
 
 

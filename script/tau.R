@@ -101,6 +101,65 @@ labs(x='Sex bias', y='Tau')
 
 dev.off()
 
+####liner model to investigate whether tau is correlated with gene expression and sex bias.
+g46_tau_sub <- subset(g46_tau,g46_tau$bias!='unbias')
+str(g46_tau_sub)
+qqnorm(sqrt(abs(g46_tau_sub$logFC.XY46.XX46)))
+hist(sqrt(abs(g46_tau_sub$logFC.XY46.XX46)))
+y <- lm(tau~sqrt(abs(g46_tau_sub$logFC.XY46.XX46))*bias, g46_tau_sub)
+anova(y)
+
+##########
+##############without unbias genes
+##########
+#Response: tau
+#Df Sum Sq Mean Sq  F value    Pr(>F)    
+#sqrt(abs(g46_tau_sub$logFC.XY46.XX46))         1 54.872  54.872 3407.645 < 2.2e-16 ***
+#  bias                                           1  1.530   1.530   94.997 < 2.2e-16 ***
+#  sqrt(abs(g46_tau_sub$logFC.XY46.XX46)):bias    1  2.275   2.275  141.265 < 2.2e-16 ***
+#  Residuals                                   4674 75.264   0.016 
+
+#############
+#############with unbias genes
+#Response: tau
+#Df Sum Sq Mean Sq  F value    Pr(>F)    
+#sqrt(abs(g46_tau$logFC.XY46.XX46))          1 108.38 108.379 3855.423 < 2.2e-16 ***
+#  bias                                        2   5.12   2.562   91.155 < 2.2e-16 ***
+#  sqrt(abs(g46_tau$logFC.XY46.XX46)):bias     2   6.91   3.454  122.879 < 2.2e-16 ***
+#  Residuals                               24400 685.90   0.028  
+############
+###########
+
+##investigate whether dnds is influences by tau or sex bias, or the interaction between the two.
+g46_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G46_tau/G46_sb_un_tau_dnds.txt", header = TRUE)
+str(g46_tau_dnds)
+
+hist(g46_tau_dnds$tau) #look quite normal distribution
+y1 <- lm(dNdS~tau*bias, g46_tau_dnds)
+anova(y1)
+
+###########
+#Response: dNdS
+#Df  Sum Sq Mean Sq  F value    Pr(>F)    
+#  tau          1  0.4084 0.40841 119.9465 < 2.2e-16 ***
+#  bias         2  0.0652 0.03258   9.5674 7.095e-05 ***
+#  tau:bias     2  0.1277 0.06386  18.7562 7.540e-09 ***
+#  Residuals 6589 22.4353 0.00340  
+###########
+
+y2 <- glm(dNdS~tau*bias, family=quasi, g46_tau_dnds)
+summary(y2)
+#######
+Coefficients:
+  Estimate Std. Error t value Pr(>|t|)    
+(Intercept)     0.038071   0.004829   7.884 3.69e-15 ***
+  tau             0.092544   0.009279   9.974  < 2e-16 ***
+  biasmale        0.037546   0.018415   2.039   0.0415 *  
+  biasunbias      0.031121   0.005254   5.923 3.33e-09 ***
+  tau:biasmale   -0.033100   0.033230  -0.996   0.3192    
+tau:biasunbias -0.062678   0.010277  -6.099 1.13e-09 ***
+#########  
+
 #scatter plot
 abs_g46_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G46_tau/G46_abssb_un_tau_match_fi.txt", header = TRUE)
 str(abs_g46_tau)
@@ -145,6 +204,18 @@ ggplot(gonad_tau, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c(
 
 dev.off()
 
+y <- lm(tau~sqrt(abs(logFC.XYtestis.XXovary))*bias, gonad_tau)
+anova(y)
+##
+##
+#Df Sum Sq Mean Sq  F value    Pr(>F)    
+#sqrt(abs(logFC.XYtestis.XXovary))          1 165.94 165.945 6088.711 < 2.2e-16 ***
+#  bias                                       2  34.67  17.333  635.955 < 2.2e-16 ***
+#  sqrt(abs(logFC.XYtestis.XXovary)):bias     2   4.06   2.028   74.402 < 2.2e-16 ***
+#  Residuals                              21111 575.37   0.027  
+##
+
+
 ##correlation scatter plot
 abs_gonad_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Gonad_tau/gonad_fc1_abssb_unbias_tau.txt", header = TRUE)
 str(abs_gonad_tau)
@@ -185,6 +256,45 @@ ggplot(gonad_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(value
   theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
   theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
 dev.off()
+
+###linear model to investigate whether evolutionary rate is explained by tau or sex bias, or the interaction.
+y1 <- lm(dNdS ~ sqrt(tau) * bias, gonad_tau_dnds)
+anova(y1)
+#######
+#Response: dNdS
+#Df  Sum Sq  Mean Sq F value    Pr(>F)    
+#sqrt(tau)         1  0.2805 0.280491 80.0801 < 2.2e-16 ***
+#  bias              2  0.0020 0.001013  0.2892  0.748840    
+#sqrt(tau):bias    2  0.0378 0.018880  5.3904  0.004583 ** 
+#  Residuals      5774 20.2242 0.003503 
+########
+
+y1a <- glm(dNdS ~ tau * bias,family=quasipoisson, gonad_tau_dnds)
+summary(y1a)
+
+#####
+Coefficients:
+  Estimate Std. Error t value Pr(>|t|)    
+(Intercept)    -2.77772    0.05513 -50.389  < 2e-16 ***
+  tau             0.62930    0.10043   6.266 3.97e-10 ***
+  biasmale        0.22170    0.07373   3.007  0.00265 ** 
+  biasunbias      0.09160    0.06541   1.401  0.16141    
+tau:biasmale   -0.48594    0.13841  -3.511  0.00045 ***
+  tau:biasunbias -0.21891    0.12770  -1.714  0.08652 . 
+#####
+
+y2 <- glm(dNdS ~ tau * logFC.XYtestis.XXovary, family=quasipoisson, gonad_tau_dnds)
+summary(y2)
+
+#########
+Coefficients:
+  Estimate Std. Error  t value Pr(>|t|)    
+(Intercept)                -2.67217    0.02510 -106.456  < 2e-16 ***
+  tau                         0.38679    0.05060    7.644 2.45e-14 ***
+  logFC.XYtestis.XXovary      0.04836    0.01376    3.514 0.000445 ***
+  tau:logFC.XYtestis.XXovary -0.09222    0.02108   -4.374 1.24e-05 ***
+#########  
+
 
 wilcox.test(gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='female'],gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='unbias'],exact = FALSE) 
 #W = 2430100, p-value = 0.002517

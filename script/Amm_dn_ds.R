@@ -75,7 +75,7 @@ ggplot(dn_ds_all, aes(x=sexbias, y=dnds,fill=(sexbias))) +
   scale_fill_manual(values = c("firebrick2","dodgerblue2","grey")) +
   theme(legend.position="none") +
   facet_grid(~stage) +
-  scale_x_discrete(labels=c("F", "M", "Unbias"),name="Sex bias") +
+  scale_x_discrete(labels=c("F", "M", "U"),name="Sex bias") +
   scale_y_continuous(name = "dN/dS", limits = c(0,0.6)) + 
   theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
   theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
