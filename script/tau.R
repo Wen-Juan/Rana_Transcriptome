@@ -133,19 +133,38 @@ anova(y)
 ##investigate whether dnds is influences by tau or sex bias, or the interaction between the two.
 g46_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G46_tau/G46_sb_un_tau_dnds.txt", header = TRUE)
 str(g46_tau_dnds)
+g46sub_tau_dnds <- subset(g46_tau_dnds, g46_tau_dnds$bias!='unbias')
+str(g46sub_tau_dnds)
 
-hist(g46_tau_dnds$tau) #look quite normal distribution
-y1 <- lm(dNdS~tau*bias, g46_tau_dnds)
+qqnorm(sqrt(g46_tau_dnds$tau)[1:5000]) #not normal distribution
+shapiro.test(log(g46_tau_dnds$tau[1:5000])) #not normal distribution
+
+y1 <- lm(dNdS~sqrt(tau)*bias, g46_tau_dnds)
 anova(y1)
 
 ###########
 #Response: dNdS
 #Df  Sum Sq Mean Sq  F value    Pr(>F)    
-#  tau          1  0.4084 0.40841 119.9465 < 2.2e-16 ***
-#  bias         2  0.0652 0.03258   9.5674 7.095e-05 ***
-#  tau:bias     2  0.1277 0.06386  18.7562 7.540e-09 ***
-#  Residuals 6589 22.4353 0.00340  
+#  sqrt(tau)         1  0.4781 0.47813 140.8440 < 2.2e-16 ***
+#  bias              2  0.0643 0.03216   9.4725 7.799e-05 ***
+#  sqrt(tau):bias    2  0.1263 0.06317  18.6083 8.735e-09 ***
+#  Residuals      6589 22.3678 0.00339  
 ###########
+
+################
+#########if removing unbiased genes,
+###############
+y2 <- lm(dNdS~sqrt(tau)*bias, g46sub_tau_dnds)
+anova(y2)
+
+############
+#Response: dNdS
+#Df Sum Sq Mean Sq  F value    Pr(>F)    
+#  sqrt(tau)         1 0.3712 0.37124 115.7551 < 2.2e-16 ***
+#  bias              1 0.0534 0.05341  16.6526 4.682e-05 ***
+#  sqrt(tau):bias    1 0.0034 0.00336   1.0475    0.3062    
+#   Residuals      1827 5.8594 0.00321 
+############
 
 y2 <- glm(dNdS~tau*bias, family=quasi, g46_tau_dnds)
 summary(y2)
@@ -304,6 +323,22 @@ wilcox.test(gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='male'],gonad_tau_dnds$dNdS
 
 wilcox.test(gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='female'],gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='male'],exact = FALSE) 
 #W = 1349300, p-value = 0.3569
+
+###########
+#remove unbiased genes.
+##########
+gonadsub_tau_dnds <- subset(gonad_tau_dnds, gonad_tau_dnds$bias!='unbias')
+str(gonadsub_tau_dnds)
+y2 <- lm(dNdS ~ sqrt(tau) * bias, gonadsub_tau_dnds)
+anova(y2)
+
+#Response: dNdS
+#Df  Sum Sq  Mean Sq F value    Pr(>F)    
+#  sqrt(tau)         1  0.1280 0.127956 35.2817 3.152e-09 ***
+#  bias              1  0.0014 0.001430  0.3944  0.530034    
+#  sqrt(tau):bias    1  0.0376 0.037630 10.3757  0.001289 ** 
+#  Residuals      3277 11.8847 0.003627    
+
 
 #with color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_dnds_colors1.pdf", width=8, height=8)
