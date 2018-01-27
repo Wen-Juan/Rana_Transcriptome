@@ -74,24 +74,23 @@ library("microbenchmark")
 require(zoo)
 
 
-dn_ds <-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Tvedora_dev_RNAseq/input/sexchr_trans_dnds.txt", header = T)
+dn_ds <-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds/amm88perc_annotation_dnds.txt", header = T)
 str(dn_ds)
 
 map.data <- dn_ds
 chr1_1_start <-map.data$start[map.data$chr=='Chr01']
 chr_1_end <- max(map.data$start[map.data$chr=='Chr01'])
-DC.data1dmrt <- subset(map.data, map.data$Gid=='TRINITY_DN112725_c0_g1_i1') #DMRT2
 
-zoo.dat <- zoo(map.data$dN_dS[map.data$chr=='Chr01'], c(chr1_1_start,chr_1_end))
+zoo.dat <- zoo(map.data$dnds[map.data$chr=='Chr01'], c(chr1_1_start,chr_1_end))
 y <- rollapply(zoo.dat, 50, FUN = mean, align = 'center', na.rm=TRUE) 
 
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Tvedora_dev_RNAseq/output/Figure_9_dnds_sexchr.pdf", width=8, height=8)
 par(mar=c(5,5,4,3)+0.6) 
 #plot(c(0, chr_1_end), c(0,2), axes=F, lwd=2, xlab="Position (bp)", ylab="gene expression ratio log2(XY0/XX)", cex.axis=1.5, cex.lab=1.2, col="white")
-plot(c(0, chr_1_end), c(-0.2,1.1), axes=F, lwd=2, xlab="Position (bp)", ylab="dN/dS", cex.axis=1.5, cex.lab=1.2, col="white")
+plot(c(0, chr_1_end), c(0,1.5), axes=F, lwd=2, xlab="Position (bp)", ylab="dN/dS", cex.axis=1.5, cex.lab=1.2, col="white")
 axis(1,c(0, 30000000,60000000,90000000, 120000000, 150000000, 180000000, 200000000))
-axis(2, c(-0.2,0,0.2,0.4,0.6,0.8,1.1))
-points(map.data$start[map.data$chr=='Chr01'], map.data$dN_dS[map.data$chr=='Chr01'], pch=20, lwd=2, type="p",col="gray50", main="",cex.axis=1.5)
+axis(2, c(0,0.2,0.4,0.6,0.8,1,1.2,1.5))
+points(map.data$start[map.data$chr=='Chr01'], map.data$dnds[map.data$chr=='Chr01'], pch=20, lwd=2, type="p",col="gray50", main="",cex.axis=1.5)
 #points(DC.data1dmrt$start[DC.data1dmrt$chr=='Chr01'],DC.data1dmrt$dN_dS[DC.data1dmrt$chr=='Chr01'], pch=20, lwd=3, type="p",col="red", main="",cex.axis=1.5)
 lines(y,col="blue",lwd=4)
 abline(v=116440117, col="blue",lwd=2,lty=3)
