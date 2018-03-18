@@ -308,12 +308,49 @@ summary(y2)
 ##
 
 ##############
-#load data from folder G43c
+#load data from folder G43
 ##############
+g43_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G43_tau/Am43_log1_sb_sorted.txt", header = TRUE)
+str(g43_tau)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_g43.pdf", width=8, height=8)
+ggplot(g43_tau, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias",labels=c("XX","XY","unbias")) +
+  geom_boxplot() +
+  ylim(0,1) +
+  scale_x_discrete(labels=c("XX", "XY","Unbias"),name="Sex bias") + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
+dev.off()
+
+####some stats
+
+str(g43_tau)
+qqnorm(sqrt(abs(g43_tau$logFC.XY43.XX43)))
+hist(sqrt(abs(g43_tau$logFC.XY43.XX43)))
+qqnorm(sqrt(abs(g43_tau$tau)))
+hist(sqrt(abs(g43_tau$tau)))
+
+y <- lm(sqrt(tau)~sqrt(abs(logFC.XY43.XX43))*bias, data=g43_tau)
+
+summary(y)
 
 
+#scatter plot
+abs_g43_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G43_tau/Am43_log1_sb_sorted.txt", header = TRUE)
+str(abs_g43_tau)
 
+#with color
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g43_sb_colors1.pdf", width=8, height=8)
+ggplot2.scatterplot(data=abs_g43_tau, xName='abslogFC.XY43.XX43',yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
+  labs(x="LogFC.XY46.XX46)", y="Tau", color ="bias")
+dev.off()
 
+#without color
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g43_sb_nocolors.pdf", width=8, height=8)
+ggplot2.scatterplot(data=abs_g43_tau, xName='abslogFC.XY43.XX43',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="LogFC.XY43.XX43)", y="Tau") +
+  scale_fill_manual(values = c("grey40"))
+dev.off()
 
 
 ##############
@@ -479,3 +516,4 @@ cor.test(gonad_tau_dnds$abslogFC.XYtestis.XXovary, gonad_tau_dnds$dNdS, method=c
 #0.1055151 
 
 cor.test(gonad_tau_dnds$abslogFC.XYtestis.XXovary, gonad_tau_dnds$dNdS, method=c("pearson"))
+
