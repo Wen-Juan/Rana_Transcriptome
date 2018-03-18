@@ -283,7 +283,7 @@ str(gonad_tau)
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_gonad_sb.pdf", width=8, height=8)
 ggplot(gonad_tau, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias") +
   geom_boxplot() +
-  ylim(0, 1.25) +
+  ylim(0, 1) +
   scale_x_discrete(labels=c("XX", "XY", "unbias")) +
   theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
   theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
@@ -306,6 +306,19 @@ summary(y2)
 #  sqrt(abs(logFC.XYtestis.XXovary)):biasmale   -0.15882    0.10971  -1.448    0.148    
 # sqrt(abs(logFC.XYtestis.XXovary)):biasunbias -0.43344    0.10830  -4.002 6.28e-05 ***
 ##
+
+##############
+#load data from folder G43c
+##############
+
+
+
+
+
+
+##############
+#load data from gonads
+##############
 
 ###If removing unbiased genes, 
 gonad_tau_sub <- subset(gonad_tau,gonad_tau$bias!='unbias')
