@@ -142,8 +142,19 @@ anova(y)
 ###########
 
 ##investigate whether dnds is influences by tau or sex bias, or the interaction between the two.
+
 g46_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G46_tau/G46_sb_un_tau_dnds.txt", header = TRUE)
 str(g46_tau_dnds)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_g46_dnds.pdf", width=8, height=8)
+ggplot(g46_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias",labels=c("XX","XY","unbias")) +
+  geom_boxplot() +
+  ylim(0,1) +
+  scale_x_discrete(labels=c("XX", "XY","Unbias"),name="Sex bias") + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
+dev.off()
+
 g46sub_tau_dnds <- subset(g46_tau_dnds, g46_tau_dnds$bias!='unbias')
 str(g46sub_tau_dnds)
 
@@ -331,9 +342,20 @@ qqnorm(sqrt(abs(g43_tau$tau)))
 hist(sqrt(abs(g43_tau$tau)))
 
 y <- lm(sqrt(tau)~sqrt(abs(logFC.XY43.XX43))*bias, data=g43_tau)
+anova(y)
 
-summary(y)
-
+######
+#> anova(y)
+#Analysis of Variance Table
+#Response: sqrt(tau)
+#Df Sum Sq Mean Sq  F value    Pr(>F)    
+#sqrt(abs(logFC.XY43.XX43))          1  35.31  35.307 1896.228 < 2.2e-16 ***
+#  bias                                2   0.60   0.300   16.094 1.035e-07 ***
+#  sqrt(abs(logFC.XY43.XX43)):bias     2   0.38   0.189   10.137 3.974e-05 ***
+#  Residuals                       25567 476.04   0.019                       
+---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+######
 
 #scatter plot
 abs_g43_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G43_tau/Am43_log1_sb_sorted.txt", header = TRUE)
