@@ -374,6 +374,19 @@ ggplot2.scatterplot(data=abs_g43_tau, xName='abslogFC.XY43.XX43',yName='tau', yl
   scale_fill_manual(values = c("grey40"))
 dev.off()
 
+########
+g43_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G43_tau/Am43_log1_sbun_dnds_sorted.txt", header = TRUE)
+str(g43_tau_dnds)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_g43_dnds.pdf", width=8, height=8)
+ggplot(g43_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias",labels=c("XX","XY","unbias")) +
+  geom_boxplot() +
+  ylim(0,1) +
+  scale_x_discrete(labels=c("XX", "XY","Unbias"),name="Sex bias") + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
+dev.off()
+
 
 ##############
 #load data from gonads
@@ -428,7 +441,7 @@ str(gonad_tau_dnds)
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/gonad_sb_dnds.pdf", width=8, height=8)
 ggplot(gonad_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias") +
   geom_boxplot() +
-  ylim(0,0.7) +
+  ylim(0,0.6) +
   labs(x='Sex bias', y='dN/dS') +
   scale_x_discrete(labels=c("XX", "XY", "unbias")) +
   theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
