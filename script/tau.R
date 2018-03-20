@@ -573,3 +573,43 @@ cor.test(gonad_tau_dnds$abslogFC.XYtestis.XXovary, gonad_tau_dnds$dNdS, method=c
 
 cor.test(gonad_tau_dnds$abslogFC.XYtestis.XXovary, gonad_tau_dnds$dNdS, method=c("pearson"))
 
+
+##############
+#load data from folder Brain tissues.
+##############
+brain_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Brain_tau/Ambrain_log1_sbun_tau_match_sorted.txt", header = TRUE)
+str(brain_tau)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_brain.pdf", width=8, height=8)
+ggplot(brain_tau, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias",labels=c("XX","XY","unbias")) +
+  geom_boxplot() +
+  ylim(0,1) +
+  scale_x_discrete(labels=c("XX", "XY","Unbias"),name="Sex bias") + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
+dev.off()
+
+###some stat
+wilcox.test(brain_tau$tau[brain_tau$bias=='female'],brain_tau$tau[brain_tau$bias=='unbias'],exact = FALSE) 
+#W = 1551500, p-value < 2.2e-16
+
+wilcox.test(brain_tau$tau[brain_tau$bias=='male'],brain_tau$tau[brain_tau$bias=='unbias'],exact = FALSE) 
+#W = 1235700, p-value = 0.0001819
+
+wilcox.test(brain_tau$tau[brain_tau$bias=='male'],brain_tau$tau[brain_tau$bias=='female'],exact = FALSE) 
+#W = 1329, p-value = 1.093e-07
+
+###dNdS and tau in Brain tissues
+gonad_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Gonad_tau/gonad_fc1_tau_dnds_subset_sorted.txt", header = TRUE)
+str(gonad_tau_dnds)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/gonad_sb_dnds.pdf", width=8, height=8)
+ggplot(gonad_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias") +
+  geom_boxplot() +
+  ylim(0,0.6) +
+  labs(x='Sex bias', y='dN/dS') +
+  scale_x_discrete(labels=c("XX", "XY", "unbias")) +
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+dev.off()
+
