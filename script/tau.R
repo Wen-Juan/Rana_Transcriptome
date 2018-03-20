@@ -700,10 +700,44 @@ wilcox.test(liver_tau_dnds$dNdS[liver_tau_dnds$bias=='female'],liver_tau_dnds$dN
 
 
 ####
-qqnorm(sqrt(abs(brain_tau$tau)))
-hist(sqrt(abs(brain_tau$tau)))
-qqnorm(sqrt(abs(brain_tau_dnds$dNdS)))
-hist(sqrt(abs(brain_tau_dnds$dNdS)))
+qqnorm(sqrt(abs(liver_tau$tau)))
+hist(sqrt(abs(liver_tau$tau)))
+qqnorm(sqrt(abs(liver_tau_dnds$dNdS)))
+hist(sqrt(abs(liver_tau_dnds$dNdS)))
 
-y2 <- lm(sqrt(dNdS) ~ sqrt(tau) * bias, brain_tau_dnds)
-anova(y2)
+y3 <- lm(sqrt(dNdS) ~ sqrt(tau) * bias, liver_tau_dnds)
+anova(y3)
+
+##
+Df Sum Sq Mean Sq  F value  Pr(>F)    
+sqrt(tau)         1  1.758 1.75790 195.1515 < 2e-16 ***
+  bias              2  0.086 0.04323   4.7994 0.00827 ** 
+  sqrt(tau):bias    2  0.047 0.02360   2.6196 0.07293 .  
+Residuals      5453 49.120 0.00901                     
+---
+##
+  
+  
+  #with color
+  pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_dnds_liver_colors.pdf", width=8, height=8)
+ggplot2.scatterplot(data=liver_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
+  labs(x="dNdS", y="Tau", color ="bias")
+dev.off()
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_exp_liver_colors.pdf", width=8, height=8)
+ggplot2.scatterplot(data=liver_tau_dnds, xName='abslogFC.XYliver.XXliver',yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
+  labs(x="abs(logFC.XYliver.XXliver)", y="Tau", color ="bias")
+dev.off()
+
+#without color
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_liver_dnds.pdf", width=8, height=8)
+ggplot2.scatterplot(data=liver_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="dNdS", y="Tau") +
+  scale_fill_manual(values = c("grey40"))
+dev.off()
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_exp_liver_nocolors.pdf", width=8, height=8)
+ggplot2.scatterplot(data=liver_tau_dnds, xName='abslogFC.XYliver.XXliver',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="abs(logFC.XYliver.XXliver)", y="Tau") +
+  scale_fill_manual(values = c("grey40"))
+dev.off()
