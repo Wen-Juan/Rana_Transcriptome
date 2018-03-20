@@ -615,5 +615,95 @@ dev.off()
 
 ###some stats
 wilcox.test(brain_tau_dnds$dNdS[brain_tau_dnds$bias=='female'],brain_tau_dnds$dNdS[brain_tau_dnds$bias=='unbias'],exact = FALSE) 
-#W = 1551500, p-value < 2.2e-16
+#W = 24326, p-value = 0.1196
+wilcox.test(brain_tau_dnds$dNdS[brain_tau_dnds$bias=='male'],brain_tau_dnds$dNdS[brain_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 103280, p-value = 0.1375
+wilcox.test(brain_tau_dnds$dNdS[brain_tau_dnds$bias=='female'],brain_tau_dnds$dNdS[brain_tau_dnds$bias=='male'],exact = FALSE) 
+#W = 74, p-value = 0.04997
 
+#with color
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_dnds_brain_colors.pdf", width=8, height=8)
+ggplot2.scatterplot(data=brain_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
+  labs(x="dNdS", y="Tau", color ="bias")
+dev.off()
+
+
+########
+qqnorm(sqrt(abs(brain_tau$tau)))
+hist(sqrt(abs(brain_tau$tau)))
+qqnorm(sqrt(abs(brain_tau_dnds$dNdS)))
+hist(sqrt(abs(brain_tau_dnds$dNdS)))
+
+y2 <- lm(sqrt(dNdS) ~ sqrt(tau) * bias, brain_tau_dnds)
+anova(y2)
+
+##########
+Df Sum Sq Mean Sq F value    Pr(>F)    
+sqrt(tau)         1  0.465 0.46481 50.9438 1.049e-12 ***
+  bias              2  0.036 0.01805  1.9782    0.1384    
+sqrt(tau):bias    2  0.022 0.01086  1.1902    0.3042    
+Residuals      6829 62.308 0.00912   
+##########
+
+#without color
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_brain_dnds.pdf", width=8, height=8)
+ggplot2.scatterplot(data=brain_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="dNdS", y="Tau") +
+  scale_fill_manual(values = c("grey40"))
+dev.off()
+
+
+##############
+#load data from folder Liver tissues.
+##############
+liver_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Liver_tau/Amliver_log1_sbun_tau_match_sorted.txt", header = TRUE)
+str(liver_tau)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_liver.pdf", width=8, height=8)
+ggplot(liver_tau, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias",labels=c("XX","XY","unbias")) +
+  geom_boxplot() +
+  ylim(0,1) +
+  scale_x_discrete(labels=c("XX", "XY","Unbias"),name="Sex bias") + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
+dev.off()
+
+###some stats
+wilcox.test(liver_tau$tau[liver_tau$bias=='female'],liver_tau$tau[liver_tau$bias=='unbias'],exact = FALSE) 
+#W = 1819400, p-value = 2.897e-16
+wilcox.test(liver_tau$tau[liver_tau$bias=='male'],liver_tau$tau[liver_tau$bias=='unbias'],exact = FALSE) 
+#W = 1266700, p-value = 7.196e-10
+wilcox.test(liver_tau$tau[liver_tau$bias=='female'],liver_tau$tau[liver_tau$bias=='male'],exact = FALSE) 
+#W = 7352, p-value = 0.4464
+
+####
+liver_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Liver_tau/Amliver_log1_sbun_tau_dnds_fi.txt", header = TRUE)
+str(liver_tau_dnds)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/liver_sbun_dnds.pdf", width=8, height=8)
+ggplot(liver_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias") +
+  geom_boxplot() +
+  ylim(0,1) +
+  labs(x='Sex bias', y='dN/dS') +
+  scale_x_discrete(labels=c("XX", "XY", "unbias")) +
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+dev.off()
+
+###some stats
+wilcox.test(liver_tau_dnds$dNdS[liver_tau_dnds$bias=='female'],liver_tau_dnds$dNdS[liver_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 81166, p-value = 0.0796
+wilcox.test(liver_tau_dnds$dNdS[liver_tau_dnds$bias=='male'],liver_tau_dnds$dNdS[liver_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 123380, p-value = 0.005197
+wilcox.test(liver_tau_dnds$dNdS[liver_tau_dnds$bias=='female'],liver_tau_dnds$dNdS[liver_tau_dnds$bias=='male'],exact = FALSE) 
+#W = 426.5, p-value = 0.7359
+
+
+####
+qqnorm(sqrt(abs(brain_tau$tau)))
+hist(sqrt(abs(brain_tau$tau)))
+qqnorm(sqrt(abs(brain_tau_dnds$dNdS)))
+hist(sqrt(abs(brain_tau_dnds$dNdS)))
+
+y2 <- lm(sqrt(dNdS) ~ sqrt(tau) * bias, brain_tau_dnds)
+anova(y2)
