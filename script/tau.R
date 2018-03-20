@@ -155,6 +155,12 @@ ggplot(g46_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(values 
   theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
 dev.off()
 
+wilcox.test(g46_tau_dnds$dNdS[g46_tau_dnds$bias=='male'],g46_tau_dnds$dNdS[g46_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 441010, p-value = 8.044e-08
+wilcox.test(g46_tau_dnds$dNdS[g46_tau_dnds$bias=='female'],g46_tau_dnds$dNdS[g46_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 4095500, p-value = 0.1994
+wilcox.test(g46_tau_dnds$dNdS[g46_tau_dnds$bias=='male'],g46_tau_dnds$dNdS[g46_tau_dnds$bias=='female'],exact = FALSE) 
+#W = 152450, p-value = 3.095e-06
 g46sub_tau_dnds <- subset(g46_tau_dnds, g46_tau_dnds$bias!='unbias')
 str(g46sub_tau_dnds)
 
@@ -332,6 +338,14 @@ ggplot(g43_tau, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("f
   theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
   theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
 dev.off()
+
+#wilcox test for tau
+wilcox.test(g43_tau$tau[g43_tau$bias=='male'],g43_tau$tau[g43_tau$bias=='female'],exact = FALSE) 
+#W = 664, p-value = 5.495e-10
+wilcox.test(g43_tau$tau[g43_tau$bias=='unbias'],g43_tau$tau[g43_tau$bias=='female'],exact = FALSE) 
+#W = 191360, p-value < 2.2e-16
+wilcox.test(g43_tau$tau[g43_tau$bias=='unbias'],g43_tau$tau[g43_tau$bias=='male'],exact = FALSE) 
+#W = 186350, p-value = 1.289e-06
 
 ####some stats
 
