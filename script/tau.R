@@ -646,9 +646,9 @@ Residuals      6829 62.308 0.00912
 ##########
 
 #without color
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_brain_dnds.pdf", width=8, height=8)
-ggplot2.scatterplot(data=brain_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
-  labs(x="dNdS", y="Tau") +
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_brain_exp.pdf", width=8, height=8)
+ggplot2.scatterplot(data=brain_tau_dnds, xName='abslogFC.XYbrain.Xxrain',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="abs(logFC.XYbrain.XXrain)", y="Tau") +
   scale_fill_manual(values = c("grey40"))
 dev.off()
 
