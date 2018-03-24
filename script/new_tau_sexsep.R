@@ -95,9 +95,9 @@ dev.off()
 
 #subset the tissue specific genes (high tau values, >=0.9), and also genes with more pleotropic effects (tau<0.2).
 s2 <- subset(tau_amm,tau_amm[,2] >= 0.9)
-write.table(s2, file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_log_TSI0.9.txt",row.names=TRUE, sep="\t", quote= FALSE)
+write.table(s2, file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/new_tau/tau_amm_log_TSI0.9.txt",row.names=TRUE, sep="\t", quote= FALSE)
 s3 <- subset(tau_amm,tau_amm[,2]<=0.2)
-write.table(s3, file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_log_TSI0.2.txt",row.names=TRUE, sep="\t", quote= FALSE)
+write.table(s3, file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/new_tau/tau_amm_log_TSI0.2.txt",row.names=TRUE, sep="\t", quote= FALSE)
 
 ##############
 #load data from folder G46
