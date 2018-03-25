@@ -103,10 +103,10 @@ write.table(s3, file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcripto
 #load data from folder G46
 ##############
 
-g46_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G46_tau/G46_sb_un_tau_match_fi.txt", header = TRUE)
+g46_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/G46/Amg46nosr_log1_sb_un_tau_fi.txt", header = TRUE)
 str(g46_tau)
 
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_g46.pdf", width=8, height=8)
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/new_tau/newtau_amm_g46.pdf", width=8, height=8)
 ggplot(g46_tau, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias",labels=c("XX","XY","unbias")) +
   geom_boxplot() +
   ylim(0,1.25) +
@@ -115,51 +115,24 @@ ggplot(g46_tau, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("f
   theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
 dev.off()
 
-####liner model to investigate whether tau is correlated with gene expression and sex bias.
-g46_tau_sub <- subset(g46_tau,g46_tau$bias!='unbias')
-str(g46_tau_sub)
-qqnorm(sqrt(abs(g46_tau_sub$logFC.XY46.XX46)))
-hist(sqrt(abs(g46_tau_sub$logFC.XY46.XX46)))
-shapiro.test(abs(g46_tau_sub$logFC.XY46.XX46)) #not normal distributiuon
-y <- glm(tau~sqrt(abs(g46_tau_sub$logFC.XY46.XX46))*bias, family=binomial, data=g46_tau_sub)
-summary(y)
-anova(y)  #does not provide p values for some reason
 
-##########
-##############without unbias genes
-##########
-#Coefficients:
-#  Estimate Std. Error z value Pr(>|z|)    
-#(Intercept)                                     -1.66392    0.12150 -13.694  < 2e-16 ***
-#  sqrt(abs(g46_tau_sub$logFC.XY46.XX46))           1.14631    0.08078  14.191  < 2e-16 ***
-#  biasmale                                         1.26968    0.30488   4.164 3.12e-05 ***
-#  sqrt(abs(g46_tau_sub$logFC.XY46.XX46)):biasmale -0.79765    0.22160  -3.599 0.000319 ***
-
-y1 <- glm(tau~sqrt(abs(g46_tau$logFC.XY46.XX46))*bias, family=binomial, data=g46_tau)
-summary(y1)
-anova(y) 
+y1 <- lm(sqrt(tau)~sqrt(abs(g46_tau$logFC.XY46.XX46))*bias, data=g46_tau)
+anova(y1) 
 
 #############
 #############with unbias genes
-#Coefficients:
-#  Estimate Std. Error z value Pr(>|z|)    
-#(Intercept)                                   -1.66392    0.12150 -13.694  < 2e-16 ***
-#  sqrt(abs(g46_tau$logFC.XY46.XX46))             1.14631    0.08078  14.191  < 2e-16 ***
-#  biasmale                                       1.26968    0.30488   4.164 3.12e-05 ***
-#  biasunbias                                     0.92699    0.12807   7.238 4.54e-13 ***
-#  sqrt(abs(g46_tau$logFC.XY46.XX46)):biasmale   -0.79765    0.22160  -3.599 0.000319 ***
-#  sqrt(abs(g46_tau$logFC.XY46.XX46)):biasunbias -0.57202    0.09956  -5.746 9.16e-09 ***
----
-  #  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-  ############
-###########
+Df Sum Sq Mean Sq  F value    Pr(>F)    
+sqrt(abs(g46_tau$logFC.XY46.XX46))          1  65.92  65.923 3775.405 < 2.2e-16 ***
+  bias                                        2   2.67   1.336   76.499 < 2.2e-16 ***
+  sqrt(abs(g46_tau$logFC.XY46.XX46)):bias     2   2.23   1.114   63.779 < 2.2e-16 ***
+  Residuals                               24400 426.05   0.017   
+####
 
 ##investigate whether dnds is influences by tau or sex bias, or the interaction between the two.
-
-g46_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G46_tau/G46_sb_un_tau_dnds.txt", header = TRUE)
+g46_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/G46/Amg46nosr_log1_sb_un_tau_dnds_fi.txt", header = TRUE)
 str(g46_tau_dnds)
 
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_g46_dnds.pdf", width=8, height=8)
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/new_tau/newtau_amm_g46_dnds.pdf", width=8, height=8)
 ggplot(g46_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias",labels=c("XX","XY","unbias")) +
   geom_boxplot() +
   ylim(0,1) +
@@ -174,134 +147,51 @@ wilcox.test(g46_tau_dnds$dNdS[g46_tau_dnds$bias=='female'],g46_tau_dnds$dNdS[g46
 #W = 4095500, p-value = 0.1994
 wilcox.test(g46_tau_dnds$dNdS[g46_tau_dnds$bias=='male'],g46_tau_dnds$dNdS[g46_tau_dnds$bias=='female'],exact = FALSE) 
 #W = 152450, p-value = 3.095e-06
-g46sub_tau_dnds <- subset(g46_tau_dnds, g46_tau_dnds$bias!='unbias')
-str(g46sub_tau_dnds)
 
-qqnorm(sqrt(g46_tau_dnds$tau)[1:5000]) #not normal distribution
-shapiro.test(log(g46_tau_dnds$tau[1:5000])) #not normal distribution
-
-y1 <- lm(dNdS~sqrt(tau)*bias, g46_tau_dnds)
+y1 <- lm(sqrt(dNdS)~sqrt(tau)*bias, g46_tau_dnds)
 anova(y1)
 
 ###########
-#Response: dNdS
-#Df  Sum Sq Mean Sq  F value    Pr(>F)    
-#  sqrt(tau)         1  0.4781 0.47813 140.8440 < 2.2e-16 ***
-#  bias              2  0.0643 0.03216   9.4725 7.799e-05 ***
-#  sqrt(tau):bias    2  0.1263 0.06317  18.6083 8.735e-09 ***
-#  Residuals      6589 22.3678 0.00339  
+Df Sum Sq Mean Sq F value    Pr(>F)    
+sqrt(tau)         1  1.941 1.94074 212.689 < 2.2e-16 ***
+  bias              2  0.200 0.10001  10.960 1.770e-05 ***
+  sqrt(tau):bias    2  0.375 0.18746  20.544 1.275e-09 ***
+  Residuals      6589 60.123 0.00912    
 ###########
 
-################
-#########if removing unbiased genes,
-###############
-y2 <- lm(dNdS~sqrt(tau)*bias, g46sub_tau_dnds)
-anova(y2)
-
-############
-#Response: dNdS
-#Df Sum Sq Mean Sq  F value    Pr(>F)    
-#  sqrt(tau)         1 0.3712 0.37124 115.7551 < 2.2e-16 ***
-#  bias              1 0.0534 0.05341  16.6526 4.682e-05 ***
-#  sqrt(tau):bias    1 0.0034 0.00336   1.0475    0.3062    
-#   Residuals      1827 5.8594 0.00321 
-############
-
-y2 <- glm(dNdS~tau*bias, family=quasi, g46_tau_dnds)
-summary(y2)
-#######
-Coefficients:
-  Estimate Std. Error t value Pr(>|t|)    
-(Intercept)     0.038071   0.004829   7.884 3.69e-15 ***
-  tau             0.092544   0.009279   9.974  < 2e-16 ***
-  biasmale        0.037546   0.018415   2.039   0.0415 *  
-  biasunbias      0.031121   0.005254   5.923 3.33e-09 ***
-  tau:biasmale   -0.033100   0.033230  -0.996   0.3192    
-tau:biasunbias -0.062678   0.010277  -6.099 1.13e-09 ***
-  ######### 
-
-qqnorm(sqrt(g46_tau_dnds$dNdS))
-
-y1a <- lm(sqrt(dNdS) ~ sqrt(tau) * bias, g46_tau_dnds)
-anova(y1a)
-################
-Analysis of Variance Table
-
-Response: sqrt(dNdS)
-Df Sum Sq Mean Sq F value    Pr(>F)    
-sqrt(tau)         1  1.607 1.60698 175.214 < 2.2e-16 ***
-  bias              2  0.197 0.09855  10.745 2.192e-05 ***
-  sqrt(tau):bias    2  0.403 0.20170  21.992 3.024e-10 ***
-  Residuals      6589 60.431 0.00917                      
----
-  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#################
-summary(y1a)
-###############
-Coefficients:
-  Estimate Std. Error t value Pr(>|t|)    
-(Intercept)           0.10758    0.01506   7.143 1.01e-12 ***
-  sqrt(tau)             0.23680    0.02136  11.088  < 2e-16 ***
-  biasmale              0.10490    0.05529   1.897   0.0578 .  
-biasunbias            0.10901    0.01620   6.730 1.84e-11 ***
-  sqrt(tau):biasmale   -0.09704    0.07573  -1.282   0.2001    
-sqrt(tau):biasunbias -0.15363    0.02322  -6.617 3.96e-11 ***
-  ---
-  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-##############
-
-##if removing unbiased genes
-g46_tau_dnds_sub <- subset (g46_tau_dnds,g46_tau_dnds$bias!='unbias')
-str(g46_tau_dnds_sub)
-
-y2a <- lm(sqrt(dNdS) ~ sqrt(tau) * bias, g46_tau_dnds_sub)
-anova(y2a)
-###############
-Response: sqrt(dNdS)
-Df  Sum Sq Mean Sq  F value    Pr(>F)    
-sqrt(tau)         1  1.2116 1.21159 132.5928 < 2.2e-16 ***
-  bias              1  0.1634 0.16337  17.8782 2.471e-05 ***
-  sqrt(tau):bias    1  0.0151 0.01506   1.6484    0.1993    
-Residuals      1827 16.6946 0.00914   
-#############
-summary(y2a)
-#############
-Coefficients:
-  Estimate Std. Error t value Pr(>|t|)    
-(Intercept)         0.10758    0.01503   7.156  1.2e-12 ***
-  sqrt(tau)           0.23680    0.02132  11.109  < 2e-16 ***
-  biasmale            0.10490    0.05518   1.901   0.0575 .  
-sqrt(tau):biasmale -0.09704    0.07559  -1.284   0.1993    
----
-  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#############
-
-#scatter plot
-abs_g46_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G46_tau/G46_abssb_un_tau_match_fi.txt", header = TRUE)
-str(abs_g46_tau)
-
 #with color
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g46_sb_colors1.pdf", width=8, height=8)
-ggplot2.scatterplot(data=abs_g46_tau, xName='abslogFC.XY46.XX46',yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/new_tau/scatter_abs_newtau_g46_sb_colors1.pdf", width=8, height=8)
+ggplot2.scatterplot(data=g46_tau, xName='abslogFC.XY46.XX46',yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
   labs(x="LogFC.XY46.XX46)", y="Tau", color ="bias")
 dev.off()
 
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/new_tau/scatter_abs_newtau_g46_taudnds_colors1.pdf", width=8, height=8)
+ggplot2.scatterplot(data=g46_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
+  labs(x="dNdS)", y="Tau", color ="bias")
+dev.off()
+
 #without color
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g46_sb.pdf", width=8, height=8)
-ggplot2.scatterplot(data=abs_g46_tau, xName='abslogFC.XY46.XX46',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/new_tau/scatter_abs_newtau_g46_sb.pdf", width=8, height=8)
+ggplot2.scatterplot(data=g46_tau, xName='abslogFC.XY46.XX46',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
   labs(x="LogFC.XY46.XX46)", y="Tau") +
+  scale_fill_manual(values = c("grey40"))
+dev.off()
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/new_tau/scatter_abs_newtau_g46_sbtau.pdf", width=8, height=8)
+ggplot2.scatterplot(data=g46_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="dNdS)", y="Tau") +
   scale_fill_manual(values = c("grey40"))
 dev.off()
 
 #stats
 wilcox.test(g46_tau$tau[g46_tau$bias=='male'],g46_tau$tau[g46_tau$bias=='unbias'],exact = FALSE) 
-#W = 9496800, p-value < 2.2e-16
+#W = 9537200, p-value < 2.2e-16
 
 wilcox.test(g46_tau$tau[g46_tau$bias=='male'],g46_tau$tau[g46_tau$bias=='female'],exact = FALSE)
-#W = 1484700, p-value = 0.03636
+#W = 1494500, p-value = 0.01684
 
 wilcox.test(g46_tau$tau[g46_tau$bias=='unbias'],g46_tau$tau[g46_tau$bias=='female'],exact = FALSE)
-#W = 26901000, p-value < 2.2e-16
+#W = 27165000, p-value < 2.2e-16
 
 ##############
 #load data from folder G43
