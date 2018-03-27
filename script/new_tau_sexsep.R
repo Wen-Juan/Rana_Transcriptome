@@ -551,3 +551,5 @@ ggplot2.scatterplot(data=liver_tau_dnds, xName='abslogFC.XYliver.Xxliver',yName=
   labs(x="abs(logFC.XYliver.XXliver)", y="Tau") +
   scale_fill_manual(values = c("grey40"))
 dev.off()
+
+#### stats on chi-square test

@@ -102,6 +102,19 @@ scale_x_discrete(labels=c("XX", "XY","Unbias"),name="Sex bias") +
   theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
 dev.off()
 
+########
+cor.test(sqrt(abs(g46_tau$logFC.XY46.XX46)),sqrt(g46_tau$tau),
+         method = "spearman",
+         conf.level = 0.95)
+####
+data:  sqrt(abs(g46_tau$logFC.XY46.XX46)) and sqrt(g46_tau$tau)
+S = 1.7071e+12, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+  rho 
+0.2954389 
+####
+
 ####liner model to investigate whether tau is correlated with gene expression and sex bias.
 g46_tau_sub <- subset(g46_tau,g46_tau$bias!='unbias')
 str(g46_tau_sub)
@@ -355,6 +368,19 @@ hist(sqrt(abs(g43_tau$logFC.XY43.XX43)))
 qqnorm(sqrt(abs(g43_tau$tau)))
 hist(sqrt(abs(g43_tau$tau)))
 
+cor.test(sqrt(g43_tau$abslogFC.XY43.XX43),sqrt(g43_tau$tau),
+         method = "spearman",
+         conf.level = 0.95)
+
+########
+data:  sqrt(g43_tau$abslogFC.XY43.XX43) and sqrt(g43_tau$tau)
+S = 2.1933e+12, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+rho 
+0.2131365 
+#######
+
 y <- lm(sqrt(tau)~sqrt(abs(logFC.XY43.XX43))*bias, data=g43_tau)
 anova(y)
 
@@ -404,7 +430,8 @@ dev.off()
 #wilcox test for dNdS
 wilcox.test(g43_tau_dnds$dNdS[g43_tau_dnds$bias=='male'],g43_tau_dnds$dNdS[g43_tau_dnds$bias=='female'],exact = FALSE) 
 #W = 66, p-value = 0.9094
-wilcox.test(g43_tau_dnds$dNdS[g43_tau_dnds$bias=='male'],g43_tau_dnds$dNdS[g43_tau_dnds$bias=='unbias'],exact = FALSE) 
+wilcox.test(g43_tau_dnds$dNdS[g43_tau_dnds$bias!='unbias'],g43_tau_dnds$dNdS[g43_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 217220, p-value = 3.2e-06
 #W = 14262, p-value = 0.2533  ## only 3 for male-biased genes
 wilcox.test(g43_tau_dnds$dNdS[g43_tau_dnds$bias=='unbias'],g43_tau_dnds$dNdS[g43_tau_dnds$bias=='female'],exact = FALSE) 
 #W = 86214, p-value = 6.255e-06
@@ -416,7 +443,23 @@ wilcox.test(g43_tau_dnds$dNdS[g43_tau_dnds$bias=='unbias'],g43_tau_dnds$dNdS[g43
 ###If removing unbiased genes, 
 gonad_tau_sub <- subset(gonad_tau,gonad_tau$bias!='unbias')
 
-y3 <- glm(sqrt(tau)~sqrt(abs(logFC.XYtestis.XXovary))*bias, family = binomial, data=gonad_tau_sub)
+hist(sqrt(abs_gonad_tau$abslogFC.XYtestis.XXovary))
+hist(sqrt(abs_gonad_tau$tau))
+
+cor.test(sqrt(abs_gonad_tau$abslogFC.XYtestis.XXovary),sqrt(abs_gonad_tau$tau),
+         method = "spearman",
+         conf.level = 0.95)
+
+#######
+data:  sqrt(abs_gonad_tau$abslogFC.XYtestis.XXovary) and sqrt(abs_gonad_tau$tau)
+S = 9.5359e+11, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+  rho 
+0.3924036 
+#######
+
+y3 <- lm(sqrt(tau)~sqrt(abs(logFC.XYtestis.XXovary))*bias, data=gonad_tau)
 summary(y3)
 
 #################
@@ -427,6 +470,7 @@ summary(y3)
 #  biasmale                                   -0.09787    0.16565  -0.591    0.555    
 # sqrt(abs(logFC.XYtestis.XXovary)):biasmale -0.15882    0.10971  -1.448    0.148  
 #################
+
 
 ##correlation scatter plot
 abs_gonad_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Gonad_tau/gonad_fc1_abssb_unbias_tau.txt", header = TRUE)
@@ -589,6 +633,20 @@ ggplot(brain_tau, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c(
   theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
 dev.off()
 
+####
+cor.test(sqrt(abs(brain_tau$logFC.XYbrain.XXrain)),sqrt(brain_tau$tau),
+         method = "spearman",
+         conf.level = 0.95)
+
+###
+data:  sqrt(abs(brain_tau$logFC.XYbrain.XXrain)) and sqrt(brain_tau$tau)
+S = 2.6339e+12, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+  rho 
+0.1517634 
+###
+
 ###some stats
 wilcox.test(brain_tau$tau[brain_tau$bias=='female'],brain_tau$tau[brain_tau$bias=='unbias'],exact = FALSE) 
 #W = 1551500, p-value < 2.2e-16
@@ -667,6 +725,19 @@ ggplot(liver_tau, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c(
   theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
   theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
 dev.off()
+
+cor.test(sqrt(abs(liver_tau$logFC.XYliver.XXliver)),sqrt(liver_tau$tau),
+         method = "spearman",
+         conf.level = 0.95)
+
+###
+data:  sqrt(abs(liver_tau$logFC.XYliver.XXliver)) and sqrt(liver_tau$tau)
+S = 9.3843e+11, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+  rho 
+0.1675863 
+###
 
 ###some stats
 wilcox.test(liver_tau$tau[liver_tau$bias=='female'],liver_tau$tau[liver_tau$bias=='unbias'],exact = FALSE) 
