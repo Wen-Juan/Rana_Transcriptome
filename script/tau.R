@@ -155,11 +155,11 @@ anova(y)
 ###########
 
 ##investigate whether dnds is influences by tau or sex bias, or the interaction between the two.
-
-g46_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G46_tau/G46_sb_un_tau_dnds.txt", header = TRUE)
+###
+g46_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G46_tau/G46_sb_shareunbias_tau_dnds.txt", header = TRUE)
 str(g46_tau_dnds)
 
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_g46_dnds.pdf", width=8, height=8)
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_g46_dnds_shareunbias.pdf", width=8, height=8)
 ggplot(g46_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias",labels=c("XX","XY","unbias")) +
   geom_boxplot() +
   ylim(0,1) +
@@ -169,13 +169,28 @@ ggplot(g46_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(values 
 dev.off()
 
 wilcox.test(g46_tau_dnds$dNdS[g46_tau_dnds$bias=='male'],g46_tau_dnds$dNdS[g46_tau_dnds$bias=='unbias'],exact = FALSE) 
-#W = 441010, p-value = 8.044e-08
+#W = 145600, p-value = 1.843e-09
 wilcox.test(g46_tau_dnds$dNdS[g46_tau_dnds$bias=='female'],g46_tau_dnds$dNdS[g46_tau_dnds$bias=='unbias'],exact = FALSE) 
-#W = 4095500, p-value = 0.1994
+#W = 1362300, p-value = 0.00253
 wilcox.test(g46_tau_dnds$dNdS[g46_tau_dnds$bias=='male'],g46_tau_dnds$dNdS[g46_tau_dnds$bias=='female'],exact = FALSE) 
 #W = 152450, p-value = 3.095e-06
 g46sub_tau_dnds <- subset(g46_tau_dnds, g46_tau_dnds$bias!='unbias')
 str(g46sub_tau_dnds)
+
+###tau
+ggplot(g46_tau_dnds, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias",labels=c("XX","XY","unbias")) +
+  geom_boxplot() +
+  ylim(0,1.25) +
+  scale_x_discrete(labels=c("XX", "XY","Unbias"),name="Sex bias") + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
+
+wilcox.test(g46_tau_dnds$tau[g46_tau_dnds$bias=='male'],g46_tau_dnds$tau[g46_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 184270, p-value < 2.2e-16
+wilcox.test(g46_tau_dnds$tau[g46_tau_dnds$bias=='female'],g46_tau_dnds$tau[g46_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 1991900, p-value < 2.2e-16
+wilcox.test(g46_tau_dnds$dNdS[g46_tau_dnds$bias=='male'],g46_tau_dnds$dNdS[g46_tau_dnds$bias=='female'],exact = FALSE) 
+#W = 152450, p-value = 3.095e-06
 
 qqnorm(sqrt(g46_tau_dnds$tau)[1:5000]) #not normal distribution
 shapiro.test(log(g46_tau_dnds$tau[1:5000])) #not normal distribution
@@ -416,10 +431,10 @@ ggplot2.scatterplot(data=abs_g43_tau, xName='abslogFC.XY43.XX43',yName='tau', yl
 dev.off()
 
 ########
-g43_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G43_tau/Am43_log1_sbun_dnds_sorted.txt", header = TRUE)
+g43_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G43_tau/Am43_log1_sb_shareunbias_dnds_sorted.txt", header = TRUE)
 str(g43_tau_dnds)
 
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_g43_dnds.pdf", width=8, height=8)
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_g43_dnds_shareunbias.pdf", width=8, height=8)
 ggplot(g43_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias",labels=c("XX","XY","unbias")) +
   geom_boxplot() +
   ylim(0,1) +
@@ -432,10 +447,34 @@ dev.off()
 wilcox.test(g43_tau_dnds$dNdS[g43_tau_dnds$bias=='male'],g43_tau_dnds$dNdS[g43_tau_dnds$bias=='female'],exact = FALSE) 
 #W = 66, p-value = 0.9094
 wilcox.test(g43_tau_dnds$dNdS[g43_tau_dnds$bias!='unbias'],g43_tau_dnds$dNdS[g43_tau_dnds$bias=='unbias'],exact = FALSE) 
-#W = 217220, p-value = 3.2e-06
+#W = 49395, p-value = 4.594e-07
 #W = 14262, p-value = 0.2533  ## only 3 for male-biased genes
 wilcox.test(g43_tau_dnds$dNdS[g43_tau_dnds$bias=='unbias'],g43_tau_dnds$dNdS[g43_tau_dnds$bias=='female'],exact = FALSE) 
-#W = 86214, p-value = 6.255e-06
+#W = 17852, p-value = 9.837e-07
+wilcox.test(g43_tau_dnds$dNdS[g43_tau_dnds$bias=='unbias'],g43_tau_dnds$dNdS[g43_tau_dnds$bias=='male'],exact = FALSE) 
+#W = 1333, p-value = 0.2119
+
+###tau
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_g43_tau_shareunbias.pdf", width=8, height=8)
+
+ggplot(g43_tau_dnds, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias",labels=c("XX","XY","unbias")) +
+  geom_boxplot() +
+  ylim(0,1) +
+  scale_x_discrete(labels=c("XX", "XY","Unbias"),name="Sex bias") + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
+dev.off()
+
+wilcox.test(g43_tau_dnds$tau[g43_tau_dnds$bias=='male'],g43_tau_dnds$tau[g43_tau_dnds$bias=='female'],exact = FALSE) 
+#W = 4, p-value = 0.007771
+wilcox.test(g43_tau_dnds$tau[g43_tau_dnds$bias!='unbias'],g43_tau_dnds$tau[g43_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 67275, p-value < 2.2e-16
+#W = 14262, p-value = 0.2533  ## only 3 for male-biased genes
+wilcox.test(g43_tau_dnds$tau[g43_tau_dnds$bias=='unbias'],g43_tau_dnds$tau[g43_tau_dnds$bias=='female'],exact = FALSE) 
+#W = 633, p-value < 2.2e-16
+wilcox.test(g43_tau_dnds$tau[g43_tau_dnds$bias=='unbias'],g43_tau_dnds$tau[g43_tau_dnds$bias=='male'],exact = FALSE) 
+#W = 672, p-value = 0.03446
+
 
 y <- lm(sqrt(dNdS)~sqrt(tau)*bias, data=g43_tau_dnds)
 anova(y)
@@ -512,10 +551,10 @@ wilcox.test(gonad_tau$tau[gonad_tau$bias=='male'],gonad_tau$tau[gonad_tau$bias==
 ##########
 #####gonad tau and dnds
 ##########
-gonad_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Gonad_tau/gonad_fc1_tau_dnds_subset_sorted.txt", header = TRUE)
+gonad_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Gonad_tau/gonad_fc1_tau_dnds_sb_shareunbias_sorted_fi.txt", header = TRUE)
 str(gonad_tau_dnds)
 
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/gonad_sb_dnds.pdf", width=8, height=8)
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/gonad_sb_dnds_shareunbias.pdf", width=8, height=8)
 ggplot(gonad_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias") +
   geom_boxplot() +
   ylim(0,0.6) +
@@ -580,15 +619,34 @@ Coefficients:
   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1   
 #####
 
-
 wilcox.test(gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='female'],gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='unbias'],exact = FALSE) 
-#W = 2430100, p-value = 0.002517
+#W = 1513800, p-value = 0.0001378
 
 wilcox.test(gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='male'],gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='unbias'],exact = FALSE) 
-#W = 1855500, p-value = 0.06863
+#W = 1156200, p-value = 0.006921
 
 wilcox.test(gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='female'],gonad_tau_dnds$dNdS[gonad_tau_dnds$bias=='male'],exact = FALSE) 
 #W = 1349300, p-value = 0.3569
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/gonad_sb_tau_shareunbias.pdf", width=8, height=8)
+ggplot(gonad_tau_dnds, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias") +
+  geom_boxplot() +
+  ylim(0,1) +
+  labs(x='Sex bias', y='dN/dS') +
+  scale_x_discrete(labels=c("XX", "XY", "unbias")) +
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+dev.off()
+
+
+wilcox.test(gonad_tau_dnds$tau[gonad_tau_dnds$bias=='female'],gonad_tau_dnds$tau[gonad_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 2207300, p-value < 2.2e-16
+
+wilcox.test(gonad_tau_dnds$tau[gonad_tau_dnds$bias=='male'],gonad_tau_dnds$tau[gonad_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 1533000, p-value < 2.2e-16
+
+wilcox.test(gonad_tau_dnds$tau[gonad_tau_dnds$bias=='female'],gonad_tau_dnds$tau[gonad_tau_dnds$bias=='male'],exact = FALSE) 
+#W = 1495500, p-value = 2.101e-10
 
 ###########
 #remove unbiased genes.
@@ -643,7 +701,7 @@ cor.test(gonad_tau_dnds$abslogFC.XYtestis.XXovary, gonad_tau_dnds$dNdS, method=c
 ##############
 #load data from folder Brain tissues.
 ##############
-brain_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Brain_tau/Ambrain_log1_sbun_tau_match_sorted.txt", header = TRUE)
+brain_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Brain_tau/Ambrain_log1_sbun_tau_match_sorted_fi.txt", header = TRUE)
 str(brain_tau)
 
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_brain.pdf", width=8, height=8)
@@ -680,10 +738,10 @@ wilcox.test(brain_tau$tau[brain_tau$bias=='male'],brain_tau$tau[brain_tau$bias==
 #W = 1329, p-value = 1.093e-07
 
 ###dNdS and tau in Brain tissues
-brain_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Brain_tau/Ambrain_log1_sbun_tau_match_dnds_sorted_fi.txt", header = TRUE)
+brain_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Brain_tau/Ambrain_log1_sb_tau_match_dnds_sorted_fi_shareunbias.txt", header = TRUE)
 str(brain_tau_dnds)
 
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/brain_sbun_dnds.pdf", width=8, height=8)
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/brain_sbun_dnds_shareunbias.pdf", width=8, height=8)
 ggplot(brain_tau_dnds, aes(x=bias, y=dNdS, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias") +
   geom_boxplot() +
   ylim(0,1) +
@@ -695,11 +753,28 @@ dev.off()
 
 ###some stats
 wilcox.test(brain_tau_dnds$dNdS[brain_tau_dnds$bias=='female'],brain_tau_dnds$dNdS[brain_tau_dnds$bias=='unbias'],exact = FALSE) 
-#W = 24326, p-value = 0.1196
+#W = 5540, p-value = 0.1364
 wilcox.test(brain_tau_dnds$dNdS[brain_tau_dnds$bias=='male'],brain_tau_dnds$dNdS[brain_tau_dnds$bias=='unbias'],exact = FALSE) 
-#W = 103280, p-value = 0.1375
+#W = 23444, p-value = 0.1086
 wilcox.test(brain_tau_dnds$dNdS[brain_tau_dnds$bias=='female'],brain_tau_dnds$dNdS[brain_tau_dnds$bias=='male'],exact = FALSE) 
 #W = 74, p-value = 0.04997
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_brain_shareunbias.pdf", width=8, height=8)
+ggplot(brain_tau_dnds, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias",labels=c("XX","XY","unbias")) +
+  geom_boxplot() +
+  ylim(0,1) +
+  scale_x_discrete(labels=c("XX", "XY","Unbias"),name="Sex bias") + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
+dev.off()
+
+###some stats
+wilcox.test(brain_tau_dnds$tau[brain_tau_dnds$bias=='female'],brain_tau_dnds$tau[brain_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 11708, p-value = 0.003417
+wilcox.test(brain_tau_dnds$tau[brain_tau_dnds$bias=='male'],brain_tau_dnds$tau[brain_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 30195, p-value = 4.479e-06
+wilcox.test(brain_tau_dnds$tau[brain_tau_dnds$bias=='female'],brain_tau_dnds$tau[brain_tau_dnds$bias=='male'],exact = FALSE) 
+#W = 129, p-value = 0.9859
 
 #with color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_dnds_brain_colors.pdf", width=8, height=8)
@@ -772,7 +847,7 @@ wilcox.test(liver_tau$tau[liver_tau$bias=='female'],liver_tau$tau[liver_tau$bias
 #W = 7352, p-value = 0.4464
 
 ####
-liver_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Liver_tau/Amliver_log1_sbun_tau_dnds_fi.txt", header = TRUE)
+liver_tau_dnds <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Liver_tau/Amliver_log1_sb_shareunbias_tau_dnds_fi.txt", header = TRUE)
 str(liver_tau_dnds)
 
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/liver_sbun_dnds.pdf", width=8, height=8)
@@ -787,12 +862,30 @@ dev.off()
 
 ###some stats
 wilcox.test(liver_tau_dnds$dNdS[liver_tau_dnds$bias=='female'],liver_tau_dnds$dNdS[liver_tau_dnds$bias=='unbias'],exact = FALSE) 
-#W = 81166, p-value = 0.0796
+#W = 23308, p-value = 0.05493
 wilcox.test(liver_tau_dnds$dNdS[liver_tau_dnds$bias=='male'],liver_tau_dnds$dNdS[liver_tau_dnds$bias=='unbias'],exact = FALSE) 
-#W = 123380, p-value = 0.005197
+#W = 35469, p-value = 0.002628
 wilcox.test(liver_tau_dnds$dNdS[liver_tau_dnds$bias=='female'],liver_tau_dnds$dNdS[liver_tau_dnds$bias=='male'],exact = FALSE) 
 #W = 426.5, p-value = 0.7359
 
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/liver_sbun_tau_sharebias.pdf", width=8, height=8)
+ggplot(liver_tau_dnds, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias") +
+  geom_boxplot() +
+  ylim(0,1) +
+  labs(x='Sex bias', y='dN/dS') +
+  scale_x_discrete(labels=c("XX", "XY", "unbias")) +
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+dev.off()
+
+###some stats
+wilcox.test(liver_tau_dnds$tau[liver_tau_dnds$bias=='female'],liver_tau_dnds$tau[liver_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 29292, p-value = 3.9e-06
+wilcox.test(liver_tau_dnds$tau[liver_tau_dnds$bias=='male'],liver_tau_dnds$tau[liver_tau_dnds$bias=='unbias'],exact = FALSE) 
+#W = 41192, p-value = 2.598e-07
+wilcox.test(liver_tau_dnds$tau[liver_tau_dnds$bias=='female'],liver_tau_dnds$tau[liver_tau_dnds$bias=='male'],exact = FALSE) 
+#W = 479, p-value = 0.676
 
 ####
 qqnorm(sqrt(abs(liver_tau$tau)))
@@ -811,9 +904,7 @@ sqrt(tau)         1  1.758 1.75790 195.1515 < 2e-16 ***
 Residuals      5453 49.120 0.00901                     
 ---
 ##
-  
-  
-  #with color
+#with color
   pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_dnds_liver_colors.pdf", width=8, height=8)
 ggplot2.scatterplot(data=liver_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
   labs(x="dNdS", y="Tau", color ="bias")
@@ -832,7 +923,7 @@ ggplot2.scatterplot(data=liver_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),s
 dev.off()
 
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_exp_liver_nocolors.pdf", width=8, height=8)
-ggplot2.scatterplot(data=liver_tau, xName=abs,yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+ggplot2.scatterplot(data=liver_tau, xName='abslogFC.XYliver.XXliver',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
   labs(x="abs(logFC.XYliver.XXliver)", y="Tau") +
   scale_fill_manual(values = c("grey40"))
 dev.off()

@@ -86,7 +86,7 @@ wilcox.test(map.data$ratio[map.data$chr=='Chr02'],map.data$ratio[map.data$chr!='
 ##W = 1796200, p-value = 0.1252
 t <- rbind(map.data$ratio[map.data$chr=='Chr01'],map.data$ratio[map.data$chr=='Chr02'])
 wilcox.test(t,map.data$ratio[map.data$chr!='Chr01'],exact = FALSE) 
-#W = 4026500, p-value = 0.2345
+#W = 4026500, p-value = 0.2345He
 
 #gonad
 
