@@ -1,3 +1,11 @@
+#install R packages and load R libraries
+library(ggplot2)
+library(plyr)
+install.packages("devtools")
+library(devtools)
+install_github("easyGgplot2", "kassambara")
+library(easyGgplot2)
+
 ## need manual changing
 compname <- 'Amg46male' #'tv46' #G46
 contrast.name <- 'logFC.XY46.SR46' # logFC.XYm.XXmt

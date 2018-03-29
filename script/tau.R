@@ -407,6 +407,7 @@ ggplot2.scatterplot(data=abs_g43_tau, xName='abslogFC.XY43.XX43',yName='tau', yl
   labs(x="LogFC.XY46.XX46)", y="Tau", color ="bias")
 dev.off()
 
+
 #without color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g43_sb_nocolors.pdf", width=8, height=8)
 ggplot2.scatterplot(data=abs_g43_tau, xName='abslogFC.XY43.XX43',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
@@ -435,6 +436,17 @@ wilcox.test(g43_tau_dnds$dNdS[g43_tau_dnds$bias!='unbias'],g43_tau_dnds$dNdS[g43
 #W = 14262, p-value = 0.2533  ## only 3 for male-biased genes
 wilcox.test(g43_tau_dnds$dNdS[g43_tau_dnds$bias=='unbias'],g43_tau_dnds$dNdS[g43_tau_dnds$bias=='female'],exact = FALSE) 
 #W = 86214, p-value = 6.255e-06
+
+y <- lm(sqrt(dNdS)~sqrt(tau)*bias, data=g43_tau_dnds)
+anova(y)
+
+###
+Df Sum Sq Mean Sq  F value    Pr(>F)    
+sqrt(tau)         1  1.512 1.51227 162.8875 < 2.2e-16 ***
+  bias              2  0.133 0.06632   7.1429 0.0007963 ***
+  sqrt(tau):bias    2  0.054 0.02705   2.9131 0.0543756 .  
+Residuals      6924 64.283 0.00928  
+###
 
 ##############
 #load data from gonads
@@ -515,6 +527,16 @@ dev.off()
 
 ###linear model to investigate whether evolutionary rate is explained by tau or sex bias, or the interaction.
 y4 <- lm(sqrt(dNdS) ~ sqrt(tau) * bias, data=gonad_tau_dnds)
+anova(y4)
+##
+Df Sum Sq Mean Sq  F value    Pr(>F)    
+sqrt(tau)         1  1.191 1.19103 128.7234 < 2.2e-16 ***
+  bias              2  0.002 0.00088   0.0949  0.909449    
+sqrt(tau):bias    2  0.089 0.04437   4.7956  0.008299 ** 
+  Residuals      5774 53.425 0.00925                       
+  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+###
+
 summary(y4)
 
 #######
@@ -717,6 +739,7 @@ dev.off()
 liver_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/Liver_tau/Amliver_log1_sbun_tau_match_sorted.txt", header = TRUE)
 str(liver_tau)
 
+abs <- abs(liver_tau$logFC.XYliver.XXliver)
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_liver.pdf", width=8, height=8)
 ggplot(liver_tau, aes(x=bias, y=tau, fill=bias)) + scale_fill_manual(values = c("firebrick2","dodgerblue2","grey40"), name="Sex bias",labels=c("XX","XY","unbias")) +
   geom_boxplot() +
@@ -737,6 +760,7 @@ alternative hypothesis: true rho is not equal to 0
 sample estimates:
   rho 
 0.1675863 
+
 ###
 
 ###some stats
@@ -796,7 +820,7 @@ ggplot2.scatterplot(data=liver_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),s
 dev.off()
 
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_exp_liver_colors.pdf", width=8, height=8)
-ggplot2.scatterplot(data=liver_tau_dnds, xName='abslogFC.XYliver.XXliver',yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
+ggplot2.scatterplot(data=liver_tau, xName=abs,yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
   labs(x="abs(logFC.XYliver.XXliver)", y="Tau", color ="bias")
 dev.off()
 
@@ -808,7 +832,7 @@ ggplot2.scatterplot(data=liver_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),s
 dev.off()
 
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_exp_liver_nocolors.pdf", width=8, height=8)
-ggplot2.scatterplot(data=liver_tau_dnds, xName='abslogFC.XYliver.XXliver',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+ggplot2.scatterplot(data=liver_tau, xName=abs,yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
   labs(x="abs(logFC.XYliver.XXliver)", y="Tau") +
   scale_fill_manual(values = c("grey40"))
 dev.off()
