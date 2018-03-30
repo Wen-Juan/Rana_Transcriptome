@@ -5,7 +5,6 @@ library(devtools)
 install_github("easyGgplot2", "kassambara")
 library(easyGgplot2)
 
-
 #set up the working directory
 setwd("/Users/Wen-Juan/my_postdoc/useful_scripts/Sex_reversal_gene_expression/input/")
 #results directoy

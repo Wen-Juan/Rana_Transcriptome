@@ -12,20 +12,23 @@ setwd("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds")
 #results directoy
 setwd("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
 
-dn_ds_all<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds/all_dnds_exp_sorted.txt", header = T)
-str(dn_ds_all)
+dn_ds_all_shareunbias<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/5tissues_sb_shareunbias_dnds_sorted.txt", header = T)
+str(dn_ds_all_shareunbias)
 
-sex_auto<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds/sexchr_auto_dnds_all.txt", header = T)
+tau_all<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/5tissues_sbun_log1_tau.txt", header = T)
+str(tau_all)
+
+sex_auto<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds/all_dnds_exp_sorted.txt", header = T)
 str(sex_auto)
 head(sex_auto)
 
 #dn/ds plot for Faster-X
 ###all chromosome separately
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_fasterX_10chr.pdf", width=10)
-ggplot(sex_auto, aes(x=chrid, y=dNdS, fill=chrid)) + 
+ggplot(dn_ds_all, aes(x=stage, y=dnds, fill=sexbias)) + 
   scale_fill_manual(values = c("firebrick2","firebrick2","grey","grey","grey","grey","grey","grey","grey","grey")) +
   theme(legend.position="none") +
-  geom_boxplot() +
+  geom_boxplot(notch = TRUE) +
   ylim(0,0.5) +
   labs(x='Chromosome', y='dn/ds') +
   theme(axis.text=element_text(size=12, color="black"),text = element_text(size=15,color="black"))
@@ -69,14 +72,15 @@ wilcox.test(sex_auto$dNdS[sex_auto$twosexchr=='Chr01'], sex_auto$dNdS[sex_auto$t
 
 #boxplot
 #dn/ds
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_dnds_all.pdf", width=10)
-ggplot(dn_ds_all, aes(x=sexbias, y=dnds,fill=(sexbias))) + 
-  geom_boxplot(notch = FALSE) +
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_dnds_all_shareunbias.pdf", width=10)
+
+ggplot(dn_ds_all_shareunbias, aes(x=bias, y=dNdS,fill=(bias))) + 
+  geom_boxplot(notch = TRUE) +
   scale_fill_manual(values = c("firebrick2","dodgerblue2","grey")) +
   theme(legend.position="none") +
   facet_grid(~stage) +
   scale_x_discrete(labels=c("F", "M", "U"),name="Sex bias") +
-  scale_y_continuous(name = "dN/dS", limits = c(0,0.6)) + 
+  scale_y_continuous(name = "dN/dS", limits = c(0,1)) + 
   theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
   theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
 dev.off()
@@ -114,6 +118,19 @@ gonad <- subset(dn_ds_all, dn_ds_all$stage=='Gonad')
 liver <- subset(dn_ds_all, dn_ds_all$stage=='Liver')
 brain <- subset(dn_ds_all, dn_ds_all$stage=='Brain')
 
+##tau
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_tau_all.pdf", width=10)
+
+ggplot(tau_all, aes(x=bias, y=tau,fill=(bias))) + 
+  geom_boxplot(notch = TRUE) +
+  scale_fill_manual(values = c("firebrick2","dodgerblue2","grey")) +
+  theme(legend.position="none") +
+  facet_grid(~stage) +
+  scale_x_discrete(labels=c("F", "M", "U"),name="Sex bias") +
+  scale_y_continuous(name = "dN/dS", limits = c(0,1)) + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+dev.off()
 
 #G43
 wilcox.test(G43$dnds[G43$sexbias=='female'], G43$dnds[G43$sexbias=='male']) # W = 60, p-value = 0.9149
