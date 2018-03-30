@@ -18,6 +18,11 @@ str(dn_ds_all_shareunbias)
 tau_all<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/5tissues_sbun_log1_tau.txt", header = T)
 str(tau_all)
 
+tau_all_postiion<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/tau_11tissues/Amm_tau_location_fi.txt", header = T)
+str(tau_all_postiion)
+tau_all_postiion_sub <- subset(tau_all_postiion, tau_all_postiion$chr!='NA')
+str(tau_all_postiion_sub)
+
 sex_auto<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds/all_dnds_exp_sorted.txt", header = T)
 str(sex_auto)
 head(sex_auto)
@@ -119,7 +124,7 @@ liver <- subset(dn_ds_all, dn_ds_all$stage=='Liver')
 brain <- subset(dn_ds_all, dn_ds_all$stage=='Brain')
 
 ##tau
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_tau_all.pdf", width=10)
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_tau_all_new.pdf", width=10)
 
 ggplot(tau_all, aes(x=bias, y=tau,fill=(bias))) + 
   geom_boxplot(notch = TRUE) +
@@ -127,10 +132,46 @@ ggplot(tau_all, aes(x=bias, y=tau,fill=(bias))) +
   theme(legend.position="none") +
   facet_grid(~stage) +
   scale_x_discrete(labels=c("F", "M", "U"),name="Sex bias") +
-  scale_y_continuous(name = "dN/dS", limits = c(0,1)) + 
+  scale_y_continuous(name = "tau", limits = c(0,1)) + 
   theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
   theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
 dev.off()
+
+###
+#sex chromosome vs autosomes of tau
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/tau_sexchr_auto.pdf", height=10, width=10)
+ggplot(tau_all_postiion_sub, aes(x=chr, y=tau, fill=chr)) + 
+  scale_fill_manual(values = c("firebrick2","firebrick2","grey","grey","grey","grey","grey","grey","grey","grey")) +
+  theme(legend.position="none") +
+  geom_boxplot(notch = TRUE) +
+  ylim(0,1) +
+  scale_x_discrete(labels=c("01", "02","03", "04","05", "06","07", "08","09", "10"),name="Chromosome") +
+  labs(x='Chromosome', y='tau') +
+  theme(axis.text=element_text(size=12, color="black"),text = element_text(size=15,color="black"))
+dev.off()
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/tau_sexchr_autotog.pdf", height=10, width=10)
+ggplot(tau_all_postiion_sub, aes(x=chrone, y=tau, fill=chrone)) + 
+  scale_fill_manual(values = c("grey","firebrick2","firebrick2")) +
+  theme(legend.position="none") +
+  geom_boxplot(notch = TRUE) +
+  ylim(0,1) +
+  labs(x='Chromosome', y='tau') +
+  theme(axis.text=element_text(size=12, color="black"),text = element_text(size=15,color="black"))
+dev.off()
+
+tau_auto_position1 <- subset(tau_all_postiion_sub, tau_all_postiion_sub$chr!='Chr01')
+tau_sexchr_position1 <- rbind(subset(tau_all_postiion_sub,tau_all_postiion_sub$chr=='Chr01'),subset(tau_all_postiion_sub,tau_all_postiion_sub$chr=='Chr02'))
+
+wilcox.test(tau_all_postiion_sub$tau[tau_all_postiion_sub$chr=='Chr01'], tau_auto_position1$tau[tau_auto_position1$chr=='Chr02']) #W = 1005300, p-value = 0.01345
+wilcox.test(tau_all_postiion_sub$tau[tau_all_postiion_sub$chr=='Chr01'], tau_auto_position1$tau[tau_auto_position1$chr!='Chr02']) #W = 5555200, p-value = 0.1862
+wilcox.test(tau_all_postiion_sub$tau[tau_all_postiion_sub$chr=='Chr02'], tau_auto_position1$tau[tau_auto_position1$chr!='Chr02']) #W = 5151300, p-value = 0.06847
+wilcox.test(tau_sexchr_position1$tau, tau_auto_position1$tau[tau_auto_position1$chr!='Chr02']) #W = 10706000, p-value = 0.8021
+
+wilcox.test(tau_all_postiion_sub$tau[tau_all_postiion_sub$chrone=='Chr01'], tau_all_postiion_sub$tau[tau_all_postiion_sub$chrone=='Auto']) #W = 5555200, p-value = 0.1862
+wilcox.test(tau_all_postiion_sub$tau[tau_all_postiion_sub$chrone=='Chr01'], tau_all_postiion_sub$tau[tau_all_postiion_sub$chrone=='Chr02']) #W = 1005300, p-value = 0.01345
+wilcox.test(tau_all_postiion_sub$tau[tau_all_postiion_sub$chrone=='Chr02'], tau_all_postiion_sub$tau[tau_all_postiion_sub$chrone=='Auto']) #W = 5151300, p-value = 0.06847
+###
 
 #G43
 wilcox.test(G43$dnds[G43$sexbias=='female'], G43$dnds[G43$sexbias=='male']) # W = 60, p-value = 0.9149
