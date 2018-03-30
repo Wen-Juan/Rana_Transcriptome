@@ -20,7 +20,8 @@ head(sb)
 blues <- RColorBrewer::brewer.pal(4, "Blues")
 reds <- RColorBrewer::brewer.pal(4, "Reds")
 
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sex_bias_alltissues.pdf",height=10, width=10)  
+par(mar=c(5,1,3,5))
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sex_bias_alltissues.pdf",height=10, width=12)  
 
 ggplot(data = sb, aes(x=Sex_bias, y= Gene_number, fill=interaction(factor(Fold_change),Sex_bias), label=Gene_number)) + 
   geom_bar(stat="identity") +
