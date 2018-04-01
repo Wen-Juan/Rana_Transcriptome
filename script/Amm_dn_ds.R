@@ -23,43 +23,34 @@ str(tau_all_postiion)
 tau_all_postiion_sub <- subset(tau_all_postiion, tau_all_postiion$chr!='NA')
 str(tau_all_postiion_sub)
 
-sex_auto<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds/all_dnds_exp_sorted.txt", header = T)
+sex_auto<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds/amm88perc_annotation_dnds.txt", header = T)
 str(sex_auto)
 head(sex_auto)
 
 #dn/ds plot for Faster-X
 ###all chromosome separately
+sex_auto1 <- subset(sex_auto,sex_auto$chr!='NA')
+sexchr1 <- subset(sex_auto, sex_auto$chr=='Chr01')
+sexchr2 <- subset(sex_auto, sex_auto$chr=='Chr01')
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_fasterX_10chr.pdf", width=10)
-ggplot(dn_ds_all, aes(x=stage, y=dnds, fill=sexbias)) + 
+ggplot(sex_auto1, aes(x=chr, y=dnds, fill=chr)) + 
   scale_fill_manual(values = c("firebrick2","firebrick2","grey","grey","grey","grey","grey","grey","grey","grey")) +
   theme(legend.position="none") +
   geom_boxplot(notch = TRUE) +
-  ylim(0,0.5) +
+  ylim(0,1) +
   labs(x='Chromosome', y='dn/ds') +
   theme(axis.text=element_text(size=12, color="black"),text = element_text(size=15,color="black"))
 dev.off()
 
 #sex chromosome vs autosomes
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_fasterX.pdf")
-ggplot(sex_auto, aes(x=chrtype, y=dNdS, fill=chrtype)) + 
-  scale_fill_manual(values = c("grey","firebrick2")) +
-  theme(legend.position="none") +
-  geom_boxplot() +
-  ylim(0,0.5) +
-  labs(x='Chromosome', y='dn/ds') +
-  scale_x_discrete(labels = c("Autosome","Sex chromosome")) +
-  theme(axis.text=element_text(size=12, color="black"),text = element_text(size=15,color="black"))
-dev.off()
-
-###if separate to compare Chr01, Chr02 and autosome
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_fasterX_chr0102.pdf")
-ggplot(sex_auto, aes(x=twosexchr, y=dNdS, fill=twosexchr)) + 
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_fasterX_autog.pdf")
+ggplot(sex_auto1, aes(x=chrone, y=dnds, fill=chrone)) + 
   scale_fill_manual(values = c("grey","firebrick2","firebrick2")) +
   theme(legend.position="none") +
-  geom_boxplot() +
-  ylim(0,0.5) +
+  geom_boxplot(notch=TRUE) +
+  ylim(0,0.6) +
   labs(x='Chromosome', y='dn/ds') +
-  scale_x_discrete(labels = c("Autosome","Chr01","Chr02")) +
+ # scale_x_discrete(labels = c("Autosome","Sex chromosome")) +
   theme(axis.text=element_text(size=12, color="black"),text = element_text(size=15,color="black"))
 dev.off()
 
@@ -67,13 +58,12 @@ mean(sex_auto$dNdS[sex_auto$chrid=='Chr01'])  #0.08367571
 mean(sex_auto$dNdS[sex_auto$chrid=='Chr02']) # 0.08482178
 mean(sex_auto$dNdS[sex_auto$chrtype=='Autosome'])  #0.08202889
 
-wilcox.test(sex_auto$dNdS[sex_auto$twosexchr=='Autosome'], sex_auto$dNdS[sex_auto$twosexchr=='Chr01'])
+wilcox.test(sex_auto1$dnds[sex_auto1$chrone=='Auto'], sex_auto1$dnds[sex_auto1$chrone=='Chr01'])
 #W = 2745200, p-value = 0.2957
-wilcox.test(sex_auto$dNdS[sex_auto$twosexchr=='Chr02'], sex_auto$dNdS[sex_auto$twosexchr=='Autosome'])
-#W = 2453400, p-value = 0.06201
-wilcox.test(sex_auto$dNdS[sex_auto$twosexchr=='Chr01'], sex_auto$dNdS[sex_auto$twosexchr=='Chr02'])
-#data:  sex_auto$dNdS[sex_auto$chr == "Chr01"] and sex_auto$dNdS[sex_auto$chr == "Chr02"]
-#W = 566390, p-value = 0.4656
+wilcox.test(sex_auto1$dnds[sex_auto1$chrone=='Auto'], sex_auto1$dnds[sex_auto1$chrone=='Chr02'])
+#W = 2275300, p-value = 0.06201
+wilcox.test(sex_auto1$dnds[sex_auto1$chrone=='Chr02'], sex_auto1$dnds[sex_auto1$chrone=='Chr01'])
+#W = 587410, p-value = 0.4656
 
 #boxplot
 #dn/ds

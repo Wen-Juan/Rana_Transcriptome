@@ -11,8 +11,8 @@ library(easyGgplot2)
 col1 <- rgb(red = 0, green = 0, blue = 0, alpha = 0.1)
 col2 <- rgb(red = 1, green = 0, blue = 0, alpha = 0.6)
 
-datapath <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg43/'
-kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg43/LogCPM_0.05_Amg43 copy.txt",header = T)
+datapath <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46male/'
+kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46male/LogCPM_0.05_Amg46male copy.txt",header = T)
 str(kdata)
 
 ###restrict the analysis to sex-biaxed genes
@@ -27,14 +27,16 @@ chr1.data <- rbind(chr1.1.data,chr1.2.data)
 chr2.1.data <- subset(map.data, map.data$chr!='Chr01') 
 chr2.data<- subset(chr2.1.data, chr2.1.data$chr!='Chr02') 
 
+group1.expr.minus <- (map.data$Am2_463 + map.data$Am4_461 + map.data$Am6_462) / 3 #XY male group at G46
 #group1.expr.minus <- (map.data$Am2_463 + map.data$Am4_461 + map.data$Am6_462) / 3 #XY male group at G46
-group1.expr.minus <- (map.data$Am1_434 + map.data$Am2_434 + map.data$Am4_434) / 3 #XY male group at G43
+#group1.expr.minus <- (map.data$Am1_434 + map.data$Am2_434 + map.data$Am4_434) / 3 #XY male group at G43
 #group1.expr.minus <- (map.data$A15MT1 + map.data$A17MT1 + map.data$A6MT1 + map.data$A8MT1 + map.data$A12MT1) / 5 #XY male group in gonad
 #group1.expr.minus <- (map.data$A10MB + map.data$A15MB + map.data$A16MB + map.data$A17MB + map.data$A8MB) /5 #XY in brain
 #group1.expr.minus <- (map.data$A12ML1 + map.data$A17ML1 + map.data$A15ML1 +map.data$A8ML1)/4 #XY linver
 
+group2.expr.minus <- (map.data$Am5_461) #Sex reversal XX male
 #group2.expr.minus <- (map.data$Am2_464+map.data$Am6_464)/2 #XX male group at G46
-group2.expr.minus <- (map.data$Am2_433 + map.data$Am4_435 + map.data$Am5_433) / 3 #XX female group at G43
+#group2.expr.minus <- (map.data$Am2_433 + map.data$Am4_435 + map.data$Am5_433) / 3 #XX female group at G43
 #group2.expr.minus <- (map.data$A10FO1 + map.data$A17FO1 + map.data$A2FO2 + map.data$A8FO2 + map.data$A6FO1) / 5 #XY male group in gonad
 #group2.expr.minus <- (map.data$A10FB + map.data$A12FB + map.data$A15FB + map.data$A16FB + map.data$A17FB) /5 #XX in brain
 #group2.expr.minus <- (map.data$A12FL1 + map.data$A17FL1 + map.data$A2FL1 + map.data$A7FL1 +map.data$A8FL1)/5 #XX linver
@@ -46,6 +48,44 @@ group2.expr <- group2.expr.minus + min(abs(c(group1.expr.minus, group2.expr.minu
 map.data$ratio <- log2(group1.expr/group2.expr)
 map.data$ratio[mapply(is.infinite, map.data$ratio)] <- NA
 
+#gene expression ratio Log2(XY/XX)
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/log2ratio_XYXXsexreversal_10chr.pdf", width=8, height=8)
+ggplot(map.data, aes(x=chr, y=ratio, fill=chr)) +
+  scale_fill_manual(values = c("red","red","grey","grey","grey","grey","grey","grey","grey","grey")) +
+  scale_y_continuous(limits = c(-6,6)) + 
+  geom_boxplot(notch = TRUE) +
+  theme(legend.position="none") +
+  labs(x='Chromosome', y='Log2 ratio of XY/XX gene expression') +
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+dev.off()
+
+
+#gene expression ratio Log2(XY/XX)
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/log2ratio_XYXXsexreversal_allauto.pdf", width=8, height=8)
+ggplot(map.data, aes(x=chrone, y=ratio, fill=chrone)) +
+  scale_fill_manual(values = c("grey","red","red")) +
+  scale_y_continuous(limits = c(-6,6)) + 
+  geom_boxplot(notch = TRUE)+
+  theme(legend.position="none") +
+  labs(x='Chromosome', y='Log2 ratio of XY/XX gene expression') +
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+dev.off()
+
+#stats
+##
+wilcox.test(map.data$ratio[map.data$chr=='Chr01'],map.data$ratio[map.data$chr=='Chr02'],exact = FALSE) 
+##W = 291820, p-value = 0.9756
+withoutchr01 <- subset(map.data, map.data$chr!='Chr01')
+withoutchr0102 <- subset(withoutchr01, withoutchr01$chr!='Chr02')
+
+wilcox.test(map.data$ratio[map.data$chr=='Chr01'],withoutchr01$ratio[withoutchr01$chr!='Chr02'],exact = FALSE) 
+##W = 1525200, p-value = 0.513
+wilcox.test(map.data$ratio[map.data$chr=='Chr02'],withoutchr01$ratio[withoutchr01$chr!='Chr02'],exact = FALSE) 
+##W = 1350200, p-value = 0.4937
+
+###liver
 #ggplot of boxplot
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/log2ratio_liver.pdf", width=8, height=8)
 ggplot(map.data, aes(x=chr, y=ratio, fill=chr)) +

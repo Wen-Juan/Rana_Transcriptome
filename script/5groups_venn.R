@@ -6,6 +6,7 @@ library(gridExtra)
 library(grid)
 library(ggplot2)
 library(lattice)
+library("SuperExactTest")
 
 #for the shared female-biased genes across five stages.
 setwd <-'/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/'
@@ -44,6 +45,22 @@ grid.arrange(gTree(children=venn.plot0),ncol = 1 )
 venn_fbias_out0 <- arrangeGrob(gTree(children=venn.plot0),ncol = 1 )
 ggsave(file="shared_sbias_larva.pdf", venn_fbias_out0, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
 
+##
+#test whether the overlap is greater than by chance.
+share_5stage <- list(as.character(sbias_g23), as.character(sbias_g27), as.character(sbias_g31), as.character(sbias_g43), as.character(sbias_g46))
+list(share_5stage)
+str(share_5stage)
+
+total3 <- 4923
+
+####### TO DO for all interections
+
+res=supertest(share_5stage, n=total3)
+plot(res, Layout="landscape", degree=2:5, sort.by="size")
+summary(res)
+
+write.csv(summary(res)$Table, file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/5stage_sb_testbychance.csv", row.names=FALSE)
+##
 ##################
 #######larvae shared female-biased genes
 #################
@@ -245,7 +262,24 @@ venn_fbias_out8 <- arrangeGrob(gTree(children=venn.plot8),ncol = 1 )
 ggsave(file="shared_sbias_g43g46adults.pdf", venn_fbias_out8, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
 
 
+#test whether the overlap is greater than by chance.
+share_gonadG46 <- list(as.character(adult_gonad), as.character(sbias_g46))
+list(share_gonadG46)
+str(share_gonadG46)
 
+total3 <- 15591
+
+####### TO DO for all interections
+
+res=supertest(share_gonadG46, n=total3)
+plot(res, Layout="landscape", sort.by="size")
+summary(res)
+
+write.csv(summary(res)$Table, file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/gonadg46_sb_testbychance.csv", row.names=FALSE)
+
+#correction for multiple test.
+Pvals = c(0.000013, 0.0002, 0.04,0.4) ### vector of pvals
+p.adjust(Pvals, method = "BH") 
 
 
 
