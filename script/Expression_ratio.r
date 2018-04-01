@@ -183,18 +183,18 @@ map.data <- dn_ds
 chr1_1_start <-map.data$start[map.data$chr=='Chr01']
 chr_1_end <- max(map.data$start[map.data$chr=='Chr01'])
 
-zoo.dat <- zoo(map.data$dnds[map.data$chr=='Chr01'], c(chr1_1_start,chr_1_end))
-y <- rollapply(zoo.dat, 50, FUN = mean, align = 'center', na.rm=TRUE) 
+zoo.dat <- zoo(map.data$ratio[map.data$chr=='Chr01'], c(chr1_1_start,chr_1_end))
+y <- rollapply(zoo.dat, 40, FUN = mean, align = 'center', na.rm=TRUE) 
 
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Tvedora_dev_RNAseq/output/Figure_9_dnds_sexchr.pdf", width=8, height=8)
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_chr01_malesexreveral_ratio.pdf", width=8, height=8)
 par(mar=c(5,5,4,3)+0.6) 
 #plot(c(0, chr_1_end), c(0,2), axes=F, lwd=2, xlab="Position (bp)", ylab="gene expression ratio log2(XY0/XX)", cex.axis=1.5, cex.lab=1.2, col="white")
-plot(c(0, chr_1_end), c(0,1.5), axes=F, lwd=2, xlab="Position (bp)", ylab="dN/dS", cex.axis=1.5, cex.lab=1.2, col="white")
+plot(c(0, chr_1_end), c(-6,6), axes=F, lwd=2, xlab="Position (bp)", ylab="gene expression ratio Log2(XY/XX)", cex.axis=1.5, cex.lab=1.2, col="white")
 axis(1,c(0, 30000000,60000000,90000000, 120000000, 150000000, 180000000, 200000000))
-axis(2, c(0,0.2,0.4,0.6,0.8,1,1.2,1.5))
-points(map.data$start[map.data$chr=='Chr01'], map.data$dnds[map.data$chr=='Chr01'], pch=20, lwd=2, type="p",col="gray50", main="",cex.axis=1.5)
+axis(2, c(-6,-4,-2,0,2,4,6))
+points(map.data$start[map.data$chr=='Chr01'], map.data$ratio[map.data$chr=='Chr01'], pch=20, lwd=2, type="p",col="gray50", main="",cex.axis=1.5)
 #points(DC.data1dmrt$start[DC.data1dmrt$chr=='Chr01'],DC.data1dmrt$dN_dS[DC.data1dmrt$chr=='Chr01'], pch=20, lwd=3, type="p",col="red", main="",cex.axis=1.5)
 lines(y,col="blue",lwd=4)
-abline(v=116440117, col="blue",lwd=2,lty=3)
+abline(v=116443467, col="blue",lwd=2,lty=3)
 dev.off()
 
