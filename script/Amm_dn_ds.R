@@ -27,6 +27,9 @@ sex_auto<-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcripto
 str(sex_auto)
 head(sex_auto)
 
+sex_auto_mel<-read.table("/Users/Wen-Juan/my_postdoc/postdoc_manuscripts/Amm_RNAseq/Mel/FasterXY.Results/all_dnds.txt", header = T)
+str(sex_auto_mel)
+head(sex_auto_mel)
 #dn/ds plot for Faster-X
 ###all chromosome separately
 sex_auto1 <- subset(sex_auto,sex_auto$chr!='NA')
@@ -43,26 +46,36 @@ ggplot(sex_auto1, aes(x=chr, y=dnds, fill=chr)) +
 dev.off()
 
 #sex chromosome vs autosomes
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_fasterX_autog.pdf")
-ggplot(sex_auto1, aes(x=chrone, y=dnds, fill=chrone)) + 
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_fasterX_autog_ds.pdf")
+ggplot(sex_auto1, aes(x=chrone, y=ds, fill=chrone)) + 
   scale_fill_manual(values = c("grey","firebrick2","firebrick2")) +
   theme(legend.position="none") +
   geom_boxplot(notch=TRUE) +
-  ylim(0,0.6) +
-  labs(x='Chromosome', y='dn/ds') +
+  ylim(1,2) +
+  labs(x='Chromosome', y='ds') +
  # scale_x_discrete(labels = c("Autosome","Sex chromosome")) +
   theme(axis.text=element_text(size=12, color="black"),text = element_text(size=15,color="black"))
 dev.off()
 
-mean(sex_auto$dNdS[sex_auto$chrid=='Chr01'])  #0.08367571
-mean(sex_auto$dNdS[sex_auto$chrid=='Chr02']) # 0.08482178
-mean(sex_auto$dNdS[sex_auto$chrtype=='Autosome'])  #0.08202889
+mean(sex_auto1$ds[sex_auto1$chrone=='Chr01'])  #1.419043
+mean(sex_auto1$ds[sex_auto1$chrone=='Chr02']) # 1.432956
+mean(sex_auto1$ds[sex_auto1$chrone=='Auto'])  #1.444327
 
 wilcox.test(sex_auto1$dnds[sex_auto1$chrone=='Auto'], sex_auto1$dnds[sex_auto1$chrone=='Chr01'])
 #W = 2745200, p-value = 0.2957
+wilcox.test(sex_auto1$dn[sex_auto1$chrone=='Auto'], sex_auto1$dn[sex_auto1$chrone=='Chr01'])
+#W = 2779200, p-value = 0.6887
+wilcox.test(sex_auto1$ds[sex_auto1$chrone=='Auto'], sex_auto1$ds[sex_auto1$chrone=='Chr01'])
+#W = 2925700, p-value = 0.01748
 wilcox.test(sex_auto1$dnds[sex_auto1$chrone=='Auto'], sex_auto1$dnds[sex_auto1$chrone=='Chr02'])
 #W = 2275300, p-value = 0.06201
-wilcox.test(sex_auto1$dnds[sex_auto1$chrone=='Chr02'], sex_auto1$dnds[sex_auto1$chrone=='Chr01'])
+wilcox.test(sex_auto1$dn[sex_auto1$chrone=='Auto'], sex_auto1$dn[sex_auto1$chrone=='Chr02'])
+#W = 2304100, p-value = 0.2065
+wilcox.test(sex_auto1$ds[sex_auto1$chrone=='Auto'], sex_auto1$ds[sex_auto1$chrone=='Chr02'])
+#W = 2408500, p-value = 0.3546
+wilcox.test(sex_auto1$dnds[sex_auto1$chrone=='Chr02'], sex_auto1$dnds[sex_auto1$chrone=='Chr01'])#W = 587410, p-value = 0.4656
+wilcox.test(sex_auto1$dn[sex_auto1$chrone=='Chr02'], sex_auto1$dn[sex_auto1$chrone=='Chr01']) #W = 587350, p-value = 0.4683
+wilcox.test(sex_auto1$ds[sex_auto1$chrone=='Chr02'], sex_auto1$ds[sex_auto1$chrone=='Chr01']) #W = 591180, p-value = 0.3216
 #W = 587410, p-value = 0.4656
 
 #boxplot
@@ -112,6 +125,53 @@ G46 <- subset(dn_ds_all, dn_ds_all$stage=='G46')
 gonad <- subset(dn_ds_all, dn_ds_all$stage=='Gonad')
 liver <- subset(dn_ds_all, dn_ds_all$stage=='Liver')
 brain <- subset(dn_ds_all, dn_ds_all$stage=='Brain')
+
+###using Mel data from XY transcriptome
+#dn/ds
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_dnds_all_meldata.pdf", width=10)
+
+ggplot(sex_auto_mel, aes(x=chrom, y=dNdS,fill=(chrom))) + 
+  geom_boxplot(notch = TRUE) +
+  scale_fill_manual(values = c("grey","firebrick2","firebrick2")) +
+  theme(legend.position="none") +
+  scale_y_continuous(name = "dN/dS", limits = c(0,0.6)) + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+dev.off()
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_dn_all_meldata.pdf", width=10)
+
+ggplot(sex_auto_mel, aes(x=chrom, y=dN,fill=(chrom))) + 
+  geom_boxplot(notch = TRUE) +
+  scale_fill_manual(values = c("grey","firebrick2","firebrick2")) +
+  theme(legend.position="none") +
+  scale_y_continuous(name = "dN/dS", limits = c(0,0.7)) + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+dev.off()
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_ds_all_meldata.pdf", width=10)
+
+ggplot(sex_auto_mel, aes(x=chrom, y=dS,fill=(chrom))) + 
+  geom_boxplot(notch = TRUE) +
+  scale_fill_manual(values = c("grey","firebrick2","firebrick2")) +
+  theme(legend.position="none") +
+  scale_y_continuous(name = "dN/dS", limits = c(0,2)) + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+dev.off()
+
+wilcox.test(sex_auto_mel$dNdS[sex_auto_mel$chrom=='Chr02'], sex_auto_mel$dNdS[sex_auto_mel$chrom=='Auto']) #W = 2052300, p-value = 0.8509
+wilcox.test(sex_auto_mel$dN[sex_auto_mel$chrom=='Chr02'], sex_auto_mel$dN[sex_auto_mel$chrom=='Auto']) # W = 2015000, p-value = 0.5029
+wilcox.test(sex_auto_mel$dS[sex_auto_mel$chrom=='Chr02'], sex_auto_mel$dS[sex_auto_mel$chrom=='Auto']) #W = 1942800, p-value = 0.01989
+
+wilcox.test(sex_auto_mel$dNdS[sex_auto_mel$chrom=='Chr01'], sex_auto_mel$dNdS[sex_auto_mel$chrom=='Auto']) #W = 2559000, p-value = 0.8916
+wilcox.test(sex_auto_mel$dN[sex_auto_mel$chrom=='Chr02'], sex_auto_mel$dN[sex_auto_mel$chrom=='Auto']) #W = 2015000, p-value = 0.5029
+wilcox.test(sex_auto_mel$dS[sex_auto_mel$chrom=='Chr02'], sex_auto_mel$dS[sex_auto_mel$chrom=='Auto']) #W = 1942800, p-value = 0.01989
+
+wilcox.test(sex_auto_mel$dNdS[sex_auto_mel$chrom=='Chr02'], sex_auto_mel$dNdS[sex_auto_mel$chrom=='Chr01']) #W = 476360, p-value = 0.9635
+wilcox.test(sex_auto_mel$dN[sex_auto_mel$chrom=='Chr02'], sex_auto_mel$dN[sex_auto_mel$chrom=='Auto']) #W = 2015000, p-value = 0.5029
+wilcox.test(sex_auto_mel$dS[sex_auto_mel$chrom=='Chr02'], sex_auto_mel$dS[sex_auto_mel$chrom=='Auto']) #W = 1942800, p-value = 0.01989
+###
 
 ##tau
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_tau_all_new.pdf", width=10)
