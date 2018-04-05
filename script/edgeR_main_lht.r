@@ -26,7 +26,7 @@ sub_analyse = paste(args[1])
 FDR2use = as.numeric(paste(args[2]))
 
 # example
-# sub_analyse <- 'Amm27'
+# sub_analyse <- 'Amgonad'
 # FDR2use  <- 0.05
 
 datapath <- "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/"
@@ -43,6 +43,21 @@ model.formula <- as.formula("~0+group")
 dmat <- model.matrix(model.formula,data=as.data.frame(design))
 dgl <- DGEList(counts=count, group=design$group, genes=annotation)
 paste("all transcripts:", nrow(dgl))
+
+#converting to RPKM of G46###
+#dgl <- DGEList(counts=count, group=design$group, genes=annotation)
+#dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
+#dgl <- calcNormFactors(dgl)
+#dgl_rpkm <- rpkm(dgl)
+
+#write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46nosr/dgl_rpkm_amm.txt", sep="\t", col.names=T)
+
+###coverting to RPKM of gonad
+dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
+dgl <- calcNormFactors(dgl)
+dgl_rpkm <- rpkm(dgl)
+
+write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amgonad/dgl_rpkm_amm_gonad.txt", sep="\t", col.names=T)
 
 ##filter effects
 filter_file <- file.path(paste(outpath, '/',sub_analyse, 'filtering_info.txt', sep=""))
@@ -74,6 +89,7 @@ write(summary(rowSums(cpm(sum10)/ncol(sum10))), filter_file, append=T, sep='\t',
 dgl <- dgl[aveLogCPM(dgl) > 0,] # filter by average reads
 #dgl <- dgl[rowSums(cpm(dgl)>=2) > 3,] #the 5 means there are 10 libraries in total with 5 males and 5 females
 dgl <- dgl[rowSums(cpm(dgl)>1) >=2,]
+
 
 write(paste("dgl"), filter_file, append=T)
 write(paste(nrow(dgl), "_", sep=""), filter_file, append=T)

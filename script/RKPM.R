@@ -78,40 +78,31 @@ col1 <- rgb(red = 0, green = 0, blue = 0, alpha = 0.1)
 col2 <- rgb(red = 1, green = 0, blue = 0, alpha = 0.6)
 
 datapath <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46nosr/'
-kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46nosr/LogCPM_0.05_Amg46nosr copy.txt",header = T)
+kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46nosr/rpkm_list_count_sorted.txt",header = T)
 str(kdata)
 
 ###restrict the analysis to sex-biaxed genes
 kdata1 <- subset(kdata, kdata$logFC.XY46.XX46<=-1)
-kdata2 <- subset(kdata, kdata$logFC.XY46.XX46>=1 & kdata$logFC.XY46.XX46>=1)
+kdata2 <- subset(kdata, kdata$logFC.XY46.XX46>=1)
 kdata3 <- subset(kdata, kdata$logFC.XY46.XX46>-1 & kdata$logFC.XY46.XX46<1)
 
-kdata1$meanXY <- (kdata1$Am2_463 + kdata1$Am4_461 + kdata1$Am6_462) / 3 #XY male group at G46
+kdata1$meanXY <- (kdata1$logAm2_463 + kdata1$logAm4_461 + kdata1$logAm6_462) / 3 #XY male group at G46
 kdata1$group1="meanmale"
 
-kdata2$meanXY <- (kdata2$Am2_463 + kdata2$Am4_461 + kdata2$Am6_462) / 3 #XY male group at G46
+kdata2$meanXY <- (kdata2$logAm2_463 + kdata2$logAm4_461 + kdata2$logAm6_462) / 3 #XY male group at G46
 kdata2$group1="meanmale"
 
-kdata3$meanXY <- (kdata3$Am2_463 + kdata3$Am4_461 + kdata3$Am6_462) / 3 #XY male group at G46
+kdata3$meanXY <- (kdata3$logAm2_463 + kdata3$logAm4_461 + kdata3$logAm6_462) / 3 #XY male group at G46
 kdata3$group1="meanmale"
-#group1.expr.minus <- (map.data$Am2_463 + map.data$Am4_461 + map.data$Am6_462) / 3 #XY male group at G46
-#group1.expr.minus <- (map.data$Am1_434 + map.data$Am2_434 + map.data$Am4_434) / 3 #XY male group at G43
-#group1.expr.minus <- (map.data$A15MT1 + map.data$A17MT1 + map.data$A6MT1 + map.data$A8MT1 + map.data$A12MT1) / 5 #XY male group in gonad
-#group1.expr.minus <- (map.data$A10MB + map.data$A15MB + map.data$A16MB + map.data$A17MB + map.data$A8MB) /5 #XY in brain
-#group1.expr.minus <- (map.data$A12ML1 + map.data$A17ML1 + map.data$A15ML1 +map.data$A8ML1)/4 #XY linver
 
-kdata1$meanXX <- (kdata1$Am2_464+kdata1$Am6_464)/2 #XX male group at G46
+kdata1$meanXX <- (kdata1$logAm2_464+kdata1$logAm6_464)/2 #XX female group at G46
 kdata1$group2="meanfemale"
 
-kdata2$meanXX <- (kdata2$Am2_464+kdata2$Am6_464)/2 #XX male group at G46
+kdata2$meanXX <- (kdata2$logAm2_464+kdata2$logAm6_464)/2 #XX female group at G46
 kdata2$group2="meanfemale"
 
-kdata3$meanXX <- (kdata3$Am2_464+kdata3$Am6_464)/2 #XY male group at G46
+kdata3$meanXX <- (kdata3$logAm2_464+kdata3$logAm6_464)/2 #XY female group at G46
 kdata3$group2="meanfemale"
-#group2.expr.minus <- (map.data$Am2_433 + map.data$Am4_435 + map.data$Am5_433) / 3 #XX female group at G43
-#group2.expr.minus <- (map.data$A10FO1 + map.data$A17FO1 + map.data$A2FO2 + map.data$A8FO2 + map.data$A6FO1) / 5 #XY male group in gonad
-#group2.expr.minus <- (map.data$A10FB + map.data$A12FB + map.data$A15FB + map.data$A16FB + map.data$A17FB) /5 #XX in brain
-#group2.expr.minus <- (map.data$A12FL1 + map.data$A17FL1 + map.data$A2FL1 + map.data$A7FL1 +map.data$A8FL1)/5 #XX linver
 
 write.table(kdata1, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46nosr_fbias.txt", sep="\t", col.names=F)
 write.table(kdata2, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46nosr_mbias.txt", sep="\t", col.names=F)
@@ -128,11 +119,12 @@ write.table(g46_fbias_all, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Trans
 write.table(g46_mbias_all, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_mbias_all2.txt", sep="\t", col.names=F)
 write.table(g46_unbias_all, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_unbias_all2.txt", sep="\t", col.names=F)
 
-g46_bias_all <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_all_bias.txt", header=TRUE)
+g46_bias_all <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_sbunbias_all_fi.txt", header=TRUE)
+str(g46_bias_all)
 
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sexbias_logcpmg46_alltog.pdf")
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sexbias_logRPKM_alltog.pdf")
 
-ggplot(data = g46_bias_all, aes(x=bias, y= LogCPM, fill=sex)) + 
+ggplot(data = g46_bias_all, aes(x=bias, y= Log2RPKM, fill=Sex)) + 
   geom_boxplot(notch=TRUE)  +
   scale_fill_manual(values = c("red","blue")) +
   theme(axis.title.x = element_text(size=15,colour = "black"),axis.title.y = element_text(size=15,colour = "black")) +
@@ -171,4 +163,59 @@ ggplot(g46_unbias_all, aes(x=sex, y=logCPM, fill=sex)) +
   ylim(-5,13) +
   labs(y='LogCPM') +
   theme(axis.text=element_text(size=12, color="black"),text = element_text(size=15,color="black"))
+dev.off()
+
+
+### load data from gonad tissues
+kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amgonad/rpkm_amm_gonad.txt", header=TRUE)
+str(kdata)
+
+kdata1 <- subset(kdata, kdata$logFC.XYtestis.XXovary<=-1)
+kdata2 <- subset(kdata, kdata$logFC.XYtestis.XXovary>=1)
+kdata3 <- subset(kdata, kdata$logFC.XYtestis.XXovary>-1 & kdata$logFC.XYtestis.XXovary<1)
+
+kdata1$meanXY <- (log2(kdata1$A15MT1) + log2(kdata1$A17MT1) + log2(kdata1$A6MT1) + log2(kdata1$A8MT1) + log2(kdata1$A12MT1)) / 5 
+kdata1$group1="meanmale"
+
+kdata2$meanXY <- (log2(kdata2$A15MT1) + log2(kdata2$A17MT1) + log2(kdata2$A6MT1) + log2(kdata2$A8MT1) + log2(kdata2$A12MT1)) / 5 #XY male group at gonad
+kdata2$group1="meanmale"
+
+kdata3$meanXY <- (log2(kdata3$A15MT1) + log2(kdata3$A17MT1) + log2(kdata3$A6MT1) + log2(kdata3$A8MT1) + log2(kdata3$A12MT1)) / 5
+kdata3$group1="meanmale"
+
+kdata1$meanXX <- (log2(kdata1$A10FO1) + log2(kdata1$A17FO1) + log2(kdata1$A2FO2) + log2(kdata1$A6FO1) + log2(kdata1$A8FO2)) / 5 
+kdata1$group2="meanfemale"
+
+kdata2$meanXX <- (log2(kdata2$A10FO1) + log2(kdata2$A17FO1) + log2(kdata2$A2FO2) + log2(kdata2$A6FO1) + log2(kdata2$A8FO2)) #XX female group at gonad
+kdata2$group2="meanfemale"
+
+kdata3$meanXX <- (log2(kdata3$A10FO1) + log2(kdata3$A17FO1) + log2(kdata3$A2FO2) + log2(kdata3$A6FO1) + log2(kdata3$A8FO2)) 
+kdata3$group2="meanfemale"
+
+write.table(kdata1, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_fbias.txt", sep="\t", col.names=F)
+write.table(kdata2, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_mbias.txt", sep="\t", col.names=F)
+write.table(kdata3, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_unbias.txt", sep="\t", col.names=F)
+
+gonad_fbias_all <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_fbias.txt", header=TRUE)
+gonad_fbias_all$bias = "female"
+gonad_mbias_all <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_mbias.txt", header=TRUE)
+gonad_mbias_all$bias = "male"
+gonad_unbias_all <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_unbias.txt", header=TRUE)
+gonad_unbias_all$bias = "unbias"
+
+write.table(gonad_fbias_all, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_fbias_all2.txt", sep="\t", col.names=F)
+write.table(gonad_mbias_all, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_mbias_all2.txt", sep="\t", col.names=F)
+write.table(gonad_unbias_all, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_unbias_all2.txt", sep="\t", col.names=F)
+
+gonad_bias_all_rpkm <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_rpkm_all_mean.txt", header=TRUE)
+str(gonad_bias_all_rpkm)
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sexbias_logRPKM_gonad.pdf")
+
+ggplot(data = gonad_bias_all_rpkm, aes(x=bias, y= Log2RPKM, fill=sex)) + 
+  geom_boxplot(notch=TRUE)  +
+  scale_fill_manual(values = c("red","blue")) +
+  theme(axis.title.x = element_text(size=15,colour = "black"),axis.title.y = element_text(size=15,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
+
 dev.off()
