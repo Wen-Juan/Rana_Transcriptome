@@ -26,7 +26,7 @@ sub_analyse = paste(args[1])
 FDR2use = as.numeric(paste(args[2]))
 
 # example
-# sub_analyse <- 'Amgonad'
+# sub_analyse <- 'Amg43'
 # FDR2use  <- 0.05
 
 datapath <- "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/"
@@ -53,11 +53,22 @@ paste("all transcripts:", nrow(dgl))
 #write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46nosr/dgl_rpkm_amm.txt", sep="\t", col.names=T)
 
 ###coverting to RPKM of gonad
+#dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
+#dgl <- calcNormFactors(dgl)
+#dgl_rpkm <- rpkm(dgl)
+#write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amgonad/dgl_rpkm_amm_gonad.txt", sep="\t", col.names=T)
+
+###coverting to RPKM of liver
+#dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
+#dgl <- calcNormFactors(dgl)
+#dgl_rpkm <- rpkm(dgl)
+#write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amliver/dgl_rpkm_amm_liver.txt", sep="\t", col.names=T)
+
+###coverting to RPKM of G43
 dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
 dgl <- calcNormFactors(dgl)
 dgl_rpkm <- rpkm(dgl)
-
-write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amgonad/dgl_rpkm_amm_gonad.txt", sep="\t", col.names=T)
+write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg43/dgl_rpkm_amm_g43.txt", sep="\t", col.names=T)
 
 ##filter effects
 filter_file <- file.path(paste(outpath, '/',sub_analyse, 'filtering_info.txt', sep=""))
