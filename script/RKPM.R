@@ -442,7 +442,7 @@ pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/fi
 sts <- boxplot.stats(liver_sbunbias_rpkm$log2RPKM)$stats
 
 p4 <- ggplot(data = liver_sbunbias_rpkm, aes(x=Bias, y= log2RPKM, fill=Sex)) + 
-  geom_boxplot(notch=TRUE,outlier.colour = NA,position=position_dodge(0.8))  +
+  geom_boxplot(notch=TRUE,position=position_dodge(0.8))  +
   scale_fill_manual(values = c("red3","dodgerblue3")) +
   coord_cartesian(ylim = c(sts[1]*1.5,max(sts)*1.5)) +
   theme_set(theme_bw(base_size=12)) +
@@ -460,6 +460,92 @@ wilcox.test(liver_fbias_rpkm$log2RPKM[liver_fbias_rpkm$Sex=='meanmale'], liver_f
 wilcox.test(liver_mbias_rpkm$log2RPKM[liver_mbias_rpkm$Sex=='meanmale'], liver_mbias_rpkm$log2RPKM[liver_mbias_rpkm$Sex=='meanfemale']) #W = 285950, p-value < 2.2e-16
 wilcox.test(liver_unbias_rpkm$log2RPKM[liver_unbias_rpkm$Sex=='meanmale'],liver_unbias_rpkm$log2RPKM[liver_unbias_rpkm$Sex=='meanfemale']) #W = 141100000, p-value = 0.319
 
+###sex-bias cutoff figures
+
+kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amliver/rpkm_amliver_sorted_cutoff_fi.txt", header=TRUE)
+str(kdata)
+
+kdata1 <- subset(kdata, kdata$logFC.XYliver.XXliver<=-1 & kdata$FDR.XYliver.XXliver < 0.05)
+kdata2 <- subset(kdata, kdata$logFC.XYliver.XXliver>=1 & kdata$FDR.XYliver.XXliver < 0.05)
+
+kdata1$meanXY <- (kdata1$A12ML1 + kdata1$A15ML1 + kdata1$A17ML1 + kdata1$A8ML1) /4 
+kdata1$log2meanXY <- log2(kdata1$meanXY + 0.0001)
+kdata1$group1="meanmale"
+
+kdata2$meanXY <- (kdata2$A12ML1 + kdata2$A15ML1 + kdata2$A17ML1 + kdata2$A8ML1) /4 
+kdata2$log2meanXY <- log2(kdata2$meanXY + 0.0001)
+kdata2$group1="meanmale"
+
+
+kdata1$meanXX <- (kdata1$A12FL1 + kdata1$A17FL1 + kdata1$A2FL1 + kdata1$A7FL1 + kdata1$A8FL1) / 5 
+kdata1$log2meanXX <- log2(kdata1$meanXX + 0.0001)
+kdata1$group2="meanfemale"
+
+kdata2$meanXX <- (kdata2$A12FL1 + kdata2$A17FL1 + kdata2$A2FL1 + kdata2$A7FL1 + kdata2$A8FL1) / 5 #XX female group at gonad
+kdata2$log2meanXX <- log2(kdata2$meanXX + 0.0001)
+kdata2$group2="meanfemale"
+
+write.table(kdata1, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/liver_fbias2_cutoff2.txt", sep="\t", col.names=T)
+write.table(kdata2, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/liver_mbias2_cutoff2.txt", sep="\t", col.names=T)
+
+liver_mbias_cutoff <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/liver_mbias2_cutoff_inclusexlimit_fi.txt", header=TRUE)
+str(liver_mbias_cutoff)
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sbcutoff_logrpkm_liver_mbias.pdf")
+
+p1 <-  ggplot(data =liver_mbias_cutoff, aes(x=cutoff, y= log2RPKM, fill=sex)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0), width=0.9,alpha=0.9) +
+  coord_cartesian(ylim = c(-20,-10, -5, 0,2,5,10)) +
+  scale_fill_manual(values = c("red3","dodgerblue3")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0))
+
+dev.off()
+
+
+liver_fbias_cutoff <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/liver_sb_cutoff_inclusexlimit_fi.txt", header=TRUE)
+str(liver_fbias_cutoff)
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sbcutoff_logrpkm_liver_fbias.pdf")
+
+p2 <- ggplot(data =liver_fbias_cutoff, aes(x=cutoff, y= log2RPKM, fill=sex)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0), width=0.9,alpha=0.9) +
+  coord_cartesian(ylim = c(-20,-10, -5, 0,2,5,10)) +
+  scale_fill_manual(values = c("red3","dodgerblue3")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0))
+
+dev.off()
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sbcutoff_logrpkm_liver_inclusexlimit.pdf")
+
+ggarrange(p2, p1, labels = c("A", "B"),
+          ncol = 2, nrow = 1)
+
+dev.off()
+
+###stats
+liver_fbias_cutoff_male <- subset(liver_fbias_cutoff, liver_fbias_cutoff$sex=='meanmale')
+liver_fbias_cutoff_female  <- subset(liver_fbias_cutoff , liver_fbias_cutoff $sex=='meanfemale')
+
+wilcox.test(liver_fbias_cutoff_male$log2RPKM[liver_fbias_cutoff_male$cutoff=='FC1'], liver_fbias_cutoff_male$log2RPKM[liver_fbias_cutoff_male$cutoff=='FC3'])#W = 1997, p-value = 3.833e-05
+wilcox.test(liver_fbias_cutoff_male$log2RPKM[liver_fbias_cutoff_male$cutoff=='FC3'], liver_fbias_cutoff_male$log2RPKM[liver_fbias_cutoff_male$cutoff=='FC5'])#W = 263, p-value = 0.2815
+wilcox.test(liver_fbias_cutoff_male$log2RPKM[liver_fbias_cutoff_male$cutoff=='FC5'], liver_fbias_cutoff_male$log2RPKM[liver_fbias_cutoff_male$cutoff=='FC7'])#W = 171, p-value = 0.01125
+
+wilcox.test(liver_fbias_cutoff_female$log2RPKM[liver_fbias_cutoff_female$cutoff=='FC1'], liver_fbias_cutoff_female$log2RPKM[liver_fbias_cutoff_female$cutoff=='FC3'])#W = 1544, p-value = 0.2162
+wilcox.test(liver_fbias_cutoff_female$log2RPKM[liver_fbias_cutoff_female$cutoff=='FC3'], liver_fbias_cutoff_female$log2RPKM[liver_fbias_cutoff_female$cutoff=='FC5'])#W = 130, p-value = 0.0002754
+wilcox.test(liver_fbias_cutoff_female$log2RPKM[liver_fbias_cutoff_female$cutoff=='FC5'], liver_fbias_cutoff_female$log2RPKM[liver_fbias_cutoff_female$cutoff=='FC7'])#W = 127, p-value = 0.5088
+
+liver_mbias_cutoff_male <- subset(liver_mbias_cutoff, liver_mbias_cutoff$sex=='meanmale')
+liver_mbias_cutoff_female  <- subset(liver_mbias_cutoff , liver_mbias_cutoff $sex=='meanfemale')
+
+wilcox.test(liver_mbias_cutoff_male$log2RPKM[liver_mbias_cutoff_male$cutoff=='FC1'], liver_mbias_cutoff_male$log2RPKM[liver_mbias_cutoff_male$cutoff=='FC3'])#W = 705, p-value = 0.003533
+wilcox.test(liver_mbias_cutoff_male$log2RPKM[liver_mbias_cutoff_male$cutoff=='FC3'], liver_mbias_cutoff_male$log2RPKM[liver_mbias_cutoff_male$cutoff=='FC5'])#W = 13, p-value = 0.2799
+wilcox.test(liver_mbias_cutoff_male$log2RPKM[liver_mbias_cutoff_male$cutoff=='FC5'], liver_mbias_cutoff_male$log2RPKM[liver_mbias_cutoff_male$cutoff=='FC7'])#W = 6, p-value = 0.5333
+
+wilcox.test(liver_mbias_cutoff_female$log2RPKM[liver_mbias_cutoff_female$cutoff=='FC1'], liver_mbias_cutoff_female$log2RPKM[liver_mbias_cutoff_female$cutoff=='FC3'])#W = 828, p-value = 1.278e-05
+wilcox.test(liver_mbias_cutoff_female$log2RPKM[liver_mbias_cutoff_female$cutoff=='FC3'], liver_mbias_cutoff_female$log2RPKM[liver_mbias_cutoff_female$cutoff=='FC5'])#W = 25, p-value = 0.7531
+wilcox.test(liver_mbias_cutoff_female$log2RPKM[liver_mbias_cutoff_female$cutoff=='FC5'], liver_mbias_cutoff_female$log2RPKM[liver_mbias_cutoff_female$cutoff=='FC7'])#W = 8, p-value = 0.1333
 
 ###load G43 datasets
 kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg43/rpkm_ammg43_fi.txt", header=TRUE)
@@ -535,3 +621,89 @@ ggarrange(p1, p2, p3, p4, labels = c("A", "B", "C", "D"),
 
 dev.off()
 
+###G43 for sex-bias cut off figures
+
+kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg43/rpkm_ammg43_forcutoff.txt", header=TRUE)
+str(kdata)
+
+kdata1 <- subset(kdata, kdata$logFC.XY43.XX43<=-1 & kdata$FDR.XY43.XX43 < 0.05)
+kdata2 <- subset(kdata, kdata$logFC.XY43.XX43>=1 & kdata$FDR.XY43.XX43 < 0.05)
+
+kdata1$meanXY <- (kdata1$Am1_434 + kdata1$Am2_434 + kdata1$Am4_434) /3 
+kdata1$log2meanXY <- log2(kdata1$meanXY + 0.0001)
+kdata1$group1="meanmale"
+
+kdata2$meanXY <- (kdata2$Am1_434 + kdata2$Am2_434 + kdata2$Am4_434) /3 
+kdata2$log2meanXY <- log2(kdata2$meanXY + 0.0001)
+kdata2$group1="meanmale"
+
+kdata1$meanXX <- (kdata1$Am2_433 + kdata1$Am4_435 + kdata1$Am5_433)/3
+kdata1$log2meanXX <- log2(kdata1$meanXX + 0.0001)
+kdata1$group2="meanfemale"
+
+kdata2$meanXX <- (kdata2$Am2_433 + kdata2$Am4_435 + kdata2$Am5_433)/3  #XX female group at gonad
+kdata2$log2meanXX <- log2(kdata2$meanXX + 0.0001)
+kdata2$group2="meanfemale"
+
+
+write.table(kdata1, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g43_fbias2_cutoff.txt", sep="\t", col.names=T)
+write.table(kdata2, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g43_mbias2_cutoff.txt", sep="\t", col.names=T)
+
+g43_fbias_cutoff <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g43_fbias2_cutoff_inclsexlimit_fi.txt", header=TRUE)
+str(g43_fbias_cutoff)
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sbcutoff_logrpkm_g43_fbias.pdf")
+
+pg43_f <- ggplot(data = g43_fbias_cutoff, aes(x=cutoff, y= log2RPKM, fill=sex)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0), width=0.9,alpha=0.9) +
+  coord_cartesian(ylim = c(-15,-10, -5, 0,2,5,10)) +
+  scale_fill_manual(values = c("red3","dodgerblue3")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0))
+
+dev.off()
+
+g43_mbias_cutoff <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g43_mbias_cutoff_inclusexlimit_fi.txt", header=TRUE)
+str(g43_mbias_cutoff)
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sbcutoff_logrpkm_g43_mbias.pdf")
+
+pg43_m <- ggplot(data = g43_mbias_cutoff, aes(x=cutoff, y= log2RPKM, fill=sex)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0), width=0.9,alpha=0.9) +
+  coord_cartesian(ylim = c(-15,-10, -5, 0,2,5,10)) +
+  scale_fill_manual(values = c("red3","dodgerblue3")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0))
+
+dev.off()
+
+####
+g43_fbias_cutoff_male <- subset(g43_mbias_cutoff, g43_mbias_cutoff$sex=='meanmale')
+g43_mbias_cutoff_female <- subset(g43_mbias_cutoff, g43_mbias_cutoff$sex=='meanfemale')
+
+wilcox.test(g43_mbias_cutoff_male$log2RPKM[g43_mbias_cutoff_male$cutoff=='FC1'], g43_mbias_cutoff_male$log2RPKM[g43_mbias_cutoff_male$cutoff=='FC3'])#w== 57, p-value = 0.3562
+wilcox.test(g43_mbias_cutoff_male$log2RPKM[g43_mbias_cutoff_male$cutoff=='FC3'], g43_mbias_cutoff_male$log2RPKM[g43_mbias_cutoff_male$cutoff=='FC5'])#W = 14, p-value = 0.9371
+wilcox.test(g43_mbias_cutoff_male$log2RPKM[g43_mbias_cutoff_male$cutoff=='FC5'], g43_mbias_cutoff_male$log2RPKM[g43_mbias_cutoff_male$cutoff=='FC7'])#W = 15, p-value = 0.6303
+
+wilcox.test(g43_mbias_cutoff_female$log2RPKM[g43_mbias_cutoff_female$cutoff=='FC1'], g43_mbias_cutoff_female$log2RPKM[g43_mbias_cutoff_female$cutoff=='FC3'])#W = 66, p-value = 0.09472
+wilcox.test(g43_mbias_cutoff_female$log2RPKM[g43_mbias_cutoff_female$cutoff=='FC3'], g43_mbias_cutoff_female$log2RPKM[g43_mbias_cutoff_female$cutoff=='FC5'])#W = 24, p-value = 0.1608
+wilcox.test(g43_mbias_cutoff_female$log2RPKM[g43_mbias_cutoff_female$cutoff=='FC5'], g43_mbias_cutoff_female$log2RPKM[g43_mbias_cutoff_female$cutoff=='FC7'])#W = 23, p-value = 0.01943
+
+g43_fbias_cutoff_male <- subset(g43_fbias_cutoff, g43_fbias_cutoff$sex=='meanmale')
+g43_fbias_cutoff_female <- subset(g43_fbias_cutoff, g43_fbias_cutoff$sex=='meanfemale')
+
+wilcox.test(g43_fbias_cutoff_female$log2RPKM[g43_fbias_cutoff_female$cutoff=='FC1'], g43_fbias_cutoff_female$log2RPKM[g43_fbias_cutoff_female$cutoff=='FC3'])#W = 788, p-value = 0.5908
+wilcox.test(g43_fbias_cutoff_female$log2RPKM[g43_fbias_cutoff_female$cutoff=='FC3'], g43_fbias_cutoff_female$log2RPKM[g43_fbias_cutoff_female$cutoff=='FC5'])#W = 1416, p-value = 0.002866
+wilcox.test(g43_fbias_cutoff_female$log2RPKM[g43_fbias_cutoff_female$cutoff=='FC5'], g43_fbias_cutoff_female$log2RPKM[g43_fbias_cutoff_female$cutoff=='FC7'])#W = 307, p-value = 0.01566
+
+wilcox.test(g43_fbias_cutoff_male$log2RPKM[g43_fbias_cutoff_male$cutoff=='FC1'], g43_fbias_cutoff_male$log2RPKM[g43_fbias_cutoff_male$cutoff=='FC3'])#W = 1132, p-value = 0.0001738
+wilcox.test(g43_fbias_cutoff_male$log2RPKM[g43_fbias_cutoff_male$cutoff=='FC3'], g43_fbias_cutoff_male$log2RPKM[g43_fbias_cutoff_male$cutoff=='FC5'])#W = 2656, p-value = 0.003664
+wilcox.test(g43_fbias_cutoff_male$log2RPKM[g43_fbias_cutoff_male$cutoff=='FC5'], g43_fbias_cutoff_male$log2RPKM[g43_fbias_cutoff_male$cutoff=='FC7'])#W = 392, p-value = 1.881e-05
+
+##put four figures in one page
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sbcutoff_logrpkm_g43_inclusexlimit.pdf")
+
+ggarrange(pg43_f,pg43_m, labels = c("A", "B"),
+          ncol = 2, nrow = 1)
+
+dev.off()
