@@ -65,11 +65,11 @@ dev.off()
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/log2ratio_XYXXsexreversal_allauto.pdf", width=8, height=8)
 ggplot(map.data, aes(x=chrone, y=ratio, fill=chrone)) +
   scale_fill_manual(values = c("grey","red","red")) +
-  scale_y_continuous(limits = c(-6,6)) + 
-  geom_boxplot(notch = TRUE)+
+  scale_y_continuous(limits = c(-0.5,0.5)) + 
+  geom_boxplot(notch = TRUE,outlier.shape=NA,)+
   theme(legend.position="none") +
   labs(x='Chromosome', y='Log2 ratio of XY/XX gene expression') +
-  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.title.x = element_text(size=12,colour = "black"),axis.title.y = element_text(size=12,colour = "black")) +
   theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
 dev.off()
 

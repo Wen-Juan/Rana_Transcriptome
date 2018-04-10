@@ -41,37 +41,44 @@ logFC_brain <-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcr
 str(logFC_brain)
 logFC_brain$stage = "brain"
 
-g23_sub <- data.frame(logFC_23$logFC.XY23.XX23,logFC_23$stage)
+g23_sub <- data.frame(logFC.XY23.XX23,g23_sub$stage)
 write.table(g23_sub, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g23_sub.txt", sep="\t", col.names=F)
-g27_sub <- data.frame(logFC_27$logFC.XY27.XX27,logFC_27$stage)
+
+g27_sub <- data.frame(logFC.XY27.XX27, g27_sub$stage)
 write.table(g27_sub, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g27_sub.txt", sep="\t", col.names=F)
-g31_sub <- data.frame(logFC_31$logFC.XY31.XX31,logFC_31$stage)
+
+g31_sub <- data.frame(logFC.XY31.XX31,g31_sub$stage)
 write.table(g31_sub, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g31_sub.txt", sep="\t", col.names=F)
-g43_sub <- data.frame(logFC_43$logFC.XY43.XX43,logFC_43$stage)
+
+g43_sub <- data.frame(logFC.XY43.XX43,g43_sub$stage)
 write.table(g43_sub, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g43_sub.txt", sep="\t", col.names=F)
-g46_sub <- data.frame(logFC_46nosr$logFC.XY46.XX46,logFC_46nosr$stage)
+
+g46_sub <- data.frame(logFC.XY46.XX46,g46_sub$stage)
 write.table(g46_sub, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_sub.txt", sep="\t", col.names=F)
-gonad_sub <- data.frame(logFC_gonad$logFC.XYtestis.XXovary,logFC_gonad$stage)
+
+gonad_sub <- data.frame(logFC.XYtestis.XXovary,logFC_gonad$stage)
 write.table(gonad_sub, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_sub.txt", sep="\t", col.names=F)
-brain_sub <- data.frame(logFC_brain$logFC.XYbrain.XXrain,logFC_brain$stage)
+
+brain_sub <- data.frame(logFC.XYbrain.XXrain,logFC_brain$stage)
 write.table(brain_sub, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/brain_sub.txt", sep="\t", col.names=F)
-liver_sub <- data.frame(logFC_liver$logFC.XYliver.XXliver,logFC_liver$stage)
+
+liver_sub <- data.frame(logFC.XYliver.XXliver,logFC_liver$stage)
 write.table(liver_sub, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/liver_sub.txt", sep="\t", col.names=F)
 
 logFC_all <-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/all_sub_logfc.txt", header = T)
 str(logFC_all)
 
-new_stage <- factor(logFC_all$stage, levels=c("G23", "G27","G31","G43", "G46", "gonad","liver", "brain"))
+new_stage <- factor(logFC_all$stage, levels=c("G23", "G27","G31","G43", "G46", "gonad","brain", "liver"))
 
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/violin_expressionratio.pdf")
 p = ggplot(logFC_all, aes(factor(new_stage),logFC), ylim)
-p + geom_violin(scale="width",fill="dodgerblue3", trim=F) + 
+p + geom_violin(scale="width", trim=F,aes(fill=tissue)) + 
   geom_hline(yintercept=-1,linetype="dashed") + geom_hline(yintercept=1, linetype="dashed") +
   theme_set(theme_bw(base_size=12)) +
-  #+ geom_hline(yintercept=-2,linetype="dashed") + geom_hline(yintercept=2, linetype="dashed") + 
-  #theme(panel.background = element_rect(fill='blue')) + 
+  facet_grid(~tissue,scales = "free_x", space = "free_x") +
+  scale_fill_manual(values = c("grey","grey")) +
+  theme(legend.position="none") +
   scale_y_continuous(breaks=c(-15,-10, -5, -1, 0, 1, 5, 10, 15)) +theme(axis.text=element_text(size=12), 
-#panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), 
 axis.line = element_line(colour = "black"), axis.title.x = element_text(colour = "black"), axis.title.y = element_text(colour = "black"))
 dev.off()
 
@@ -88,50 +95,49 @@ kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptom
 str(kdata)
 
 ###restrict the analysis to sex-biaxed genes
-kdata1 <- subset(kdata, kdata$logFC.XY46.XX46<=-1 & kdata$FDR.XY46.XX46< 0.05)
-kdata2 <- subset(kdata, kdata$logFC.XY46.XX46>=1 & kdata$FDR.XY46.XX46< 0.05)
-kdata3 <- subset(kdata, kdata$logFC.XY46.XX46>-1 & kdata$logFC.XY46.XX46<1 & kdata$FDR.XY46.XX46< 0.05)
+kdata1 <- subset(kdata, kdata$logFC.XY46.XX46<=-1 & kdata$FDR.XY46.XX46 < 0.05)
+kdata2 <- subset(kdata, kdata$logFC.XY46.XX46>=1 & kdata$FDR.XY46.XX46 < 0.05)
+kdata3 <- subset(kdata, kdata$logFC.XY46.XX46>-1 & kdata$logFC.XY46.XX46<1 & kdata$FDR.XY46.XX46 >= 0.05)
 
-kdata1$meanXY <- (kdata1$logAm2_463 + kdata1$logAm4_461 + kdata1$logAm6_462) / 3 #XY male group at G46
+kdata1$meanXY <- log2((kdata1$Am2_463 + kdata1$Am4_461 + kdata1$Am6_462)/3 + 0.0001) #XY male group at G46
 kdata1$group1="meanmale"
 
-kdata2$meanXY <- (kdata2$logAm2_463 + kdata2$logAm4_461 + kdata2$logAm6_462) / 3 #XY male group at G46
+kdata2$meanXY <- log2((kdata2$Am2_463 + kdata2$Am4_461 + kdata2$Am6_462)/3 + 0.0001) #XY male group at G46
 kdata2$group1="meanmale"
 
-kdata3$meanXY <- (kdata3$logAm2_463 + kdata3$logAm4_461 + kdata3$logAm6_462) / 3 #XY male group at G46
+kdata3$meanXY <- log2((kdata3$Am2_463 + kdata3$Am4_461 + kdata3$Am6_462)/3 + 0.0001) #XY male group at G46
 kdata3$group1="meanmale"
 
-kdata1$meanXX <- (kdata1$logAm2_464+kdata1$logAm6_464)/2 #XX female group at G46
+kdata1$meanXX <- log2((kdata1$Am2_464+kdata1$Am6_464)/2 + 0.0001) #XX female group at G46
 kdata1$group2="meanfemale"
 
-kdata2$meanXX <- (kdata2$logAm2_464+kdata2$logAm6_464)/2 #XX female group at G46
+kdata2$meanXX <- log2((kdata2$Am2_464+kdata2$Am6_464)/2 + 0.0001) #XX female group at G46
 kdata2$group2="meanfemale"
 
-kdata3$meanXX <- (kdata3$logAm2_464+kdata3$logAm6_464)/2 #XY female group at G46
+kdata3$meanXX <- log2((kdata3$Am2_464+kdata3$Am6_464)/2 + 0.0001) #XY female group at G46
 kdata3$group2="meanfemale"
 
-write.table(kdata1, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46nosr_fbias.txt", sep="\t", col.names=F)
-write.table(kdata2, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46nosr_mbias.txt", sep="\t", col.names=F)
-write.table(kdata3, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46nosr_unbias.txt", sep="\t", col.names=F)
+write.table(kdata1, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46nosr_fbias.txt", sep="\t", col.names=T)
+write.table(kdata2, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46nosr_mbias.txt", sep="\t", col.names=T)
+write.table(kdata3, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46nosr_unbias.txt", sep="\t", col.names=T)
 
-g46_fbias_all <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_fbias_all.txt", header=TRUE)
+g46_fbias_all <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_fbias_short.txt", header=TRUE)
 g46_fbias_all$bias = "female"
-g46_mbias_all <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_mbias_all.txt", header=TRUE)
+g46_mbias_all <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_mbias_short.txt", header=TRUE)
 g46_mbias_all$bias = "male"
-g46_unbias_all <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_unbias_all.txt", header=TRUE)
+g46_unbias_all <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_unbias_short.txt", header=TRUE)
 g46_unbias_all$bias = "unbias"
 
-write.table(g46_fbias_all, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_fbias_all2.txt", sep="\t", col.names=F)
+write.table(g46_fbias_all, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_fbias_all2.txt", sep="\t", col.names=T)
 write.table(g46_mbias_all, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_mbias_all2.txt", sep="\t", col.names=F)
 write.table(g46_unbias_all, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_unbias_all2.txt", sep="\t", col.names=F)
 
-g46_bias_all <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_sbunbias_all_fi.txt", header=TRUE)
+g46_bias_all <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/g46_sbunbias_all_newfi.txt", header=TRUE)
 str(g46_bias_all)
 
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sexbias_logcpmg46_fbias.pdf")
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sbunbias_log2rpkm_g46.pdf")
 
-sts <- boxplot.stats(g46_bias_all$log2RPKM)$stats
-p2 <- ggplot(data = g46_bias_all, aes(x=Bias, y= log2RPKM, fill=Sex)) + 
+ggplot(data = g46_bias_all, aes(x=bias, y= Log2RPKM, fill=sex)) + 
   geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0.8)) +
   coord_cartesian(ylim = c(sts[1]*1.8,max(sts)*1.3)) +
   scale_fill_manual(values = c("red3","dodgerblue3")) +
@@ -139,6 +145,24 @@ p2 <- ggplot(data = g46_bias_all, aes(x=Bias, y= log2RPKM, fill=Sex)) +
   theme(legend.justification=c(1,0), legend.position=c(1,0))
   #theme(legend.position="none")
 dev.off()
+
+##stats for female-biased genes
+g46_fbias <- subset(g46_bias_all, g46_bias_all$bias=='female')
+wilcox.test(g46_fbias $Log2RPKM[g46_fbias $sex=='meanfemale'], g46_fbias $Log2RPKM[g46_fbias $sex=='meanmale'])#W = 12945000, p-value < 2.2e-16
+
+g46_mbias <- subset(g46_bias_all, g46_bias_all$bias=='male')
+wilcox.test(g46_mbias $Log2RPKM[g46_mbias $sex=='meanfemale'], g46_mbias $Log2RPKM[g46_mbias $sex=='meanmale'])#W = 143500, p-value < 2.2e-16
+
+g46_unbias <- subset(g46_bias_all, g46_bias_all$bias=='unbias')
+wilcox.test(g46_unbias $Log2RPKM[g46_unbias $sex=='meanfemale'], g46_unbias $Log2RPKM[g46_unbias $sex=='meanmale'])#W = 143500, p-value < 2.2e-16 #W = 173200000, p-value = 3.876e-10
+
+g46_female<- subset(g46_bias_all, g46_bias_all$sex=='meanfemale')
+wilcox.test(g46_female$Log2RPKM[g46_female $bias=='female'], g46_female $Log2RPKM[g46_female$bias=='unbias'])#W = 52546000, p-value < 2.2e-16
+wilcox.test(g46_female$Log2RPKM[g46_female $bias=='male'], g46_female $Log2RPKM[g46_female$bias=='unbias'])#W = 4566200, p-value < 2.2e-16
+
+g46_male <- subset(g46_bias_all, g46_bias_all$sex=='meanmale')
+wilcox.test(g46_male$Log2RPKM[g46_male $bias=='female'], g46_male $Log2RPKM[g46_male$bias=='unbias'])#W = 25722000, p-value < 2.2e-16
+wilcox.test(g46_male$Log2RPKM[g46_male $bias=='male'], g46_male $Log2RPKM[g46_male$bias=='unbias'])#W = 7449000, p-value = 5.421e-06
 
 ###cut-off figures of G46 Log2FC
 datapath <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46nosr/'

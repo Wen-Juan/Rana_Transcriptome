@@ -12,5 +12,5 @@
 #BSUB -J index.sh
 
 #loading necessary modules and databases
-module add UHTS/Analysis/kallisto/0.43.0
-kallisto index -i am_transcripts.idx /scratch/beegfs/monthly/wjma/amm_rna/expression/AmmMT_HIMin1.fasta
+module add UHTS/Analysis/kallisto/0.43.1
+kallisto index -i am_orthologs.idx /scratch/beegfs/monthly/wjma/amm_rna/amm_trans_filter/kallisto_onlyorthologs/amm_orthologs.fasta

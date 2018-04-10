@@ -83,12 +83,12 @@ wilcox.test(sex_auto1$ds[sex_auto1$chrone=='Chr02'], sex_auto1$ds[sex_auto1$chro
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_dnds_all_shareunbias.pdf", width=10)
 
 ggplot(dn_ds_all_shareunbias, aes(x=bias, y=dNdS,fill=(bias))) + 
-  geom_boxplot(notch = TRUE) +
+  geom_boxplot(notch = TRUE,outlier.shape=NA) +
   scale_fill_manual(values = c("firebrick2","dodgerblue2","grey")) +
   theme(legend.position="none") +
   facet_grid(~stage) +
   scale_x_discrete(labels=c("F", "M", "U"),name="Sex bias") +
-  scale_y_continuous(name = "dN/dS", limits = c(0,1)) + 
+  scale_y_continuous(name = "dN/dS", limits = c(0,0.3)) + 
   theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
   theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
 dev.off()
@@ -177,7 +177,7 @@ wilcox.test(sex_auto_mel$dS[sex_auto_mel$chrom=='Chr02'], sex_auto_mel$dS[sex_au
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_tau_all_new.pdf", width=10)
 
 ggplot(tau_all, aes(x=bias, y=tau,fill=(bias))) + 
-  geom_boxplot(notch = TRUE) +
+  geom_boxplot(notch = TRUE,outlier.shape=NA) +
   scale_fill_manual(values = c("firebrick2","dodgerblue2","grey")) +
   theme(legend.position="none") +
   facet_grid(~stage) +
