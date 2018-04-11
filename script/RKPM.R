@@ -137,9 +137,9 @@ str(g46_bias_all)
 
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sbunbias_log2rpkm_g46.pdf")
 
-ggplot(data = g46_bias_all, aes(x=bias, y= Log2RPKM, fill=sex)) + 
+p2 <- ggplot(data = g46_bias_all, aes(x=bias, y= Log2RPKM, fill=sex)) + 
   geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0.8)) +
-  coord_cartesian(ylim = c(sts[1]*1.8,max(sts)*1.3)) +
+  coord_cartesian(ylim = c(-6,0,2,5,10))  +
   scale_fill_manual(values = c("red3","dodgerblue3")) +
   theme_set(theme_bw(base_size=12)) +
   theme(legend.justification=c(1,0), legend.position=c(1,0))
@@ -418,6 +418,80 @@ wilcox.test(fbias_cutoff_testis$log2RPKM[fbias_cutoff_testis$cutoff=='FC1'], fbi
 wilcox.test(fbias_cutoff_testis$log2RPKM[fbias_cutoff_testis$cutoff=='FC3'], fbias_cutoff_testis$log2RPKM[fbias_cutoff_testis$cutoff=='FC5'])#.
 wilcox.test(fbias_cutoff_testis$log2RPKM[fbias_cutoff_testis$cutoff=='FC5'], fbias_cutoff_testis$log2RPKM[fbias_cutoff_testis$cutoff=='FC7'])#*
 
+### compare sex bias and unbias
+kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amgonad/gonad_rpkm_FDR05_newcutoff_sorted.txt", header=TRUE)
+str(kdata)
+
+kdata_unb <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/rpkm_amm_gonad.txt", header = TRUE)
+str(kdata_unb)
+
+kdata1 <- subset(kdata, kdata$logFC.XYtestis.XXovary<=-1 & kdata$FDR.XYtestis.XXovary< 0.05)
+kdata2 <- subset(kdata, kdata$logFC.XYtestis.XXovary>=1 & kdata$FDR.XYtestis.XXovary< 0.05)
+kdata3 <- subset(kdata_unb, kdata_unb$logFC.XYtestis.XXovary> -1 & kdata_unb$logFC.XYtestis.XXovary< 1)
+
+kdata1$meanXY <- log2((kdata1$A15MT1 + kdata1$A17MT1 + kdata1$A6MT1 + kdata1$A8MT1 + kdata1$A12MT1) /5 + 0.0001)
+kdata1$group1="meanmale"
+kdata1$meanXX <- log2((kdata1$A10FO1 + kdata1$A17FO1 + kdata1$A2FO2 + kdata1$A6FO1 + kdata1$A8FO2) / 5 + 0.0001)
+kdata1$group2="meanfemale"
+
+kdata2$meanXY <- log2((kdata2$A15MT1 + kdata2$A17MT1 + kdata2$A6MT1 + kdata2$A8MT1 + kdata2$A12MT1) /5 + 0.0001)
+kdata2$group1="meanmale"
+kdata2$meanXX <- log2((kdata2$A10FO1 + kdata2$A17FO1 + kdata2$A2FO2 + kdata2$A6FO1 + kdata2$A8FO2) / 5 + 0.0001)
+kdata2$group2="meanfemale"
+
+kdata3$meanXY <- log2((kdata3$A15MT1 + kdata3$A17MT1 + kdata3$A6MT1 + kdata3$A8MT1 + kdata3$A12MT1) /5 + 0.0001)
+kdata3$group1="meanmale"
+kdata3$meanXX <- log2((kdata3$A10FO1 + kdata3$A17FO1 + kdata3$A2FO2 + kdata3$A6FO1 + kdata3$A8FO2) / 5 + 0.0001)
+kdata3$group2="meanfemale"
+
+write.table(kdata1, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_fbias_fdr.txt", sep="\t", col.names=T)
+write.table(kdata2, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_mbias_fdr.txt", sep="\t", col.names=T)
+write.table(kdata3, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_unbias_fdr.txt", sep="\t", col.names=T)
+
+gonad_f <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_fbias_fdr_input2.txt", header = T)
+gonad_f$bias="female"
+gonad_m <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_mbias_fdr_input2.txt", header = F)
+gonad_m$bias="male"
+gonad_un <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_unbias_fdr_input2.txt", header = F)
+gonad_un$bias="unbias"
+
+write.table(gonad_f, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_fbias_fdr_input3.txt", sep="\t", col.names=T)
+write.table(gonad_m, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_mbias_fdr_input3.txt", sep="\t", col.names=T)
+write.table(gonad_un, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_unbias_fdr_input3.txt", sep="\t", col.names=T)
+
+gonad_rpkm_fdr <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_sbunbias_fdr_newfifi.txt", header = T)
+str(gonad_rpkm_fdr)
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sbunbias_log2rpkm_gonad.pdf")
+
+p3 <-ggplot(data = gonad_rpkm_fdr, aes(x=bias, y= log2RPKM, fill=sex)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0.8)) +
+  coord_cartesian(ylim = c(-6, 0, 5, 10)) +
+  scale_fill_manual(values = c("red3","dodgerblue3")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0))
+#theme(legend.position="none")
+dev.off()
+
+##stats for female-biased genes
+gonad_fbias <- subset(gonad_rpkm_fdr, gonad_rpkm_fdr$bias=='female')
+wilcox.test(gonad_fbias $log2RPKM[gonad_fbias $sex=='meanfemale'], gonad_fbias$log2RPKM[gonad_fbias$sex=='meanmale'])#W = 21258000, p-value < 2.2e-16
+
+gonad_mbias <- subset(gonad_rpkm_fdr, gonad_rpkm_fdr$bias=='male')
+wilcox.test(gonad_mbias $log2RPKM[gonad_mbias $sex=='meanfemale'], gonad_mbias $log2RPKM[gonad_mbias $sex=='meanmale'])#W = 8161400, p-value < 2.2e-16
+
+gonad_unbias <- subset(gonad_rpkm_fdr, gonad_rpkm_fdr$bias=='unbias')
+wilcox.test(gonad_unbias $log2RPKM[gonad_unbias $sex=='meanfemale'], gonad_unbias $log2RPKM[gonad_unbias $sex=='meanmale'])#W = 56222000, p-value = 0.4776
+
+gonad_female<- subset(gonad_rpkm_fdr, gonad_rpkm_fdr$sex=='meanfemale')
+wilcox.test(gonad_female$log2RPKM[gonad_female $bias=='female'], gonad_female $log2RPKM[gonad_female$bias=='unbias'])#W = 37410000, p-value < 2.2e-16
+wilcox.test(gonad_female$log2RPKM[gonad_female $bias=='male'], gonad_female $log2RPKM[gonad_female$bias=='unbias'])#W = 14505000, p-value < 2.2e-16
+
+gonad_male <- subset(gonad_rpkm_fdr, gonad_rpkm_fdr$sex=='meanmale')
+wilcox.test(gonad_male$log2RPKM[gonad_male $bias=='female'], gonad_male $log2RPKM[gonad_male$bias=='unbias'])#W = 20821000, p-value < 2.2e-16
+wilcox.test(gonad_male$log2RPKM[gonad_male $bias=='male'], gonad_male $log2RPKM[gonad_male$bias=='unbias'])#W = 31548000, p-value = 0.009979
+
+
 ### load data from liver tissue
 kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amliver/rpkm_amliver_sorted_fi.txt", header=TRUE)
 str(kdata)
@@ -463,16 +537,13 @@ liver_sbunbias_rpkm <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Ran
 
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sbunbias_logrpkm_liver.pdf")
 
-sts <- boxplot.stats(liver_sbunbias_rpkm$log2RPKM)$stats
-
 p4 <- ggplot(data = liver_sbunbias_rpkm, aes(x=Bias, y= log2RPKM, fill=Sex)) + 
-  geom_boxplot(notch=TRUE,position=position_dodge(0.8))  +
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0.8)) +
+  coord_cartesian(ylim = c(-6,0,2,5,10))  +
   scale_fill_manual(values = c("red3","dodgerblue3")) +
-  coord_cartesian(ylim = c(sts[1]*1.5,max(sts)*1.5)) +
   theme_set(theme_bw(base_size=12)) +
   theme(legend.justification=c(1,0), legend.position=c(1,0))
 #  theme(legend.position="none")
-  
 dev.off()
 
 ####
@@ -483,6 +554,15 @@ liver_unbias_rpkm <- subset(liver_sbunbias_rpkm, liver_sbunbias_rpkm$Bias=='unbi
 wilcox.test(liver_fbias_rpkm$log2RPKM[liver_fbias_rpkm$Sex=='meanmale'], liver_fbias_rpkm$log2RPKM[liver_fbias_rpkm$Sex=='meanfemale'])#W = 282800, p-value < 2.2e-16
 wilcox.test(liver_mbias_rpkm$log2RPKM[liver_mbias_rpkm$Sex=='meanmale'], liver_mbias_rpkm$log2RPKM[liver_mbias_rpkm$Sex=='meanfemale']) #W = 285950, p-value < 2.2e-16
 wilcox.test(liver_unbias_rpkm$log2RPKM[liver_unbias_rpkm$Sex=='meanmale'],liver_unbias_rpkm$log2RPKM[liver_unbias_rpkm$Sex=='meanfemale']) #W = 141100000, p-value = 0.319
+
+liver_female_rpkm <- subset(liver_sbunbias_rpkm, liver_sbunbias_rpkm$Sex=='meanfemale')
+wilcox.test(liver_female_rpkm$log2RPKM[liver_female_rpkm$Bias=='male'], liver_female_rpkm$log2RPKM[liver_female_rpkm$Bias=='unbias'])#W = 4199900, p-value < 2.2e-16
+wilcox.test(liver_female_rpkm$log2RPKM[liver_female_rpkm$Bias=='female'], liver_female_rpkm$log2RPKM[liver_female_rpkm$Bias=='unbias'])#W = 7386300, p-value = 5.32e-14
+
+liver_male_rpkm <- subset(liver_sbunbias_rpkm, liver_sbunbias_rpkm$Sex=='meanmale')
+wilcox.test(liver_male_rpkm$log2RPKM[liver_male_rpkm$Bias=='male'], liver_male_rpkm$log2RPKM[liver_male_rpkm$Bias=='unbias'])#W = 6587500, p-value = 5.793e-08
+wilcox.test(liver_male_rpkm$log2RPKM[liver_male_rpkm$Bias=='female'], liver_male_rpkm$log2RPKM[liver_male_rpkm$Bias=='unbias'])#W = 3999500, p-value < 2.2e-16
+
 
 ###sex-bias cutoff figures
 
@@ -617,12 +697,10 @@ str(g43_sbunbias_rpkm)
 
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sbunbias_logrpkm_g43.pdf")
 
-sts <- boxplot.stats(g43_sbunbias_rpkm$log2RPKM)$stats
-
 p1 <- ggplot(data = g43_sbunbias_rpkm, aes(x=Bias, y= log2RPKM, fill=Sex)) + 
-  geom_boxplot(notch=TRUE,outlier.colour = NA, position=position_dodge(0.8))  +
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0.8)) +
+  coord_cartesian(ylim = c(-6,0,2,5,10))  +
   scale_fill_manual(values = c("red3","dodgerblue3")) +
-  coord_cartesian(ylim = c(sts[1]*1.8,max(sts)*1.3)) +
   theme_set(theme_bw(base_size=12)) +
   theme(legend.justification=c(1,0), legend.position=c(1,0))
 
@@ -636,6 +714,14 @@ g43_unbias_rpkm <- subset(g43_sbunbias_rpkm, g43_sbunbias_rpkm$Bias=='unbias')
 wilcox.test(g43_fbias_rpkm$log2RPKM[g43_fbias_rpkm$Sex=='meanmale'], g43_fbias_rpkm$log2RPKM[g43_fbias_rpkm$Sex=='meanfemale'])#W = 99431, p-value < 2.2e-16
 wilcox.test(g43_mbias_rpkm$log2RPKM[g43_mbias_rpkm$Sex=='meanmale'], g43_mbias_rpkm$log2RPKM[g43_mbias_rpkm$Sex=='meanfemale']) #W = 245000, p-value < 2.2e-16
 wilcox.test(g43_unbias_rpkm$log2RPKM[g43_unbias_rpkm$Sex=='meanmale'],g43_unbias_rpkm$log2RPKM[g43_unbias_rpkm$Sex=='meanfemale']) #W = 288400000, p-value = 0.3782
+
+g43_female_rpkm <- subset(g43_sbunbias_rpkm, g43_sbunbias_rpkm$Sex=='meanfemale')
+wilcox.test(g43_female_rpkm$log2RPKM[g43_female_rpkm$Bias=='male'], g43_female_rpkm$log2RPKM[g43_female_rpkm$Bias=='unbias'])#W = 2829000, p-value < 2.2e-16
+wilcox.test(g43_female_rpkm$log2RPKM[g43_female_rpkm$Bias=='female'], g43_female_rpkm$log2RPKM[g43_female_rpkm$Bias=='unbias'])#W = 7454500, p-value = 0.01524
+
+g43_male_rpkm <- subset(g43_sbunbias_rpkm, g43_sbunbias_rpkm$Sex=='meanmale')
+wilcox.test(g43_male_rpkm$log2RPKM[g43_male_rpkm$Bias=='male'], g43_male_rpkm$log2RPKM[g43_male_rpkm$Bias=='unbias'])#W = 5441800, p-value < 2.2e-16
+wilcox.test(g43_male_rpkm$log2RPKM[g43_male_rpkm$Bias=='female'], g43_male_rpkm$log2RPKM[g43_male_rpkm$Bias=='unbias'])#W = 3451200, p-value < 2.2e-16
 
 ##put four figures in one page
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sbunbias_logrpkm_g43G46gonadliver.pdf")
@@ -731,3 +817,134 @@ ggarrange(pg43_f,pg43_m, labels = c("A", "B"),
           ncol = 2, nrow = 1)
 
 dev.off()
+
+
+
+
+
+####gonad, cutoff, annotation
+gonad_fbias_annotation <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_sb/gonad_fbias_rpkm_cutoff_newfi.txt", header=TRUE)
+str(gonad_fbias_annotation)
+
+gonad_fbias_chr01_annot <- subset (gonad_fbias_annotation, gonad_fbias_annotation$chr=='Chr01')
+str(gonad_fbias_chr01_annot)
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/gonad_fbias_chr01_cutoff.pdf")
+
+ggplot(data = gonad_fbias_chr01_annot, aes(x=cutoff, y= log2RPKM, fill =sex)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0), width=0.9,alpha=0.9) +
+  coord_cartesian(ylim = c(-10,-5, 0,2,5,10)) +
+  scale_fill_manual(values = c("red3","dodgerblue3")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0))
+
+dev.off()
+
+gonad_fbias_chr02_annot <- subset (gonad_fbias_annotation, gonad_fbias_annotation$chr=='Chr02')
+str(gonad_fbias_chr02_annot)
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/gonad_fbias_chr02_cutoff.pdf")
+
+ggplot(data = gonad_fbias_chr02_annot, aes(x=cutoff, y= log2RPKM, fill =sex)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0), width=0.9,alpha=0.9) +
+  coord_cartesian(ylim = c(-10,-5, 0,2,5,10)) +
+  scale_fill_manual(values = c("red3","dodgerblue3")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0))
+
+dev.off()
+
+gonad_fbias_auto_annot <- subset (gonad_fbias_annotation, gonad_fbias_annotation$chr_all=='Auto')
+str(gonad_fbias_auto_annot)
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/gonad_fbias_auto_cutoff.pdf")
+
+ggplot(data = gonad_fbias_auto_annot, aes(x=cutoff, y= log2RPKM, fill =sex)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0), width=0.9,alpha=0.9) +
+  coord_cartesian(ylim = c(-10,-5, 0,2,5,10)) +
+  scale_fill_manual(values = c("red3","dodgerblue3")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0))
+
+dev.off()
+###stats
+gonad_fbias_chr01_annot_female <- subset (gonad_fbias_chr01_annot, gonad_fbias_chr01_annot$sex=='meanfemale')
+wilcox.test(gonad_fbias_chr01_annot_female$log2RPKM[gonad_fbias_chr01_annot_female$cutoff=='FC1'], gonad_fbias_chr01_annot_female$log2RPKM[gonad_fbias_chr01_annot_female$cutoff=='FC3'])# W = 10045, p-value = 0.6532
+wilcox.test(gonad_fbias_chr01_annot_female$log2RPKM[gonad_fbias_chr01_annot_female$cutoff=='FC3'], gonad_fbias_chr01_annot_female$log2RPKM[gonad_fbias_chr01_annot_female$cutoff=='FC5'])# W = 354, p-value = 0.4064
+wilcox.test(gonad_fbias_chr01_annot_female$log2RPKM[gonad_fbias_chr01_annot_female$cutoff=='FC5'], gonad_fbias_chr01_annot_female$log2RPKM[gonad_fbias_chr01_annot_female$cutoff=='FC7'])# W = 82, p-value = 0.3314
+
+gonad_fbias_chr02_annot_female <- subset (gonad_fbias_chr02_annot, gonad_fbias_chr02_annot$sex=='meanfemale')
+wilcox.test(gonad_fbias_chr02_annot_female$log2RPKM[gonad_fbias_chr02_annot_female$cutoff=='FC1'], gonad_fbias_chr02_annot_female$log2RPKM[gonad_fbias_chr02_annot_female$cutoff=='FC3'])# NS
+wilcox.test(gonad_fbias_chr02_annot_female$log2RPKM[gonad_fbias_chr02_annot_female$cutoff=='FC3'], gonad_fbias_chr02_annot_female$log2RPKM[gonad_fbias_chr02_annot_female$cutoff=='FC5'])#NS
+wilcox.test(gonad_fbias_chr02_annot_female$log2RPKM[gonad_fbias_chr02_annot_female$cutoff=='FC5'], gonad_fbias_chr02_annot_female$log2RPKM[gonad_fbias_chr02_annot_female$cutoff=='FC7'])# NS
+
+gonad_fbias_auto_annot_female <- subset (gonad_fbias_auto_annot, gonad_fbias_auto_annot$sex=='meanfemale')
+wilcox.test(gonad_fbias_auto_annot_female$log2RPKM[gonad_fbias_auto_annot_female$cutoff=='FC1'], gonad_fbias_auto_annot_female$log2RPKM[gonad_fbias_auto_annot_female$cutoff=='FC3'])# W = 167640, p-value = 0.001268
+wilcox.test(gonad_fbias_auto_annot_female$log2RPKM[gonad_fbias_auto_annot_female$cutoff=='FC3'], gonad_fbias_auto_annot_female$log2RPKM[gonad_fbias_auto_annot_female$cutoff=='FC5'])# W = 6965, p-value = 0.056
+wilcox.test(gonad_fbias_auto_annot_female$log2RPKM[gonad_fbias_auto_annot_female$cutoff=='FC5'], gonad_fbias_auto_annot_female$log2RPKM[gonad_fbias_auto_annot_female$cutoff=='FC7'])# W = 1202, p-value = 1.022e-05
+
+
+###Gonad male bias gene cutoff
+gonad_mbias_annotation <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/CPM/gonad_sb/gonad_mbias_cutoff_all_newfi.txt", header=TRUE)
+str(gonad_mbias_annotation)
+
+gonad_mbias_chr01_annot <- subset (gonad_mbias_annotation, gonad_mbias_annotation$chr=='Chr01')
+str(gonad_mbias_chr01_annot)
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/gonad_mbias_chr01_cutoff.pdf")
+
+ggplot(data = gonad_mbias_chr01_annot, aes(x=cutoff, y= log2RPKM, fill =sex)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0), width=0.9,alpha=0.9) +
+  coord_cartesian(ylim = c(-10,-5, 0,2,5,10)) +
+  scale_fill_manual(values = c("red3","dodgerblue3")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0))
+
+dev.off()
+
+
+gonad_mbias_chr02_annot <- subset (gonad_mbias_annotation, gonad_mbias_annotation$chr=='Chr02')
+str(gonad_mbias_chr02_annot)
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/gonad_mbias_chr02_cutoff.pdf")
+
+ggplot(data = gonad_mbias_chr02_annot, aes(x=cutoff, y= log2RPKM, fill =sex)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0), width=0.9,alpha=0.9) +
+  coord_cartesian(ylim = c(-10,-5, 0,2,5,10)) +
+  scale_fill_manual(values = c("red3","dodgerblue3")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0))
+
+dev.off()
+
+gonad_mbias_auto_annot <- subset (gonad_mbias_annotation, gonad_mbias_annotation$chr_all=='Auto')
+str(gonad_mbias_auto_annot)
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/gonad_mbias_auto_cutoff.pdf")
+
+ggplot(data = gonad_mbias_auto_annot, aes(x=cutoff, y= log2RPKM, fill =sex)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0), width=0.9,alpha=0.9) +
+  coord_cartesian(ylim = c(-10,-5, 0,2,5,10)) +
+  scale_fill_manual(values = c("red3","dodgerblue3")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0))
+
+dev.off()
+
+###stats
+gonad_mbias_chr01_annot_male <- subset (gonad_mbias_chr01_annot, gonad_mbias_chr01_annot$sex=='meanmale')
+wilcox.test(gonad_mbias_chr01_annot_male$log2RPKM[gonad_mbias_chr01_annot_male$cutoff=='FC1'], gonad_mbias_chr01_annot_male$log2RPKM[gonad_mbias_chr01_annot_male$cutoff=='FC3'])# NS
+wilcox.test(gonad_mbias_chr01_annot_male$log2RPKM[gonad_mbias_chr01_annot_male$cutoff=='FC3'], gonad_mbias_chr01_annot_male$log2RPKM[gonad_mbias_chr01_annot_male$cutoff=='FC5'])# NS
+wilcox.test(gonad_mbias_chr01_annot_male$log2RPKM[gonad_mbias_chr01_annot_male$cutoff=='FC5'], gonad_mbias_chr01_annot_male$log2RPKM[gonad_mbias_chr01_annot_male$cutoff=='FC7'])# NS
+
+gonad_mbias_chr02_annot_male <- subset (gonad_mbias_chr02_annot, gonad_mbias_chr02_annot$sex=='meanmale')
+wilcox.test(gonad_mbias_chr02_annot_male$log2RPKM[gonad_mbias_chr02_annot_male$cutoff=='FC1'], gonad_mbias_chr02_annot_male$log2RPKM[gonad_mbias_chr02_annot_male$cutoff=='FC3'])# NS
+wilcox.test(gonad_mbias_chr02_annot_male$log2RPKM[gonad_mbias_chr02_annot_male$cutoff=='FC3'], gonad_mbias_chr02_annot_male$log2RPKM[gonad_mbias_chr02_annot_male$cutoff=='FC5'])#NS
+wilcox.test(gonad_mbias_chr02_annot_male$log2RPKM[gonad_mbias_chr02_annot_male$cutoff=='FC5'], gonad_mbias_chr02_annot_male$log2RPKM[gonad_mbias_chr02_annot_male$cutoff=='FC7'])# NS
+
+gonad_mbias_auto_annot_male <- subset (gonad_mbias_auto_annot, gonad_mbias_auto_annot$sex=='meanmale')
+wilcox.test(gonad_mbias_auto_annot_male$log2RPKM[gonad_mbias_auto_annot_male$cutoff=='FC1'], gonad_mbias_auto_annot_male$log2RPKM[gonad_mbias_auto_annot_male$cutoff=='FC3'])# W = 147350, p-value = 0.01791
+wilcox.test(gonad_mbias_auto_annot_male$log2RPKM[gonad_mbias_auto_annot_male$cutoff=='FC3'], gonad_mbias_auto_annot_male$log2RPKM[gonad_mbias_auto_annot_male$cutoff=='FC5'])# W = 7176, p-value = 0.6262
+wilcox.test(gonad_mbias_auto_annot_male$log2RPKM[gonad_mbias_auto_annot_male$cutoff=='FC5'], gonad_mbias_auto_annot_male$log2RPKM[gonad_mbias_auto_annot_male$cutoff=='FC7'])# W = 363, p-value = 0.00829
+
+
