@@ -26,7 +26,7 @@ sub_analyse = paste(args[1])
 FDR2use = as.numeric(paste(args[2]))
 
 # example
-# sub_analyse <- 'Amliver'
+# sub_analyse <- 'Ambrain'
 # FDR2use  <- 0.05
 
 datapath <- "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/"
@@ -46,6 +46,13 @@ paste("all transcripts:", nrow(dgl))
 
 #converting to RPKM of G46###
 #dgl <- DGEList(counts=count, group=design$group, genes=annotation)
+#dgl <- DGEList(counts=count, group=design$group, genes=data.frame(annotation$length))
+#dgl <- calcNormFactors(dgl)
+#dgl_rpkm <- rpkm(dgl)
+#write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Ambrain/brain_dgl_rpkm_amm.txt", sep="\t", col.names=T)
+
+#converting to RPKM of G46###
+#dgl <- DGEList(counts=count, group=design$group, genes=annotation)
 #dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
 #dgl <- calcNormFactors(dgl)
 #dgl_rpkm <- rpkm(dgl)
@@ -59,19 +66,19 @@ paste("all transcripts:", nrow(dgl))
 #write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amgonad/dgl_rpkm_amm_gonad.txt", sep="\t", col.names=T)
 
 ###coverting to RPKM of liver
-dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
-dgl <- calcNormFactors(dgl)
-dgl1 <- rpkm(dgl)
-dgl2 <- dgl[aveLogCPM(dgl1) > 0,]
-dgl <- dgl[rowSums(cpm(dgl)>1) >=2,]
+#dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
+#dgl <- calcNormFactors(dgl)
+#dgl1 <- rpkm(dgl)
+#dgl2 <- dgl[aveLogCPM(dgl1) > 0,]
+#dgl <- dgl[rowSums(cpm(dgl)>1) >=2,]
 
 #write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amliver/dgl_rpkm_amm_liver_filter.txt", sep="\t", col.names=T)
 
 ###coverting to RPKM of G43
-dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
-dgl <- calcNormFactors(dgl)
-dgl_rpkm <- rpkm(dgl)
-write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg43/dgl_rpkm_amm_g43.txt", sep="\t", col.names=T)
+#dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
+#dgl <- calcNormFactors(dgl)
+#dgl_rpkm <- rpkm(dgl)
+#write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg43/dgl_rpkm_amm_g43.txt", sep="\t", col.names=T)
 
 ##filter effects
 filter_file <- file.path(paste(outpath, '/',sub_analyse, 'filtering_info.txt', sep=""))
@@ -102,7 +109,7 @@ write(summary(rowSums(cpm(sum10)/ncol(sum10))), filter_file, append=T, sep='\t',
 # spec <- dgl[rowSums(cpm(dgl)>=2) > 3,] # The gene must be expressed in at least 3 libaries (remove sex specific genes)
 dgl <- dgl[aveLogCPM(dgl) > 0,] # filter by average reads
 #dgl <- dgl[rowSums(cpm(dgl)>=2) > 3,] #the 5 means there are 10 libraries in total with 5 males and 5 females
-dgl <- dgl[rowSums(cpm(dgl)>1) >=2,]
+dgl <- dgl[rowSums(cpm(dgl)>1) >=1,]
 
 
 write(paste("dgl"), filter_file, append=T)
@@ -127,25 +134,44 @@ col.M43 <- rgb(88/255, 135/255, 37/255, 3/4)
 col.F43 <- rgb(88/255, 135/255, 37/255, 3/4)
 #col.R43 <- rgb(88/255, 135/255, 37/255, 3/4) #for tvedora
 col.M46 <- rgb(113/255, 250/255, 241/255, 3/4)
-#col.F46 <- rgb(113/255, 250/255, 241/255, 3/4)
+col.F46 <- rgb(113/255, 250/255, 241/255, 3/4)
 col.SR46 <- rgb(113/255, 250/255, 241/255, 3/4)
 
+col.BF <- rgb(100/255, 127/255, 21/255, 3/4)
+col.BM <- rgb(100/255, 127/255, 21/255, 3/4)
+
+col.LF <- rgb(160/255, 140/255, 21/255, 3/4)
+col.LM <- rgb(160/255, 140/255, 21/255, 3/4)
+
+col.OF <- rgb(100/255, 180/255, 21/255, 3/4)
+col.TM <- rgb(200/255, 180/255, 21/255, 3/4)
+
 pdf(file.path(outpath,paste('MDS_', sub_analyse, '.pdf', sep="")), width=8, height=8)
-par(mar=c(5,5,4,3))
+par(mar=c(3,5,4,3))
 # design$group
 y <- dgl
 colnames(y) <- paste(colnames(y), design$group, sep="\n")
+
+#color different groups for MDS plot, combine both sexes. this code is particular for TV
+pchs = c(18,5,18,5,18,5,18,5,18,5,16,18,5,18,5,18,5)
+cols = c("red","red","pink","pink","darkblue","darkblue","blue","blue","orange","orange","orange","brown","grey","green","brown","grey","green")
+plotMDS(y, pch=pchs[design$group],col=cols[design$group], cex=2, main="Tvedora MDS plot",cex.main=1, cex.lab=1,lty=3, lwd=5)
+legend('bottomright', inset=0.02, legend=levels(design$group), pch = pchs, col=cols,cex = 0.8 )
+dev.off()
+
+#y <- dgl
+#colnames(y) <- paste(colnames(y), design$group, sep="\n")
 #cols = c(col.M23, col.F23,col.M27,col.F27, col.M31, col.F31,col.M43,col.F43,col.R43,col.M46,col.F46,col.R46)#for tvedora
 #cols = c(col.M23, col.F23,col.U23,col.M27,col.F27,col.U27, col.M31, col.F31,col.U31,col.M43,col.F43,col.M46,col.F46,col.MF46) #for argovie
-cols = c(col.M23, col.F23,col.M27,col.F27, col.M31, col.F31,col.M43,col.F43,col.M46,col.SR46) #for ammarnas
+#cols = c(col.M23, col.F23,col.M27,col.F27, col.M31, col.F31,col.M43,col.F43,col.M46,col.F46,col.SR46,col.FB,col.BM,col.BF,col.FL,col.ML,col.FO,col.MT) #for ammarnas
 #pchs = c(18,5,18,5,18,5,18,5,16,18,5,16) #for tvedora
-pchs = c(18,5,18,5,18,5,18,5,18,5)
-plotMDS(y, pch=pchs[design$group],col=cols[design$group], cex=2.0, main="Ammarnas MDS plot",cex.main=1, cex.lab=1,lty=2, lwd=3)
-legend('bottom', inset=0.02, legend=levels(design$group), pch = pchs, col=cols )
-plotMDS(y, cex=1, col=cols[design$group], main=paste(sub_analyse,"MDS plot"))
-plotMDS(y, cex=1, pch=as.numeric(y$samples$group), col=as.numeric(y$samples$group), main=paste(sub_analyse,"MDS plot"))
-legend('bottom', inset=0.02, legend=levels(design$group), pch = as.numeric(y$samples$group), col=as.numeric(y$samples$group) )
-dev.off()
+#pchs = c(18,5,18,5,18,5,18,5,18,5,1,16,1,16,1,16,1)
+#plotMDS(y, pch=pchs[design$group],col=cols[design$group], cex=0.6, main="Ammarnas MDS plot",cex.main=0.8, cex.lab=0.5,lty=1.5, lwd=2)
+#legend('bottomright', inset=0.02, legend=levels(design$group), pch = pchs, col=cols )
+#plotMDS(y, cex=1, col=cols[design$group], main=paste(sub_analyse,"MDS plot"))
+#plotMDS(y, cex=1, pch=as.numeric(y$samples$group), col=as.numeric(y$samples$group), main=paste(sub_analyse,"MDS plot"))
+#legend('bottomright', legend=levels(design$group), pch = as.numeric(y$samples$group), col=as.numeric(y$samples$group))
+#dev.off()
 
 # estimate data normalisation factors and dispersion
 xcpm <- mglmOneGroup(dgl$counts)     # computing a logCPM for making dispersion plot

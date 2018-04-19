@@ -45,7 +45,7 @@ rownames(a1) <- a1[,1]
 a1 <-a1[,-1]
 a1 <- round(a1,3)
 dim1 <- dim(a1)[1]
-a2 <- a1[,c(62,63:72)]
+a2 <- a1[,c(1,63:73)]
 dim1 <- dim(a2)[1]
 
 s <-matrix(0, nrow=dim(a2)[1], ncol=2, dimnames = list(rownames(a2),c("Tissue_specific_index", "Tissue_name")))
@@ -116,43 +116,24 @@ sample estimates:
 ####
 
 ####liner model to investigate whether tau is correlated with gene expression and sex bias.
-g46_tau_sub <- subset(g46_tau,g46_tau$bias!='unbias')
-str(g46_tau_sub)
-qqnorm(sqrt(abs(g46_tau_sub$logFC.XY46.XX46)))
-hist(sqrt(abs(g46_tau_sub$logFC.XY46.XX46)))
-shapiro.test(abs(g46_tau_sub$logFC.XY46.XX46)) #not normal distributiuon
-y <- glm(tau~sqrt(abs(g46_tau_sub$logFC.XY46.XX46))*bias, family=binomial, data=g46_tau_sub)
+qqnorm(sqrt(g46_tau$tau))
+hist(sqrt(g46_tau$tau))
+
+y <- lm(sqrt(tau)~g46_tau$logFC.XY46.XX46*bias, data=g46_tau)
 summary(y)
 anova(y)  #does not provide p values for some reason
 
 ##########
-##############without unbias genes
-##########
-#Coefficients:
-#  Estimate Std. Error z value Pr(>|z|)    
-#(Intercept)                                     -1.66392    0.12150 -13.694  < 2e-16 ***
-#  sqrt(abs(g46_tau_sub$logFC.XY46.XX46))           1.14631    0.08078  14.191  < 2e-16 ***
-#  biasmale                                         1.26968    0.30488   4.164 3.12e-05 ***
-#  sqrt(abs(g46_tau_sub$logFC.XY46.XX46)):biasmale -0.79765    0.22160  -3.599 0.000319 ***
+Df Sum Sq Mean Sq F value    Pr(>F)    
+g46_tau$logFC.XY46.XX46          1  18.36 18.3641 1016.32 < 2.2e-16 ***
+  bias                             2  11.62  5.8113  321.62 < 2.2e-16 ***
+  g46_tau$logFC.XY46.XX46:bias     2  26.25 13.1267  726.47 < 2.2e-16 ***
+  Residuals                    24400 440.89  0.0181   
 
 y1 <- glm(tau~sqrt(abs(g46_tau$logFC.XY46.XX46))*bias, family=binomial, data=g46_tau)
 summary(y1)
 anova(y) 
-
-#############
-#############with unbias genes
-#Coefficients:
-#  Estimate Std. Error z value Pr(>|z|)    
-#(Intercept)                                   -1.66392    0.12150 -13.694  < 2e-16 ***
-#  sqrt(abs(g46_tau$logFC.XY46.XX46))             1.14631    0.08078  14.191  < 2e-16 ***
-#  biasmale                                       1.26968    0.30488   4.164 3.12e-05 ***
-#  biasunbias                                     0.92699    0.12807   7.238 4.54e-13 ***
-#  sqrt(abs(g46_tau$logFC.XY46.XX46)):biasmale   -0.79765    0.22160  -3.599 0.000319 ***
-#  sqrt(abs(g46_tau$logFC.XY46.XX46)):biasunbias -0.57202    0.09956  -5.746 9.16e-09 ***
-  ---
-#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-############
-###########
+#######
 
 ##investigate whether dnds is influences by tau or sex bias, or the interaction between the two.
 ###
@@ -222,19 +203,6 @@ anova(y2)
 #   Residuals      1827 5.8594 0.00321 
 ############
 
-y2 <- glm(dNdS~tau*bias, family=quasi, g46_tau_dnds)
-summary(y2)
-#######
-Coefficients:
-  Estimate Std. Error t value Pr(>|t|)    
-(Intercept)     0.038071   0.004829   7.884 3.69e-15 ***
-  tau             0.092544   0.009279   9.974  < 2e-16 ***
-  biasmale        0.037546   0.018415   2.039   0.0415 *  
-  biasunbias      0.031121   0.005254   5.923 3.33e-09 ***
-  tau:biasmale   -0.033100   0.033230  -0.996   0.3192    
-tau:biasunbias -0.062678   0.010277  -6.099 1.13e-09 ***
-######### 
-
 qqnorm(sqrt(g46_tau_dnds$dNdS))
 
 y1a <- lm(sqrt(dNdS) ~ sqrt(tau) * bias, g46_tau_dnds)
@@ -298,13 +266,13 @@ str(abs_g46_tau)
 #with color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g46_sb_colors1.pdf", width=8, height=8)
 ggplot2.scatterplot(data=abs_g46_tau, xName='abslogFC.XY46.XX46',yName='tau', ylim=c(0,1),size=2, groupName='bias',groupColors=c("firebrick4","dodgerblue4","grey50"), addRegLine=TRUE, addConfidenceInterval=TRUE)  +
-  labs(x="LogFC.XY46.XX46)", y="Tau", color ="bias")
+  labs(x="LogFC.XY46.XX46", y="Tau", color ="bias")
 dev.off()
 
 #without color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g46_sb.pdf", width=8, height=8)
-ggplot2.scatterplot(data=abs_g46_tau, xName='abslogFC.XY46.XX46',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
-  labs(x="LogFC.XY46.XX46)", y="Tau") +
+p2 <- ggplot2.scatterplot(data=abs_g46_tau, xName='abslogFC.XY46.XX46',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="G46: Log2(male/female)", y="Tissue specificity") +
   scale_fill_manual(values = c("grey40"))
 dev.off()
 
@@ -412,9 +380,11 @@ anova(y)
 #  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 ######
 
-#scatter plot
-abs_g43_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G43_tau/Am43_log1_sb_sorted.txt", header = TRUE)
-str(abs_g43_tau)
+#scatter plot ###
+####
+
+absg43tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G43_tau/Am43_log1_sb_sorted.txt", header = TRUE)
+str(absg43tau)
 
 #with color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g43_sb_colors1.pdf", width=8, height=8)
@@ -425,8 +395,8 @@ dev.off()
 
 #without color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g43_sb_nocolors.pdf", width=8, height=8)
-ggplot2.scatterplot(data=abs_g43_tau, xName='abslogFC.XY43.XX43',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
-  labs(x="LogFC.XY43.XX43)", y="Tau") +
+p1 <- ggplot2.scatterplot(data=absg43tau, xName='abslogFC.XY43.XX43',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="G43: Log2(male/female)", y="Tissue specificity") +
   scale_fill_manual(values = c("grey40"))
 dev.off()
 
@@ -480,11 +450,24 @@ y <- lm(sqrt(dNdS)~sqrt(tau)*bias, data=g43_tau_dnds)
 anova(y)
 
 ###
-Df Sum Sq Mean Sq  F value    Pr(>F)    
-sqrt(tau)         1  1.512 1.51227 162.8875 < 2.2e-16 ***
-  bias              2  0.133 0.06632   7.1429 0.0007963 ***
-  sqrt(tau):bias    2  0.054 0.02705   2.9131 0.0543756 .  
-Residuals      6924 64.283 0.00928  
+Response: sqrt(dNdS)
+Df  Sum Sq Mean Sq F value    Pr(>F)    
+sqrt(tau)         1  0.5102 0.51021  55.685 1.405e-13 ***
+  bias              2  0.1027 0.05136   5.606   0.00375 ** 
+  sqrt(tau):bias    2  0.0535 0.02677   2.922   0.05412 .  
+Residuals      1563 14.3208 0.00916    
+###
+
+
+y1 <- lm(sqrt(dNdS)~sqrt(tau) + bias, data=g43_tau_dnds)
+anova(y1)
+
+###
+Response: sqrt(dNdS)
+Df  Sum Sq Mean Sq F value    Pr(>F)    
+sqrt(tau)    1  0.5102 0.51021 55.5491 1.501e-13 ***
+  bias         2  0.1027 0.05136  5.5923  0.003801 ** 
+  Residuals 1565 14.3743 0.00918   
 ###
 
 ##############
@@ -535,8 +518,8 @@ dev.off()
 
 #without color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_gonad_sb.pdf", width=8, height=8)
-ggplot2.scatterplot(data=abs_gonad_tau, xName='abslogFC.XYtestis.XXovary',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
-  labs(x="LogFC(XYtestis/XXovary)", y="Tau") +
+p3 <- ggplot2.scatterplot(data=abs_gonad_tau, xName='abslogFC.XYtestis.XXovary',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="Gonad: Log2(male/female)", y="Tissue specificity") +
   scale_fill_manual(values = c("grey40"))
 
  dev.off()
@@ -802,8 +785,8 @@ Residuals      6829 62.308 0.00912
 
 #without color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_brain_exp.pdf", width=8, height=8)
-ggplot2.scatterplot(data=brain_tau_dnds, xName='abslogFC.XYbrain.Xxrain',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
-  labs(x="abs(logFC.XYbrain.XXrain)", y="Tau") +
+p5 <-ggplot2.scatterplot(data=brain_tau, xName='asblogFC.XYbrain.Xxrain',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="Brain: Log2(male/female)", y="Tissue specificity") +
   scale_fill_manual(values = c("grey40"))
 dev.off()
 
@@ -897,11 +880,12 @@ y3 <- lm(sqrt(dNdS) ~ sqrt(tau) * bias, liver_tau_dnds)
 anova(y3)
 
 ##
-Df Sum Sq Mean Sq  F value  Pr(>F)    
-sqrt(tau)         1  1.758 1.75790 195.1515 < 2e-16 ***
-  bias              2  0.086 0.04323   4.7994 0.00827 ** 
-  sqrt(tau):bias    2  0.047 0.02360   2.6196 0.07293 .  
-Residuals      5453 49.120 0.00901                     
+Response: sqrt(dNdS)
+Df  Sum Sq Mean Sq F value    Pr(>F)    
+sqrt(tau)         1  0.4148 0.41482 45.3508 2.299e-11 ***
+  bias              2  0.0813 0.04066  4.4456   0.01188 *  
+  sqrt(tau):bias    2  0.0564 0.02819  3.0817   0.04616 *  
+  Residuals      1579 14.4431 0.00915                     
 ---
 ##
 #with color
@@ -923,7 +907,488 @@ ggplot2.scatterplot(data=liver_tau_dnds, xName='dNdS',yName='tau', ylim=c(0,1),s
 dev.off()
 
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_exp_liver_nocolors.pdf", width=8, height=8)
-ggplot2.scatterplot(data=liver_tau, xName='abslogFC.XYliver.XXliver',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
-  labs(x="abs(logFC.XYliver.XXliver)", y="Tau") +
+p4 <- ggplot2.scatterplot(data=liver_tau, xName='abslogFC.XYliver.Xxliver',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="Liver: Log2(male/female)", y="Tissue specificity") +
   scale_fill_manual(values = c("grey40"))
+dev.off()
+
+
+###
+alltissues_tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/am_tau_8tissues_fi.txt", header = TRUE)
+str(alltissues_tau)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissue_tau.pdf", width=8, height=8)
+
+ggplot(data = alltissues_tau, aes(x=stage, y= tau,fill=stage)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,width=0.7,alpha=0.9) +
+  coord_cartesian(ylim = c(0,0.3,0.6,0.9,1.1)) +
+  scale_fill_manual(values = c("grey","grey","grey","grey","grey","grey","grey","grey")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0)) +
+  theme(legend.position="none")
+dev.off()
+
+fourtissues_tau_top30 <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/tau_g2346gonadliver.txt", header = TRUE)
+str(fourtissues_tau_top30)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/4tissue_tau_top30.pdf", width=8, height=8)
+
+ggplot(data = fourtissues_tau_top30, aes(x=stage, y= tau,fill=stage)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,width=0.7,alpha=0.9) +
+  coord_cartesian(ylim = c(0,0.3,0.6,0.9,1.1)) +
+  scale_fill_manual(values = c("grey","grey","grey","grey")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0)) +
+  theme(legend.position="none")
+dev.off()
+
+alltissues_tau_top70 <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/tau_alltissues_top70.txt", header = TRUE)
+str(alltissues_tau_top70)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissue_tau_top70.pdf", width=8, height=8)
+
+ggplot(data = alltissues_tau_top70, aes(x=stage, y= tau,fill=stage)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,width=0.7,alpha=0.9) +
+  coord_cartesian(ylim = c(0,0.3,0.6,0.9,1)) +
+  scale_fill_manual(values = c("grey","grey","grey","grey","grey","grey","grey","grey")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0)) +
+  theme(legend.position="none")
+dev.off()
+
+#g23
+
+g23_all<- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/LogCPM_0.05_Amg23.txt", header = TRUE)
+str(g23_all)
+
+g23_all_sort <- data.frame(g23_all[order(g23_all$logCPM, decreasing=T),])
+
+nr_g23 <- nrow(g23_all_sort)*0.9
+nr_g23
+
+nr_g23 <- nrow(g23_all_sort)*0.7
+nr_g23
+
+nr_g23_top30 <- nrow(g23_all_sort)*0.3
+nr_g23_top30
+
+nr_g23_top10 <- nrow(g23_all_sort)*0.1
+nr_g23_top10
+
+g23_top10 <- data.frame(g23_all_sort[1:2387,])
+write.table(g23_top10, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg23_top10.txt", sep="\t", col.names=T)
+
+g23_top90 <- data.frame(g23_all_sort[1:21490,])
+write.table(g23_top90, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg23_top90.txt", sep="\t", col.names=T)
+
+g23_top30 <- data.frame(g23_all_sort[1:7163,])
+write.table(g23_top30, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg23_top30.txt", sep="\t", col.names=T)
+
+g23_top70 <- data.frame(g23_all_sort[1:16714,])
+write.table(g23_top70, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg23_top70.txt", sep="\t", col.names=T)
+
+g23_tau_topall <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/tau_amg23_topall.txt", header = TRUE)
+str(g23_tau_topall)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/tau_amg23_topall", width=8, height=8)
+
+ggplot(data = g23_tau_topall, aes(x=perc, y= tau,fill=perc)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,width=0.7,alpha=0.9) +
+  coord_cartesian(ylim = c(0,0.3,0.6,0.9,1)) +
+  scale_fill_manual(values = c("grey80","grey60","grey40","grey20")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0)) +
+  theme(legend.position="none")
+dev.off()
+##g27
+
+g27_all<- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/LogCPM_0.05_Amg27.txt", header = TRUE)
+str(g27_all)
+
+g27_all_sort <- data.frame(g27_all[order(g27_all$logCPM, decreasing=T),])
+
+nr_g27 <- nrow(g27_all_sort)*0.9
+nr_g27
+
+nr_g27 <- nrow(g27_all_sort)*0.7
+nr_g27
+
+nr_g27_top30 <- nrow(g27_all_sort)*0.3
+nr_g27_top30
+
+nr_g27 <- nrow(g27_all_sort)*0.1
+nr_g27
+
+g27_top10 <- data.frame(g27_all_sort[1:2437,])
+write.table(g27_top10, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg27_top10.txt", sep="\t", col.names=T)
+
+g27_top90 <- data.frame(g27_all_sort[1:21490,])
+write.table(g27_top90, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg27_top90.txt", sep="\t", col.names=T)
+
+g27_top30 <- data.frame(g27_all_sort[1:7163,])
+write.table(g27_top30, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg27_top30.txt", sep="\t", col.names=T)
+
+g27_top70 <- data.frame(g27_all_sort[1:17059,])
+write.table(g27_top70, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg27_top70.txt", sep="\t", col.names=T)
+
+g27_tau_topall <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/tau_amg27_topall.txt", header = TRUE)
+str(g27_tau_topall)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/tau_amg27_topall", width=8, height=8)
+
+ggplot(data = g27_tau_topall, aes(x=perc, y= tau,fill=perc)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,width=0.7,alpha=0.9) +
+  coord_cartesian(ylim = c(0,0.3,0.6,0.9,1)) +
+  scale_fill_manual(values = c("grey80","grey60","grey40","grey20")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0)) +
+  theme(legend.position="none")
+dev.off()
+
+#g31
+
+
+g31_all<- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/LogCPM_0.05_Amg31.txt", header = TRUE)
+str(g31_all)
+
+g31_all_sort <- data.frame(g31_all[order(g31_all$logCPM, decreasing=T),])
+
+nr_g31 <- nrow(g31_all_sort)*0.9
+nr_g31
+
+nr_g31 <- nrow(g31_all_sort)*0.7
+nr_g31
+
+nr_g31_top30 <- nrow(g31_all_sort)*0.3
+nr_g31_top30
+
+nr_g31_top10 <- nrow(g31_all_sort)*0.1
+nr_g31_top10
+
+g31_top10 <- data.frame(g31_all_sort[1:2375,])
+write.table(g31_top10, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg31_top10.txt", sep="\t", col.names=T)
+
+g31_top90 <- data.frame(g31_all_sort[1:21490,])
+write.table(g31_top90, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg31_top90.txt", sep="\t", col.names=T)
+
+g31_top30 <- data.frame(g31_all_sort[1:7163,])
+write.table(g31_top30, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg31_top30.txt", sep="\t", col.names=T)
+
+g31_top70 <- data.frame(g31_all_sort[1:16629,])
+write.table(g31_top70, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg31_top70.txt", sep="\t", col.names=T)
+
+g31_tau_topall <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/tau_amg31_topall.txt", header = TRUE)
+str(g31_tau_topall)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/tau_g31_topall", width=8, height=8)
+
+ggplot(data = g31_tau_topall, aes(x=perc, y= tau,fill=perc)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,width=0.7,alpha=0.9) +
+  coord_cartesian(ylim = c(0,0.3,0.6,0.9,1)) +
+  scale_fill_manual(values = c("grey80","grey60","grey40","grey20")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0)) +
+  theme(legend.position="none")
+dev.off()
+
+#g43
+#g43
+
+g43_all<- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/LogCPM_0.05_Amg43.txt", header = TRUE)
+str(g43_all)
+
+g43_all_sort <- data.frame(g43_all[order(g43_all$logCPM, decreasing=T),])
+
+nr_g43 <- nrow(g43_all_sort)*0.9
+nr_g43
+
+nr_g43 <- nrow(g43_all_sort)*0.7
+nr_g43
+
+nr_g43_top30 <- nrow(g43_all_sort)*0.3
+nr_g43_top30
+
+nr_g43_top10 <- nrow(g43_all_sort)*0.1
+nr_g43_top10
+
+g43_top10 <- data.frame(g43_all_sort[1:2557,])
+write.table(g43_top10, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg43_top10.txt", sep="\t", col.names=T)
+
+g43_top90 <- data.frame(g43_all_sort[1:21490,])
+write.table(g43_top90, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg43_top90.txt", sep="\t", col.names=T)
+
+g43_top30 <- data.frame(g43_all_sort[1:7163,])
+write.table(g43_top30, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg43_top30.txt", sep="\t", col.names=T)
+
+g43_top70 <- data.frame(g43_all_sort[1:17091,])
+write.table(g43_top70, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg43_top70.txt", sep="\t", col.names=T)
+
+g43_tau_topall <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/tau_amg43_topall.txt", header = TRUE)
+str(g43_tau_topall)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/tau_g43_topall", width=8, height=8)
+
+ggplot(data = g43_tau_topall, aes(x=perc, y= tau,fill=perc)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,width=0.7,alpha=0.9) +
+  coord_cartesian(ylim = c(0,0.3,0.6,0.9,1)) +
+  scale_fill_manual(values = c("grey80","grey60","grey40","grey20")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0)) +
+  theme(legend.position="none")
+dev.off()
+
+#brain
+#brain
+
+brain_all<- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/LogCPM_0.05_Ambrain.txt", header = TRUE)
+str(brain_all)
+
+brain_all_sort <- data.frame(brain_all[order(brain_all$logCPM, decreasing=T),])
+
+nr_brain <- nrow(brain_all_sort)*0.9
+nr_brain
+
+nr_brain <- nrow(brain_all_sort)*0.7
+nr_brain
+
+nr_brain_top30 <- nrow(brain_all_sort)*0.3
+nr_brain_top30
+
+nr_brain_top10 <- nrow(brain_all_sort)*0.1
+nr_brain_top10
+
+brain_top10 <- data.frame(brain_all_sort[1:2655,])
+write.table(brain_top10, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/ambrain_top10.txt", sep="\t", col.names=T)
+
+brain_top90 <- data.frame(brain_all_sort[1:23899,])
+write.table(brain_top90, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/ambrain_top90.txt", sep="\t", col.names=T)
+
+brain_top30 <- data.frame(brain_all_sort[1:7163,])
+write.table(brain_top30, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/ambrain_top30.txt", sep="\t", col.names=T)
+
+brain_top70 <- data.frame(brain_all_sort[1:18588,])
+write.table(brain_top70, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/ambrain_top70.txt", sep="\t", col.names=T)
+
+brain_tau_topall <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/tau_ambrain_topall.txt", header = TRUE)
+str(brain_tau_topall)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/tau_brain_topall", width=8, height=8)
+
+ggplot(data = brain_tau_topall, aes(x=perc, y= tau,fill=perc)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,width=0.7,alpha=0.9) +
+  coord_cartesian(ylim = c(0,0.3,0.6,0.9,1)) +
+  scale_fill_manual(values = c("grey80","grey60","grey40","grey20")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0)) +
+  theme(legend.position="none")
+dev.off()
+##g46
+
+g46_all<- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/LogCPM_0.05_Amg46.txt", header = TRUE)
+str(g46_all)
+
+g46_all_sort <- data.frame(g46_all[order(g46_all$logCPM, decreasing=T),])
+
+nr_g46 <- nrow(g46_all_sort)*0.9
+nr_g46
+
+nr_g46 <- nrow(g46_all_sort)*0.7
+nr_g46
+
+nr_g46_top30 <- nrow(g46_all_sort)*0.3
+nr_g46_top30
+nr_g46_top10 <- nrow(g46_all_sort)*0.1
+nr_g46_top10
+
+g46_top10 <- data.frame(g46_all_sort[1:2494,])
+write.table(g46_top10, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg46_top10.txt", sep="\t", col.names=T)
+
+g46_top90 <- data.frame(g46_all_sort[1:21490,])
+write.table(g46_top90, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg46_top90.txt", sep="\t", col.names=T)
+
+g46_top30 <- data.frame(g46_all_sort[1:7482,])
+write.table(g46_top30, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg46_top30.txt", sep="\t", col.names=T)
+
+g46_top70 <- data.frame(g46_all_sort[1:17458,])
+write.table(g46_top70, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amg46_top70.txt", sep="\t", col.names=T)
+
+
+g46_tau_topall <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/tau_amg46_topall.txt", header = TRUE)
+str(g46_tau_topall)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/tau_g46_topall", width=8, height=8)
+
+ggplot(data = g46_tau_topall, aes(x=perc, y= tau,fill=perc)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,width=0.7,alpha=0.9) +
+  coord_cartesian(ylim = c(0,0.3,0.6,0.9,1)) +
+  scale_fill_manual(values = c("grey80","grey60","grey40","grey20")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0)) +
+  theme(legend.position="none")
+dev.off()
+
+#gonad
+
+gonad_all<- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/LogCPM_0.05_Amgonad.txt", header = TRUE)
+str(gonad_all)
+
+gonad_all_sort <- data.frame(gonad_all[order(gonad_all$logCPM, decreasing=T),])
+
+nr_gonad <- nrow(gonad_all_sort)*0.9
+nr_gonad
+
+nr_gonad_top30 <- nrow(gonad_all_sort)*0.3
+nr_gonad_top30
+
+nr_gonad_top70 <- nrow(gonad_all_sort)*0.7
+nr_gonad_top70
+nr_gonad_top10 <- nrow(gonad_all_sort)*0.1
+nr_gonad_top10
+
+gonad_top10 <- data.frame(gonad_all_sort[1:2256,])
+write.table(gonad_top10, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amgonad_top10.txt", sep="\t", col.names=T)
+
+gonad_top90 <- data.frame(gonad_all_sort[1:21490,])
+write.table(gonad_top90, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amgonad_top90.txt", sep="\t", col.names=T)
+
+gonad_top30 <- data.frame(gonad_all_sort[1:6768,])
+write.table(gonad_top30, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amgonad_top30.txt", sep="\t", col.names=T)
+
+gonad_top70 <- data.frame(gonad_all_sort[1:15792,])
+write.table(gonad_top70, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amgonad_top70.txt", sep="\t", col.names=T)
+
+gonad_tau_topall <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/tau_amgonad_topall.txt", header = TRUE)
+str(gonad_tau_topall)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/tau_gonad_topall", width=8, height=8)
+
+ggplot(data = gonad_tau_topall, aes(x=perc, y= tau,fill=perc)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,width=0.7,alpha=0.9) +
+  coord_cartesian(ylim = c(0,0.3,0.6,0.9,1)) +
+  scale_fill_manual(values = c("grey80","grey60","grey40","grey20")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0)) +
+  theme(legend.position="none")
+dev.off()
+
+#liver
+##
+
+liver_all<- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/LogCPM_0.05_Amliver.txt", header = TRUE)
+str(liver_all)
+
+liver_all_sort <- data.frame(liver_all[order(liver_all$logCPM, decreasing=T),])
+
+nr_liver <- nrow(liver_all_sort)*0.9
+nr_liver
+
+nr_liver <- nrow(liver_all_sort)*0.7
+nr_liver
+
+nr_liver_top30 <- nrow(liver_all_sort)*0.3
+nr_liver_top30
+
+nr_liver_top10 <- nrow(liver_all_sort)*0.1
+nr_liver_top10
+
+liver_top10 <- data.frame(liver_all_sort[1:1892,])
+write.table(liver_top10, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amliver_top10.txt", sep="\t", col.names=T)
+
+liver_top90 <- data.frame(liver_all_sort[1:21490,])
+write.table(liver_top90, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amliver_top90.txt", sep="\t", col.names=T)
+
+liver_top30 <- data.frame(liver_all_sort[1:5677,])
+write.table(liver_top30, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amliver_top30.txt", sep="\t", col.names=T)
+liver_top70 <- data.frame(liver_all_sort[1:13247,])
+write.table(liver_top70, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/amliver_top70.txt", sep="\t", col.names=T)
+
+liver_tau_topall <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/tau_amliver_topall.txt", header = TRUE)
+str(liver_tau_topall)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/tau_liver_topall", width=8, height=8)
+
+ggplot(data = liver_tau_topall, aes(x=perc, y= tau,fill=perc)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,width=0.7,alpha=0.9) +
+  coord_cartesian(ylim = c(0,0.3,0.6,0.9,1)) +
+  scale_fill_manual(values = c("grey80","grey60","grey40","grey20")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0)) +
+  theme(legend.position="none")
+dev.off()
+
+
+###for all 8 tissues.
+
+tau_topall <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/tau_amall_topall_fifi.txt", header = TRUE)
+str(tau_topall)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/tau_alltissues_topall.pdf", width=8, height=8)
+
+ggplot(data = tau_topall, aes(x=perc, y= tau,fill=stage)) + 
+  geom_boxplot(notch=TRUE,outlier.shape=NA,position=position_dodge(0.7), width=0.55,alpha=0.8) +
+  coord_cartesian(ylim = c(0,0.3,0.6,0.9,1)) +
+  scale_fill_manual(values = c("steelblue1","steelblue3","steelblue4","purple1","purple4","springgreen1","springgreen3","springgreen4")) +
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0)) 
+
+dev.off()
+
+# G23 unbias correlation with tau
+
+tau_unbias_amg23 <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/LogCPM_0.05_Amg23_tau.txt", header = TRUE)
+str(tau_unbias_amg23)
+
+qqnorm(sqrt(tau_unbias_amg23$tau))
+hist(sqrt(tau_unbias_amg23$tau))
+
+cor.test(sqrt(tau_unbias_amg23$tau),sqrt(tau_unbias_amg23$logFC.XY23.XX23),
+         method = "spearman",
+         conf.level = 0.95)
+
+###
+S = 2.029e+11, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+  rho 
+0.225896 
+###
+
+tau_unbias_amg27 <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/LogCPM_0.05_Amg27_tau.txt", header = TRUE)
+str(tau_unbias_amg27)
+
+qqnorm(sqrt(tau_unbias_amg27$tau))
+hist(sqrt(tau_unbias_amg27$tau))
+
+cor.test(sqrt(tau_unbias_amg27$tau),sqrt(tau_unbias_amg27$logFC.XY27.XX27),
+         method = "spearman",
+         conf.level = 0.95)
+###
+S = 2.312e+11, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+  rho 
+0.2233488 
+###
+tau_unbias_amg31 <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/sexsp_tau/cpm_tau/LogCPM_0.05_Amg31_tau.txt", header = TRUE)
+str(tau_unbias_amg31)
+
+qqnorm(sqrt(tau_unbias_amg31$tau))
+hist(sqrt(tau_unbias_amg31$tau))
+
+cor.test(sqrt(tau_unbias_amg31$tau),sqrt(tau_unbias_amg31$logFC.XY31.XX31),
+         method = "spearman",
+         conf.level = 0.95)
+###
+S = 2.399e+11, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+  rho 
+0.2247824 
+###
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/correlation_5tissuesv2.pdf")
+
+ggarrange(p1, p2, p5, p3, p4, labels = c("A","B","C","D","E"),
+          ncol = 2, nrow = 3)
+
 dev.off()

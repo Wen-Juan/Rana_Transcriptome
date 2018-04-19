@@ -1,3 +1,3 @@
-model_coefficients	XYbrain/XXrain
+model_coefficients	XYbrain/XXbrain
 F_B	-1
 M_B	1
