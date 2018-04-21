@@ -17,6 +17,46 @@ results <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/
 all_sbias <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/venn_diag/de_0.05_1_Am_alltissues.txt", header = TRUE)
 str(all_sbias)
 
+all_ortholog_sbias <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/venn_diag/de_0.05_1_orthol_sbun_fi.txt", header = TRUE)
+str(all_ortholog_sbias)
+
+###orhologs based on venn diagram for sex-biased gene expression
+sbias_g23 <-all_ortholog_sbias$gid[all_ortholog_sbias$stage=='G23']
+sbias_g27 <-all_ortholog_sbias$gid[all_ortholog_sbias$stage=='G27']
+sbias_g31 <-all_ortholog_sbias$gid[all_ortholog_sbias$stage=='G31']
+sbias_g43 <-all_ortholog_sbias$gid[all_ortholog_sbias$stage=='G43']
+sbias_g46 <-all_ortholog_sbias$gid[all_ortholog_sbias$stage=='G46']
+
+venn.plot0 <- venn.diagram(list(G23 = as.character(sbias_g23), G27 = as.character(sbias_g27), G31 = as.character(sbias_g31), G43=as.character(sbias_g43), G46=as.character(sbias_g46)), filename =NULL,
+                           fill=c("orange","red","black","green","blue"),
+                           ext.line.lwd = 3,
+                           cex = 2,
+                           cat.cex = 2,
+                           rotation.degree = 65)
+
+grid.arrange(gTree(children=venn.plot0),ncol = 1 )
+
+venn_sbias_out0 <- arrangeGrob(gTree(children=venn.plot0),ncol = 1 )
+ggsave(file="shared_sbias_larva_orthologs.pdf", venn_sbias_out0, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+
+
+sbias_brain <-all_ortholog_sbias$gid[all_ortholog_sbias$stage=='Brain']
+sbias_gonad <-all_ortholog_sbias$gid[all_ortholog_sbias$stage=='Gonad']
+sbias_liver <-all_ortholog_sbias$gid[all_ortholog_sbias$stage=='Liver']
+
+venn.plot1 <- venn.diagram(list(Gonad = as.character(sbias_gonad), Brain = as.character(sbias_brain), Liver = as.character(sbias_liver)), filename =NULL,
+                           fill=c("orange","green","blue"),
+                           ext.line.lwd = 3,
+                           cex = 2,
+                           cat.cex = 2,
+                           rotation.degree = 65)
+
+grid.arrange(gTree(children=venn.plot1),ncol = 1 )
+
+venn_sbias_out1 <- arrangeGrob(gTree(children=venn.plot1),ncol = 1 )
+ggsave(file="shared_sbias_adult_orthologs.pdf", venn_sbias_out1, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+
+
 ##############
 ############## LARVA
 ##############
@@ -28,7 +68,7 @@ larva_sbias <- subset(all_sbias,all_sbias$tissue!='adult')
 str(larva_sbias)
 
 sbias_g23 <- larva_sbias$gid[larva_sbias$stage=='G23']
-sbias_g27 <- larva_sbias$gid[larva_sbias$stage=='G27']
+sbias_g27 <-all_ortholog_sbias$gid[larva_sbias$stage=='G27']
 sbias_g31 <- larva_sbias$gid[larva_sbias$stage=='G31']
 sbias_g43 <- larva_sbias$gid[larva_sbias$stage=='G43']
 sbias_g46 <- larva_sbias$gid[larva_sbias$stage=='G46']
@@ -44,6 +84,7 @@ grid.arrange(gTree(children=venn.plot0),ncol = 1 )
 
 venn_fbias_out0 <- arrangeGrob(gTree(children=venn.plot0),ncol = 1 )
 ggsave(file="shared_sbias_larva.pdf", venn_fbias_out0, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+
 
 ##
 #test whether the overlap is greater than by chance.

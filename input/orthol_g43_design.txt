@@ -1,0 +1,7 @@
+sample	pop	stage	sex	group
+"Am1_434"	"Am"	"43"	"M"	"Am_43_M"
+"Am2_433"	"Am"	"43"	"F"	"Am_43_F"
+"Am2_434"	"Am"	"43"	"M"	"Am_43_M"
+"Am4_434"	"Am"	"43"	"M"	"Am_43_M"
+"Am4_435"	"Am"	"43"	"F"	"Am_43_F"
+"Am5_433"	"Am"	"43"	"F"	"Am_43_F"

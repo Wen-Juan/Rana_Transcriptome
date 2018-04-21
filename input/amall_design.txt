@@ -30,7 +30,6 @@ Am2_464	Am	46	F	Am_46_F
 Am6_464	Am	46	F	Am_46_F
 Am2_463	Am	46	M	Am_46_M
 Am4_461	Am	46	M	Am_46_M
-Am5_461	Am	46	SR	Am_46_SR
 Am6_462	Am	46	M	Am_46_M
 A10FB	Amm	Brain	F	F_B
 A12FB	Amm	Brain	F	F_B

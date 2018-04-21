@@ -4,6 +4,7 @@ library(gplots)
 library(ggplot2)
 library(dynamicTreeCut)
 library(statmod)
+library(FactoMineR)
 
 cbred <- 2 # '#D55E00'
 cbblue <- '#0072B2'
@@ -26,7 +27,7 @@ sub_analyse = paste(args[1])
 FDR2use = as.numeric(paste(args[2]))
 
 # example
-# sub_analyse <- 'Ambrain'
+# sub_analyse <- 'amall'
 # FDR2use  <- 0.05
 
 datapath <- "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/"
@@ -109,7 +110,7 @@ write(summary(rowSums(cpm(sum10)/ncol(sum10))), filter_file, append=T, sep='\t',
 # spec <- dgl[rowSums(cpm(dgl)>=2) > 3,] # The gene must be expressed in at least 3 libaries (remove sex specific genes)
 dgl <- dgl[aveLogCPM(dgl) > 0,] # filter by average reads
 #dgl <- dgl[rowSums(cpm(dgl)>=2) > 3,] #the 5 means there are 10 libraries in total with 5 males and 5 females
-dgl <- dgl[rowSums(cpm(dgl)>1) >=1,]
+dgl <- dgl[rowSums(cpm(dgl)>1) >=2,]
 
 
 write(paste("dgl"), filter_file, append=T)
@@ -150,14 +151,74 @@ pdf(file.path(outpath,paste('MDS_', sub_analyse, '.pdf', sep="")), width=8, heig
 par(mar=c(3,5,4,3))
 # design$group
 y <- dgl
-colnames(y) <- paste(colnames(y), design$group, sep="\n")
+colnames(y) <- paste(colnames(y), (design$group), sep="\n")
 
 #color different groups for MDS plot, combine both sexes. this code is particular for TV
-pchs = c(18,5,18,5,18,5,18,5,18,5,16,18,5,18,5,18,5)
-cols = c("red","red","pink","pink","darkblue","darkblue","blue","blue","orange","orange","orange","brown","grey","green","brown","grey","green")
+pchs = c(18,5,18,5,18,5,18,5,18,5,18,18,18,5,5,5)
+cols = c("orange","orange","red","red","pink","pink","darkblue","darkblue","blue","blue","brown","grey","green","brown","grey","green")
 plotMDS(y, pch=pchs[design$group],col=cols[design$group], cex=2, main="Tvedora MDS plot",cex.main=1, cex.lab=1,lty=3, lwd=5)
-legend('bottomright', inset=0.02, legend=levels(design$group), pch = pchs, col=cols,cex = 0.8 )
+legend('bottom', inset=0.02, legend=levels(design$group), pch = pchs, col=cols,cex = 0.8 )
 dev.off()
+
+# plotting PCA 
+install.packages('ggfortify')
+library('ggfortify')
+
+y <- dgl
+count_norm <- data.frame(y$counts)
+count_norm1 <- data.frame(t(count_norm[,1:61]))
+str(count_norm1)
+
+pcaData <- count_norm1
+pca <- prcomp(pcaData, scale. = TRUE)
+summary(pca)
+
+rownames(count_norm1) <- c("23F1", "23F2", "23F3", "23M1","23M3","23M2","27F1","27F2","27F3", "27M1","27M2","27M3","31F1","31F2", "31F3", "31F4", "31M1","31M2","31M3","31M4","31M5","43F1","43F2", "43F3", "43M1","43M2","43M3","46F1","46F2","46M1","46M2","46M3", "FB1", "FB2", "FB3", "FB4","FB5", "MB1", "MB2", "MB3", "MB4", "MB5", "FO1", "FO2", "FO3", "FO4", "FO5", "MT1", "MT2", "MT3", "MT4", "MT5", "FL1", "FL2", "FL3", "FL4", "FL5", "ML1", "ML2", "ML3", "ML4")
+str(count_norm1)
+count_norm1$stage <- c("23", "23", "23", "23","23","23","27","27","27", "27","27","27","31","31", "31", "31", "31","31","31","31","31","43","43", "43", "43","43","43","46","46","46","46","46","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Liver","Liver","Liver","Liver","Liver","Liver","Liver","Liver","Liver")
+count_norm1$sex <- c("female","female","female","male","male","male","female","female","female","male","male","male","female","female","female","female","male","male","male","male","male","female","female","female","male","male","male","female","female","male","male","male","female","female","female","female","female","male","male","male","male","male","female","female","female","female","female","male","male","male","male","male","female","female","female","female","female","male","male","male","male")
+
+count_i <- data.frame(pca$x, stage=count_norm1$stage, sex=count_norm1$sex)
+str(count_i)
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissues_pc1pc2.pdf")
+autoplot(pca, data = count_i, x=1, y=2, colour = 'stage', shape='sex', size=4)
+dev.off()
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissues_pc3pc4.pdf")
+autoplot(pca, data = count_i, x=3, y=4, colour = 'stage', shape='sex', size=4)
+dev.off()
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissues_pc5pc6.pdf")
+autoplot(pca, data = count_i, x=5, y=6, colour = 'stage', shape='sex', size=4)
+dev.off()
+
+ggplot (count_i, aes(x=PC1,y=PC2,col=stage,shape=sex)) + #this does not give variance percentage.
+  geom_point(size=3,alpha=0.8)+
+  scale_color_manual(values = c("orange", "red","pink","darkblue","blue", "brown", "green",  "grey"))+ 
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(0.95,0.05)) 
+
+ 
+
+ggplot (count_i, aes(x=PC3,y=PC4,col=stage,shape=sex,variance_percentage = TRUE)) + #this does not give variance percentage.
+  geom_point(size=3,alpha=0.8) +
+  scale_color_manual(values = c("orange", "red","pink","darkblue","blue", "brown", "green",  "grey"))+ 
+  theme_set(theme_bw(base_size=12))
+
+ggplot (count_i, aes(x=PC5,y=PC6,col=stage,shape=sex)) + #this does not give variance percentage.
+  geom_point(size=3,alpha=0.8)+
+  scale_color_manual(values = c("orange", "red","pink","darkblue","blue", "brown", "green",  "grey"))+ 
+  theme_set(theme_bw(base_size=12)) +
+  theme(legend.justification=c(1,0), legend.position=c(0.95,0.05))
+
+#pca1 <- PCA(pcaData)
+#par(mar=c(5,5,4,3))
+#plot.PCA(pca1, axes=c(1, 2), label="none", col.ind=c("orange", "orange", "orange", "orange","orange","orange","red","red","red","red","red","red","pink","pink", "pink", "pink", "pink","pink","pink","pink","pink","darkblue","darkblue", "darkblue", "darkblue","darkblue","darkblue","blue","blue","blue","blue","blue", "brown", "brown", "brown", "brown", "brown", "brown", "brown", "brown", "brown","brown", "green", "green", "green", "green", "green", "green", "green", "green", "green", "green", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey"), title="PCA 1 vs PCA 2", cex=1.5)
+#plotellipses(plot.PCA)
+#plot.PCA(pca1, axes=c(3, 4), col.ind=c("red","red","red","blue","blue","blue","red","red","red","blue","blue","blue","red","red","red","red","blue","blue","blue","blue","blue","red","red","red","blue","blue","blue","red","red","blue","blue","blue","red","red","red","red","red","blue","blue","blue","blue","blue","red","red","red","red","red","blue","blue","blue","blue","blue","red","red","red","red","red","blue","blue","blue","blue"), title="PCA 3 vs PCA 4", cex=0.7)
+#plot.PCA(pca1, axes=c(4, 5), col.ind=c("red","red","red","blue","blue","blue","red","red","red","blue","blue","blue","red","red","red","red","blue","blue","blue","blue","blue","red","red","red","blue","blue","blue","red","red","blue","blue","blue","red","red","red","red","red","blue","blue","blue","blue","blue","red","red","red","red","red","blue","blue","blue","blue","blue","red","red","red","red","red","blue","blue","blue","blue"), title="PCA 1 vs PCA 2", cex=0.4)
+#plotellipses(pca1)
 
 #y <- dgl
 #colnames(y) <- paste(colnames(y), design$group, sep="\n")
