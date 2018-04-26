@@ -1,0 +1,189 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoFisher	topgoKS	topgoFisher	classicFisher	cluster
+GO:0051301	cell division	487	230	141.78	1	1.2e-22	3.5e-25	5.0e-18	out_BP
+GO:0006355	regulation of transcription, DNA-templat...	2036	709	592.74	2	3.1e-11	3.7e-11	4.4e-10	out_BP
+GO:0034587	piRNA metabolic process	19	18	5.53	7	5.9e-11	3.0e-09	3.0e-09	out_BP
+GO:0007049	cell cycle	1181	561	343.83	3	9.9e-10	4.2e-11	< 1e-30	out_BP
+GO:0031047	gene silencing by RNA	80	51	23.29	9	1.4e-09	1.0e-08	1.2e-10	out_BP
+GO:0006260	DNA replication	213	131	62.01	8	1.7e-09	3.3e-09	4.3e-23	out_BP
+GO:0006397	mRNA processing	386	196	112.38	4	3.5e-09	1.2e-10	8.3e-20	out_BP
+GO:0006606	protein import into nucleus	180	73	52.4	5	4.3e-09	9.2e-10	0.00061	out_BP
+GO:0008033	tRNA processing	93	65	27.08	6	1.4e-08	1.5e-09	4.0e-16	out_BP
+GO:0007062	sister chromatid cohesion	55	34	16.01	10	3.9e-08	2.4e-08	4.5e-07	out_BP
+GO:0000724	double-strand break repair via homologou...	75	51	21.83	11	6.3e-08	2.7e-08	3.2e-12	out_BP
+GO:0006406	mRNA export from nucleus	53	31	15.43	19	3.5e-07	1.6e-06	7.6e-06	out_BP
+GO:0000278	mitotic cell cycle	551	264	160.41	16	3.7e-07	7.1e-07	1.1e-21	out_BP
+GO:0043046	DNA methylation involved in gamete gener...	17	14	4.95	25	4.2e-07	8.1e-06	8.1e-06	out_BP
+GO:0006364	rRNA processing	147	101	42.8	20	9.5e-07	2.3e-06	2.0e-23	out_BP
+GO:0006281	DNA repair	385	221	112.09	12	9.7e-07	1.5e-07	< 1e-30	out_BP
+GO:0000387	spliceosomal snRNP assembly	30	23	8.73	22	1.1e-06	4.0e-06	9.4e-08	out_BP
+GO:1901796	regulation of signal transduction by p53...	60	33	17.47	15	1.4e-06	6.3e-07	2.3e-05	out_BP
+GO:0034501	protein localization to kinetochore	12	12	3.49	14	2.0e-06	3.7e-07	3.7e-07	out_BP
+GO:0008380	RNA splicing	337	157	98.11	13	2.2e-06	2.2e-07	4.5e-12	out_BP
+GO:0000462	maturation of SSU-rRNA from tricistronic...	24	18	6.99	21	2.3e-06	2.8e-06	4.3e-06	out_BP
+GO:0000398	mRNA splicing, via spliceosome	208	97	60.56	27	2.6e-06	1.4e-05	5.3e-08	out_BP
+GO:0051315	attachment of mitotic spindle microtubul...	8	8	2.33	37	4.4e-06	5.1e-05	5.1e-05	out_BP
+GO:0006268	DNA unwinding involved in DNA replicatio...	9	8	2.62	51	4.4e-06	0.00034	0.00034	out_BP
+GO:0006417	regulation of translation	244	110	71.04	17	4.9e-06	7.5e-07	6.7e-08	out_BP
+GO:0060467	negative regulation of fertilization	6	6	1.75	65	7.6e-06	0.00061	0.00061	out_BP
+GO:0007059	chromosome segregation	203	123	59.1	32	7.6e-06	2.6e-05	5.8e-21	out_BP
+GO:0051028	mRNA transport	102	59	29.7	34	7.7e-06	3.5e-05	1.2e-09	out_BP
+GO:0007131	reciprocal meiotic recombination	25	19	7.28	18	9.4e-06	1.1e-06	1.6e-06	out_BP
+GO:0006383	transcription from RNA polymerase III pr...	36	22	10.48	24	9.5e-06	8.1e-06	6.4e-05	out_BP
+GO:0031145	anaphase-promoting complex-dependent cat...	22	17	6.4	23	1.5e-05	4.0e-06	4.0e-06	out_BP
+GO:0000070	mitotic sister chromatid segregation	100	58	29.11	36	2.0e-05	4.9e-05	1.5e-09	out_BP
+GO:0007140	male meiotic nuclear division	18	16	5.24	38	2.0e-05	5.2e-05	2.1e-07	out_BP
+GO:0006367	transcription initiation from RNA polyme...	59	30	17.18	68	2.1e-05	0.00067	0.00035	out_BP
+GO:0006270	DNA replication initiation	26	22	7.57	39	2.1e-05	6.4e-05	6.3e-09	out_BP
+GO:0006310	DNA recombination	178	113	51.82	29	3.6e-05	2.0e-05	1.1e-21	out_BP
+GO:0051225	spindle assembly	63	33	18.34	26	4.3e-05	1.1e-05	8.6e-05	out_BP
+GO:0006283	transcription-coupled nucleotide-excisio...	28	19	8.15	30	4.6e-05	2.4e-05	2.4e-05	out_BP
+GO:0051321	meiotic cell cycle	135	84	39.3	28	5.5e-05	1.8e-05	1.1e-15	out_BP
+GO:0030490	maturation of SSU-rRNA	38	28	11.06	73	5.5e-05	0.00125	1.6e-08	out_BP
+GO:0070475	rRNA base methylation	7	7	2.04	47	5.9e-05	0.00018	0.00018	out_BP
+GO:0006271	DNA strand elongation involved in DNA re...	14	11	4.08	64	6.6e-05	0.00060	0.00018	out_BP
+GO:0006368	transcription elongation from RNA polyme...	47	30	13.68	31	7.8e-05	2.6e-05	8.0e-07	out_BP
+GO:0010501	RNA secondary structure unwinding	33	20	9.61	46	8.6e-05	0.00016	0.00016	out_BP
+GO:0030174	regulation of DNA-dependent DNA replicat...	11	10	3.2	35	8.8e-05	3.5e-05	3.5e-05	out_BP
+GO:0006405	RNA export from nucleus	79	49	23	42	9.2e-05	0.00010	1.2e-09	out_BP
+GO:0006396	RNA processing	672	377	195.64	49	9.6e-05	0.00024	< 1e-30	out_BP
+GO:0016569	covalent chromatin modification	380	166	110.63	41	0.00011	8.9e-05	6.0e-10	out_BP
+GO:0007339	binding of sperm to zona pellucida	20	11	5.82	183	0.00013	0.01351	0.01351	out_BP
+GO:0016567	protein ubiquitination	496	215	144.4	94	0.00014	0.00253	4.0e-12	out_BP
+GO:0036297	interstrand cross-link repair	23	15	6.7	54	0.00016	0.00035	0.00035	out_BP
+GO:0031297	replication fork processing	19	14	5.53	40	0.00016	7.4e-05	7.4e-05	out_BP
+GO:0007098	centrosome cycle	85	47	24.75	33	0.00018	2.7e-05	3.8e-07	out_BP
+GO:0016925	protein sumoylation	41	22	11.94	60	0.00020	0.00058	0.00083	out_BP
+GO:0006284	base-excision repair	26	17	7.57	44	0.00023	0.00013	0.00013	out_BP
+GO:0060964	regulation of gene silencing by miRNA	27	15	7.86	56	0.00024	0.00049	0.00358	out_BP
+GO:0075733	intracellular transport of virus	16	10	4.66	129	0.00026	0.00560	0.00560	out_BP
+GO:0000083	regulation of transcription involved in ...	11	8	3.2	116	0.00033	0.00347	0.00347	out_BP
+GO:0006297	nucleotide-excision repair, DNA gap fill...	9	8	2.62	52	0.00036	0.00034	0.00034	out_BP
+GO:0006513	protein monoubiquitination	43	23	12.52	81	0.00040	0.00145	0.00068	out_BP
+GO:0043928	exonucleolytic nuclear-transcribed mRNA ...	14	10	4.08	75	0.00041	0.00128	0.00128	out_BP
+GO:2000104	negative regulation of DNA-dependent DNA...	13	9	3.78	72	0.00042	0.00105	0.00320	out_BP
+GO:0001522	pseudouridine synthesis	17	15	4.95	61	0.00046	0.00060	6.5e-07	out_BP
+GO:0034080	CENP-A containing nucleosome assembly	12	10	3.49	45	0.00049	0.00016	0.00016	out_BP
+GO:0045830	positive regulation of isotype switching	14	10	4.08	76	0.00056	0.00128	0.00128	out_BP
+GO:0070125	mitochondrial translational elongation	39	21	11.35	70	0.00059	0.00103	0.00103	out_BP
+GO:0031118	rRNA pseudouridine synthesis	7	7	2.04	48	0.00063	0.00018	0.00018	out_BP
+GO:0006974	cellular response to DNA damage stimulus	542	288	157.79	43	0.00066	0.00012	< 1e-30	out_BP
+GO:0009411	response to UV	86	41	25.04	69	0.00066	0.00078	0.00020	out_BP
+GO:0000086	G2/M transition of mitotic cell cycle	92	45	26.78	67	0.00067	0.00066	4.6e-05	out_BP
+GO:0002098	tRNA wobble uridine modification	9	8	2.62	53	0.00072	0.00034	0.00034	out_BP
+GO:0006366	transcription from RNA polymerase II pro...	1072	346	312.09	166	0.00086	0.00949	0.00966	out_BP
+GO:0000722	telomere maintenance via recombination	19	13	5.53	55	0.00089	0.00044	0.00044	out_BP
+GO:0051382	kinetochore assembly	15	11	4.37	58	0.00089	0.00050	0.00050	out_BP
+GO:0007141	male meiosis I	5	5	1.46	85	0.00100	0.00209	0.00209	out_BP
+GO:0019827	stem cell population maintenance	78	31	22.71	50	0.00101	0.00026	0.02809	out_BP
+GO:0042273	ribosomal large subunit biogenesis	52	29	15.14	79	0.00103	0.00130	5.1e-05	out_BP
+GO:0016073	snRNA metabolic process	38	26	11.06	138	0.00112	0.00707	5.9e-07	out_BP
+GO:0031497	chromatin assembly	67	34	19.51	84	0.00114	0.00205	0.00015	out_BP
+GO:0071035	nuclear polyadenylation-dependent rRNA c...	6	6	1.75	66	0.00118	0.00061	0.00061	out_BP
+GO:0051988	regulation of attachment of spindle micr...	7	6	2.04	103	0.00123	0.00319	0.00319	out_BP
+GO:0006409	tRNA export from nucleus	8	6	2.33	170	0.00134	0.00960	0.00960	out_BP
+GO:0000731	DNA synthesis involved in DNA repair	36	22	10.48	177	0.00136	0.00994	6.4e-05	out_BP
+GO:0043153	entrainment of circadian clock by photop...	12	5	3.49	766	0.00152	0.25319	0.25319	out_BP
+GO:0070192	chromosome organization involved in meio...	33	24	9.61	118	0.00156	0.00347	2.7e-07	out_BP
+GO:0032508	DNA duplex unwinding	27	20	7.86	80	0.00158	0.00131	1.7e-06	out_BP
+GO:0000972	transcription-dependent tethering of RNA...	5	5	1.46	86	0.00169	0.00209	0.00209	out_BP
+GO:0034427	nuclear-transcribed mRNA catabolic proce...	9	7	2.62	120	0.00174	0.00354	0.00354	out_BP
+GO:0009113	purine nucleobase biosynthetic process	12	9	3.49	101	0.00176	0.00318	0.00133	out_BP
+GO:0000479	endonucleolytic cleavage of tricistronic...	10	7	2.91	142	0.00178	0.00716	0.00883	out_BP
+GO:0006302	double-strand break repair	148	91	43.09	130	0.00181	0.00608	2.0e-16	out_BP
+GO:0006264	mitochondrial DNA replication	10	8	2.91	74	0.00182	0.00127	0.00127	out_BP
+GO:0000076	DNA replication checkpoint	9	7	2.62	121	0.00184	0.00354	0.00354	out_BP
+GO:0060046	regulation of acrosome reaction	5	5	1.46	87	0.00185	0.00209	0.00209	out_BP
+GO:0007051	spindle organization	107	55	31.15	275	0.00192	0.03990	9.6e-07	out_BP
+GO:0048599	oocyte development	26	9	7.57	598	0.00201	0.19761	0.33486	out_BP
+GO:0000466	maturation of 5.8S rRNA from tricistroni...	17	14	4.95	62	0.00203	0.00060	8.1e-06	out_BP
+GO:0006401	RNA catabolic process	154	79	44.83	97	0.00203	0.00299	5.0e-09	out_BP
+GO:0048523	negative regulation of cellular process	2540	757	739.47	98	0.00206	0.00308	0.20024	out_BP
+GO:0001833	inner cell mass cell proliferation	8	6	2.33	171	0.00207	0.00960	0.00960	out_BP
+GO:0070816	phosphorylation of RNA polymerase II C-t...	17	13	4.95	63	0.00211	0.00060	7.2e-05	out_BP
+GO:0006296	nucleotide-excision repair, DNA incision...	13	10	3.78	57	0.00217	0.00050	0.00050	out_BP
+GO:0000729	DNA double-strand break processing	14	9	4.08	133	0.00222	0.00664	0.00664	out_BP
+GO:0070124	mitochondrial translational initiation	24	12	6.99	220	0.00226	0.02480	0.02480	out_BP
+GO:0045910	negative regulation of DNA recombination	18	12	5.24	149	0.00233	0.00879	0.00106	out_BP
+GO:0046602	regulation of mitotic centrosome separat...	7	5	2.04	225	0.00236	0.02523	0.02523	out_BP
+GO:2001032	regulation of double-strand break repair...	6	5	1.75	155	0.00241	0.00949	0.00949	out_BP
+GO:0098789	pre-mRNA cleavage required for polyadeny...	5	5	1.46	88	0.00259	0.00209	0.00209	out_BP
+GO:0016246	RNA interference	7	6	2.04	104	0.00260	0.00319	0.00319	out_BP
+GO:0045292	mRNA cis splicing, via spliceosome	15	11	4.37	59	0.00266	0.00050	0.00050	out_BP
+GO:0016926	protein desumoylation	6	5	1.75	156	0.00266	0.00949	0.00949	out_BP
+GO:0051436	negative regulation of ubiquitin-protein...	14	10	4.08	77	0.00267	0.00128	0.00128	out_BP
+GO:0051437	positive regulation of ubiquitin-protein...	14	10	4.08	78	0.00267	0.00128	0.00128	out_BP
+GO:0006261	DNA-dependent DNA replication	99	70	28.82	148	0.00287	0.00826	1.1e-17	out_BP
+GO:0044267	cellular protein metabolic process	3055	964	889.4	2144	0.00289	0.65893	0.00032	out_BP
+GO:0071356	cellular response to tumor necrosis fact...	111	31	32.32	2509	0.00290	0.76937	0.64375	out_BP
+GO:0042254	ribosome biogenesis	223	141	64.92	124	0.00291	0.00441	1.6e-26	out_BP
+GO:0032211	negative regulation of telomere maintena...	20	11	5.82	184	0.00294	0.01351	0.01351	out_BP
+GO:0042787	protein ubiquitination involved in ubiqu...	110	52	32.02	123	0.00313	0.00368	4.0e-05	out_BP
+GO:0030488	tRNA methylation	16	9	4.66	196	0.00322	0.02102	0.02102	out_BP
+GO:0007283	spermatogenesis	215	85	62.59	83	0.00323	0.00205	0.00061	out_BP
+GO:0035999	tetrahydrofolate interconversion	7	6	2.04	105	0.00324	0.00319	0.00319	out_BP
+GO:0046325	negative regulation of glucose import	6	5	1.75	157	0.00327	0.00949	0.00949	out_BP
+GO:0034244	negative regulation of transcription elo...	7	6	2.04	106	0.00328	0.00319	0.00319	out_BP
+GO:0006400	tRNA modification	48	32	13.97	113	0.00329	0.00338	7.6e-08	out_BP
+GO:0048066	developmental pigmentation	27	11	7.86	215	0.00331	0.02464	0.13250	out_BP
+GO:0051256	mitotic spindle midzone assembly	5	4	1.46	244	0.00332	0.02753	0.02753	out_BP
+GO:0070979	protein K11-linked ubiquitination	22	13	6.4	112	0.00362	0.00321	0.00321	out_BP
+GO:0000467	exonucleolytic trimming to generate matu...	5	5	1.46	89	0.00364	0.00209	0.00209	out_BP
+GO:0071038	nuclear polyadenylation-dependent tRNA c...	5	5	1.46	90	0.00364	0.00209	0.00209	out_BP
+GO:0006189	'de novo' IMP biosynthetic process	7	6	2.04	107	0.00368	0.00319	0.00319	out_BP
+GO:0070544	histone H3-K36 demethylation	7	6	2.04	108	0.00374	0.00319	0.00319	out_BP
+GO:0007130	synaptonemal complex assembly	11	8	3.2	117	0.00395	0.00347	0.00347	out_BP
+GO:0010212	response to ionizing radiation	84	41	24.45	122	0.00397	0.00357	0.00010	out_BP
+GO:0031937	positive regulation of chromatin silenci...	10	7	2.91	150	0.00398	0.00883	0.00883	out_BP
+GO:0006378	mRNA polyadenylation	26	17	7.57	82	0.00399	0.00177	0.00013	out_BP
+GO:0006303	double-strand break repair via nonhomolo...	37	21	10.77	137	0.00406	0.00684	0.00040	out_BP
+GO:0046825	regulation of protein export from nucleu...	26	13	7.57	71	0.00422	0.00105	0.01978	out_BP
+GO:0007018	microtubule-based movement	193	49	56.19	182	0.00430	0.01321	0.89149	out_BP
+GO:1904668	positive regulation of ubiquitin protein...	18	14	5.24	141	0.00432	0.00713	2.7e-05	out_BP
+GO:0001824	blastocyst development	33	21	9.61	289	0.00443	0.05075	4.0e-05	out_BP
+GO:0017148	negative regulation of translation	108	54	31.44	114	0.00464	0.00342	3.6e-06	out_BP
+GO:0000732	strand displacement	11	7	3.2	193	0.00474	0.01821	0.01821	out_BP
+GO:0043523	regulation of neuron apoptotic process	107	28	31.15	755	0.00490	0.25113	0.78070	out_BP
+GO:0000122	negative regulation of transcription fro...	373	114	108.59	1094	0.00512	0.36214	0.28313	out_BP
+GO:0071392	cellular response to estradiol stimulus	25	12	7.28	270	0.00518	0.03533	0.03533	out_BP
+GO:0043966	histone H3 acetylation	41	21	11.94	93	0.00521	0.00235	0.00235	out_BP
+GO:0033260	nuclear DNA replication	19	11	5.53	168	0.00530	0.00957	0.00822	out_BP
+GO:0006298	mismatch repair	18	11	5.24	126	0.00551	0.00468	0.00468	out_BP
+GO:0045926	negative regulation of growth	111	25	32.32	1825	0.00556	0.58241	0.95249	out_BP
+GO:0043984	histone H4-K16 acetylation	18	10	5.24	187	0.00563	0.01684	0.01684	out_BP
+GO:0045892	negative regulation of transcription, DN...	595	204	173.22	119	0.00569	0.00353	0.00282	out_BP
+GO:0045475	locomotor rhythm	8	6	2.33	172	0.00569	0.00960	0.00960	out_BP
+GO:0038061	NIK/NF-kappaB signaling	42	12	12.23	348	0.00571	0.06878	0.58883	out_BP
+GO:0034475	U4 snRNA 3'-end processing	7	6	2.04	109	0.00580	0.00319	0.00319	out_BP
+GO:0006898	receptor-mediated endocytosis	138	32	40.18	1104	0.00586	0.37904	0.95158	out_BP
+GO:0009566	fertilization	70	31	20.38	235	0.00588	0.02610	0.00484	out_BP
+GO:0042795	snRNA transcription from RNA polymerase ...	15	10	4.37	96	0.00604	0.00284	0.00284	out_BP
+GO:1902074	response to salt	11	3	3.2	2152	0.00611	0.66411	0.66411	out_BP
+GO:0007077	mitotic nuclear envelope disassembly	9	5	2.62	396	0.00616	0.08823	0.08823	out_BP
+GO:1903432	regulation of TORC1 signaling	19	10	5.53	223	0.00617	0.02518	0.02642	out_BP
+GO:0051607	defense response to virus	106	36	30.86	537	0.00625	0.15739	0.15938	out_BP
+GO:0031441	negative regulation of mRNA 3'-end proce...	5	5	1.46	91	0.00646	0.00209	0.00209	out_BP
+GO:1900264	positive regulation of DNA-directed DNA ...	5	4	1.46	245	0.00647	0.02753	0.02753	out_BP
+GO:0048806	genitalia development	29	11	8.44	92	0.00652	0.00209	0.19759	out_BP
+GO:0042886	amide transport	1327	383	386.33	176	0.00652	0.00972	0.59580	out_BP
+GO:0000959	mitochondrial RNA metabolic process	27	15	7.86	180	0.00657	0.01228	0.00358	out_BP
+GO:0031054	pre-miRNA processing	6	5	1.75	158	0.00677	0.00949	0.00949	out_BP
+GO:0032386	regulation of intracellular transport	348	114	101.31	731	0.00680	0.24805	0.07330	out_BP
+GO:0006999	nuclear pore organization	12	9	3.49	154	0.00700	0.00946	0.00133	out_BP
+GO:0090267	positive regulation of mitotic cell cycl...	6	5	1.75	159	0.00702	0.00949	0.00949	out_BP
+GO:0032007	negative regulation of TOR signaling	29	14	8.44	269	0.00713	0.03323	0.02252	out_BP
+GO:0090174	organelle membrane fusion	121	33	35.23	144	0.00731	0.00722	0.70490	out_BP
+GO:0051254	positive regulation of RNA metabolic pro...	813	250	236.69	208	0.00741	0.02440	0.15269	out_BP
+GO:0071028	nuclear mRNA surveillance	10	7	2.91	151	0.00757	0.00883	0.00883	out_BP
+GO:0046655	folic acid metabolic process	9	6	2.62	200	0.00776	0.02173	0.02173	out_BP
+GO:0007004	telomere maintenance via telomerase	43	23	12.52	167	0.00807	0.00950	0.00068	out_BP
+GO:0010569	regulation of double-strand break repair...	19	13	5.53	115	0.00814	0.00345	0.00044	out_BP
+GO:0006325	chromatin organization	463	210	134.79	99	0.00827	0.00308	3.1e-14	out_BP
+GO:0006348	chromatin silencing at telomere	7	6	2.04	110	0.00836	0.00319	0.00319	out_BP
+GO:0032506	cytokinetic process	18	8	5.24	318	0.00842	0.06357	0.12210	out_BP
+GO:0044030	regulation of DNA methylation	12	8	3.49	146	0.00865	0.00776	0.00776	out_BP
+GO:0022618	ribonucleoprotein complex assembly	140	70	40.76	127	0.00879	0.00530	1.4e-07	out_BP
+GO:0032467	positive regulation of cytokinesis	27	12	7.86	335	0.00889	0.06506	0.06506	out_BP
+GO:2000278	regulation of DNA biosynthetic process	67	29	19.51	140	0.00934	0.00712	0.00922	out_BP
+GO:2000001	regulation of DNA damage checkpoint	8	6	2.33	173	0.00987	0.00960	0.00960	out_BP
+GO:0031146	SCF-dependent proteasomal ubiquitin-depe...	30	16	8.73	125	0.00995	0.00456	0.00456	out_BP
+GO:0007080	mitotic metaphase plate congression	24	18	6.99	128	0.00996	0.00553	4.3e-06	out_BP

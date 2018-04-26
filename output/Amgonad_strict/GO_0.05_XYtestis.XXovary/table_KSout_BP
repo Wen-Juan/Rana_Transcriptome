@@ -1,0 +1,48 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoFisher	topgoKS	topgoFisher	classicFisher	cluster
+GO:0006412	translation	501	322	297.76	3	1.3e-06	0.00119	0.0131	out_BP
+GO:0007339	binding of sperm to zona pellucida	17	13	10.1	341	4.7e-06	0.11632	0.1163	out_BP
+GO:0060467	negative regulation of fertilization	6	6	3.57	82	1.1e-05	0.04403	0.0440	out_BP
+GO:0006793	phosphorus metabolic process	1807	1069	1073.96	34	0.00020	0.01572	0.6129	out_BP
+GO:0007275	multicellular organism development	3007	1857	1787.16	2	0.00038	0.00042	0.0012	out_BP
+GO:0016051	carbohydrate biosynthetic process	119	76	70.73	5	0.00045	0.00193	0.1854	out_BP
+GO:0046887	positive regulation of hormone secretion	58	40	34.47	7	0.00079	0.00456	0.0874	out_BP
+GO:0007369	gastrulation	129	80	76.67	902	0.00095	0.28986	0.3063	out_BP
+GO:0010586	miRNA metabolic process	10	9	5.94	173	0.00118	0.07405	0.0430	out_BP
+GO:0007399	nervous system development	1310	814	778.57	132	0.00138	0.05998	0.0179	out_BP
+GO:0030514	negative regulation of BMP signaling pat...	28	19	16.64	821	0.00190	0.23914	0.2391	out_BP
+GO:0006351	transcription, DNA-templated	2186	1311	1299.21	1	0.00207	0.00033	0.2916	out_BP
+GO:0048477	oogenesis	51	35	30.31	517	0.00215	0.18506	0.1146	out_BP
+GO:2000344	positive regulation of acrosome reaction	5	5	2.97	177	0.00239	0.07411	0.0741	out_BP
+GO:0039694	viral RNA genome replication	10	10	5.94	9	0.00257	0.00548	0.0055	out_BP
+GO:0006309	apoptotic DNA fragmentation	12	11	7.13	43	0.00260	0.02613	0.0178	out_BP
+GO:0042138	meiotic DNA double-strand break formatio...	5	5	2.97	178	0.00267	0.07411	0.0741	out_BP
+GO:0030154	cell differentiation	2178	1342	1294.45	22	0.00285	0.01314	0.0108	out_BP
+GO:0048066	developmental pigmentation	27	19	16.05	569	0.00286	0.20973	0.1682	out_BP
+GO:0016266	O-glycan processing	24	20	14.26	20	0.00291	0.01161	0.0116	out_BP
+GO:0009611	response to wounding	303	190	180.08	533	0.00321	0.20255	0.1317	out_BP
+GO:0017148	negative regulation of translation	118	80	70.13	60	0.00334	0.02950	0.0374	out_BP
+GO:0010842	retina layer formation	17	14	10.1	71	0.00337	0.04197	0.0420	out_BP
+GO:0019233	sensory perception of pain	39	28	23.18	249	0.00350	0.08595	0.0770	out_BP
+GO:0032682	negative regulation of chemokine product...	9	9	5.35	13	0.00371	0.00923	0.0092	out_BP
+GO:0051348	negative regulation of transferase activ...	179	121	106.39	161	0.00429	0.07339	0.0143	out_BP
+GO:0032367	intracellular cholesterol transport	9	7	5.35	673	0.00477	0.22117	0.2212	out_BP
+GO:0051262	protein tetramerization	77	50	45.76	481	0.00490	0.15788	0.1926	out_BP
+GO:0070092	regulation of glucagon secretion	5	4	2.97	1042	0.00499	0.32719	0.3272	out_BP
+GO:0006614	SRP-dependent cotranslational protein ta...	20	15	11.89	320	0.00504	0.11513	0.1151	out_BP
+GO:0048523	negative regulation of cellular process	2451	1487	1456.71	835	0.00508	0.25634	0.0821	out_BP
+GO:0002181	cytoplasmic translation	41	28	24.37	117	0.00525	0.05322	0.1591	out_BP
+GO:0006547	histidine metabolic process	5	5	2.97	179	0.00610	0.07411	0.0741	out_BP
+GO:0001574	ganglioside biosynthetic process	6	6	3.57	83	0.00614	0.04403	0.0440	out_BP
+GO:0007611	learning or memory	119	76	70.73	57	0.00619	0.02930	0.1854	out_BP
+GO:2000765	regulation of cytoplasmic translation	19	13	11.29	218	0.00641	0.07413	0.2903	out_BP
+GO:0050773	regulation of dendrite development	98	62	58.24	44	0.00672	0.02613	0.2518	out_BP
+GO:0010996	response to auditory stimulus	12	10	7.13	423	0.00698	0.15115	0.0775	out_BP
+GO:0015804	neutral amino acid transport	14	12	8.32	67	0.00699	0.03624	0.0362	out_BP
+GO:0006670	sphingosine metabolic process	7	7	4.16	45	0.00719	0.02616	0.0262	out_BP
+GO:0006469	negative regulation of protein kinase ac...	146	98	86.77	4	0.00732	0.00182	0.0332	out_BP
+GO:0000462	maturation of SSU-rRNA from tricistronic...	24	18	14.26	523	0.00741	0.19447	0.0866	out_BP
+GO:0045445	myoblast differentiation	41	25	24.37	650	0.00807	0.21357	0.4872	out_BP
+GO:0046513	ceramide biosynthetic process	32	25	19.02	521	0.00836	0.19399	0.0212	out_BP
+GO:0051983	regulation of chromosome segregation	66	43	39.23	167	0.00882	0.07401	0.2060	out_BP
+GO:0043393	regulation of protein binding	102	65	60.62	12	0.00964	0.00922	0.2168	out_BP
+GO:0001522	pseudouridine synthesis	17	11	10.1	106	0.00966	0.04409	0.4288	out_BP

@@ -1,12 +1,12 @@
-sort -u ~/git/rana_transcriptome/input/GO_Amm.txt > GO_sorted_temp.txt
+sort -u ~/my_postdoc/useful_scripts/Rana_Transcriptome/input/GO_Amm88.txt > GO_sorted_temp.txt
 
 cut -f 1 GO_pvalues.txt | sort -u > GO_p_sorted_temp.txt
 
 join GO_sorted_temp.txt GO_p_sorted_temp.txt | perl -pe 's/ /\t/' > GO_universe.txt
 
-Rscript ~/git/rana_transcriptome/scripts/GO_BP.R GO_universe.txt GO_pvalues.txt out_BP 0.05
-Rscript ~/git/rana_transcriptome/scripts/GO_CC.R GO_universe.txt GO_pvalues.txt out_CC 0.05
-Rscript ~/git/rana_transcriptome/scripts/GO_MF.R GO_universe.txt GO_pvalues.txt out_MF 0.05
+Rscript ~/my_postdoc/useful_scripts/Rana_Transcriptome/script/GO_BP.R GO_universe.txt GO_pvalues.txt out_BP 0.05
+Rscript ~/my_postdoc/useful_scripts/Rana_Transcriptome/script/GO_CC.R GO_universe.txt GO_pvalues.txt out_CC 0.05
+Rscript ~/my_postdoc/useful_scripts/Rana_Transcriptome/script/GO_MF.R GO_universe.txt GO_pvalues.txt out_MF 0.05
 
 echo -e 'GO category\tGO\tTerm\tAnnotated\tSignificant\tExpected\ttopGO (Fisher)\tclassic (Fisher)' > header_temp.txt
 cat table_Fisherout_BP | cut -f 1,2,3,4,5,7,9 | grep -v topgo |  perl -pe 's/^/BP\t/' > table_Fisherout_BP_temp

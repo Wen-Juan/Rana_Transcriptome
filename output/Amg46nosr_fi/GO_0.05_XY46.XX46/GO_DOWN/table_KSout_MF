@@ -1,0 +1,67 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoFisher	topgoKS	topgoFisher	classicFisher	cluster
+GO:0003723	RNA binding	1176	511	290.9	1	1.3e-27	< 1e-30	< 1e-30	out_MF
+GO:0003677	DNA binding	1485	534	367.33	2	5.7e-27	< 1e-30	1.6e-25	out_MF
+GO:0003899	DNA-directed 5'-3' RNA polymerase activi...	35	31	8.66	3	7.2e-14	2.4e-15	2.4e-15	out_MF
+GO:0008536	Ran GTPase binding	24	21	5.94	5	5.5e-10	1.6e-10	1.6e-10	out_MF
+GO:0003676	nucleic acid binding	2606	1024	644.63	6	2.5e-09	2.6e-09	< 1e-30	out_MF
+GO:0003682	chromatin binding	302	127	74.7	4	5.1e-09	5.0e-11	1.7e-11	out_MF
+GO:0004004	ATP-dependent RNA helicase activity	54	33	13.36	7	2.3e-08	1.5e-08	1.5e-08	out_MF
+GO:0030515	snoRNA binding	24	19	5.94	8	8.4e-08	3.2e-08	3.2e-08	out_MF
+GO:0003887	DNA-directed DNA polymerase activity	25	18	6.18	11	2.2e-07	8.7e-07	8.7e-07	out_MF
+GO:0001104	RNA polymerase II transcription cofactor...	66	27	16.33	19	2.6e-06	4.2e-05	0.00272	out_MF
+GO:0046872	metal ion binding	3124	797	772.76	9	4.2e-06	3.8e-07	0.12289	out_MF
+GO:0043021	ribonucleoprotein complex binding	74	39	18.3	13	7.8e-06	2.1e-06	2.1e-07	out_MF
+GO:0005487	nucleocytoplasmic transporter activity	20	13	4.95	31	8.3e-06	0.00016	0.00016	out_MF
+GO:0018024	histone-lysine N-methyltransferase activ...	39	22	9.65	14	8.4e-06	2.2e-06	2.3e-05	out_MF
+GO:0003697	single-stranded DNA binding	61	34	15.09	10	1.2e-05	5.1e-07	2.1e-07	out_MF
+GO:0000049	tRNA binding	41	25	10.14	12	1.4e-05	8.8e-07	8.8e-07	out_MF
+GO:0042393	histone binding	123	64	30.43	15	1.7e-05	7.6e-06	5.8e-11	out_MF
+GO:0003678	DNA helicase activity	36	28	8.91	26	2.4e-05	0.00011	3.2e-11	out_MF
+GO:0017056	structural constituent of nuclear pore	15	12	3.71	17	2.7e-05	1.1e-05	1.1e-05	out_MF
+GO:0003713	transcription coactivator activity	162	58	40.07	36	3.3e-05	0.00052	0.00102	out_MF
+GO:0003735	structural constituent of ribosome	131	27	32.4	766	7.1e-05	0.88715	0.88715	out_MF
+GO:0140097	catalytic activity, acting on DNA	144	85	35.62	16	8.8e-05	9.0e-06	1.4e-18	out_MF
+GO:0004003	ATP-dependent DNA helicase activity	22	17	5.44	18	0.00015	3.5e-05	3.3e-07	out_MF
+GO:0008270	zinc ion binding	557	178	137.78	20	0.00016	4.7e-05	4.7e-05	out_MF
+GO:0019789	SUMO transferase activity	13	10	3.22	28	0.00019	0.00011	0.00011	out_MF
+GO:0016891	endoribonuclease activity, producing 5'-...	20	17	4.95	27	0.00020	0.00011	2.4e-08	out_MF
+GO:0035064	methylated histone binding	40	21	9.89	30	0.00024	0.00014	0.00014	out_MF
+GO:0008353	RNA polymerase II carboxy-terminal domai...	11	9	2.72	29	0.00029	0.00011	0.00011	out_MF
+GO:0004842	ubiquitin-protein transferase activity	246	102	60.85	22	0.00030	6.6e-05	4.3e-09	out_MF
+GO:0004526	ribonuclease P activity	9	8	2.23	24	0.00032	9.8e-05	9.8e-05	out_MF
+GO:0070182	DNA polymerase binding	11	8	2.72	41	0.00047	0.00109	0.00109	out_MF
+GO:0008168	methyltransferase activity	178	81	44.03	32	0.00056	0.00030	1.0e-09	out_MF
+GO:0061630	ubiquitin protein ligase activity	146	61	36.12	21	0.00058	4.8e-05	4.0e-06	out_MF
+GO:0003714	transcription corepressor activity	107	28	26.47	268	0.00064	0.32827	0.40136	out_MF
+GO:0140101	catalytic activity, acting on a tRNA	92	44	22.76	25	0.00068	0.00011	1.2e-06	out_MF
+GO:0003691	double-stranded telomeric DNA binding	7	6	1.73	44	0.00116	0.00126	0.00126	out_MF
+GO:0008565	protein transporter activity	74	32	18.3	23	0.00125	7.0e-05	0.00036	out_MF
+GO:0003729	mRNA binding	121	46	29.93	37	0.00139	0.00063	0.00078	out_MF
+GO:0008327	methyl-CpG binding	10	8	2.47	34	0.00143	0.00038	0.00038	out_MF
+GO:0003689	DNA clamp loader activity	7	6	1.73	45	0.00146	0.00126	0.00126	out_MF
+GO:0000175	3'-5'-exoribonuclease activity	17	11	4.21	33	0.00155	0.00038	0.00056	out_MF
+GO:0004843	thiol-dependent ubiquitin-specific prote...	56	22	13.85	69	0.00187	0.01120	0.01120	out_MF
+GO:0000981	RNA polymerase II transcription factor a...	333	79	82.37	40	0.00201	0.00098	0.68847	out_MF
+GO:0016740	transferase activity	1885	567	466.28	39	0.00210	0.00086	3.8e-09	out_MF
+GO:0016929	SUMO-specific protease activity	6	5	1.48	56	0.00228	0.00440	0.00440	out_MF
+GO:0043139	5'-3' DNA helicase activity	6	5	1.48	57	0.00256	0.00440	0.00440	out_MF
+GO:0016742	hydroxymethyl-, formyl- and related tran...	8	6	1.98	53	0.00305	0.00398	0.00398	out_MF
+GO:0032451	demethylase activity	28	15	6.93	43	0.00329	0.00125	0.00098	out_MF
+GO:0005164	tumor necrosis factor receptor binding	11	5	2.72	162	0.00335	0.11033	0.11033	out_MF
+GO:0044877	macromolecular complex binding	618	132	152.87	52	0.00341	0.00388	0.98102	out_MF
+GO:0004386	helicase activity	146	86	36.12	35	0.00351	0.00052	1.1e-18	out_MF
+GO:0008649	rRNA methyltransferase activity	11	7	2.72	55	0.00390	0.00440	0.00708	out_MF
+GO:0043142	single-stranded DNA-dependent ATPase act...	9	5	2.23	100	0.00500	0.04683	0.04683	out_MF
+GO:0017070	U6 snRNA binding	7	6	1.73	46	0.00503	0.00126	0.00126	out_MF
+GO:0008173	RNA methyltransferase activity	41	25	10.14	66	0.00506	0.00923	8.8e-07	out_MF
+GO:0030159	receptor signaling complex scaffold acti...	13	7	3.22	77	0.00544	0.02287	0.02287	out_MF
+GO:0003747	translation release factor activity	6	5	1.48	58	0.00547	0.00440	0.00440	out_MF
+GO:0004652	polynucleotide adenylyltransferase activ...	11	8	2.72	42	0.00551	0.00109	0.00109	out_MF
+GO:0043140	ATP-dependent 3'-5' DNA helicase activit...	8	6	1.98	54	0.00779	0.00398	0.00398	out_MF
+GO:0044212	transcription regulatory region DNA bind...	429	116	106.12	38	0.00802	0.00063	0.14242	out_MF
+GO:0016597	amino acid binding	37	12	9.15	128	0.00853	0.07029	0.18328	out_MF
+GO:0036459	thiol-dependent ubiquitinyl hydrolase ac...	68	30	16.82	48	0.00866	0.00252	0.00036	out_MF
+GO:0000400	four-way junction DNA binding	9	6	2.23	67	0.00937	0.00943	0.00943	out_MF
+GO:0061659	ubiquitin-like protein ligase activity	149	64	36.86	70	0.00939	0.01471	7.4e-07	out_MF
+GO:0004722	protein serine/threonine phosphatase act...	43	15	10.64	138	0.00961	0.08883	0.08883	out_MF
+GO:0070530	K63-linked polyubiquitin modification-de...	17	10	4.21	49	0.00992	0.00283	0.00283	out_MF

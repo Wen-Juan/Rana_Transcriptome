@@ -1,0 +1,7 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
+GO:0016021	integral component of membrane	1969	662	624.43	4	0.00029	0.00068	0.0217	out_CC
+GO:0070382	exocytic vesicle	98	33	31.08	6	0.00066	0.00111	0.3738	out_CC
+GO:0032426	stereocilium tip	8	7	2.54	3	0.00186	0.00064	0.0019	out_CC
+GO:0005666	DNA-directed RNA polymerase III complex	12	9	3.81	13	0.00260	0.00736	0.0026	out_CC
+GO:0048500	signal recognition particle	5	5	1.59	2	0.00320	0.00051	0.0032	out_CC
+GO:0017059	serine C-palmitoyltransferase complex	5	5	1.59	5	0.00320	0.00099	0.0032	out_CC

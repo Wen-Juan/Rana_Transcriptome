@@ -1,0 +1,20 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoFisher	topgoKS	topgoFisher	classicFisher	cluster
+GO:0005615	extracellular space	1266	406	343.27	3	5e-07	0.00056	1.5e-05	out_CC
+GO:0070852	cell body fiber	9	7	2.44	12	0.00033	0.00225	0.00225	out_CC
+GO:0000786	nucleosome	16	12	4.34	2	0.00033	9.0e-05	9.0e-05	out_CC
+GO:0022625	cytosolic large ribosomal subunit	16	10	4.34	13	0.00056	0.00317	0.00317	out_CC
+GO:0005578	proteinaceous extracellular matrix	170	79	46.09	1	0.00070	6.6e-05	4.0e-08	out_CC
+GO:0070062	extracellular exosome	991	308	268.7	9	0.00070	0.00184	0.00184	out_CC
+GO:0031012	extracellular matrix	236	109	63.99	7	0.00076	0.00139	1.7e-10	out_CC
+GO:0005925	focal adhesion	241	88	65.35	4	0.00131	0.00077	0.00077	out_CC
+GO:0030141	secretory granule	207	70	56.13	15	0.00205	0.00443	0.01876	out_CC
+GO:0005667	transcription factor complex	153	54	41.48	5	0.00225	0.00107	0.01541	out_CC
+GO:0043025	neuronal cell body	258	93	69.95	16	0.00248	0.00468	0.00089	out_CC
+GO:0005887	integral component of plasma membrane	479	162	129.88	6	0.00293	0.00123	0.00053	out_CC
+GO:0031045	dense core granule	7	6	1.9	11	0.00369	0.00213	0.00213	out_CC
+GO:0031672	A band	20	8	5.42	32	0.00390	0.01991	0.14798	out_CC
+GO:0005604	basement membrane	26	17	7.05	14	0.00421	0.00388	5.0e-05	out_CC
+GO:0071547	piP-body	5	4	1.36	34	0.00431	0.02113	0.02113	out_CC
+GO:0014069	postsynaptic density	136	53	36.88	8	0.00654	0.00163	0.00163	out_CC
+GO:0043083	synaptic cleft	6	5	1.63	20	0.00865	0.00679	0.00679	out_CC
+GO:0031258	lamellipodium membrane	21	9	5.69	79	0.00904	0.08770	0.08770	out_CC

@@ -109,8 +109,9 @@ write(summary(rowSums(cpm(sum10)/ncol(sum10))), filter_file, append=T, sep='\t',
 
 # spec <- dgl[rowSums(cpm(dgl)>=2) > 3,] # The gene must be expressed in at least 3 libaries (remove sex specific genes)
 dgl <- dgl[aveLogCPM(dgl) > 0,] # filter by average reads
-#dgl <- dgl[rowSums(cpm(dgl)>=2) > 3,] #the 5 means there are 10 libraries in total with 5 males and 5 females
-dgl <- dgl[rowSums(cpm(dgl)>1) >=2,]
+#dgl <- dgl[rowSums(cpm(dgl)) >= 2,]
+#dgl <- dgl[rowSums(cpm(dgl)>=1) >= 3,] #the 5 means there are 10 libraries in total with 5 males and 5 females
+#dgl <- dgl[rowSums(cpm(dgl)>1) >=2,]
 
 
 write(paste("dgl"), filter_file, append=T)
@@ -161,56 +162,55 @@ legend('bottom', inset=0.02, legend=levels(design$group), pch = pchs, col=cols,c
 dev.off()
 
 # plotting PCA 
-install.packages('ggfortify')
-library('ggfortify')
+#install.packages('ggfortify')
+#library('ggfortify')
 
-y <- dgl
-count_norm <- data.frame(y$counts)
-count_norm1 <- data.frame(t(count_norm[,1:61]))
-str(count_norm1)
+#y <- dgl
+#count_norm <- data.frame(y$counts)
+#count_norm1 <- data.frame(t(count_norm[,1:61]))
+#str(count_norm1)
 
-pcaData <- count_norm1
-pca <- prcomp(pcaData, scale. = TRUE)
-summary(pca)
+#pcaData <- count_norm1
+#pca <- prcomp(pcaData, scale. = TRUE)
+#summary(pca)
 
-rownames(count_norm1) <- c("23F1", "23F2", "23F3", "23M1","23M3","23M2","27F1","27F2","27F3", "27M1","27M2","27M3","31F1","31F2", "31F3", "31F4", "31M1","31M2","31M3","31M4","31M5","43F1","43F2", "43F3", "43M1","43M2","43M3","46F1","46F2","46M1","46M2","46M3", "FB1", "FB2", "FB3", "FB4","FB5", "MB1", "MB2", "MB3", "MB4", "MB5", "FO1", "FO2", "FO3", "FO4", "FO5", "MT1", "MT2", "MT3", "MT4", "MT5", "FL1", "FL2", "FL3", "FL4", "FL5", "ML1", "ML2", "ML3", "ML4")
-str(count_norm1)
-count_norm1$stage <- c("23", "23", "23", "23","23","23","27","27","27", "27","27","27","31","31", "31", "31", "31","31","31","31","31","43","43", "43", "43","43","43","46","46","46","46","46","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Liver","Liver","Liver","Liver","Liver","Liver","Liver","Liver","Liver")
-count_norm1$sex <- c("female","female","female","male","male","male","female","female","female","male","male","male","female","female","female","female","male","male","male","male","male","female","female","female","male","male","male","female","female","male","male","male","female","female","female","female","female","male","male","male","male","male","female","female","female","female","female","male","male","male","male","male","female","female","female","female","female","male","male","male","male")
+#rownames(count_norm1) <- c("23F1", "23F2", "23F3", "23M1","23M3","23M2","27F1","27F2","27F3", "27M1","27M2","27M3","31F1","31F2", "31F3", "31F4", "31M1","31M2","31M3","31M4","31M5","43F1","43F2", "43F3", "43M1","43M2","43M3","46F1","46F2","46M1","46M2","46M3", "FB1", "FB2", "FB3", "FB4","FB5", "MB1", "MB2", "MB3", "MB4", "MB5", "FO1", "FO2", "FO3", "FO4", "FO5", "MT1", "MT2", "MT3", "MT4", "MT5", "FL1", "FL2", "FL3", "FL4", "FL5", "ML1", "ML2", "ML3", "ML4")
+#str(count_norm1)
+#count_norm1$stage <- c("23", "23", "23", "23","23","23","27","27","27", "27","27","27","31","31", "31", "31", "31","31","31","31","31","43","43", "43", "43","43","43","46","46","46","46","46","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Liver","Liver","Liver","Liver","Liver","Liver","Liver","Liver","Liver")
+#count_norm1$sex <- c("female","female","female","male","male","male","female","female","female","male","male","male","female","female","female","female","male","male","male","male","male","female","female","female","male","male","male","female","female","male","male","male","female","female","female","female","female","male","male","male","male","male","female","female","female","female","female","male","male","male","male","male","female","female","female","female","female","male","male","male","male")
 
-count_i <- data.frame(pca$x, stage=count_norm1$stage, sex=count_norm1$sex)
-str(count_i)
+#count_i <- data.frame(pca$x, stage=count_norm1$stage, sex=count_norm1$sex)
+#str(count_i)
 
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissues_pc1pc2.pdf")
-autoplot(pca, data = count_i, x=1, y=2, colour = 'stage', shape='sex', size=4)
-dev.off()
+#pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissues_pc1pc2.pdf")
+#autoplot(pca, data = count_i, x=1, y=2, colour = 'stage', shape='sex', size=4, ylim=c(-0.3,0.5), xlim=c(-0.3,0.3))
+#dev.off()
 
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissues_pc3pc4.pdf")
-autoplot(pca, data = count_i, x=3, y=4, colour = 'stage', shape='sex', size=4)
-dev.off()
+#pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissues_pc3pc4.pdf")
+#autoplot(pca, data = count_i, x=3, y=4, colour = 'stage', shape='sex', size=4, ylim=c(-0.3,0.3), xlim=c(-0.3,0.5))
+#dev.off()
 
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissues_pc5pc6.pdf")
-autoplot(pca, data = count_i, x=5, y=6, colour = 'stage', shape='sex', size=4)
-dev.off()
+#pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissues_pc5pc6.pdf")
+#autoplot(pca, data = count_i, x=5, y=6, colour = 'stage', shape='sex', size=4, ylim=c(-0.3,0.5), xlim=c(-0.3,0.5))
+#dev.off()
 
-ggplot (count_i, aes(x=PC1,y=PC2,col=stage,shape=sex)) + #this does not give variance percentage.
-  geom_point(size=3,alpha=0.8)+
-  scale_color_manual(values = c("orange", "red","pink","darkblue","blue", "brown", "green",  "grey"))+ 
-  theme_set(theme_bw(base_size=12)) +
-  theme(legend.justification=c(1,0), legend.position=c(0.95,0.05)) 
+#ggplot (count_i, aes(x=PC1,y=PC2,col=stage,shape=sex)) + #this does not give variance percentage.
+#  geom_point(size=3,alpha=0.8)+
+#  scale_color_manual(values = c("orange", "red","pink","darkblue","blue", "brown", "green",  "grey"))+ 
+#  theme_set(theme_bw(base_size=12)) +
+#  theme(legend.justification=c(1,0), legend.position=c(0.95,0.05)) 
 
- 
 
-ggplot (count_i, aes(x=PC3,y=PC4,col=stage,shape=sex,variance_percentage = TRUE)) + #this does not give variance percentage.
-  geom_point(size=3,alpha=0.8) +
-  scale_color_manual(values = c("orange", "red","pink","darkblue","blue", "brown", "green",  "grey"))+ 
-  theme_set(theme_bw(base_size=12))
+#ggplot (count_i, aes(x=PC3,y=PC4,col=stage,shape=sex,variance_percentage = TRUE)) + #this does not give variance percentage.
+# geom_point(size=3,alpha=0.8) +
+#  scale_color_manual(values = c("orange", "red","pink","darkblue","blue", "brown", "green",  "grey"))+ 
+#  theme_set(theme_bw(base_size=12))
 
-ggplot (count_i, aes(x=PC5,y=PC6,col=stage,shape=sex)) + #this does not give variance percentage.
-  geom_point(size=3,alpha=0.8)+
-  scale_color_manual(values = c("orange", "red","pink","darkblue","blue", "brown", "green",  "grey"))+ 
-  theme_set(theme_bw(base_size=12)) +
-  theme(legend.justification=c(1,0), legend.position=c(0.95,0.05))
+#ggplot (count_i, aes(x=PC5,y=PC6,col=stage,shape=sex)) + #this does not give variance percentage.
+#  geom_point(size=3,alpha=0.8)+
+#  scale_color_manual(values = c("orange", "red","pink","darkblue","blue", "brown", "green",  "grey"))+ 
+#  theme_set(theme_bw(base_size=12)) +
+#  theme(legend.justification=c(1,0), legend.position=c(0.95,0.05))
 
 #pca1 <- PCA(pcaData)
 #par(mar=c(5,5,4,3))

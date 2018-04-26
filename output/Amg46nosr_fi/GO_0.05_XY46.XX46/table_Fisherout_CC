@@ -1,0 +1,70 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
+GO:0005634	nucleus	3814	1481	1083.4	1	1.2e-23	5.2e-19	< 1e-30	out_CC
+GO:0005654	nucleoplasm	1545	641	438.87	2	6.0e-16	2.0e-13	< 1e-30	out_CC
+GO:0005730	nucleolus	492	230	139.76	4	1.9e-12	5.1e-12	6.1e-19	out_CC
+GO:0032040	small-subunit processome	27	25	7.67	3	3.7e-12	3.1e-12	3.7e-12	out_CC
+GO:0000932	P-body	61	39	17.33	5	7.8e-09	8.6e-10	7.8e-09	out_CC
+GO:0000777	condensed chromosome kinetochore	31	23	8.81	6	1.6e-07	6.4e-09	1.6e-07	out_CC
+GO:0016607	nuclear speck	196	86	55.68	8	2.2e-06	7.0e-06	2.2e-06	out_CC
+GO:0044452	nucleolar part	80	49	22.72	10	2.3e-06	1.5e-05	8.3e-10	out_CC
+GO:0070652	HAUS complex	10	10	2.84	7	3.4e-06	4.8e-06	3.4e-06	out_CC
+GO:0030686	90S preribosome	15	13	4.26	14	4.4e-06	2.6e-05	4.4e-06	out_CC
+GO:0071011	precatalytic spliceosome	21	16	5.97	9	7.6e-06	8.2e-06	7.6e-06	out_CC
+GO:1902555	endoribonuclease complex	9	9	2.56	16	1.2e-05	3.1e-05	1.2e-05	out_CC
+GO:0001650	fibrillar center	60	33	17.04	26	1.3e-05	0.00010	1.3e-05	out_CC
+GO:0000922	spindle pole	116	55	32.95	17	1.7e-05	3.3e-05	9.8e-06	out_CC
+GO:0030687	preribosome, large subunit precursor	18	14	5.11	27	2.0e-05	0.00011	2.0e-05	out_CC
+GO:0071339	MLL1 complex	22	16	6.25	15	2.0e-05	3.0e-05	2.0e-05	out_CC
+GO:0005681	spliceosomal complex	106	61	30.11	24	2.3e-05	7.6e-05	2.8e-10	out_CC
+GO:0005643	nuclear pore	51	34	14.49	11	2.5e-05	1.6e-05	1.5e-08	out_CC
+GO:0008023	transcription elongation factor complex	23	16	6.53	30	4.9e-05	0.00017	4.9e-05	out_CC
+GO:0034719	SMN-Sm protein complex	15	12	4.26	18	5.0e-05	3.3e-05	5.0e-05	out_CC
+GO:0034709	methylosome	10	9	2.84	22	8.9e-05	6.8e-05	8.9e-05	out_CC
+GO:0005666	DNA-directed RNA polymerase III complex	10	9	2.84	29	8.9e-05	0.00014	8.9e-05	out_CC
+GO:0005732	small nucleolar ribonucleoprotein comple...	10	9	2.84	28	8.9e-05	0.00012	8.9e-05	out_CC
+GO:0000776	kinetochore	71	46	20.17	12	9.9e-05	1.7e-05	1.8e-10	out_CC
+GO:0005669	transcription factor TFIID complex	22	15	6.25	39	0.00012	0.00081	0.00012	out_CC
+GO:0005819	spindle	253	121	71.87	23	0.00019	7.0e-05	2.7e-11	out_CC
+GO:0000176	nuclear exosome (RNase complex)	11	9	3.12	31	0.00036	0.00022	0.00036	out_CC
+GO:0031965	nuclear membrane	179	77	50.85	20	0.00036	4.2e-05	1.8e-05	out_CC
+GO:0046540	U4/U6 x U5 tri-snRNP complex	17	12	4.83	37	0.00037	0.00076	0.00037	out_CC
+GO:0042555	MCM complex	6	6	1.7	13	0.00052	2.3e-05	0.00052	out_CC
+GO:0000780	condensed nuclear chromosome, centromeri...	6	6	1.7	33	0.00052	0.00026	0.00052	out_CC
+GO:0000790	nuclear chromatin	150	70	42.61	67	0.00053	0.00492	1.3e-06	out_CC
+GO:0000775	chromosome, centromeric region	94	62	26.7	42	0.00094	0.00142	3.5e-14	out_CC
+GO:0005686	U2 snRNP	14	10	3.98	49	0.00103	0.00223	0.00103	out_CC
+GO:0005689	U12-type spliceosomal complex	14	10	3.98	21	0.00103	6.8e-05	0.00103	out_CC
+GO:0032797	SMN complex	10	8	2.84	40	0.00106	0.00104	0.00106	out_CC
+GO:0097504	Gemini of coiled bodies	10	8	2.84	41	0.00106	0.00104	0.00106	out_CC
+GO:0016592	mediator complex	10	8	2.84	43	0.00106	0.00147	0.00106	out_CC
+GO:0031080	nuclear pore outer ring	10	8	2.84	34	0.00106	0.00028	0.00106	out_CC
+GO:0043234	protein complex	1623	530	461.03	19	0.00127	3.5e-05	2.2e-05	out_CC
+GO:0071546	pi-body	5	5	1.42	25	0.00184	9.3e-05	0.00184	out_CC
+GO:0071547	piP-body	5	5	1.42	35	0.00184	0.00031	0.00184	out_CC
+GO:0005663	DNA replication factor C complex	5	5	1.42	32	0.00184	0.00026	0.00184	out_CC
+GO:0005688	U6 snRNP	5	5	1.42	38	0.00184	0.00079	0.00184	out_CC
+GO:0016442	RISC complex	5	5	1.42	50	0.00184	0.00223	0.00184	out_CC
+GO:0016605	PML body	60	28	17.04	36	0.00195	0.00054	0.00195	out_CC
+GO:0030529	intracellular ribonucleoprotein complex	434	233	123.28	66	0.00272	0.00487	9.6e-30	out_CC
+GO:0005687	U4 snRNP	7	6	1.99	46	0.00277	0.00184	0.00277	out_CC
+GO:0019908	nuclear cyclin-dependent protein kinase ...	7	6	1.99	56	0.00277	0.00321	0.00277	out_CC
+GO:0005657	replication fork	30	24	8.52	47	0.00295	0.00191	6.3e-09	out_CC
+GO:0005762	mitochondrial large ribosomal subunit	23	13	6.53	55	0.00429	0.00310	0.00429	out_CC
+GO:0005685	U1 snRNP	16	10	4.54	77	0.00460	0.01414	0.00460	out_CC
+GO:0000151	ubiquitin ligase complex	128	58	36.36	44	0.00513	0.00170	3.1e-05	out_CC
+GO:0042645	mitochondrial nucleoid	21	12	5.97	88	0.00537	0.02218	0.00537	out_CC
+GO:0000784	nuclear chromosome, telomeric region	44	22	12.5	53	0.00557	0.00249	0.00196	out_CC
+GO:0097526	spliceosomal tri-snRNP complex	21	16	5.97	61	0.00643	0.00405	7.6e-06	out_CC
+GO:0043186	P granule	13	13	3.69	57	0.00644	0.00345	7.7e-08	out_CC
+GO:0005637	nuclear inner membrane	38	18	10.79	52	0.00670	0.00242	0.00993	out_CC
+GO:0043601	nuclear replisome	10	7	2.84	76	0.00761	0.01205	0.00761	out_CC
+GO:0000974	Prp19 complex	10	7	2.84	45	0.00761	0.00173	0.00761	out_CC
+GO:0031011	Ino80 complex	10	7	2.84	74	0.00761	0.01063	0.00761	out_CC
+GO:0005876	spindle microtubule	27	15	7.67	65	0.00831	0.00469	0.00275	out_CC
+GO:0043596	nuclear replication fork	16	12	4.54	63	0.00839	0.00435	0.00015	out_CC
+GO:0005665	DNA-directed RNA polymerase II, core com...	8	6	2.27	64	0.00841	0.00450	0.00841	out_CC
+GO:0030688	preribosome, small subunit precursor	6	5	1.7	71	0.00845	0.00825	0.00845	out_CC
+GO:0005675	holo TFIIH complex	6	5	1.7	89	0.00845	0.02422	0.00845	out_CC
+GO:0033061	DNA recombinase mediator complex	6	5	1.7	92	0.00845	0.02499	0.00845	out_CC
+GO:0044615	nuclear pore nuclear basket	6	5	1.7	69	0.00845	0.00647	0.00845	out_CC
+GO:0032993	protein-DNA complex	60	28	17.04	79	0.00979	0.01511	0.00195	out_CC

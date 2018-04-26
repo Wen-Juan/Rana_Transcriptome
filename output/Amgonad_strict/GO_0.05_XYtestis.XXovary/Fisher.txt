@@ -1,0 +1,27 @@
+GO category	GO	Term	Annotated	Significant	Expected	topGO (Fisher)	classic (Fisher)
+BP	GO:0006351	transcription, DNA-templated	2186	1311	1299.21	0.00033	0.2916
+BP	GO:0007275	multicellular organism development	3007	1857	1787.16	0.00042	0.0012
+BP	GO:0006412	translation	501	322	297.76	0.00119	0.0131
+BP	GO:0006469	negative regulation of protein kinase ac...	146	98	86.77	0.00182	0.0332
+BP	GO:0016051	carbohydrate biosynthetic process	119	76	70.73	0.00193	0.1854
+BP	GO:0060334	regulation of interferon-gamma-mediated ...	11	11	6.54	0.00326	0.0033
+BP	GO:0046887	positive regulation of hormone secretion	58	40	34.47	0.00456	0.0874
+BP	GO:0006367	transcription initiation from RNA polyme...	58	43	34.47	0.00530	0.0140
+BP	GO:0039694	viral RNA genome replication	10	10	5.94	0.00548	0.0055
+BP	GO:0006241	CTP biosynthetic process	15	12	8.91	0.00549	0.0834
+BP	GO:0007156	homophilic cell adhesion via plasma memb...	87	63	51.71	0.00797	0.0080
+BP	GO:0043393	regulation of protein binding	102	65	60.62	0.00922	0.2168
+BP	GO:0046655	folic acid metabolic process	9	9	5.35	0.00923	0.0092
+BP	GO:0032682	negative regulation of chemokine product...	9	9	5.35	0.00923	0.0092
+BP	GO:0042472	inner ear morphogenesis	56	42	33.28	0.00940	0.0109
+BP	GO:0043154	negative regulation of cysteine-type end...	33	26	19.61	0.00946	0.0157
+CC	GO:0016021	integral component of membrane	1969	1222	1158.31	0.00019	0.00053
+CC	GO:0022625	cytosolic large ribosomal subunit	16	15	9.41	0.00249	0.00249
+CC	GO:0005578	proteinaceous extracellular matrix	170	120	100.01	0.00657	0.00091
+MF	GO:0003735	structural constituent of ribosome	136	97	80.98	0.0027	0.0027
+MF	GO:0019843	rRNA binding	50	40	29.77	0.0063	0.0018
+MF	GO:0008013	beta-catenin binding	55	42	32.75	0.0067	0.0067
+MF	GO:0001784	phosphotyrosine residue binding	22	19	13.1	0.0067	0.0067
+MF	GO:0016779	nucleotidyltransferase activity	113	73	67.29	0.0074	0.1576
+MF	GO:0005070	SH3/SH2 adaptor activity	32	26	19.06	0.0079	0.0079
+MF	GO:0048306	calcium-dependent protein binding	32	26	19.06	0.0079	0.0079

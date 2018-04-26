@@ -271,9 +271,12 @@ dev.off()
 
 #without color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g46_sb.pdf", width=8, height=8)
-p2 <- ggplot2.scatterplot(data=abs_g46_tau, xName='abslogFC.XY46.XX46',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
-  labs(x="G46: Log2(male/female)", y="Tissue specificity") +
-  scale_fill_manual(values = c("grey40"))
+p2 <- 
+  ggplot2.scatterplot(data=abs_g46_tau, xName='abslogFC.XY46.XX46',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
+  labs(x="G46: Log2(male/female)", y="Tissue specificity tau") +
+  scale_fill_manual(values = c("grey40")) +
+  theme(text = element_text(size=2))
+
 dev.off()
 
 #stats
@@ -380,11 +383,11 @@ anova(y)
 #  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 ######
 
-#scatter plot ###
-####
-
+#scatter plot
+####G43
 absg43tau <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G43_tau/Am43_log1_sb_sorted.txt", header = TRUE)
 str(absg43tau)
+####
 
 #with color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g43_sb_colors1.pdf", width=8, height=8)
@@ -396,7 +399,7 @@ dev.off()
 #without color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_g43_sb_nocolors.pdf", width=8, height=8)
 p1 <- ggplot2.scatterplot(data=absg43tau, xName='abslogFC.XY43.XX43',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
-  labs(x="G43: Log2(male/female)", y="Tissue specificity") +
+  labs(x="G43: Log2(male/female)", y="Tissue specificity tau") +
   scale_fill_manual(values = c("grey40"))
 dev.off()
 
@@ -519,7 +522,7 @@ dev.off()
 #without color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_gonad_sb.pdf", width=8, height=8)
 p3 <- ggplot2.scatterplot(data=abs_gonad_tau, xName='abslogFC.XYtestis.XXovary',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
-  labs(x="Gonad: Log2(male/female)", y="Tissue specificity") +
+  labs(x="Gonad: Log2(male/female)", y="Tissue specificity tau") +
   scale_fill_manual(values = c("grey40"))
 
  dev.off()
@@ -786,7 +789,7 @@ Residuals      6829 62.308 0.00912
 #without color
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_brain_exp.pdf", width=8, height=8)
 p5 <-ggplot2.scatterplot(data=brain_tau, xName='asblogFC.XYbrain.Xxrain',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
-  labs(x="Brain: Log2(male/female)", y="Tissue specificity") +
+  labs(x="Brain: Log2(male/female)", y="Tissue specificity tau") +
   scale_fill_manual(values = c("grey40"))
 dev.off()
 
@@ -908,7 +911,7 @@ dev.off()
 
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/scatter_abs_tau_exp_liver_nocolors.pdf", width=8, height=8)
 p4 <- ggplot2.scatterplot(data=liver_tau, xName='abslogFC.XYliver.Xxliver',yName='tau', ylim=c(0,1),size=2,addRegLine=TRUE, addConfidenceInterval=TRUE,color='grey40')  +
-  labs(x="Liver: Log2(male/female)", y="Tissue specificity") +
+  labs(x="Liver: Log2(male/female)", y="Tissue specificity tau") +
   scale_fill_manual(values = c("grey40"))
 dev.off()
 
@@ -1385,6 +1388,8 @@ sample estimates:
   rho 
 0.2247824 
 ###
+install.packages("ggpubr")
+library("ggpubr")
 
 pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/correlation_5tissuesv2.pdf")
 

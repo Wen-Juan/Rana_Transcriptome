@@ -1,0 +1,44 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoFisher	topgoKS	topgoFisher	classicFisher	cluster
+GO:0015031	protein transport	1264	417	404.49	34	9.2e-07	0.01135	0.22046	out_BP
+GO:0007339	binding of sperm to zona pellucida	17	12	5.44	10	2.9e-06	0.00124	0.00124	out_BP
+GO:0060467	negative regulation of fertilization	6	6	1.92	8	9.5e-06	0.00107	0.00107	out_BP
+GO:0006793	phosphorus metabolic process	1807	559	578.26	2	2.4e-05	0.00012	0.86223	out_BP
+GO:0016266	O-glycan processing	24	18	7.68	1	3.3e-05	1.9e-05	1.9e-05	out_BP
+GO:0006383	transcription from RNA polymerase III pr...	38	22	12.16	3	0.00042	0.00046	0.00086	out_BP
+GO:0001522	pseudouridine synthesis	17	10	5.44	7	0.00060	0.00107	0.02031	out_BP
+GO:0007369	gastrulation	129	44	41.28	51	0.00065	0.01759	0.33354	out_BP
+GO:0070125	mitochondrial translational elongation	40	17	12.8	285	0.00089	0.10616	0.10616	out_BP
+GO:0006547	histidine metabolic process	5	5	1.6	16	0.00098	0.00335	0.00335	out_BP
+GO:0032926	negative regulation of activin receptor ...	9	8	2.88	6	0.00176	0.00070	0.00070	out_BP
+GO:0006400	tRNA modification	49	28	15.68	4	0.00190	0.00051	0.00024	out_BP
+GO:0007080	mitotic metaphase plate congression	24	14	7.68	23	0.00194	0.00611	0.00689	out_BP
+GO:0070936	protein K48-linked ubiquitination	33	20	10.56	5	0.00217	0.00066	0.00066	out_BP
+GO:0017148	negative regulation of translation	118	48	37.76	21	0.00220	0.00557	0.02835	out_BP
+GO:2000344	positive regulation of acrosome reaction	5	4	1.6	87	0.00223	0.03898	0.03898	out_BP
+GO:0006189	'de novo' IMP biosynthetic process	7	6	2.24	18	0.00235	0.00544	0.00544	out_BP
+GO:0032469	endoplasmic reticulum calcium ion homeos...	9	5	2.88	300	0.00239	0.12511	0.12511	out_BP
+GO:0006670	sphingosine metabolic process	7	6	2.24	19	0.00244	0.00544	0.00544	out_BP
+GO:0006914	autophagy	263	97	84.16	11	0.00255	0.00183	0.05063	out_BP
+GO:0033574	response to testosterone	22	10	7.04	323	0.00271	0.13122	0.13122	out_BP
+GO:0048066	developmental pigmentation	27	15	8.64	63	0.00281	0.03263	0.00953	out_BP
+GO:0008033	tRNA processing	97	52	31.04	13	0.00325	0.00231	8.0e-06	out_BP
+GO:0070897	DNA-templated transcriptional preinitiat...	15	9	4.8	15	0.00405	0.00335	0.02349	out_BP
+GO:0070534	protein K63-linked ubiquitination	32	17	10.24	9	0.00449	0.00108	0.01056	out_BP
+GO:0006289	nucleotide-excision repair	56	24	17.92	57	0.00483	0.02773	0.05693	out_BP
+GO:0010458	exit from mitosis	15	9	4.8	44	0.00499	0.01546	0.02349	out_BP
+GO:0000462	maturation of SSU-rRNA from tricistronic...	24	13	7.68	29	0.00516	0.01032	0.02008	out_BP
+GO:0061311	cell surface receptor signaling pathway ...	11	6	3.52	42	0.00561	0.01475	0.10296	out_BP
+GO:0051898	negative regulation of protein kinase B ...	31	14	9.92	165	0.00582	0.08619	0.08619	out_BP
+GO:0016051	carbohydrate biosynthetic process	119	46	38.08	14	0.00605	0.00278	0.07292	out_BP
+GO:0035871	protein K11-linked deubiquitination	9	7	2.88	25	0.00647	0.00641	0.00641	out_BP
+GO:0007098	centrosome cycle	87	31	27.84	28	0.00657	0.00695	0.26705	out_BP
+GO:0034501	protein localization to kinetochore	12	6	3.84	339	0.00677	0.15200	0.15200	out_BP
+GO:0042438	melanin biosynthetic process	8	5	2.56	139	0.00780	0.07490	0.07490	out_BP
+GO:0000959	mitochondrial RNA metabolic process	28	16	8.96	26	0.00855	0.00663	0.00519	out_BP
+GO:0071108	protein K48-linked deubiquitination	18	11	5.76	30	0.00880	0.01032	0.01032	out_BP
+GO:0070979	protein K11-linked ubiquitination	24	15	7.68	12	0.00891	0.00203	0.00203	out_BP
+GO:0046323	glucose import	45	21	14.4	38	0.00911	0.01467	0.02787	out_BP
+GO:0016567	protein ubiquitination	496	200	158.73	27	0.00922	0.00670	3.9e-05	out_BP
+GO:0007338	single fertilization	42	21	13.44	531	0.00948	0.19863	0.01138	out_BP
+GO:2000027	regulation of organ morphogenesis	81	26	25.92	59	0.00949	0.03103	0.53443	out_BP
+GO:0052805	imidazole-containing compound catabolic ...	5	5	1.6	17	0.00969	0.00335	0.00335	out_BP

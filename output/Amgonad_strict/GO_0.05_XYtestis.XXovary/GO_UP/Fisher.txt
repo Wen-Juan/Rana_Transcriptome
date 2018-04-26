@@ -1,0 +1,154 @@
+GO category	GO	Term	Annotated	Significant	Expected	topGO (Fisher)	classic (Fisher)
+BP	GO:0006412	translation	501	165	137.43	1.8e-11	0.00315
+BP	GO:0007155	cell adhesion	767	306	210.4	3.9e-08	6.2e-15
+BP	GO:0007275	multicellular organism development	3007	991	824.88	2.9e-06	2.1e-15
+BP	GO:0007156	homophilic cell adhesion via plasma memb...	87	44	23.87	3.7e-06	3.7e-06
+BP	GO:0007229	integrin-mediated signaling pathway	60	31	16.46	1.1e-05	5.8e-05
+BP	GO:0042472	inner ear morphogenesis	56	27	15.36	4.9e-05	0.00072
+BP	GO:0030154	cell differentiation	2178	731	597.47	0.00010	1.1e-12
+BP	GO:0042989	sequestering of actin monomers	7	7	1.92	0.00012	0.00012
+BP	GO:0007283	spermatogenesis	238	88	65.29	0.00019	0.00074
+BP	GO:0043393	regulation of protein binding	102	33	27.98	0.00022	0.15678
+BP	GO:0034587	piRNA metabolic process	19	13	5.21	0.00023	0.00023
+BP	GO:0045071	negative regulation of viral genome repl...	22	14	6.04	0.00026	0.00041
+BP	GO:0071481	cellular response to X-ray	11	9	3.02	0.00027	0.00027
+BP	GO:0002181	cytoplasmic translation	41	19	11.25	0.00029	0.00730
+BP	GO:0045944	positive regulation of transcription fro...	517	174	141.82	0.00063	0.00084
+BP	GO:0006351	transcription, DNA-templated	2186	630	599.67	0.00068	0.05548
+BP	GO:1900016	negative regulation of cytokine producti...	8	7	2.19	0.00071	0.00071
+BP	GO:0045654	positive regulation of megakaryocyte dif...	8	7	2.19	0.00071	0.00071
+BP	GO:2000273	positive regulation of receptor activity	22	11	6.04	0.00077	0.02017
+BP	GO:0001525	angiogenesis	266	104	72.97	0.00082	2.0e-05
+BP	GO:0039694	viral RNA genome replication	10	8	2.74	0.00082	0.00082
+BP	GO:0010837	regulation of keratinocyte proliferation	19	10	5.21	0.00082	0.01741
+BP	GO:0021591	ventricular system development	18	10	4.94	0.00083	0.01089
+BP	GO:0009749	response to glucose	102	39	27.98	0.00110	0.01115
+BP	GO:0048025	negative regulation of mRNA splicing, vi...	19	12	5.21	0.00119	0.00119
+BP	GO:0043046	DNA methylation involved in gamete gener...	17	11	4.66	0.00145	0.00145
+BP	GO:0034341	response to interferon-gamma	49	24	13.44	0.00153	0.00105
+BP	GO:0051983	regulation of chromosome segregation	66	22	18.11	0.00155	0.17304
+BP	GO:0009446	putrescine biosynthetic process	5	5	1.37	0.00155	0.00155
+BP	GO:0071286	cellular response to magnesium ion	5	5	1.37	0.00155	0.00155
+BP	GO:0007169	transmembrane receptor protein tyrosine ...	373	128	102.32	0.00183	0.00177
+BP	GO:0010720	positive regulation of cell development	255	85	69.95	0.00197	0.02085
+BP	GO:0009653	anatomical structure morphogenesis	1473	492	404.07	0.00226	3.4e-08
+BP	GO:1903140	regulation of establishment of endotheli...	7	6	1.92	0.00227	0.00227
+BP	GO:1900452	regulation of long term synaptic depress...	7	6	1.92	0.00227	0.00227
+BP	GO:0038063	collagen-activated tyrosine kinase recep...	7	6	1.92	0.00227	0.00227
+BP	GO:0006165	nucleoside diphosphate phosphorylation	59	20	16.18	0.00229	0.16558
+BP	GO:0030705	cytoskeleton-dependent intracellular tra...	107	28	29.35	0.00230	0.65153
+BP	GO:0035108	limb morphogenesis	72	29	19.75	0.00240	0.01219
+BP	GO:0043931	ossification involved in bone maturation	15	9	4.11	0.00242	0.00813
+BP	GO:0051968	positive regulation of synaptic transmis...	9	7	2.47	0.00242	0.00242
+BP	GO:2000310	regulation of NMDA receptor activity	9	7	2.47	0.00242	0.00242
+BP	GO:0021952	central nervous system projection neuron...	9	7	2.47	0.00242	0.00242
+BP	GO:0007267	cell-cell signaling	707	231	193.94	0.00270	0.00085
+BP	GO:0030509	BMP signaling pathway	78	28	21.4	0.00304	0.06275
+BP	GO:0045727	positive regulation of translation	61	23	16.73	0.00304	0.05165
+BP	GO:0002040	sprouting angiogenesis	48	26	13.17	0.00342	8.1e-05
+BP	GO:0000165	MAPK cascade	409	137	112.2	0.00346	0.00347
+BP	GO:0006805	xenobiotic metabolic process	31	16	8.5	0.00364	0.00364
+BP	GO:0006898	receptor-mediated endocytosis	131	50	35.94	0.00412	0.00466
+BP	GO:0007158	neuron cell-cell adhesion	14	9	3.84	0.00429	0.00429
+BP	GO:0007528	neuromuscular junction development	37	16	10.15	0.00505	0.02773
+BP	GO:0050806	positive regulation of synaptic transmis...	63	31	17.28	0.00510	0.00019
+BP	GO:0031589	cell-substrate adhesion	197	66	54.04	0.00512	0.03426
+BP	GO:0055010	ventricular cardiac muscle tissue morpho...	20	10	5.49	0.00521	0.02641
+BP	GO:0048592	eye morphogenesis	83	31	22.77	0.00561	0.03077
+BP	GO:0090278	negative regulation of peptide hormone s...	25	12	6.86	0.00564	0.02244
+BP	GO:0016202	regulation of striated muscle tissue dev...	53	19	14.54	0.00564	0.11248
+BP	GO:0055013	cardiac muscle cell development	30	12	8.23	0.00565	0.09311
+BP	GO:0033688	regulation of osteoblast proliferation	17	8	4.66	0.00565	0.06624
+BP	GO:0072234	metanephric nephron tubule development	14	7	3.84	0.00565	0.06078
+BP	GO:0034755	iron ion transmembrane transport	10	5	2.74	0.00566	0.10968
+BP	GO:0060079	excitatory postsynaptic potential	31	17	8.5	0.00611	0.00115
+BP	GO:0002230	positive regulation of defense response ...	10	7	2.74	0.00617	0.00617
+BP	GO:0045740	positive regulation of DNA replication	21	10	5.76	0.00617	0.03829
+BP	GO:0006241	CTP biosynthetic process	15	8	4.11	0.00617	0.02995
+BP	GO:0009142	nucleoside triphosphate biosynthetic pro...	67	21	18.38	0.00619	0.27575
+BP	GO:0022409	positive regulation of cell-cell adhesio...	98	38	26.88	0.00630	0.00941
+BP	GO:0007140	male meiotic nuclear division	27	14	7.41	0.00637	0.00609
+BP	GO:0051693	actin filament capping	25	13	6.86	0.00638	0.00789
+BP	GO:0086091	regulation of heart rate by cardiac cond...	17	10	4.66	0.00640	0.00640
+BP	GO:0021549	cerebellum development	59	24	16.18	0.00647	0.01878
+BP	GO:0010001	glial cell differentiation	105	42	28.8	0.00686	0.00343
+BP	GO:0048678	response to axon injury	31	14	8.5	0.00695	0.02573
+BP	GO:0032874	positive regulation of stress-activated ...	80	27	21.95	0.00696	0.12698
+BP	GO:0032330	regulation of chondrocyte differentiatio...	21	10	5.76	0.00697	0.03829
+BP	GO:0006228	UTP biosynthetic process	8	6	2.19	0.00698	0.00698
+BP	GO:1900225	regulation of NLRP3 inflammasome complex...	8	6	2.19	0.00698	0.00698
+BP	GO:0007220	Notch receptor processing	8	6	2.19	0.00698	0.00698
+BP	GO:0002675	positive regulation of acute inflammator...	14	7	3.84	0.00698	0.06078
+BP	GO:0006706	steroid catabolic process	13	9	3.57	0.00715	0.00202
+BP	GO:0003056	regulation of vascular smooth muscle con...	6	5	1.65	0.00718	0.00718
+BP	GO:0001574	ganglioside biosynthetic process	6	5	1.65	0.00718	0.00718
+BP	GO:0033605	positive regulation of catecholamine sec...	6	5	1.65	0.00718	0.00718
+BP	GO:0021861	forebrain radial glial cell differentiat...	6	5	1.65	0.00718	0.00718
+BP	GO:0043517	positive regulation of DNA damage respon...	6	5	1.65	0.00718	0.00718
+BP	GO:0031115	negative regulation of microtubule polym...	6	5	1.65	0.00718	0.00718
+BP	GO:0045655	regulation of monocyte differentiation	6	5	1.65	0.00718	0.00718
+BP	GO:1904778	positive regulation of protein localizat...	6	5	1.65	0.00718	0.00718
+BP	GO:1990869	cellular response to chemokine	6	5	1.65	0.00718	0.00718
+BP	GO:0051127	positive regulation of actin nucleation	13	6	3.57	0.00719	0.11700
+BP	GO:0046887	positive regulation of hormone secretion	58	19	15.91	0.00817	0.21974
+BP	GO:0030593	neutrophil chemotaxis	30	11	8.23	0.00817	0.17484
+BP	GO:0007420	brain development	391	150	107.26	0.00825	1.1e-06
+BP	GO:0007626	locomotory behavior	106	43	29.08	0.00837	0.00225
+BP	GO:0071222	cellular response to lipopolysaccharide	70	26	19.2	0.00862	0.04826
+BP	GO:0006469	negative regulation of protein kinase ac...	146	53	40.05	0.00871	0.01148
+BP	GO:0060348	bone development	98	46	26.88	0.00987	2.7e-05
+CC	GO:0005578	proteinaceous extracellular matrix	170	79	46.09	6.6e-05	4.0e-08
+CC	GO:0000786	nucleosome	16	12	4.34	9.0e-05	9.0e-05
+CC	GO:0005615	extracellular space	1266	406	343.27	0.00056	1.5e-05
+CC	GO:0005925	focal adhesion	241	88	65.35	0.00077	0.00077
+CC	GO:0005667	transcription factor complex	153	54	41.48	0.00107	0.01541
+CC	GO:0005887	integral component of plasma membrane	479	162	129.88	0.00123	0.00053
+CC	GO:0031012	extracellular matrix	236	109	63.99	0.00139	1.7e-10
+CC	GO:0014069	postsynaptic density	136	53	36.88	0.00163	0.00163
+CC	GO:0070062	extracellular exosome	991	308	268.7	0.00184	0.00184
+CC	GO:0045211	postsynaptic membrane	149	57	40.4	0.00185	0.00185
+CC	GO:0031045	dense core granule	7	6	1.9	0.00213	0.00213
+CC	GO:0070852	cell body fiber	9	7	2.44	0.00225	0.00225
+CC	GO:0022625	cytosolic large ribosomal subunit	16	10	4.34	0.00317	0.00317
+CC	GO:0005604	basement membrane	26	17	7.05	0.00388	5.0e-05
+CC	GO:0030141	secretory granule	207	70	56.13	0.00443	0.01876
+CC	GO:0043025	neuronal cell body	258	93	69.95	0.00468	0.00089
+CC	GO:0016459	myosin complex	45	19	12.2	0.00542	0.02014
+CC	GO:0005886	plasma membrane	2484	770	673.52	0.00602	2.4e-07
+CC	GO:0043256	laminin complex	8	6	2.17	0.00655	0.00655
+CC	GO:0043083	synaptic cleft	6	5	1.63	0.00679	0.00679
+CC	GO:0008305	integrin complex	20	11	5.42	0.00764	0.00764
+CC	GO:0005938	cell cortex	89	37	24.13	0.00972	0.00214
+CC	GO:0060076	excitatory synapse	18	10	4.88	0.00997	0.00997
+MF	GO:0003735	structural constituent of ribosome	136	70	38.13	5.6e-09	5.6e-09
+MF	GO:0005509	calcium ion binding	448	170	125.62	2.2e-06	2.2e-06
+MF	GO:0005201	extracellular matrix structural constitu...	39	25	10.94	2.8e-06	2.8e-06
+MF	GO:0004888	transmembrane signaling receptor activit...	417	144	116.93	4.6e-05	0.00183
+MF	GO:0004550	nucleoside diphosphate kinase activity	20	14	5.61	0.00012	0.00012
+MF	GO:0005198	structural molecule activity	422	183	118.33	0.00012	4.4e-12
+MF	GO:0004716	signal transducer, downstream of recepto...	6	6	1.68	0.00048	0.00048
+MF	GO:0005178	integrin binding	65	31	18.23	0.00057	0.00057
+MF	GO:0016709	oxidoreductase activity, acting on paire...	21	12	5.89	0.00083	0.00478
+MF	GO:0004714	transmembrane receptor protein tyrosine ...	50	25	14.02	0.00147	0.00080
+MF	GO:0003779	actin binding	327	125	91.69	0.00158	3.3e-05
+MF	GO:0019955	cytokine binding	42	20	11.78	0.00175	0.00535
+MF	GO:0030507	spectrin binding	20	12	5.61	0.00275	0.00275
+MF	GO:0004181	metallocarboxypeptidase activity	18	11	5.05	0.00339	0.00339
+MF	GO:0005179	hormone activity	38	20	10.66	0.00459	0.00117
+MF	GO:0004402	histone acetyltransferase activity	30	13	8.41	0.00481	0.05207
+MF	GO:0003950	NAD+ ADP-ribosyltransferase activity	42	20	11.78	0.00535	0.00535
+MF	GO:0070840	dynein complex binding	19	11	5.33	0.00602	0.00602
+MF	GO:0001540	amyloid-beta binding	19	11	5.33	0.00602	0.00602
+MF	GO:0030898	actin-dependent ATPase activity	12	8	3.36	0.00603	0.00603
+MF	GO:0008373	sialyltransferase activity	17	9	4.77	0.00604	0.02624
+MF	GO:0090079	translation regulator activity, nucleic ...	13	7	3.65	0.00617	0.04427
+MF	GO:0003682	chromatin binding	300	107	84.12	0.00629	0.00211
+MF	GO:0001047	core promoter binding	92	35	25.8	0.00681	0.02350
+MF	GO:0019901	protein kinase binding	342	119	95.9	0.00692	0.00328
+MF	GO:0001105	RNA polymerase II transcription coactiva...	17	10	4.77	0.00757	0.00757
+MF	GO:0051015	actin filament binding	119	46	33.37	0.00759	0.00759
+MF	GO:0051010	microtubule plus-end binding	8	6	2.24	0.00785	0.00785
+MF	GO:0005080	protein kinase C binding	22	12	6.17	0.00787	0.00787
+MF	GO:0003680	AT DNA binding	6	5	1.68	0.00795	0.00795
+MF	GO:0097110	scaffold protein binding	30	15	8.41	0.00877	0.00877
+MF	GO:0008201	heparin binding	75	31	21.03	0.00886	0.00886

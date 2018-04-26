@@ -7,12 +7,11 @@ install_github("easyGgplot2", "kassambara")
 library(easyGgplot2)
 
 #load the corresponding data files.
-
 col1 <- rgb(red = 0, green = 0, blue = 0, alpha = 0.1)
 col2 <- rgb(red = 1, green = 0, blue = 0, alpha = 0.6)
 
-datapath <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46male/'
-kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46male/LogCPM_0.05_Amg46male copy.txt",header = T)
+datapath <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46nosr_fi/'
+kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46nosr_fi/LogCPM_0.05_Amg46nosr copy.txt",header = T)
 str(kdata)
 
 ###restrict the analysis to sex-biaxed genes
@@ -34,8 +33,8 @@ group1.expr.minus <- (map.data$Am2_463 + map.data$Am4_461 + map.data$Am6_462) / 
 #group1.expr.minus <- (map.data$A10MB + map.data$A15MB + map.data$A16MB + map.data$A17MB + map.data$A8MB) /5 #XY in brain
 #group1.expr.minus <- (map.data$A12ML1 + map.data$A17ML1 + map.data$A15ML1 +map.data$A8ML1)/4 #XY linver
 
-group2.expr.minus <- (map.data$Am5_461) #Sex reversal XX male
-#group2.expr.minus <- (map.data$Am2_464+map.data$Am6_464)/2 #XX male group at G46
+#group2.expr.minus <- (map.data$Am5_461) #Sex reversal XX male
+group2.expr.minus <- (map.data$Am2_464+map.data$Am6_464)/2 #XX female group at G46
 #group2.expr.minus <- (map.data$Am2_433 + map.data$Am4_435 + map.data$Am5_433) / 3 #XX female group at G43
 #group2.expr.minus <- (map.data$A10FO1 + map.data$A17FO1 + map.data$A2FO2 + map.data$A8FO2 + map.data$A6FO1) / 5 #XY male group in gonad
 #group2.expr.minus <- (map.data$A10FB + map.data$A12FB + map.data$A15FB + map.data$A16FB + map.data$A17FB) /5 #XX in brain
@@ -46,6 +45,7 @@ group2.expr <- group2.expr.minus + min(abs(c(group1.expr.minus, group2.expr.minu
 
 
 map.data$ratio <- log2(group1.expr/group2.expr)
+#map.data$ratio <- group1.expr/group2.expr
 map.data$ratio[mapply(is.infinite, map.data$ratio)] <- NA
 
 #gene expression ratio Log2(XY/XX)
@@ -174,17 +174,161 @@ library("zoo")
 install.packages("microbenchmark")
 library("microbenchmark")
 require(zoo)
+install.packages("rtracklayer")
+library("rtracklayer")
+
 
 
 dn_ds <-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds/amm88perc_annotation_dnds.txt", header = T)
 str(dn_ds)
 
+##Assigning Transcripts to Chromosomes###
+Chr1 <- subset(dn_ds, dn_ds$chr=="Chr01")
+Chr2 <- subset(dn_ds, dn_ds$chr=="Chr02")
+Chr3 <- subset(dn_ds, dn_ds$chr=="Chr03")
+Chr4 <- subset(dn_ds, dn_ds$chr=="Chr04")
+Chr5 <- subset(dn_ds, dn_ds$chr=="Chr05")
+Chr6 <- subset(dn_ds, dn_ds$chr=="Chr06")
+Chr7 <- subset(dn_ds, dn_ds$chr=="Chr07")
+Chr8 <- subset(dn_ds, dn_ds$chr=="Chr08")
+Chr9 <- subset(dn_ds, dn_ds$chr=="Chr09")
+Chr10 <- subset(dn_ds, dn_ds$chr=="Chr10")
+
+## Sort According to Position ####
+Chr01_sort <- Chr1[order(Chr1$start),] 
+Chr02_sort <- Chr2[order(Chr2$start),] 
+Chr03_sort <- Chr3[order(Chr3$start),] 
+Chr04_sort <- Chr4[order(Chr4$start),] 
+Chr05_sort <- Chr5[order(Chr5$start),] 
+Chr06_sort <- Chr6[order(Chr6$start),] 
+Chr07_sort <- Chr7[order(Chr7$start),] 
+Chr08_sort <- Chr8[order(Chr8$start),] 
+Chr09_sort <- Chr9[order(Chr9$start),] 
+Chr10_sort <- Chr10[order(Chr10$start),] 
+
+###### Sliding Window Analysis - Judith Visualization ####
+
+library(zoo)
+
+Chr1RT<- rollmean(smooth(Chr01_sort$dnds),40)
+Chr2RT<- rollmean(smooth(Chr02_sort$dnds),40)
+Chr3RT<- rollmean(smooth(Chr03_sort$dnds),40)
+Chr4RT<- rollmean(smooth(Chr04_sort$dnds),40)
+Chr5RT<- rollmean(smooth(Chr05_sort$dnds),40)
+Chr6RT<- rollmean(smooth(Chr06_sort$dnds),40)
+Chr7RT<- rollmean(smooth(Chr07_sort$dnds),40)
+Chr8RT<- rollmean(smooth(Chr08_sort$dnds),40)
+Chr9RT<- rollmean(smooth(Chr09_sort$dnds),40)
+Chr10RT<- rollmean(smooth(Chr10_sort$dnds),40)
+
+
+Rt<- c(Chr3RT,Chr4RT,Chr5RT,Chr6RT,Chr7RT,Chr8RT,Chr9RT,Chr10RT)
+
+
+myfunction <- function(i){
+  Info <- sample(i,1,replace=FALSE)
+  return(Info)
+}
+
+my.perm <- c()
+for(i in 1:10^3){ my.perm[i] <- myfunction(Rt) }
+sorted.perm <- sort(my.perm)
+lowCI <- sorted.perm[25]
+highCI <- sorted.perm[975]
+
+RMpalette <- c("#f0f9e8", "#bae4bc", "#7bccc4", "#43a2ca", "#0868ac")
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/chr1_dnds.pdf", width=7,height=5)
+
+Chr_pos <- rollmean(smooth(Chr01_sort$start),40)
+Chr_dnds <- rollmean(smooth(Chr01_sort$dnds),40)
+plot(Chr01_sort$start, Chr01_sort$dnds,col=alpha(RMpalette[3], 0.5),pch=20, ylim=c(0,0.4), xlab="Position(bp)", ylab="dN/dS",main="Chr01")
+lines(Chr_pos, Chr_dnds,type="l",lwd=5, col=RMpalette[5])
+abline(h=lowCI,lty=2)
+abline(h=highCI,lty=2)
+abline(v=116443467, col="blue",lwd=2,lty=3)
+dev.off()
+
+###gene expression at G46
+
+##Assigning Transcripts to Chromosomes###
+Chr1 <- subset(map.data, map.data$chr=="Chr01")
+Chr2 <- subset(map.data, map.data$chr=="Chr02")
+Chr3 <- subset(map.data, map.data$chr=="Chr03")
+Chr4 <- subset(map.data, map.data$chr=="Chr04")
+Chr5 <- subset(map.data, map.data$chr=="Chr05")
+Chr6 <- subset(map.data, map.data$chr=="Chr06")
+Chr7 <- subset(map.data, map.data$chr=="Chr07")
+Chr8 <- subset(map.data, map.data$chr=="Chr08")
+Chr9 <- subset(map.data, map.data$chr=="Chr09")
+Chr10 <- subset(map.data, map.data$chr=="Chr10")
+
+## Sort According to Position ####
+Chr01_sort <- Chr1[order(Chr1$start),] 
+Chr02_sort <- Chr2[order(Chr2$start),] 
+Chr03_sort <- Chr3[order(Chr3$start),] 
+Chr04_sort <- Chr4[order(Chr4$start),] 
+Chr05_sort <- Chr5[order(Chr5$start),] 
+Chr06_sort <- Chr6[order(Chr6$start),] 
+Chr07_sort <- Chr7[order(Chr7$start),] 
+Chr08_sort <- Chr8[order(Chr8$start),] 
+Chr09_sort <- Chr9[order(Chr9$start),] 
+Chr10_sort <- Chr10[order(Chr10$start),] 
+
+###### Sliding Window Analysis - Judith Visualization ####
+
+library(zoo)
+
+Chr1RT<- rollapply(Chr01_sort$ratio, 40, mean, na.rm = TRUE) #need to switch to rollapply, cause rollmean does not handle NA values.
+Chr2RT<- rollapply(Chr02_sort$ratio, 40, mean, na.rm = TRUE)
+Chr3RT<- rollapply(Chr03_sort$ratio, 40, mean, na.rm = TRUE)
+Chr4RT<- rollapply(Chr04_sort$ratio, 40, mean, na.rm = TRUE)
+Chr5RT<- rollapply(Chr05_sort$ratio, 40, mean, na.rm = TRUE)
+Chr6RT<- rollapply(Chr06_sort$ratio, 40, mean, na.rm = TRUE)
+Chr7RT<- rollapply(Chr07_sort$ratio, 40, mean, na.rm = TRUE)
+Chr8RT<- rollapply(Chr08_sort$ratio, 40, mean, na.rm = TRUE)
+Chr9RT<- rollapply(Chr09_sort$ratio, 40, mean, na.rm = TRUE)
+Chr10RT<- rollapply(Chr10_sort$ratio, 40, mean, na.rm = TRUE)
+
+
+Rt<- c(Chr3RT,Chr4RT,Chr5RT,Chr6RT,Chr7RT,Chr8RT,Chr9RT,Chr10RT)
+
+
+myfunction <- function(i){
+  Info <- sample(i,1,replace=FALSE)
+  return(Info)
+}
+
+my.perm <- c()
+for(i in 1:10^3){ my.perm[i] <- myfunction(Rt) }
+sorted.perm <- sort(my.perm)
+lowCI <- sorted.perm[25]
+highCI <- sorted.perm[975]
+
+RMpalette <- c("#f0f9e8", "#bae4bc", "#7bccc4", "#43a2ca", "#0868ac")
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/chr10_expratio_G46.pdf", width=7,height=5)
+
+Chr_pos <- rollapply(Chr10_sort$start, 40, mean, na.rm = TRUE)
+Chr_ratio <- rollapply(Chr10_sort$ratio, 40, mean, na.rm = TRUE)
+plot(Chr10_sort$start, Chr10_sort$ratio,col=alpha(RMpalette[3], 0.5),pch=20, ylim=c(-6,6), xlab="Position(bp)", ylab="Log2(male:female)",main="Chr10")
+lines(Chr_pos, Chr_ratio,type="l",lwd=5, col=RMpalette[5])
+abline(h=lowCI,lty=2)
+abline(h=highCI,lty=2)
+#abline(v=116443467, col="blue",lwd=2,lty=3)
+dev.off()
+
+#gene expression ratio for gonad
+
+
+##WJ original code without confidential internal
 map.data <- dn_ds
 chr1_1_start <-map.data$start[map.data$chr=='Chr01']
 chr_1_end <- max(map.data$start[map.data$chr=='Chr01'])
 
 zoo.dat <- zoo(map.data$ratio[map.data$chr=='Chr01'], c(chr1_1_start,chr_1_end))
 y <- rollapply(zoo.dat, 40, FUN = mean, align = 'center', na.rm=TRUE) 
+
 
 pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_chr01_malesexreveral_ratio.pdf", width=8, height=8)
 par(mar=c(5,5,4,3)+0.6) 

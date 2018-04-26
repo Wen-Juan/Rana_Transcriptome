@@ -1,0 +1,112 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoFisher	topgoKS	topgoFisher	classicFisher	cluster
+GO:0006412	translation	501	165	137.43	1	3.8e-12	1.8e-11	0.00315	out_BP
+GO:0007155	cell adhesion	767	306	210.4	2	4.7e-09	3.9e-08	6.2e-15	out_BP
+GO:0007156	homophilic cell adhesion via plasma memb...	87	44	23.87	4	1.4e-05	3.7e-06	3.7e-06	out_BP
+GO:0001525	angiogenesis	266	104	72.97	20	1.6e-05	0.00082	2.0e-05	out_BP
+GO:0007229	integrin-mediated signaling pathway	60	31	16.46	5	1.9e-05	1.1e-05	5.8e-05	out_BP
+GO:0034587	piRNA metabolic process	19	13	5.21	11	2.2e-05	0.00023	0.00023	out_BP
+GO:0007283	spermatogenesis	238	88	65.29	9	2.9e-05	0.00019	0.00074	out_BP
+GO:0007275	multicellular organism development	3007	991	824.88	3	5.5e-05	2.9e-06	2.1e-15	out_BP
+GO:0055010	ventricular cardiac muscle tissue morpho...	20	10	5.49	55	7.4e-05	0.00521	0.02641	out_BP
+GO:0045944	positive regulation of transcription fro...	517	174	141.82	15	8.1e-05	0.00063	0.00084	out_BP
+GO:0030154	cell differentiation	2178	731	597.47	7	9.0e-05	0.00010	1.1e-12	out_BP
+GO:0002181	cytoplasmic translation	41	19	11.25	14	9.8e-05	0.00029	0.00730	out_BP
+GO:0071481	cellular response to X-ray	11	9	3.02	13	0.00014	0.00027	0.00027	out_BP
+GO:0042472	inner ear morphogenesis	56	27	15.36	6	0.00031	4.9e-05	0.00072	out_BP
+GO:0043393	regulation of protein binding	102	33	27.98	10	0.00033	0.00022	0.15678	out_BP
+GO:0043046	DNA methylation involved in gamete gener...	17	11	4.66	26	0.00046	0.00145	0.00145	out_BP
+GO:0042989	sequestering of actin monomers	7	7	1.92	8	0.00053	0.00012	0.00012	out_BP
+GO:0051983	regulation of chromosome segregation	66	22	18.11	28	0.00053	0.00155	0.17304	out_BP
+GO:0030509	BMP signaling pathway	78	28	21.4	45	0.00069	0.00304	0.06275	out_BP
+GO:0045071	negative regulation of viral genome repl...	22	14	6.04	12	0.00069	0.00026	0.00041	out_BP
+GO:0043552	positive regulation of phosphatidylinosi...	14	8	3.84	131	0.00070	0.01832	0.01832	out_BP
+GO:0060395	SMAD protein signal transduction	20	8	5.49	775	0.00076	0.15589	0.15589	out_BP
+GO:0039694	viral RNA genome replication	10	8	2.74	21	0.00079	0.00082	0.00082	out_BP
+GO:0022412	cellular process involved in reproductio...	179	64	49.1	617	0.00101	0.11824	0.00865	out_BP
+GO:2000273	positive regulation of receptor activity	22	11	6.04	19	0.00140	0.00077	0.02017	out_BP
+GO:0009749	response to glucose	102	39	27.98	24	0.00160	0.00110	0.01115	out_BP
+GO:0010720	positive regulation of cell development	255	85	69.95	32	0.00162	0.00197	0.02085	out_BP
+GO:0045603	positive regulation of endothelial cell ...	11	7	3.02	107	0.00173	0.01295	0.01295	out_BP
+GO:0009446	putrescine biosynthetic process	5	5	1.37	29	0.00173	0.00155	0.00155	out_BP
+GO:0010837	regulation of keratinocyte proliferation	19	10	5.21	22	0.00198	0.00082	0.01741	out_BP
+GO:0043434	response to peptide hormone	210	71	57.61	129	0.00198	0.01705	0.02368	out_BP
+GO:0048025	negative regulation of mRNA splicing, vi...	19	12	5.21	25	0.00202	0.00119	0.00119	out_BP
+GO:0035108	limb morphogenesis	72	29	19.75	39	0.00205	0.00240	0.01219	out_BP
+GO:0030198	extracellular matrix organization	154	62	42.25	105	0.00208	0.01147	0.00036	out_BP
+GO:1900016	negative regulation of cytokine producti...	8	7	2.19	17	0.00217	0.00071	0.00071	out_BP
+GO:0070092	regulation of glucagon secretion	5	4	1.37	167	0.00233	0.02207	0.02207	out_BP
+GO:1903779	regulation of cardiac conduction	24	10	6.58	525	0.00238	0.09405	0.09405	out_BP
+GO:0045654	positive regulation of megakaryocyte dif...	8	7	2.19	18	0.00258	0.00071	0.00071	out_BP
+GO:2000177	regulation of neural precursor cell prol...	33	11	9.05	277	0.00263	0.05043	0.27935	out_BP
+GO:0042491	auditory receptor cell differentiation	18	6	4.94	761	0.00272	0.15020	0.36964	out_BP
+GO:0007140	male meiotic nuclear division	27	14	7.41	69	0.00272	0.00637	0.00609	out_BP
+GO:0030705	cytoskeleton-dependent intracellular tra...	107	28	29.35	38	0.00278	0.00230	0.65153	out_BP
+GO:0021591	ventricular system development	18	10	4.94	23	0.00288	0.00083	0.01089	out_BP
+GO:0001649	osteoblast differentiation	114	42	31.27	102	0.00294	0.01112	0.01739	out_BP
+GO:0042993	positive regulation of transcription fac...	27	9	7.41	273	0.00302	0.04596	0.30977	out_BP
+GO:1900452	regulation of long term synaptic depress...	7	6	1.92	34	0.00320	0.00227	0.00227	out_BP
+GO:0032330	regulation of chondrocyte differentiatio...	21	10	5.76	76	0.00334	0.00697	0.03829	out_BP
+GO:0001764	neuron migration	73	27	20.03	354	0.00334	0.06425	0.04711	out_BP
+GO:0021952	central nervous system projection neuron...	9	7	2.47	41	0.00335	0.00242	0.00242	out_BP
+GO:0071286	cellular response to magnesium ion	5	5	1.37	30	0.00337	0.00155	0.00155	out_BP
+GO:0001574	ganglioside biosynthetic process	6	5	1.65	82	0.00368	0.00718	0.00718	out_BP
+GO:0035987	endodermal cell differentiation	28	11	7.68	768	0.00372	0.15249	0.11783	out_BP
+GO:0006865	amino acid transport	64	19	17.56	905	0.00373	0.19458	0.38810	out_BP
+GO:0006898	receptor-mediated endocytosis	131	50	35.94	50	0.00377	0.00412	0.00466	out_BP
+GO:0051968	positive regulation of synaptic transmis...	9	7	2.47	42	0.00394	0.00242	0.00242	out_BP
+GO:2000310	regulation of NMDA receptor activity	9	7	2.47	43	0.00394	0.00242	0.00242	out_BP
+GO:0090278	negative regulation of peptide hormone s...	25	12	6.86	57	0.00406	0.00564	0.02244	out_BP
+GO:0006165	nucleoside diphosphate phosphorylation	59	20	16.18	37	0.00411	0.00229	0.16558	out_BP
+GO:0033688	regulation of osteoblast proliferation	17	8	4.66	60	0.00436	0.00565	0.06624	out_BP
+GO:0050806	positive regulation of synaptic transmis...	63	31	17.28	53	0.00441	0.00510	0.00019	out_BP
+GO:0045727	positive regulation of translation	61	23	16.73	46	0.00445	0.00304	0.05165	out_BP
+GO:0061384	heart trabecula morphogenesis	23	8	6.31	958	0.00456	0.20960	0.28086	out_BP
+GO:0060079	excitatory postsynaptic potential	31	17	8.5	63	0.00457	0.00611	0.00115	out_BP
+GO:0051281	positive regulation of release of seques...	22	10	6.04	329	0.00460	0.05338	0.05338	out_BP
+GO:0007399	nervous system development	1310	436	359.36	103	0.00463	0.01130	3.9e-07	out_BP
+GO:0043931	ossification involved in bone maturation	15	9	4.11	40	0.00487	0.00242	0.00813	out_BP
+GO:0038063	collagen-activated tyrosine kinase recep...	7	6	1.92	35	0.00488	0.00227	0.00227	out_BP
+GO:1903140	regulation of establishment of endotheli...	7	6	1.92	36	0.00489	0.00227	0.00227	out_BP
+GO:0022409	positive regulation of cell-cell adhesio...	98	38	26.88	68	0.00493	0.00630	0.00941	out_BP
+GO:0001889	liver development	76	23	20.85	2616	0.00495	0.55078	0.32945	out_BP
+GO:0051924	regulation of calcium ion transport	122	44	33.47	342	0.00503	0.06005	0.02238	out_BP
+GO:0034341	response to interferon-gamma	49	24	13.44	27	0.00506	0.00153	0.00105	out_BP
+GO:0070374	positive regulation of ERK1 and ERK2 cas...	70	25	19.2	485	0.00513	0.07975	0.07975	out_BP
+GO:0055013	cardiac muscle cell development	30	12	8.23	59	0.00522	0.00565	0.09311	out_BP
+GO:0048661	positive regulation of smooth muscle cel...	38	17	10.42	112	0.00539	0.01327	0.01635	out_BP
+GO:0045655	regulation of monocyte differentiation	6	5	1.65	83	0.00551	0.00718	0.00718	out_BP
+GO:0003056	regulation of vascular smooth muscle con...	6	5	1.65	84	0.00560	0.00718	0.00718	out_BP
+GO:1990869	cellular response to chemokine	6	5	1.65	85	0.00560	0.00718	0.00718	out_BP
+GO:0097150	neuronal stem cell population maintenanc...	10	6	2.74	217	0.00575	0.03094	0.03094	out_BP
+GO:0016202	regulation of striated muscle tissue dev...	53	19	14.54	58	0.00577	0.00564	0.11248	out_BP
+GO:0006351	transcription, DNA-templated	2186	630	599.67	16	0.00584	0.00068	0.05548	out_BP
+GO:0007267	cell-cell signaling	707	231	193.94	44	0.00649	0.00270	0.00085	out_BP
+GO:0046834	lipid phosphorylation	26	8	7.13	762	0.00660	0.15023	0.42314	out_BP
+GO:0042138	meiotic DNA double-strand break formatio...	5	4	1.37	168	0.00662	0.02207	0.02207	out_BP
+GO:0002683	negative regulation of immune system pro...	191	74	52.4	387	0.00689	0.06858	0.00041	out_BP
+GO:0043069	negative regulation of programmed cell d...	400	122	109.73	2387	0.00697	0.52020	0.09047	out_BP
+GO:0009408	response to heat	71	26	19.48	521	0.00699	0.09350	0.05688	out_BP
+GO:0033605	positive regulation of catecholamine sec...	6	5	1.65	86	0.00709	0.00718	0.00718	out_BP
+GO:0006972	hyperosmotic response	9	6	2.47	122	0.00712	0.01608	0.01608	out_BP
+GO:0060765	regulation of androgen receptor signalin...	15	6	4.11	927	0.00726	0.20679	0.20679	out_BP
+GO:0021861	forebrain radial glial cell differentiat...	6	5	1.65	87	0.00740	0.00718	0.00718	out_BP
+GO:0031589	cell-substrate adhesion	197	66	54.04	54	0.00760	0.00512	0.03426	out_BP
+GO:0014911	positive regulation of smooth muscle cel...	23	12	6.31	130	0.00760	0.01826	0.01025	out_BP
+GO:0002040	sprouting angiogenesis	48	26	13.17	47	0.00773	0.00342	8.1e-05	out_BP
+GO:0032874	positive regulation of stress-activated ...	80	27	21.95	75	0.00797	0.00696	0.12698	out_BP
+GO:0030168	platelet activation	75	27	20.57	511	0.00828	0.08827	0.06463	out_BP
+GO:0030307	positive regulation of cell growth	92	35	25.24	115	0.00831	0.01371	0.01696	out_BP
+GO:2000649	regulation of sodium ion transmembrane t...	28	11	7.68	317	0.00831	0.05250	0.11783	out_BP
+GO:0048520	positive regulation of behavior	11	4	3.02	1649	0.00844	0.35544	0.35544	out_BP
+GO:0086091	regulation of heart rate by cardiac cond...	17	10	4.66	71	0.00849	0.00640	0.00640	out_BP
+GO:0009142	nucleoside triphosphate biosynthetic pro...	67	21	18.38	67	0.00859	0.00619	0.27575	out_BP
+GO:0006706	steroid catabolic process	13	9	3.57	81	0.00868	0.00715	0.00202	out_BP
+GO:1902750	negative regulation of cell cycle G2/M p...	30	13	8.23	150	0.00869	0.02058	0.04426	out_BP
+GO:0045740	positive regulation of DNA replication	21	10	5.76	65	0.00874	0.00617	0.03829	out_BP
+GO:0072234	metanephric nephron tubule development	14	7	3.84	61	0.00914	0.00565	0.06078	out_BP
+GO:0010001	glial cell differentiation	105	42	28.8	73	0.00917	0.00686	0.00343	out_BP
+GO:0006805	xenobiotic metabolic process	31	16	8.5	49	0.00940	0.00364	0.00364	out_BP
+GO:0019731	antibacterial humoral response	11	6	3.02	318	0.00945	0.05253	0.05253	out_BP
+GO:0019217	regulation of fatty acid metabolic proce...	42	16	11.52	161	0.00958	0.02202	0.08686	out_BP
+GO:0048592	eye morphogenesis	83	31	22.77	56	0.00987	0.00561	0.03077	out_BP
+GO:0030853	negative regulation of granulocyte diffe...	6	3	1.65	961	0.00988	0.20965	0.20965	out_BP

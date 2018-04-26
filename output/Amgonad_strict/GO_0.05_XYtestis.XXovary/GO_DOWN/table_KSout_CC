@@ -1,0 +1,14 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoFisher	topgoKS	topgoFisher	classicFisher	cluster
+GO:0033162	melanosome membrane	10	7	3.17	12	0.00039	0.01466	0.0147	out_CC
+GO:0048500	signal recognition particle	5	5	1.59	5	0.00051	0.00320	0.0032	out_CC
+GO:0032426	stereocilium tip	8	7	2.54	3	0.00064	0.00186	0.0019	out_CC
+GO:0016021	integral component of membrane	1969	662	624.43	1	0.00068	0.00029	0.0217	out_CC
+GO:0017059	serine C-palmitoyltransferase complex	5	5	1.59	6	0.00099	0.00320	0.0032	out_CC
+GO:0070382	exocytic vesicle	98	33	31.08	2	0.00111	0.00066	0.3738	out_CC
+GO:0032797	SMN complex	10	6	3.17	32	0.00310	0.06106	0.0611	out_CC
+GO:0097504	Gemini of coiled bodies	10	5	3.17	85	0.00310	0.18107	0.1811	out_CC
+GO:0005765	lysosomal membrane	202	79	64.06	14	0.00328	0.01470	0.0147	out_CC
+GO:0070652	HAUS complex	10	7	3.17	13	0.00376	0.01466	0.0147	out_CC
+GO:0030688	preribosome, small subunit precursor	6	5	1.9	8	0.00392	0.01413	0.0141	out_CC
+GO:0001669	acrosomal vesicle	6	5	1.9	9	0.00645	0.01413	0.0141	out_CC
+GO:0005666	DNA-directed RNA polymerase III complex	12	9	3.81	4	0.00736	0.00260	0.0026	out_CC
