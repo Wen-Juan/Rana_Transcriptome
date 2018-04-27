@@ -10,8 +10,8 @@ library(easyGgplot2)
 col1 <- rgb(red = 0, green = 0, blue = 0, alpha = 0.1)
 col2 <- rgb(red = 1, green = 0, blue = 0, alpha = 0.6)
 
-datapath <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46nosr_fi/'
-kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46nosr_fi/LogCPM_0.05_Amg46nosr copy.txt",header = T)
+datapath <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amgonad_strict/'
+kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amgonad_strict/LogCPM_0.05_Amgonad copy.txt",header = T)
 str(kdata)
 
 ###restrict the analysis to sex-biaxed genes
@@ -26,17 +26,17 @@ chr1.data <- rbind(chr1.1.data,chr1.2.data)
 chr2.1.data <- subset(map.data, map.data$chr!='Chr01') 
 chr2.data<- subset(chr2.1.data, chr2.1.data$chr!='Chr02') 
 
-group1.expr.minus <- (map.data$Am2_463 + map.data$Am4_461 + map.data$Am6_462) / 3 #XY male group at G46
+#group1.expr.minus <- (map.data$Am2_463 + map.data$Am4_461 + map.data$Am6_462) / 3 #XY male group at G46
 #group1.expr.minus <- (map.data$Am2_463 + map.data$Am4_461 + map.data$Am6_462) / 3 #XY male group at G46
 #group1.expr.minus <- (map.data$Am1_434 + map.data$Am2_434 + map.data$Am4_434) / 3 #XY male group at G43
-#group1.expr.minus <- (map.data$A15MT1 + map.data$A17MT1 + map.data$A6MT1 + map.data$A8MT1 + map.data$A12MT1) / 5 #XY male group in gonad
+group1.expr.minus <- (map.data$A15MT1 + map.data$A17MT1 + map.data$A6MT1 + map.data$A8MT1 + map.data$A12MT1) / 5 #XY male group in gonad
 #group1.expr.minus <- (map.data$A10MB + map.data$A15MB + map.data$A16MB + map.data$A17MB + map.data$A8MB) /5 #XY in brain
 #group1.expr.minus <- (map.data$A12ML1 + map.data$A17ML1 + map.data$A15ML1 +map.data$A8ML1)/4 #XY linver
 
 #group2.expr.minus <- (map.data$Am5_461) #Sex reversal XX male
-group2.expr.minus <- (map.data$Am2_464+map.data$Am6_464)/2 #XX female group at G46
+#group2.expr.minus <- (map.data$Am2_464+map.data$Am6_464)/2 #XX female group at G46
 #group2.expr.minus <- (map.data$Am2_433 + map.data$Am4_435 + map.data$Am5_433) / 3 #XX female group at G43
-#group2.expr.minus <- (map.data$A10FO1 + map.data$A17FO1 + map.data$A2FO2 + map.data$A8FO2 + map.data$A6FO1) / 5 #XY male group in gonad
+group2.expr.minus <- (map.data$A10FO1 + map.data$A17FO1 + map.data$A2FO2 + map.data$A8FO2 + map.data$A6FO1) / 5 #XY male group in gonad
 #group2.expr.minus <- (map.data$A10FB + map.data$A12FB + map.data$A15FB + map.data$A16FB + map.data$A17FB) /5 #XX in brain
 #group2.expr.minus <- (map.data$A12FL1 + map.data$A17FL1 + map.data$A2FL1 + map.data$A7FL1 +map.data$A8FL1)/5 #XX linver
 
@@ -250,8 +250,6 @@ abline(v=116443467, col="blue",lwd=2,lty=3)
 dev.off()
 
 ###gene expression at G46
-
-##Assigning Transcripts to Chromosomes###
 Chr1 <- subset(map.data, map.data$chr=="Chr01")
 Chr2 <- subset(map.data, map.data$chr=="Chr02")
 Chr3 <- subset(map.data, map.data$chr=="Chr03")
@@ -319,6 +317,68 @@ abline(h=highCI,lty=2)
 dev.off()
 
 #gene expression ratio for gonad
+Chr1 <- subset(map.data, map.data$chr=="Chr01")
+Chr2 <- subset(map.data, map.data$chr=="Chr02")
+Chr3 <- subset(map.data, map.data$chr=="Chr03")
+Chr4 <- subset(map.data, map.data$chr=="Chr04")
+Chr5 <- subset(map.data, map.data$chr=="Chr05")
+Chr6 <- subset(map.data, map.data$chr=="Chr06")
+Chr7 <- subset(map.data, map.data$chr=="Chr07")
+Chr8 <- subset(map.data, map.data$chr=="Chr08")
+Chr9 <- subset(map.data, map.data$chr=="Chr09")
+Chr10 <- subset(map.data, map.data$chr=="Chr10")
+
+## Sort According to Position ####
+Chr01_sort <- Chr1[order(Chr1$start),] 
+Chr02_sort <- Chr2[order(Chr2$start),] 
+Chr03_sort <- Chr3[order(Chr3$start),] 
+Chr04_sort <- Chr4[order(Chr4$start),] 
+Chr05_sort <- Chr5[order(Chr5$start),] 
+Chr06_sort <- Chr6[order(Chr6$start),] 
+Chr07_sort <- Chr7[order(Chr7$start),] 
+Chr08_sort <- Chr8[order(Chr8$start),] 
+Chr09_sort <- Chr9[order(Chr9$start),] 
+Chr10_sort <- Chr10[order(Chr10$start),] 
+
+Chr1RT<- rollapply(Chr01_sort$ratio, 40, mean, na.rm = TRUE) #need to switch to rollapply, cause rollmean does not handle NA values.
+Chr2RT<- rollapply(Chr02_sort$ratio, 40, mean, na.rm = TRUE)
+Chr3RT<- rollapply(Chr03_sort$ratio, 40, mean, na.rm = TRUE)
+Chr4RT<- rollapply(Chr04_sort$ratio, 40, mean, na.rm = TRUE)
+Chr5RT<- rollapply(Chr05_sort$ratio, 40, mean, na.rm = TRUE)
+Chr6RT<- rollapply(Chr06_sort$ratio, 40, mean, na.rm = TRUE)
+Chr7RT<- rollapply(Chr07_sort$ratio, 40, mean, na.rm = TRUE)
+Chr8RT<- rollapply(Chr08_sort$ratio, 40, mean, na.rm = TRUE)
+Chr9RT<- rollapply(Chr09_sort$ratio, 40, mean, na.rm = TRUE)
+Chr10RT<- rollapply(Chr10_sort$ratio, 40, mean, na.rm = TRUE)
+
+
+Rt<- c(Chr3RT,Chr4RT,Chr5RT,Chr6RT,Chr7RT,Chr8RT,Chr9RT,Chr10RT)
+
+
+myfunction <- function(i){
+  Info <- sample(i,1,replace=FALSE)
+  return(Info)
+}
+
+my.perm <- c()
+for(i in 1:10^3){ my.perm[i] <- myfunction(Rt) }
+sorted.perm <- sort(my.perm)
+lowCI <- sorted.perm[25]
+highCI <- sorted.perm[975]
+
+RMpalette <- c("#f0f9e8", "#bae4bc", "#7bccc4", "#43a2ca", "#0868ac")
+
+pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/chr10_expratio_gonad.pdf", width=7,height=5)
+
+Chr_pos <- rollapply(Chr10_sort$start, 40, mean, na.rm = TRUE)
+Chr_ratio <- rollapply(Chr10_sort$ratio, 40, mean, na.rm = TRUE)
+plot(Chr10_sort$start, Chr10_sort$ratio,col=alpha(RMpalette[3], 0.5),pch=20, ylim=c(-10,10), xlab="Position(bp)", ylab="Log2(male:female)",main="Chr10")
+lines(Chr_pos, Chr_ratio,type="l",lwd=5, col=RMpalette[5])
+abline(h=lowCI,lty=2)
+abline(h=highCI,lty=2)
+#abline(v=116443467, col="blue",lwd=2,lty=3)
+
+dev.off()
 
 
 ##WJ original code without confidential internal
