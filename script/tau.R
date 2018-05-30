@@ -1414,7 +1414,22 @@ ggplot(dnds_gonadg46, aes(x=direction, y=dNdS, fill=direction)) + scale_fill_man
 dev.off()
 
 wilcox.test(dnds_gonadg46$dNdS[dnds_gonadg46$direction=='no'],dnds_gonadg46$dNdS[dnds_gonadg46$direction=='yes'],exact = FALSE) 
-#W=19778, p-value = 0.1144
+#W=19778, p-value = 0.11
+
+tau_gonadg46 <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/G46_tau/overlgonadg46_list_sort_tau_fi.txt", header = TRUE)
+str(tau_gonadg46)
+
+pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/tau/tau_amm_g46gonad_shared_sexbiasdirection.pdf", width=8, height=8)
+ggplot(tau_gonadg46, aes(x=direction, y=tau, fill=direction)) + scale_fill_manual(values = c("grey40","firebrick2"), name="Sex bias direction",labels=c("Same","Change")) +
+  geom_boxplot(notch=TRUE,outlier.shape=NA,width=0.7,alpha=0.9) +
+  ylim(0.1,1) +
+  scale_x_discrete(labels=c("Same", "Change"),name="Sex bias direction") + 
+  theme(axis.title.x = element_text(size=16,colour = "black"),axis.title.y = element_text(size=16,colour = "black")) +
+  theme(axis.text.x = element_text(colour="black",size=11),axis.text.y = element_text(colour="black",size=11))
+dev.off()
+
+wilcox.test(tau_gonadg46$tau[tau_gonadg46$direction=='no'],tau_gonadg46$tau[tau_gonadg46$direction=='yes'],exact = FALSE) 
+#W = 215480, p-value = 0.2108
 
 ##investigate tau and dnds in sex-biased genes which remains the direciton of sex bias or had turnover: Gonad vs liver
 
