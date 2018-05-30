@@ -30,6 +30,7 @@ head(sex_auto)
 sex_auto_mel<-read.table("/Users/Wen-Juan/my_postdoc/postdoc_manuscripts/Amm_RNAseq/Mel/FasterXY.Results/all_dnds.txt", header = T)
 str(sex_auto_mel)
 head(sex_auto_mel)
+
 #dn/ds plot for Faster-X
 ###all chromosome separately
 sex_auto1 <- subset(sex_auto,sex_auto$chr!='NA')

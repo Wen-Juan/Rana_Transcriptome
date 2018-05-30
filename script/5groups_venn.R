@@ -56,7 +56,6 @@ grid.arrange(gTree(children=venn.plot1),ncol = 1 )
 venn_sbias_out1 <- arrangeGrob(gTree(children=venn.plot1),ncol = 1 )
 ggsave(file="shared_sbias_adult_orthologs.pdf", venn_sbias_out1, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
 
-
 ##############
 ############## LARVA
 ##############
@@ -68,7 +67,7 @@ larva_sbias <- subset(all_sbias,all_sbias$tissue!='adult')
 str(larva_sbias)
 
 sbias_g23 <- larva_sbias$gid[larva_sbias$stage=='G23']
-sbias_g27 <-all_ortholog_sbias$gid[larva_sbias$stage=='G27']
+sbias_g27 <- larva_sbias$gid[larva_sbias$stage=='G27']
 sbias_g31 <- larva_sbias$gid[larva_sbias$stage=='G31']
 sbias_g43 <- larva_sbias$gid[larva_sbias$stage=='G43']
 sbias_g46 <- larva_sbias$gid[larva_sbias$stage=='G46']
@@ -84,6 +83,25 @@ grid.arrange(gTree(children=venn.plot0),ncol = 1 )
 
 venn_fbias_out0 <- arrangeGrob(gTree(children=venn.plot0),ncol = 1 )
 ggsave(file="shared_sbias_larva.pdf", venn_fbias_out0, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+
+##investigate shared sex-biased genes between G43 and G46 and the direction of sex bias.
+sbias_g43 <- larva_sbias$gid[larva_sbias$stage=='G43']
+sbias_g46 <- larva_sbias$gid[larva_sbias$stage=='G46']
+
+venn.plot1 <- venn.diagram(list(G43=as.character(sbias_g43), G46=as.character(sbias_g46)), filename =NULL,
+                           fill=c("green","blue"),
+                           ext.line.lwd = 3,
+                           cex = 2,
+                           cat.cex = 2,
+                           rotation.degree = 65)
+
+grid.arrange(gTree(children=venn.plot1),ncol = 1 )
+venn_fbias_out0 <- arrangeGrob(gTree(children=venn.plot1),ncol = 1 )
+ggsave(file="shared_sbias_g43g46.pdf", venn_fbias_out0, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+
+list_g43g46 <- list(G43=as.character(sbias_g43), G46=as.character(sbias_g46))
+overlap_g43g46 <- calculate.overlap(list_g43g46)
+overlap_g43g46$a3
 
 
 ##
@@ -179,6 +197,20 @@ grid.arrange(gTree(children=venn.plot2),ncol = 1 )
 venn_fbias_out2 <- arrangeGrob(gTree(children=venn.plot2),ncol = 1 )
 ggsave(file="shared_sbias_adult.pdf", venn_fbias_out2, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
 
+#extract overlap list between gonad and liver tissues
+gonad_liver <- list(Gonad = as.character(adult_gonad), Liver = as.character(adult_liver))
+goliver_overl <- calculate.overlap(gonad_liver)
+goliver_overl$a3
+
+gonad_brain <- list(Gonad = as.character(adult_gonad), Brain = as.character(adult_brain))
+gobrain_overl <- calculate.overlap(gonad_brain)
+gobrain_overl$a3
+
+gonad_G46 <- list(Gonad = as.character(adult_gonad), G46=as.character(sbias_g46))
+gobrain_G46 <- calculate.overlap(gonad_G46)
+gonad_G46_list <- gobrain_G46$a3
+
+write.table(gonad_G46_list, file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/venn_diag/gonadg46_sb_overlap.txt", row.names=FALSE)
 
 #################
 #######adult shared female-biased genes
