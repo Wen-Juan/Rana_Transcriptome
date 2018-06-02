@@ -1,0 +1,29 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoFisher	topgoKS	topgoFisher	classicFisher	cluster
+GO:0004022	alcohol dehydrogenase (NAD) activity	8	2	0.06	3	1.7e-05	0.00127	0.00127	out_MF
+GO:0030170	pyridoxal phosphate binding	40	1	0.28	74	0.00010	0.24206	0.24206	out_MF
+GO:0008395	steroid hydroxylase activity	40	3	0.28	5	0.00019	0.00256	0.00256	out_MF
+GO:0051287	NAD binding	65	1	0.45	83	0.00019	0.36301	0.36301	out_MF
+GO:0005506	iron ion binding	162	5	1.12	7	0.00022	0.00502	0.00502	out_MF
+GO:0004181	metallocarboxypeptidase activity	15	2	0.1	6	0.00044	0.00463	0.00463	out_MF
+GO:0000062	fatty-acyl-CoA binding	15	1	0.1	44	0.00057	0.09858	0.09858	out_MF
+GO:0050660	flavin adenine dinucleotide binding	64	2	0.44	77	0.00116	0.26965	0.07172	out_MF
+GO:0031419	cobalamin binding	7	0	0.05	112	0.00145	1.00000	1.00000	out_MF
+GO:0020037	heme binding	132	5	0.91	4	0.00188	0.00208	0.00208	out_MF
+GO:0016831	carboxy-lyase activity	29	1	0.2	68	0.00197	0.18193	0.18193	out_MF
+GO:0048029	monosaccharide binding	59	0	0.41	113	0.00229	1.00000	1.00000	out_MF
+GO:0016628	oxidoreductase activity, acting on the C...	27	2	0.19	59	0.00240	0.13917	0.01467	out_MF
+GO:0016830	carbon-carbon lyase activity	39	1	0.27	114	0.00254	1.00000	0.23678	out_MF
+GO:0004364	glutathione transferase activity	22	0	0.15	115	0.00290	1.00000	1.00000	out_MF
+GO:0016879	ligase activity, forming carbon-nitrogen...	39	0	0.27	116	0.00357	1.00000	1.00000	out_MF
+GO:0003988	acetyl-CoA C-acyltransferase activity	7	0	0.05	117	0.00363	1.00000	1.00000	out_MF
+GO:0008144	drug binding	40	0	0.28	118	0.00373	1.00000	1.00000	out_MF
+GO:0004185	serine-type carboxypeptidase activity	10	0	0.07	119	0.00448	1.00000	1.00000	out_MF
+GO:0005179	hormone activity	22	3	0.15	1	0.00489	0.00044	0.00044	out_MF
+GO:0050661	NADP binding	29	1	0.2	69	0.00532	0.18193	0.18193	out_MF
+GO:0016769	transferase activity, transferring nitro...	19	1	0.13	56	0.00555	0.12321	0.12321	out_MF
+GO:0043120	tumor necrosis factor binding	7	0	0.05	120	0.00556	1.00000	1.00000	out_MF
+GO:0016783	sulfurtransferase activity	10	1	0.07	33	0.00557	0.06683	0.06683	out_MF
+GO:0015643	toxic substance binding	7	0	0.05	121	0.00637	1.00000	1.00000	out_MF
+GO:0016790	thiolester hydrolase activity	31	0	0.21	122	0.00876	1.00000	1.00000	out_MF
+GO:0017136	NAD-dependent histone deacetylase activi...	16	0	0.11	123	0.00952	1.00000	1.00000	out_MF
+GO:0070330	aromatase activity	66	1	0.45	84	0.00982	0.36744	0.36744	out_MF

@@ -1,0 +1,8 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
+GO:0045735	nutrient reservoir activity	5	5	0.03	1	7.7e-12	4.8e-05	7.7e-12	out_MF
+GO:0008569	ATP-dependent microtubule motor activity...	11	3	0.07	44	3.6e-05	0.0201	3.6e-05	out_MF
+GO:0004867	serine-type endopeptidase inhibitor acti...	70	5	0.43	12	6.8e-05	0.0035	6.8e-05	out_MF
+GO:0045503	dynein light chain binding	17	3	0.11	102	0.00015	0.0500	0.00015	out_MF
+GO:0045505	dynein intermediate chain binding	19	3	0.12	229	0.00020	0.1518	0.00020	out_MF
+GO:0051959	dynein light intermediate chain binding	22	3	0.14	309	0.00032	0.2152	0.00032	out_MF
+GO:0035671	enone reductase activity	6	2	0.04	368	0.00056	0.2764	0.00056	out_MF

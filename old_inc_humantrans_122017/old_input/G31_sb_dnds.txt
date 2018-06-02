@@ -1,1 +1,0 @@
-RBH_pair_1897.fa.best.phy	TRINITY_DN118329_c0_g1_i1	0.0846	0.0819	0.9674

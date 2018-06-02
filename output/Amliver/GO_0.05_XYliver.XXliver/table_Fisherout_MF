@@ -1,0 +1,18 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
+GO:0045735	nutrient reservoir activity	5	5	0.07	2	3.5e-10	4.9e-05	3.5e-10	out_MF
+GO:0047023	androsterone dehydrogenase activity	5	3	0.07	30	2.1e-05	0.00925	2.1e-05	out_MF
+GO:0004867	serine-type endopeptidase inhibitor acti...	70	6	0.92	12	0.00029	0.00226	0.00029	out_MF
+GO:0008569	ATP-dependent microtubule motor activity...	11	3	0.14	57	0.00033	0.02286	0.00033	out_MF
+GO:0004033	aldo-keto reductase (NADP) activity	13	4	0.17	154	0.00049	0.07661	1.8e-05	out_MF
+GO:0045503	dynein light chain binding	17	3	0.22	127	0.00130	0.05734	0.00130	out_MF
+GO:0001758	retinal dehydrogenase activity	5	2	0.07	43	0.00166	0.01705	0.00166	out_MF
+GO:0047115	trans-1,2-dihydrobenzene-1,2-diol dehydr...	5	2	0.07	40	0.00166	0.01450	0.00166	out_MF
+GO:0020037	heme binding	132	7	1.73	9	0.00169	0.00088	0.00169	out_MF
+GO:0008395	steroid hydroxylase activity	40	4	0.52	3	0.00178	6.0e-05	0.00178	out_MF
+GO:0045505	dynein intermediate chain binding	19	3	0.25	255	0.00182	0.17028	0.00182	out_MF
+GO:0035671	enone reductase activity	6	2	0.08	381	0.00247	0.29087	0.00247	out_MF
+GO:0051959	dynein light intermediate chain binding	22	3	0.29	333	0.00281	0.24056	0.00281	out_MF
+GO:0005179	hormone activity	22	3	0.29	24	0.00281	0.00590	0.00281	out_MF
+GO:0004022	alcohol dehydrogenase (NAD) activity	8	2	0.1	1	0.00453	2.0e-05	0.00453	out_MF
+GO:0052650	NADP-retinol dehydrogenase activity	8	2	0.1	146	0.00453	0.07124	0.00453	out_MF
+GO:0005506	iron ion binding	162	7	2.12	5	0.00531	0.00010	0.00531	out_MF

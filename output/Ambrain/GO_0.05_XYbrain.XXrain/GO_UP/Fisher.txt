@@ -1,0 +1,21 @@
+GO category	GO	Term	Annotated	Significant	Expected	topGO (Fisher)	classic (Fisher)
+BP	GO:0006953	acute-phase response	20	3	0.08	6.5e-05	6.5e-05
+BP	GO:0052695	cellular glucuronidation	5	2	0.02	0.00015	0.00015
+BP	GO:0071392	cellular response to estradiol stimulus	27	3	0.11	0.00016	0.00016
+BP	GO:0018879	biphenyl metabolic process	7	2	0.03	0.00032	0.00032
+BP	GO:0042440	pigment metabolic process	48	3	0.19	0.00066	0.00091
+BP	GO:0071361	cellular response to ethanol	11	2	0.04	0.00084	0.00084
+BP	GO:0030199	collagen fibril organization	33	2	0.13	0.00762	0.00762
+BP	GO:0006805	xenobiotic metabolic process	35	2	0.14	0.00854	0.00854
+CC	GO:0034663	endoplasmic reticulum chaperone complex	5	2	0.02	0.00015	0.00015
+CC	GO:0005578	proteinaceous extracellular matrix	201	4	0.79	0.00782	0.00782
+MF	GO:0001972	retinoic acid binding	7	2	0.03	0.00047	0.00047
+MF	GO:0016805	dipeptidase activity	12	2	0.06	0.00145	0.00145
+MF	GO:0030247	polysaccharide binding	13	2	0.06	0.00171	0.00171
+MF	GO:0042803	protein homodimerization activity	480	8	2.31	0.00191	0.00191
+MF	GO:0004180	carboxypeptidase activity	32	3	0.15	0.00252	0.00047
+MF	GO:0015020	glucuronosyltransferase activity	18	2	0.09	0.00330	0.00330
+MF	GO:0008237	metallopeptidase activity	138	4	0.66	0.00386	0.00428
+MF	GO:0051537	2 iron, 2 sulfur cluster binding	23	2	0.11	0.00538	0.00538
+MF	GO:0005044	scavenger receptor activity	28	2	0.13	0.00791	0.00791
+MF	GO:0005509	calcium ion binding	495	7	2.38	0.00905	0.00905

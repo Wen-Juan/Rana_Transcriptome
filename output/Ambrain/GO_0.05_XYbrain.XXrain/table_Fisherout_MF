@@ -1,0 +1,11 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
+GO:0003920	GMP reductase activity	7	2	0.07	337	0.0021	0.242	0.00208	out_MF
+GO:0001972	retinoic acid binding	7	2	0.07	454	0.0021	0.339	0.00208	out_MF
+GO:0004003	ATP-dependent DNA helicase activity	26	3	0.26	167	0.0022	0.119	0.00225	out_MF
+GO:0017134	fibroblast growth factor binding	9	2	0.09	71	0.0035	0.049	0.00352	out_MF
+GO:0031492	nucleosomal DNA binding	10	2	0.1	539	0.0044	0.413	0.00437	out_MF
+GO:0004407	histone deacetylase activity	28	4	0.28	62	0.0051	0.041	0.00017	out_MF
+GO:0035613	RNA stem-loop binding	11	2	0.11	632	0.0053	0.488	0.00531	out_MF
+GO:0048027	mRNA 5'-UTR binding	11	2	0.11	638	0.0053	0.491	0.00531	out_MF
+GO:0016805	dipeptidase activity	12	2	0.12	369	0.0063	0.269	0.00633	out_MF
+GO:0030247	polysaccharide binding	13	2	0.13	308	0.0074	0.222	0.00743	out_MF

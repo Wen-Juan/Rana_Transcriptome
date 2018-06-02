@@ -1,0 +1,28 @@
+$dag
+A graphNEL graph with directed edges
+Number of Nodes = 345 
+Number of Edges = 724 
+
+$complete.dag
+[1] "A graph with 345 nodes."
+
+null device 
+          1 
+$dag
+A graphNEL graph with directed edges
+Number of Nodes = 80 
+Number of Edges = 146 
+
+$complete.dag
+[1] "A graph with 80 nodes."
+
+null device 
+          1 
+[1] "Term GO:0034383 genes: TRINITY_DN126754_c2_g1_i1,TRINITY_DN133419_c0_g1_i1"
+[1] "Term GO:0071276 genes: TRINITY_DN120145_c0_g1_i1,TRINITY_DN127281_c1_g1_i3"
+[1] "Term GO:0034377 genes: TRINITY_DN126754_c2_g1_i1,TRINITY_DN96380_c0_g3_i1"
+[1] "Term GO:0009725 genes: TRINITY_DN115604_c0_g3_i1,TRINITY_DN120145_c0_g1_i1,TRINITY_DN124366_c0_g1_i1,TRINITY_DN127041_c0_g1_i3,TRINITY_DN129651_c0_g4_i5,TRINITY_DN130203_c1_g4_i1,TRINITY_DN133419_c0_g1_i1"
+[1] "Term GO:0001539 genes: TRINITY_DN132254_c0_g1_i1,TRINITY_DN133894_c0_g1_i1"
+[1] "Term GO:0032570 genes: TRINITY_DN124366_c0_g1_i1,TRINITY_DN129651_c0_g4_i5"
+[1] "Term GO:1900026 genes: TRINITY_DN111338_c0_g1_i1,TRINITY_DN128124_c11_g2_i3"
+[1] "Term GO:0003341 genes: TRINITY_DN132254_c0_g1_i1,TRINITY_DN134935_c0_g2_i1"

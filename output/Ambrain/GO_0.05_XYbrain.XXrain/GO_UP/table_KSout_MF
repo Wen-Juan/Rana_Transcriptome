@@ -1,0 +1,21 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoFisher	topgoKS	topgoFisher	classicFisher	cluster
+GO:0005184	neuropeptide hormone activity	22	0	0.11	97	0.00014	1.000	1.000	out_MF
+GO:0005496	steroid binding	57	2	0.27	14	0.00049	0.031	0.031	out_MF
+GO:0008137	NADH dehydrogenase (ubiquinone) activity	20	0	0.1	98	0.00071	1.000	1.000	out_MF
+GO:0015035	protein disulfide oxidoreductase activit...	21	0	0.1	99	0.00083	1.000	1.000	out_MF
+GO:0016491	oxidoreductase activity	624	5	3	86	0.00117	0.693	0.179	out_MF
+GO:0071855	neuropeptide receptor binding	15	0	0.07	100	0.00159	1.000	1.000	out_MF
+GO:1901611	phosphatidylglycerol binding	5	0	0.02	101	0.00160	1.000	1.000	out_MF
+GO:0009055	electron transfer activity	62	1	0.3	63	0.00210	0.259	0.259	out_MF
+GO:0004865	protein serine/threonine phosphatase inh...	7	0	0.03	102	0.00240	1.000	1.000	out_MF
+GO:0038024	cargo receptor activity	47	2	0.23	103	0.00416	1.000	0.021	out_MF
+GO:0004867	serine-type endopeptidase inhibitor acti...	62	2	0.3	20	0.00480	0.036	0.036	out_MF
+GO:0004518	nuclease activity	144	1	0.69	104	0.00484	1.000	0.503	out_MF
+GO:0004930	G-protein coupled receptor activity	307	1	1.48	88	0.00514	0.777	0.777	out_MF
+GO:0004791	thioredoxin-disulfide reductase activity	7	0	0.03	105	0.00567	1.000	1.000	out_MF
+GO:0048306	calcium-dependent protein binding	41	0	0.2	106	0.00600	1.000	1.000	out_MF
+GO:0003746	translation elongation factor activity	19	0	0.09	107	0.00628	1.000	1.000	out_MF
+GO:0051183	vitamin transporter activity	11	0	0.05	108	0.00818	1.000	1.000	out_MF
+GO:0035381	ATP-gated ion channel activity	5	0	0.02	109	0.00922	1.000	1.000	out_MF
+GO:0004859	phospholipase inhibitor activity	15	0	0.07	110	0.00935	1.000	1.000	out_MF
+GO:0005254	chloride channel activity	55	1	0.26	59	0.00959	0.233	0.233	out_MF

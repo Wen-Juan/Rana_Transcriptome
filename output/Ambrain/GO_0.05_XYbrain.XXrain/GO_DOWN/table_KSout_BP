@@ -1,0 +1,51 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoFisher	topgoKS	topgoFisher	classicFisher	cluster
+GO:0050896	response to stimulus	4971	28	25.47	352	0.00042	1.000	0.295	out_BP
+GO:0007601	visual perception	117	0	0.6	353	0.00058	1.000	1.000	out_BP
+GO:0003214	cardiac left ventricle morphogenesis	6	0	0.03	354	0.00060	1.000	1.000	out_BP
+GO:0033234	negative regulation of protein sumoylati...	9	0	0.05	355	0.00106	1.000	1.000	out_BP
+GO:0070125	mitochondrial translational elongation	41	0	0.21	356	0.00153	1.000	1.000	out_BP
+GO:0007218	neuropeptide signaling pathway	74	0	0.38	357	0.00202	1.000	1.000	out_BP
+GO:0010975	regulation of neuron projection developm...	319	1	1.63	358	0.00247	1.000	0.810	out_BP
+GO:2000242	negative regulation of reproductive proc...	24	0	0.12	359	0.00260	1.000	1.000	out_BP
+GO:0035814	negative regulation of renal sodium excr...	8	0	0.04	360	0.00290	1.000	1.000	out_BP
+GO:0045454	cell redox homeostasis	57	0	0.29	361	0.00303	1.000	1.000	out_BP
+GO:0071774	response to fibroblast growth factor	68	0	0.35	362	0.00306	1.000	1.000	out_BP
+GO:0048148	behavioral response to cocaine	8	0	0.04	363	0.00336	1.000	1.000	out_BP
+GO:0006809	nitric oxide biosynthetic process	33	0	0.17	364	0.00358	1.000	1.000	out_BP
+GO:0070126	mitochondrial translational termination	19	0	0.1	365	0.00367	1.000	1.000	out_BP
+GO:0051790	short-chain fatty acid biosynthetic proc...	5	0	0.03	366	0.00378	1.000	1.000	out_BP
+GO:0008535	respiratory chain complex IV assembly	15	0	0.08	367	0.00402	1.000	1.000	out_BP
+GO:0001958	endochondral ossification	12	0	0.06	368	0.00404	1.000	1.000	out_BP
+GO:0042455	ribonucleoside biosynthetic process	38	0	0.19	369	0.00440	1.000	1.000	out_BP
+GO:0043416	regulation of skeletal muscle tissue reg...	5	0	0.03	370	0.00440	1.000	1.000	out_BP
+GO:0017145	stem cell division	23	0	0.12	371	0.00516	1.000	1.000	out_BP
+GO:0034138	toll-like receptor 3 signaling pathway	11	0	0.06	372	0.00549	1.000	1.000	out_BP
+GO:0035864	response to potassium ion	10	0	0.05	373	0.00592	1.000	1.000	out_BP
+GO:0007625	grooming behavior	12	0	0.06	374	0.00593	1.000	1.000	out_BP
+GO:0051593	response to folic acid	6	0	0.03	375	0.00595	1.000	1.000	out_BP
+GO:0090073	positive regulation of protein homodimer...	7	0	0.04	376	0.00595	1.000	1.000	out_BP
+GO:0002709	regulation of T cell mediated immunity	30	1	0.15	203	0.00602	0.143	0.143	out_BP
+GO:0014032	neural crest cell development	28	0	0.14	377	0.00611	1.000	1.000	out_BP
+GO:0001510	RNA methylation	40	0	0.2	378	0.00649	1.000	1.000	out_BP
+GO:0002577	regulation of antigen processing and pre...	11	0	0.06	379	0.00659	1.000	1.000	out_BP
+GO:0002176	male germ cell proliferation	5	0	0.03	380	0.00662	1.000	1.000	out_BP
+GO:0006952	defense response	631	6	3.23	381	0.00679	1.000	0.103	out_BP
+GO:0050957	equilibrioception	9	0	0.05	382	0.00683	1.000	1.000	out_BP
+GO:0010950	positive regulation of endopeptidase act...	84	1	0.43	383	0.00734	1.000	0.351	out_BP
+GO:0050953	sensory perception of light stimulus	125	0	0.64	384	0.00742	1.000	1.000	out_BP
+GO:0006937	regulation of muscle contraction	76	0	0.39	385	0.00757	1.000	1.000	out_BP
+GO:0006120	mitochondrial electron transport, NADH t...	11	0	0.06	386	0.00766	1.000	1.000	out_BP
+GO:0006351	transcription, DNA-templated	2293	18	11.75	387	0.00794	1.000	0.035	out_BP
+GO:0097190	apoptotic signaling pathway	316	1	1.62	388	0.00800	1.000	0.807	out_BP
+GO:0042572	retinol metabolic process	16	0	0.08	389	0.00838	1.000	1.000	out_BP
+GO:0019369	arachidonic acid metabolic process	39	0	0.2	390	0.00839	1.000	1.000	out_BP
+GO:0006122	mitochondrial electron transport, ubiqui...	9	0	0.05	391	0.00879	1.000	1.000	out_BP
+GO:0042036	negative regulation of cytokine biosynth...	12	0	0.06	392	0.00894	1.000	1.000	out_BP
+GO:0018342	protein prenylation	6	0	0.03	393	0.00895	1.000	1.000	out_BP
+GO:0007080	mitotic metaphase plate congression	22	0	0.11	394	0.00896	1.000	1.000	out_BP
+GO:0035094	response to nicotine	26	0	0.13	395	0.00934	1.000	1.000	out_BP
+GO:0071542	dopaminergic neuron differentiation	17	0	0.09	396	0.00965	1.000	1.000	out_BP
+GO:2000480	negative regulation of cAMP-dependent pr...	8	0	0.04	397	0.00972	1.000	1.000	out_BP
+GO:0043248	proteasome assembly	13	1	0.07	117	0.00988	0.065	0.065	out_BP
+GO:0006578	amino-acid betaine biosynthetic process	5	0	0.03	398	0.00995	1.000	1.000	out_BP
+GO:0006910	phagocytosis, recognition	13	0	0.07	399	0.00996	1.000	1.000	out_BP

@@ -1,0 +1,9 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
+GO:0006953	acute-phase response	20	3	0.08	887	6.5e-05	0.1845	6.5e-05	out_BP
+GO:0052695	cellular glucuronidation	5	2	0.02	809	0.00015	0.1715	0.00015	out_BP
+GO:0071392	cellular response to estradiol stimulus	27	3	0.11	28	0.00016	0.0053	0.00016	out_BP
+GO:0018879	biphenyl metabolic process	7	2	0.03	406	0.00032	0.0868	0.00032	out_BP
+GO:0042440	pigment metabolic process	48	3	0.19	102	0.00066	0.0187	0.00091	out_BP
+GO:0071361	cellular response to ethanol	11	2	0.04	916	0.00084	0.1906	0.00084	out_BP
+GO:0030199	collagen fibril organization	33	2	0.13	645	0.00762	0.1408	0.00762	out_BP
+GO:0006805	xenobiotic metabolic process	35	2	0.14	1699	0.00854	0.3300	0.00854	out_BP

@@ -1,0 +1,11 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
+GO:0001972	retinoic acid binding	7	2	0.03	429	0.00047	0.327	0.00047	out_MF
+GO:0016805	dipeptidase activity	12	2	0.06	340	0.00145	0.253	0.00145	out_MF
+GO:0030247	polysaccharide binding	13	2	0.06	287	0.00171	0.208	0.00171	out_MF
+GO:0042803	protein homodimerization activity	480	8	2.31	310	0.00191	0.222	0.00191	out_MF
+GO:0004180	carboxypeptidase activity	32	3	0.15	108	0.00252	0.068	0.00047	out_MF
+GO:0015020	glucuronosyltransferase activity	18	2	0.09	537	0.00330	0.413	0.00330	out_MF
+GO:0008237	metallopeptidase activity	138	4	0.66	209	0.00386	0.150	0.00428	out_MF
+GO:0051537	2 iron, 2 sulfur cluster binding	23	2	0.11	303	0.00538	0.220	0.00538	out_MF
+GO:0005044	scavenger receptor activity	28	2	0.13	122	0.00791	0.081	0.00791	out_MF
+GO:0005509	calcium ion binding	495	7	2.38	214	0.00905	0.155	0.00905	out_MF

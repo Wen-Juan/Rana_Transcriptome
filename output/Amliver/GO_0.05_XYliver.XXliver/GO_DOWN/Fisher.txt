@@ -1,0 +1,18 @@
+GO category	GO	Term	Annotated	Significant	Expected	topGO (Fisher)	classic (Fisher)
+BP	GO:0034383	low-density lipoprotein particle clearan...	10	2	0.05	0.00094	0.00094
+BP	GO:0071276	cellular response to cadmium ion	12	2	0.06	0.00137	0.00137
+BP	GO:0034377	plasma lipoprotein particle assembly	13	2	0.06	0.00162	0.00162
+BP	GO:0009725	response to hormone	387	7	1.81	0.00434	0.00195
+BP	GO:0001539	cilium or flagellum-dependent cell motil...	14	2	0.07	0.00458	0.00188
+BP	GO:0032570	response to progesterone	23	2	0.11	0.00509	0.00509
+BP	GO:1900026	positive regulation of substrate adhesio...	26	2	0.12	0.00648	0.00648
+BP	GO:0003341	cilium movement	32	2	0.15	0.00972	0.00972
+CC	GO:0030286	dynein complex	34	4	0.18	0.0055	2.9e-05
+CC	GO:0016011	dystroglycan complex	5	1	0.03	0.0265	0.026
+MF	GO:0045735	nutrient reservoir activity	5	5	0.03	7.7e-12	7.7e-12
+MF	GO:0008569	ATP-dependent microtubule motor activity...	11	3	0.07	3.6e-05	3.6e-05
+MF	GO:0004867	serine-type endopeptidase inhibitor acti...	70	5	0.43	6.8e-05	6.8e-05
+MF	GO:0045503	dynein light chain binding	17	3	0.11	0.00015	0.00015
+MF	GO:0045505	dynein intermediate chain binding	19	3	0.12	0.00020	0.00020
+MF	GO:0051959	dynein light intermediate chain binding	22	3	0.14	0.00032	0.00032
+MF	GO:0035671	enone reductase activity	6	2	0.04	0.00056	0.00056

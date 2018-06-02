@@ -1,0 +1,9 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoFisher	topgoKS	topgoFisher	classicFisher	cluster
+GO:0031090	organelle membrane	1488	8	7.4	43	0.00017	0.90	0.47	out_CC
+GO:0016021	integral component of membrane	1621	10	8.06	16	0.00027	0.27	0.28	out_CC
+GO:0005739	mitochondrion	856	5	4.26	48	0.00060	1.00	0.42	out_CC
+GO:0005747	mitochondrial respiratory chain complex ...	21	0	0.1	49	0.00091	1.00	1.00	out_CC
+GO:0005777	peroxisome	74	1	0.37	21	0.00263	0.31	0.31	out_CC
+GO:0005782	peroxisomal matrix	18	0	0.09	50	0.00448	1.00	1.00	out_CC
+GO:0030991	intraciliary transport particle A	6	0	0.03	51	0.00643	1.00	1.00	out_CC
+GO:0045178	basal part of cell	19	0	0.09	52	0.00759	1.00	1.00	out_CC

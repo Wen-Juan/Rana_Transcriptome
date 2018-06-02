@@ -1,0 +1,10 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
+GO:0070062	extracellular exosome	1024	23	9.47	27	3.9e-05	0.057	3.9e-05	out_CC
+GO:0016581	NuRD complex	12	3	0.11	92	0.00016	0.155	0.00016	out_CC
+GO:0022625	cytosolic large ribosomal subunit	16	3	0.15	203	0.00039	0.359	0.00039	out_CC
+GO:0031012	extracellular matrix	272	9	2.52	120	0.00043	0.215	0.00089	out_CC
+GO:0034663	endoplasmic reticulum chaperone complex	5	2	0.05	94	0.00083	0.160	0.00083	out_CC
+GO:1902560	GMP reductase complex	6	2	0.06	156	0.00124	0.272	0.00124	out_CC
+GO:0016020	membrane	5205	44	48.13	473	0.00563	0.742	0.83875	out_CC
+GO:0032993	protein-DNA complex	59	4	0.55	150	0.00703	0.265	0.00211	out_CC
+GO:0005925	focal adhesion	244	7	2.26	313	0.00729	0.519	0.00729	out_CC

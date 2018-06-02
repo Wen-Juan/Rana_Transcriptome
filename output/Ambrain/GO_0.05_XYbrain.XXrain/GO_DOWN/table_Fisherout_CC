@@ -1,0 +1,10 @@
+GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
+GO:0070062	extracellular exosome	1024	18	5.43	33	2.4e-06	0.066	2.4e-06	out_CC
+GO:0016581	NuRD complex	12	3	0.06	87	3.0e-05	0.147	3.0e-05	out_CC
+GO:0022625	cytosolic large ribosomal subunit	16	3	0.08	195	7.5e-05	0.345	7.5e-05	out_CC
+GO:0005925	focal adhesion	244	7	1.29	272	0.00028	0.446	0.00028	out_CC
+GO:0032993	protein-DNA complex	59	4	0.31	137	0.00141	0.247	0.00026	out_CC
+GO:0016020	membrane	5205	23	27.58	473	0.00156	0.743	0.92358	out_CC
+GO:0005720	nuclear heterochromatin	17	2	0.09	275	0.00356	0.448	0.00356	out_CC
+GO:0005730	nucleolus	498	8	2.64	32	0.00568	0.065	0.00433	out_CC
+GO:0002102	podosome	28	2	0.15	326	0.00953	0.535	0.00953	out_CC
