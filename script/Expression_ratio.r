@@ -10,14 +10,9 @@ library(easyGgplot2)
 col1 <- rgb(red = 0, green = 0, blue = 0, alpha = 0.1)
 col2 <- rgb(red = 1, green = 0, blue = 0, alpha = 0.6)
 
-datapath <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amgonad_strict/'
-kdata <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amgonad_strict/LogCPM_0.05_Amgonad copy.txt",header = T)
+datapath <- '~/Rana_Transcriptome/output/Amgonad_strict/'
+kdata <- read.table("~/Rana_Transcriptome/output/Amgonad_strict/LogCPM_0.05_Amgonad copy.txt",header = T)
 str(kdata)
-
-###restrict the analysis to sex-biaxed genes
-#kdata <- subset(kdata, kdata$logFC.XY43.XX43<=-1)
-#kdata <- subset(kdata, kdata$logFC.XY43.XX43>=1)
-#kdata$logFC.XY43.XX43
 
 map.data <- subset(kdata, kdata$start!='NA')
 chr1.1.data <- data.frame(subset(map.data, map.data$chr=='Chr01')) 
@@ -49,7 +44,7 @@ map.data$ratio <- log2(group1.expr/group2.expr)
 map.data$ratio[mapply(is.infinite, map.data$ratio)] <- NA
 
 #gene expression ratio Log2(XY/XX)
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/log2ratio_XYXXsexreversal_10chr.pdf", width=8, height=8)
+pdf("~/Rana_Transcriptome/output/figures/log2ratio_XYXXsexreversal_10chr.pdf", width=8, height=8)
 ggplot(map.data, aes(x=chr, y=ratio, fill=chr)) +
   scale_fill_manual(values = c("red","red","grey","grey","grey","grey","grey","grey","grey","grey")) +
   scale_y_continuous(limits = c(-6,6)) + 
@@ -62,7 +57,7 @@ dev.off()
 
 
 #gene expression ratio Log2(XY/XX)
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/log2ratio_XYXXsexreversal_allauto.pdf", width=8, height=8)
+pdf("~/Rana_Transcriptome/output/figures/log2ratio_XYXXsexreversal_allauto.pdf", width=8, height=8)
 ggplot(map.data, aes(x=chrone, y=ratio, fill=chrone)) +
   scale_fill_manual(values = c("grey","red","red")) +
   scale_y_continuous(limits = c(-0.5,0.5)) + 
@@ -87,7 +82,7 @@ wilcox.test(map.data$ratio[map.data$chr=='Chr02'],withoutchr01$ratio[withoutchr0
 
 ###liver
 #ggplot of boxplot
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/log2ratio_liver.pdf", width=8, height=8)
+pdf("~/Rana_Transcriptome/output/figures/log2ratio_liver.pdf", width=8, height=8)
 ggplot(map.data, aes(x=chr, y=ratio, fill=chr)) +
   scale_fill_manual(values = c("red","red","grey","grey","grey","grey","grey","grey","grey","grey")) +
   scale_y_continuous(limits = c(-8,8)) + 
@@ -98,9 +93,6 @@ ggplot(map.data, aes(x=chr, y=ratio, fill=chr)) +
   theme(axis.text.x = element_text(colour="black",size=12),axis.text.y = element_text(colour="black",size=12))
 dev.off()
 
-###G46 no sex reversals
-
-####
 ##
 wilcox.test(map.data$ratio[map.data$chr=='Chr01'],map.data$ratio[map.data$chr=='Chr02'],exact = FALSE) 
 ##W = 269820, p-value = 0.6143
@@ -112,10 +104,6 @@ t <- rbind(map.data$ratio[map.data$chr=='Chr01'],map.data$ratio[map.data$chr=='C
 wilcox.test(t,map.data$ratio[map.data$chr!='Chr01'],exact = FALSE) 
 #W = 3512100, p-value = 0.4876
 
-###
-###G46 no sex reversals
-
-####
 ##G43
 ##
 wilcox.test(map.data$ratio[map.data$chr=='Chr01'],map.data$ratio[map.data$chr=='Chr02'],exact = FALSE) 
@@ -177,9 +165,7 @@ require(zoo)
 install.packages("rtracklayer")
 library("rtracklayer")
 
-
-
-dn_ds <-read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/dnds/amm88perc_annotation_dnds.txt", header = T)
+dn_ds <-read.table("~/Rana_Transcriptome/input/dnds/amm88perc_annotation_dnds.txt", header = T)
 str(dn_ds)
 
 ##Assigning Transcripts to Chromosomes###
@@ -238,7 +224,7 @@ highCI <- sorted.perm[975]
 
 RMpalette <- c("#f0f9e8", "#bae4bc", "#7bccc4", "#43a2ca", "#0868ac")
 
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/chr1_dnds.pdf", width=7,height=5)
+pdf(file="~/Rana_Transcriptome/output/figures/chr1_dnds.pdf", width=7,height=5)
 
 Chr_pos <- rollmean(smooth(Chr01_sort$start),40)
 Chr_dnds <- rollmean(smooth(Chr01_sort$dnds),40)
@@ -305,7 +291,7 @@ highCI <- sorted.perm[975]
 
 RMpalette <- c("#f0f9e8", "#bae4bc", "#7bccc4", "#43a2ca", "#0868ac")
 
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/chr10_expratio_G46.pdf", width=7,height=5)
+pdf(file="~/Rana_Transcriptome/output/figures/chr10_expratio_G46.pdf", width=7,height=5)
 
 Chr_pos <- rollapply(Chr10_sort$start, 40, mean, na.rm = TRUE)
 Chr_ratio <- rollapply(Chr10_sort$ratio, 40, mean, na.rm = TRUE)
@@ -368,7 +354,7 @@ highCI <- sorted.perm[975]
 
 RMpalette <- c("#f0f9e8", "#bae4bc", "#7bccc4", "#43a2ca", "#0868ac")
 
-pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/chr10_expratio_gonad.pdf", width=7,height=5)
+pdf(file="~/Rana_Transcriptome/output/figures/chr10_expratio_gonad.pdf", width=7,height=5)
 
 Chr_pos <- rollapply(Chr10_sort$start, 40, mean, na.rm = TRUE)
 Chr_ratio <- rollapply(Chr10_sort$ratio, 40, mean, na.rm = TRUE)
@@ -379,26 +365,3 @@ abline(h=highCI,lty=2)
 #abline(v=116443467, col="blue",lwd=2,lty=3)
 
 dev.off()
-
-
-##WJ original code without confidential internal
-map.data <- dn_ds
-chr1_1_start <-map.data$start[map.data$chr=='Chr01']
-chr_1_end <- max(map.data$start[map.data$chr=='Chr01'])
-
-zoo.dat <- zoo(map.data$ratio[map.data$chr=='Chr01'], c(chr1_1_start,chr_1_end))
-y <- rollapply(zoo.dat, 40, FUN = mean, align = 'center', na.rm=TRUE) 
-
-
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/amm_chr01_malesexreveral_ratio.pdf", width=8, height=8)
-par(mar=c(5,5,4,3)+0.6) 
-#plot(c(0, chr_1_end), c(0,2), axes=F, lwd=2, xlab="Position (bp)", ylab="gene expression ratio log2(XY0/XX)", cex.axis=1.5, cex.lab=1.2, col="white")
-plot(c(0, chr_1_end), c(-6,6), axes=F, lwd=2, xlab="Position (bp)", ylab="gene expression ratio Log2(XY/XX)", cex.axis=1.5, cex.lab=1.2, col="white")
-axis(1,c(0, 30000000,60000000,90000000, 120000000, 150000000, 180000000, 200000000))
-axis(2, c(-6,-4,-2,0,2,4,6))
-points(map.data$start[map.data$chr=='Chr01'], map.data$ratio[map.data$chr=='Chr01'], pch=20, lwd=2, type="p",col="gray50", main="",cex.axis=1.5)
-#points(DC.data1dmrt$start[DC.data1dmrt$chr=='Chr01'],DC.data1dmrt$dN_dS[DC.data1dmrt$chr=='Chr01'], pch=20, lwd=3, type="p",col="red", main="",cex.axis=1.5)
-lines(y,col="blue",lwd=4)
-abline(v=116443467, col="blue",lwd=2,lty=3)
-dev.off()
-

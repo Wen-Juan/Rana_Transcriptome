@@ -3,15 +3,15 @@ install.packages("ggplot2")
 install.packages("reshape2")
 
 library(ggplot2)
-library(reshape2) # for melt
+library(reshape2)
 
 #set up working directory
-setwd <-'/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/'
-datapath <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/'
-results <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/'
+setwd <-'~/Rana_Transcriptome/'
+datapath <- '~/Rana_Transcriptome/input/'
+results <- '~/Rana_Transcriptome/output/'
 
 #load datasets
-sb <- read.table('/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/amm_sexbias.txt', header = TRUE)
+sb <- read.table('~/Rana_Transcriptome/input/amm_sexbias.txt', header = TRUE)
 str(sb)
 
 sb <- data.frame(with(sb,sb[order(Gosner_stage,Fold_change,Sex_bias),]))
@@ -21,7 +21,7 @@ blues <- RColorBrewer::brewer.pal(4, "Blues")
 reds <- RColorBrewer::brewer.pal(4, "Reds")
 
 par(mar=c(5,1,3,5))
-pdf("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/sex_bias_alltissues.pdf",height=10, width=12)  
+pdf("~/Rana_Transcriptome/output/figures/sex_bias_alltissues.pdf",height=10, width=12)  
 
 ggplot(data = sb, aes(x=Sex_bias, y= Gene_number, fill=interaction(factor(Fold_change),Sex_bias), label=Gene_number)) + 
   geom_bar(stat="identity") +

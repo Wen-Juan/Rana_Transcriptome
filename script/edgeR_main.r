@@ -30,11 +30,11 @@ FDR2use = as.numeric(paste(args[2]))
 # sub_analyse <- 'amall'
 # FDR2use  <- 0.05
 
-datapath <- "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/"
-outpath <- paste("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/", sub_analyse, sep="")
+datapath <- "~/Rana_Transcriptome/input/"
+outpath <- paste("~/Rana_Transcriptome/output/", sub_analyse, sep="")
 dir.create(file.path(outpath))
 
-annotation <- read.delim(file.path(datapath, "amm88perc_annotation.txt"), sep="\t", header=TRUE, stringsAsFactors=FALSE) # BRM_annotation.txt annotation_out.txt
+annotation <- read.delim(file.path(datapath, "amm_annotation.txt"), sep="\t", header=TRUE, stringsAsFactors=FALSE) # BRM_annotation.txt annotation_out.txt
 
 count <- read.table(file.path(datapath, paste(sub_analyse,'_count.txt', sep="")), header=T, row.names=1)
 count <- round(count, digits=0)
@@ -50,21 +50,20 @@ paste("all transcripts:", nrow(dgl))
 #dgl <- DGEList(counts=count, group=design$group, genes=data.frame(annotation$length))
 #dgl <- calcNormFactors(dgl)
 #dgl_rpkm <- rpkm(dgl)
-#write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Ambrain/brain_dgl_rpkm_amm.txt", sep="\t", col.names=T)
+#write.table(dgl_rpkm, "~/Rana_Transcriptome/output/Ambrain/brain_dgl_rpkm_amm.txt", sep="\t", col.names=T)
 
 #converting to RPKM of G46###
 #dgl <- DGEList(counts=count, group=design$group, genes=annotation)
 #dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
 #dgl <- calcNormFactors(dgl)
 #dgl_rpkm <- rpkm(dgl)
-
-#write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg46nosr/dgl_rpkm_amm.txt", sep="\t", col.names=T)
+#write.table(dgl_rpkm, "~/Rana_Transcriptome/output/Amg46nosr/dgl_rpkm_amm.txt", sep="\t", col.names=T)
 
 ###coverting to RPKM of gonad
 #dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
 #dgl <- calcNormFactors(dgl)
 #dgl_rpkm <- rpkm(dgl)
-#write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amgonad/dgl_rpkm_amm_gonad.txt", sep="\t", col.names=T)
+#write.table(dgl_rpkm, "~/Rana_Transcriptome/output/Amgonad/dgl_rpkm_amm_gonad.txt", sep="\t", col.names=T)
 
 ###coverting to RPKM of liver
 #dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
@@ -72,46 +71,18 @@ paste("all transcripts:", nrow(dgl))
 #dgl1 <- rpkm(dgl)
 #dgl2 <- dgl[aveLogCPM(dgl1) > 0,]
 #dgl <- dgl[rowSums(cpm(dgl)>1) >=2,]
-
-#write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amliver/dgl_rpkm_amm_liver_filter.txt", sep="\t", col.names=T)
+#write.table(dgl_rpkm, "~/Rana_Transcriptome/output/Amliver/dgl_rpkm_amm_liver_filter.txt", sep="\t", col.names=T)
 
 ###coverting to RPKM of G43
 #dgl <- DGEList(counts=count,group=design$group, genes=data.frame(annotation$length))
 #dgl <- calcNormFactors(dgl)
 #dgl_rpkm <- rpkm(dgl)
-#write.table(dgl_rpkm, "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/Amg43/dgl_rpkm_amm_g43.txt", sep="\t", col.names=T)
+#write.table(dgl_rpkm, "~/Rana_Transcriptome/output/Amg43/dgl_rpkm_amm_g43.txt", sep="\t", col.names=T)
 
-##filter effects
-filter_file <- file.path(paste(outpath, '/',sub_analyse, 'filtering_info.txt', sep=""))
-ave0 <- dgl[aveLogCPM(dgl) >= 0,]
-ave1 <- dgl[aveLogCPM(dgl) >= 1,]
-sum2 <- dgl[rowSums(cpm(dgl)) >= 2,]
-sum10 <- dgl[rowSums(cpm(dgl)) >= 10,]
+##filtering out lowly expression transcripts and transcripts only expressed in a few libraries.
 
-write(paste("Comp\tRemaining\tMin\t1Q\tMedian\tMean\t3Q\tMax"), filter_file)
-write(paste("All_"), filter_file, append=T)
-write(paste(nrow(dgl), "_", sep=""), filter_file, append=T)
-write(summary(rowSums(cpm(dgl)/ncol(dgl))), filter_file, append=T, sep='\t', ncol=6)
-write(paste("Ave0_"), filter_file, append=T)
-write(paste(nrow(ave0), "_", sep=""), filter_file, append=T)
-write(summary(rowSums(cpm(ave0)/ncol(ave0))), filter_file, append=T, sep='\t', ncol=6)
-write(paste("Ave1_"), filter_file, append=T)
-write(paste(nrow(ave1), "_", sep=""), filter_file, append=T)
-write(summary(rowSums(cpm(ave1)/ncol(ave1))), filter_file, append=T, sep='\t', ncol=6)
-write(paste("Sum2_"), filter_file, append=T)
-write(paste(nrow(sum2), "_", sep=""), filter_file, append=T)
-write(summary(rowSums(cpm(sum2)/ncol(sum2))), filter_file, append=T, sep='\t', ncol=6)
-write(paste("Sum10_"), filter_file, append=T)
-write(paste(nrow(sum10), "_", sep=""), filter_file, append=T)
-write(summary(rowSums(cpm(sum10)/ncol(sum10))), filter_file, append=T, sep='\t', ncol=6)
-
-# compile nice table with perl -pe 's/_\n/\t/g' #_filtering_info.txt
-
-# spec <- dgl[rowSums(cpm(dgl)>=2) > 3,] # The gene must be expressed in at least 3 libaries (remove sex specific genes)
-dgl <- dgl[aveLogCPM(dgl) > 0,] # filter by average reads
-#dgl <- dgl[rowSums(cpm(dgl)) >= 2,]
-#dgl <- dgl[rowSums(cpm(dgl)>=1) >= 3,] #the 5 means there are 10 libraries in total with 5 males and 5 females
-#dgl <- dgl[rowSums(cpm(dgl)>1) >=2,]
+dgl <- dgl[aveLogCPM(dgl) > 0,] # first filter by average reads
+dgl <- dgl[rowSums(cpm(dgl)>=1) >= 3,] #secondly, selecting transcript which is expressed >1 cpm in at least half of the sample size in each sex per tissue
 
 
 write(paste("dgl"), filter_file, append=T)
@@ -125,19 +96,14 @@ summary(rowSums(dgl$count))
 ## colours
 col.M23   <- rgb(206/255, 34/255, 43/255, 3/4)
 col.F23  <- rgb(206/255, 34/255, 43/255, 3/4)
-#col.U23  <- rgb(206/255, 34/255, 43/255, 3/4)
 col.M27 <- rgb(209/255, 127/255, 21/255, 3/4)
 col.F27 <- rgb(209/255, 127/255, 21/255, 3/4)
-#col.U27 <- rgb(209/255, 127/255, 21/255, 3/4)
 col.M31 <- rgb(23/255, 87/255, 120/255, 3/4)
 col.F31 <- rgb(23/255, 87/255, 120/255, 3/4)
-#col.U31 <- rgb(23/255, 87/255, 120/255, 3/4)
 col.M43 <- rgb(88/255, 135/255, 37/255, 3/4)
 col.F43 <- rgb(88/255, 135/255, 37/255, 3/4)
-#col.R43 <- rgb(88/255, 135/255, 37/255, 3/4) #for tvedora
 col.M46 <- rgb(113/255, 250/255, 241/255, 3/4)
 col.F46 <- rgb(113/255, 250/255, 241/255, 3/4)
-col.SR46 <- rgb(113/255, 250/255, 241/255, 3/4)
 
 col.BF <- rgb(100/255, 127/255, 21/255, 3/4)
 col.BM <- rgb(100/255, 127/255, 21/255, 3/4)
@@ -161,79 +127,6 @@ plotMDS(y, pch=pchs[design$group],col=cols[design$group], cex=2, main="Tvedora M
 legend('bottom', inset=0.02, legend=levels(design$group), pch = pchs, col=cols,cex = 0.8 )
 dev.off()
 
-# plotting PCA 
-#install.packages('ggfortify')
-#library('ggfortify')
-
-#y <- dgl
-#count_norm <- data.frame(y$counts)
-#count_norm1 <- data.frame(t(count_norm[,1:61]))
-#str(count_norm1)
-
-#pcaData <- count_norm1
-#pca <- prcomp(pcaData, scale. = TRUE)
-#summary(pca)
-
-#rownames(count_norm1) <- c("23F1", "23F2", "23F3", "23M1","23M3","23M2","27F1","27F2","27F3", "27M1","27M2","27M3","31F1","31F2", "31F3", "31F4", "31M1","31M2","31M3","31M4","31M5","43F1","43F2", "43F3", "43M1","43M2","43M3","46F1","46F2","46M1","46M2","46M3", "FB1", "FB2", "FB3", "FB4","FB5", "MB1", "MB2", "MB3", "MB4", "MB5", "FO1", "FO2", "FO3", "FO4", "FO5", "MT1", "MT2", "MT3", "MT4", "MT5", "FL1", "FL2", "FL3", "FL4", "FL5", "ML1", "ML2", "ML3", "ML4")
-#str(count_norm1)
-#count_norm1$stage <- c("23", "23", "23", "23","23","23","27","27","27", "27","27","27","31","31", "31", "31", "31","31","31","31","31","43","43", "43", "43","43","43","46","46","46","46","46","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Brain","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Gonad","Liver","Liver","Liver","Liver","Liver","Liver","Liver","Liver","Liver")
-#count_norm1$sex <- c("female","female","female","male","male","male","female","female","female","male","male","male","female","female","female","female","male","male","male","male","male","female","female","female","male","male","male","female","female","male","male","male","female","female","female","female","female","male","male","male","male","male","female","female","female","female","female","male","male","male","male","male","female","female","female","female","female","male","male","male","male")
-
-#count_i <- data.frame(pca$x, stage=count_norm1$stage, sex=count_norm1$sex)
-#str(count_i)
-
-#pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissues_pc1pc2.pdf")
-#autoplot(pca, data = count_i, x=1, y=2, colour = 'stage', shape='sex', size=4, ylim=c(-0.3,0.5), xlim=c(-0.3,0.3))
-#dev.off()
-
-#pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissues_pc3pc4.pdf")
-#autoplot(pca, data = count_i, x=3, y=4, colour = 'stage', shape='sex', size=4, ylim=c(-0.3,0.3), xlim=c(-0.3,0.5))
-#dev.off()
-
-#pdf(file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/alltissues_pc5pc6.pdf")
-#autoplot(pca, data = count_i, x=5, y=6, colour = 'stage', shape='sex', size=4, ylim=c(-0.3,0.5), xlim=c(-0.3,0.5))
-#dev.off()
-
-#ggplot (count_i, aes(x=PC1,y=PC2,col=stage,shape=sex)) + #this does not give variance percentage.
-#  geom_point(size=3,alpha=0.8)+
-#  scale_color_manual(values = c("orange", "red","pink","darkblue","blue", "brown", "green",  "grey"))+ 
-#  theme_set(theme_bw(base_size=12)) +
-#  theme(legend.justification=c(1,0), legend.position=c(0.95,0.05)) 
-
-
-#ggplot (count_i, aes(x=PC3,y=PC4,col=stage,shape=sex,variance_percentage = TRUE)) + #this does not give variance percentage.
-# geom_point(size=3,alpha=0.8) +
-#  scale_color_manual(values = c("orange", "red","pink","darkblue","blue", "brown", "green",  "grey"))+ 
-#  theme_set(theme_bw(base_size=12))
-
-#ggplot (count_i, aes(x=PC5,y=PC6,col=stage,shape=sex)) + #this does not give variance percentage.
-#  geom_point(size=3,alpha=0.8)+
-#  scale_color_manual(values = c("orange", "red","pink","darkblue","blue", "brown", "green",  "grey"))+ 
-#  theme_set(theme_bw(base_size=12)) +
-#  theme(legend.justification=c(1,0), legend.position=c(0.95,0.05))
-
-#pca1 <- PCA(pcaData)
-#par(mar=c(5,5,4,3))
-#plot.PCA(pca1, axes=c(1, 2), label="none", col.ind=c("orange", "orange", "orange", "orange","orange","orange","red","red","red","red","red","red","pink","pink", "pink", "pink", "pink","pink","pink","pink","pink","darkblue","darkblue", "darkblue", "darkblue","darkblue","darkblue","blue","blue","blue","blue","blue", "brown", "brown", "brown", "brown", "brown", "brown", "brown", "brown", "brown","brown", "green", "green", "green", "green", "green", "green", "green", "green", "green", "green", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey"), title="PCA 1 vs PCA 2", cex=1.5)
-#plotellipses(plot.PCA)
-#plot.PCA(pca1, axes=c(3, 4), col.ind=c("red","red","red","blue","blue","blue","red","red","red","blue","blue","blue","red","red","red","red","blue","blue","blue","blue","blue","red","red","red","blue","blue","blue","red","red","blue","blue","blue","red","red","red","red","red","blue","blue","blue","blue","blue","red","red","red","red","red","blue","blue","blue","blue","blue","red","red","red","red","red","blue","blue","blue","blue"), title="PCA 3 vs PCA 4", cex=0.7)
-#plot.PCA(pca1, axes=c(4, 5), col.ind=c("red","red","red","blue","blue","blue","red","red","red","blue","blue","blue","red","red","red","red","blue","blue","blue","blue","blue","red","red","red","blue","blue","blue","red","red","blue","blue","blue","red","red","red","red","red","blue","blue","blue","blue","blue","red","red","red","red","red","blue","blue","blue","blue","blue","red","red","red","red","red","blue","blue","blue","blue"), title="PCA 1 vs PCA 2", cex=0.4)
-#plotellipses(pca1)
-
-#y <- dgl
-#colnames(y) <- paste(colnames(y), design$group, sep="\n")
-#cols = c(col.M23, col.F23,col.M27,col.F27, col.M31, col.F31,col.M43,col.F43,col.R43,col.M46,col.F46,col.R46)#for tvedora
-#cols = c(col.M23, col.F23,col.U23,col.M27,col.F27,col.U27, col.M31, col.F31,col.U31,col.M43,col.F43,col.M46,col.F46,col.MF46) #for argovie
-#cols = c(col.M23, col.F23,col.M27,col.F27, col.M31, col.F31,col.M43,col.F43,col.M46,col.F46,col.SR46,col.FB,col.BM,col.BF,col.FL,col.ML,col.FO,col.MT) #for ammarnas
-#pchs = c(18,5,18,5,18,5,18,5,16,18,5,16) #for tvedora
-#pchs = c(18,5,18,5,18,5,18,5,18,5,1,16,1,16,1,16,1)
-#plotMDS(y, pch=pchs[design$group],col=cols[design$group], cex=0.6, main="Ammarnas MDS plot",cex.main=0.8, cex.lab=0.5,lty=1.5, lwd=2)
-#legend('bottomright', inset=0.02, legend=levels(design$group), pch = pchs, col=cols )
-#plotMDS(y, cex=1, col=cols[design$group], main=paste(sub_analyse,"MDS plot"))
-#plotMDS(y, cex=1, pch=as.numeric(y$samples$group), col=as.numeric(y$samples$group), main=paste(sub_analyse,"MDS plot"))
-#legend('bottomright', legend=levels(design$group), pch = as.numeric(y$samples$group), col=as.numeric(y$samples$group))
-#dev.off()
-
 # estimate data normalisation factors and dispersion
 xcpm <- mglmOneGroup(dgl$counts)     # computing a logCPM for making dispersion plot
 dgl <- calcNormFactors(dgl)
@@ -251,20 +144,17 @@ legend("topright", c("Common","Trended","Tagwise"), pch=16, col=c(cblblue, cbgre
 dev.off()
 
 ##  fit the data model ------------------------------------------
-#fitres <- glmFit(dgl, dmat) #old model fit
-#fitres <- glmQLFit(dgl, dmat, robust = TRUE)
 fitres <- glmFit(dgl, dmat, robust = TRUE)
 
+# cmat
 x <- read.delim(paste(datapath, sub_analyse, "_matrix.txt", sep=""), sep="\t", header=T)
 sortedX <- data.frame(x[order(x$model_coefficients, decreasing=F),])
 cmat <- as.matrix(sortedX[,-1])
 colnames(cmat)[1] <- colnames(sortedX[2])
 rownames(cmat) <- as.character(sortedX[,1])
-# cmat
 
 #Contrast fit and test results
 lrtres <- list()
-#for(k in 1:ncol(cmat)) lrtres[[k]] <- glmQLFTest(fitres, contrast=cmat[,k])
 for(k in 1:ncol(cmat)) lrtres[[k]] <- glmLRT(fitres, contrast=cmat[,k])
 
 logFC <- NULL
@@ -289,8 +179,6 @@ rownames(logFC) <- rownames(PV) <- rownames(FDR) <- rownames(fitres$coefficients
 idxzeros <- allzeros
 
 restab <- data.frame(rownames(dgl$counts),dgl$genes[,2], dgl$genes[,3], dgl$genes[,4], dgl$genes[,5],logCPM=xcpm,logFC,PV,FDR) # note start and end are the same in annotation file
-#if no go term, no the fifth column
-#restab <- data.frame(rownames(dgl$counts),dgl$genes[,2], dgl$genes[,3], dgl$genes[,4], logCPM=xcpm,logFC,PV,FDR) # note start and end are the same in annotation file
 colnames(restab)[1] <- 'gid'
 colnames(restab)[2] <- 'gname'
 colnames(restab)[3] <- 'chr'
@@ -323,8 +211,7 @@ for (k in 1:wn) {
   if (sum(ix) > 1 ) {
     pairs(xmat,pch=16,cex=0.4,main=wug[k])
   }
-  #	dev.copy(pdf,file.path(outpath,'courtship_out',paste(sub_analyse,wug[k],'_pairwise_raw_count.pdf', sep="")), width=8, height=8)
-  dev.off()
+   dev.off()
 }
 
 
@@ -373,21 +260,6 @@ deix <- which(de.yes.no[,k])
 maPlot(x=NULL,y=NULL,ylim=c(-10,10),logAbundance= xcpm, logFC = fc[,k], xlab = bquote(paste(log^2, CPM)), ylab = paste(strsplit(colnames(cmat)[k], '\\.')[[1]][1], ' - ', strsplit(colnames(cmat)[k], '\\.')[[1]][2], sep=""), de.tags= deix, pch = 19, cex = 0.3, smearWidth = 0.5, cex.axis=1.8, cex.lab=2, panel.first = grid(), smooth.scatter = FALSE, lowess = FALSE, na.rm =TRUE, main = paste('LogFC plot ', strsplit(colnames(cmat)[k], '\\.')[[1]][1], ' vs ', strsplit(colnames(cmat)[k], '\\.')[[1]][2], sep=""))
 dev.off()
 }
-
-# generation of subsets
-# colnames(restab_frame)
-# tail(restab_frame)
-# for(k in 6:ncol(restab_frame)) restab_frame[,k] <- as.numeric(levels(restab_frame[,k]))[restab_frame[,k]]
-# str(restab_frame)
-
-## correlation plots, not v useful
-# par(mfrow=c(2,2))
-# plot(restab[,13], restab[,7], xlab="m vs f", ylab="XXm vs XXf")
-# plot(restab[,13], restab[,8], xlab="m vs f", ylab="XYm vs XXf")
-# plot(restab[,13], restab[,9], xlab="m vs f", ylab="XYm vs XXm")
-# plot(restab[,13], restab[,10], xlab="XXm vs XXf", ylab="XYm vs XXf")
-# dev.copy(pdf,file.path(outpath, 'sex bias plot body.pdf'), width=8, height=8)
-# dev.off()
 
 # Physical map basics
 if (!is.numeric(restab$start)) {restab$start <- as.numeric(levels(restab$start))[restab$start] }
@@ -525,8 +397,6 @@ points(chr_6_end + list_nonde[[k]]$start[list_nonde[[k]]$chr=='Chr07'], 1-log(li
 points(chr_7_end + list_nonde[[k]]$start[list_nonde[[k]]$chr=='Chr08'], 1-log(list_nonde[[k]][[paste('FDR.',colnames(cmat)[k], sep="")]][list_nonde[[k]]$chr=='Chr08']), pch=20, lwd=2, type="p",col="8", main="")
 points(chr_8_end + list_nonde[[k]]$start[list_nonde[[k]]$chr=='Chr09'], 1-log(list_nonde[[k]][[paste('FDR.',colnames(cmat)[k], sep="")]][list_nonde[[k]]$chr=='Chr09']), pch=20, lwd=2, type="p",col="1", main="")
 points(chr_9_end + list_nonde[[k]]$start[list_nonde[[k]]$chr=='Chr10'], 1-log(list_nonde[[k]][[paste('FDR.',colnames(cmat)[k], sep="")]][list_nonde[[k]]$chr=='Chr10']), pch=20, lwd=2, type="p",col="8", main="")
-
-# abline (h = c(300), col='blue', lty='dashed')
 
 chrPosition <- c(chr_1_end/2, chr_1_end/2 + chr_2_end/2, chr_2_end/2 + chr_3_end/2, chr_3_end/2 + chr_4_end/2, chr_4_end/2 + chr_5_end/2, chr_5_end/2 + chr_6_end/2, chr_6_end/2 + chr_7_end/2, chr_7_end/2 + chr_8_end/2, chr_8_end/2 + chr_9_end/2, chr_9_end/2 + chr_10_end/2)
 
@@ -676,71 +546,6 @@ colnames(nc2) <- c('ID', as.character(design$sample))
 restab_logCPM = merge(restab, nc2, by.x="gid", by.y="ID", all=F )
 write.table(restab_logCPM, file=file.path(outpath, paste('LogCPM_',FDR2use, '_', sub_analyse, '.txt', sep="")), quote=F, row.names=F, sep='\t')
 
-# look at make specific genes
-# male_specific <- subset(restab_logCPM, restab_logCPM$FDR.m.f < 0.01)
-# summary(rowSums(cbind(male_specific$F1O, male_specific$F2O, male_specific$F4O))/3 < -1)
-
-## Violin plots
-for(k in 1:ncol(cmat)) {
-par(mar=c(5,5,4,3))
-violinData <- data.frame(subset(restab_logCPM, grepl("Chr", chr))["chr"], subset(restab_logCPM, grepl("Chr", chr))[paste('logFC.',colnames(cmat)[k], sep="")])
-p = ggplot(violinData, aes_string(factor(violinData$chr),paste('logFC.',colnames(cmat)[k], sep="")), ylim)
-p + geom_violin(scale="width", fill=16, trim=F) + geom_boxplot(width=0.15, col=4) + geom_hline(yintercept=-1,lty=3) + geom_hline(yintercept=1, lty=3) + geom_hline(yintercept=2, lty=2)+ geom_hline(yintercept=-2, lty=2) +  scale_y_continuous(breaks=c(-10, -5, -2, -1, 0, 1, 2, 5, 10)) + labs(title=paste('logFC.',colnames(cmat)[k], sep=""), x='Chromosome', y='logFC') + theme(panel.background = element_rect(fill='white'))  + theme(axis.text=element_text(size=12), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.x = element_text(colour = "black"), axis.title.y = element_text(colour = "black"))
-ggsave(file.path(outpath, paste('violin_per_chr_', colnames(cmat)[k], '_', sub_analyse, '.pdf', sep="")), width=8, height=8)
-
-
-restab_logCPM_subset <- subset(restab_logCPM, restab_logCPM[[paste('FDR.',colnames(cmat)[k], sep="")]] < FDR2use)
-violinData <- data.frame(subset(restab_logCPM_subset, grepl("Chr", chr))["chr"], subset(restab_logCPM_subset, grepl("Chr", chr))[paste('logFC.',colnames(cmat)[k], sep="")])
-p = ggplot(violinData, aes_string(factor(violinData$chr),paste('logFC.',colnames(cmat)[k], sep="")), ylim)
-p + geom_violin(scale="width", fill=16, trim=F) + geom_boxplot(width=0.15, col=4) + geom_hline(yintercept=-1,lty=3) + geom_hline(yintercept=1, lty=3) + geom_hline(yintercept=2, lty=2)+ geom_hline(yintercept=-2, lty=2) +  scale_y_continuous(breaks=c(-10, -5, -2, -1, 0, 1, 2, 5, 10)) + labs(title=paste('logFC.',colnames(cmat)[k],' DE', sep=""), x='Chromosome', y='logFC') + theme(panel.background = element_rect(fill='white'))  + theme(axis.text=element_text(size=12), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.x = element_text(colour = "black"), axis.title.y = element_text(colour = "black"))
-ggsave(file.path(outpath, paste('violin_per_chr_DE_', colnames(cmat)[k], '_', sub_analyse, '.pdf', sep="")), width=8, height=8)
-
-}
-
-for(k in 1:ncol(cmat)) {
-
-minUse <- min(restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")])
-chr1_p <- wilcox.test(restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr01'], restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")] & restab_logCPM$chr !='Chr01' & restab_logCPM$chr !='Chr01'])$p.value
-chr2_p <- wilcox.test(restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr02'], restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")] & restab_logCPM$chr !='Chr02' & restab_logCPM$chr !='Chr02'])$p.value
-chr3_p <- wilcox.test(restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr03'], restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")] & restab_logCPM$chr !='Chr03' & restab_logCPM$chr !='Chr03'])$p.value
-chr4_p <- wilcox.test(restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr04'], restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")] & restab_logCPM$chr !='Chr04' & restab_logCPM$chr !='Chr04'])$p.value
-chr5_p <- wilcox.test(restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr05'], restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")] & restab_logCPM$chr !='Chr05' & restab_logCPM$chr !='Chr05'])$p.value
-chr6_p <- wilcox.test(restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr06'], restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")] & restab_logCPM$chr !='Chr06' & restab_logCPM$chr !='Chr06'])$p.value
-chr7_p <- wilcox.test(restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr07'], restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")] & restab_logCPM$chr !='Chr07' & restab_logCPM$chr !='Chr07'])$p.value
-chr8_p <- wilcox.test(restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr08'], restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")] & restab_logCPM$chr !='Chr08' & restab_logCPM$chr !='Chr08'])$p.value
-chr9_p <- wilcox.test(restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr09'], restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")] & restab_logCPM$chr !='Chr09' & restab_logCPM$chr !='Chr09'])$p.value
-chr10_p <- wilcox.test(restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr10'], restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")] & restab_logCPM$chr !='Chr10' & restab_logCPM$chr !='Chr10'])$p.value
-
-	pdf(file.path(outpath, paste('logFC_per_chr_', colnames(cmat)[k], '_', sub_analyse, '.pdf', sep="")), width=8, height=8)
-par(mar=c(5,5,4,3))
-boxplot(
-	restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr01'],
-	restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr02'],
-	restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr03'],
-	restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr04'],
-	restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr05'],
-	restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr06'],
-	restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr07'],
-	restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr08'],
-	restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr09'],
-	restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")]  & restab_logCPM$chr =='Chr10'],
-type="n", xlab="Chromosome", names=seq(1:10), ylab="logFC", main=paste('logFC per chromosome ',strsplit(colnames(cmat)[k], '\\.')[[1]][1], ' vs ', strsplit(colnames(cmat)[k], '\\.')[[1]][2], sep=""), cex.main=1.5, cex.lab=1.3)
-
-if (chr1_p < 0.001) {text(1, minUse, labels='***', cex=1.5)} else if (chr1_p < 0.01) {text(1, minUse, labels='**', cex=1.5)} else if (chr1_p < 0.05) {text(1, minUse, labels='*', cex=1.5)}
-if (chr2_p < 0.001) {text(2, minUse, labels='***', cex=1.5)} else if (chr2_p < 0.01) {text(2, minUse, labels='**', cex=1.5)} else if (chr2_p < 0.05) {text(2, minUse, labels='*', cex=1.5)}
-if (chr3_p < 0.001) {text(3, minUse, labels='***', cex=1.5)} else if (chr3_p < 0.01) {text(3, minUse, labels='**', cex=1.5)} else if (chr3_p < 0.05) {text(3, minUse, labels='*', cex=1.5)}
-if (chr4_p < 0.001) {text(4, minUse, labels='***', cex=1.5)} else if (chr4_p < 0.01) {text(4, minUse, labels='**', cex=1.5)} else if (chr4_p < 0.05) {text(4, minUse, labels='*', cex=1.5)}
-if (chr5_p < 0.001) {text(5, minUse, labels='***', cex=1.5)} else if (chr5_p < 0.01) {text(5, minUse, labels='**', cex=1.5)} else if (chr5_p < 0.05) {text(5, minUse, labels='*', cex=1.5)}
-if (chr6_p < 0.001) {text(6, minUse, labels='***', cex=1.5)} else if (chr6_p < 0.01) {text(6, minUse, labels='**', cex=1.5)} else if (chr6_p < 0.05) {text(6, minUse, labels='*', cex=1.5)}
-if (chr7_p < 0.001) {text(7, minUse, labels='***', cex=1.5)} else if (chr7_p < 0.01) {text(7, minUse, labels='**', cex=1.5)} else if (chr7_p < 0.05) {text(7, minUse, labels='*', cex=1.5)}
-if (chr8_p < 0.001) {text(8, minUse, labels='***', cex=1.5)} else if (chr8_p < 0.01) {text(8, minUse, labels='**', cex=1.5)} else if (chr8_p < 0.05) {text(8, minUse, labels='*', cex=1.5)}
-if (chr9_p < 0.001) {text(9, minUse, labels='***', cex=1.5)} else if (chr9_p < 0.01) {text(9, minUse, labels='**', cex=1.5)} else if (chr9_p < 0.05) {text(9, minUse, labels='*', cex=1.5)}
-if (chr10_p < 0.001) {text(10, minUse, labels='***', cex=1.5)} else if (chr10_p < 0.01) {text(10, minUse, labels='**', cex=1.5)} else if (chr10_p < 0.05) {text(10, minUse, labels='*', cex=1.5)}
-
-	#	restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")][restab_logCPM[paste('logFC.',colnames(cmat)[k], sep="")] > 0 & restab_logCPM$chr !='Chr01' & restab_logCPM$chr !='Chr01'], # autosomes
-dev.off()
-}
-
 # Heatmaps
 colnames(restab_logCPM)
 tail(restab_logCPM)
@@ -754,7 +559,7 @@ length(as.character(design_subset$sample))
 rownames(restab_logCPM) <- restab_logCPM$gid
 DE_counts <- subset(restab_logCPM, restab_logCPM[[paste('FDR.',colnames(cmat)[k], sep="")]] < FDR2use)
 DE_counts_relevant <- subset(DE_counts, select=as.character(design_subset$sample))
-# row.names(DE_counts_relevant) <- DE_counts$gname
+
 colnames(DE_counts_relevant) <- paste(colnames(DE_counts_relevant), '\n', design_subset$group)
 if (nrow(DE_counts_relevant) > 2) {
 
@@ -778,11 +583,6 @@ DE_counts[[ cmethods[m] ]] = as.factor(mycl)
 gopath_method <- file.path(outpath, paste('GO_',FDR2use, '_', colnames(cmat)[k],'/',cmethods[m], sep=""))
 dir.create(gopath_method)
 
-#for(l in 1:length( levels (DE_counts[[cmethods[m]]] ) ) ) {
-#FDR05 <- data.frame(gene=DE_counts$gid, cluster=DE_counts[[cmethods[m]]], FDR=DE_counts[[paste('FDR.',colnames(cmat)[k], sep="")]] )
-#FDR05[,3][FDR05[,3] < FDR2use & FDR05[,2] != l] <- 1
-#write.table(data.frame(gene=FDR05[,1], FDR=FDR05[,3]), file=file.path(gopath_method, paste('cluster_',l ,'_',cmethods[m],'.txt', sep="")), quote=F, row.names=F, sep='\t')
-
 for(l in 1:length( levels (DE_counts[[cmethods[m]]] ) ) ) {
 FDR05 <- data.frame(gene=DE_counts$gid, cluster=DE_counts[[cmethods[m]]], FDR=DE_counts[[paste('FDR.',colnames(cmat)[k], sep="")]] )
 FDR05[,3][FDR05[,3] < FDR2use & FDR05[,2] != l] <- 1
@@ -790,78 +590,10 @@ GO_pvalues <- data.frame(gene=as.character(restab$gid), FDR=restab[[paste('FDR.'
 merged1 <- merge(GO_pvalues, FDR05, by.x="gene", by.y="gene", all=T )
 merged1$FDR.y[is.na(merged1$FDR.y)] <- as.character(merged1$FDR.x[is.na(merged1$FDR.y)])
 write.table(data.frame(gene=merged1[,1], FDR=merged1[,5]), file=file.path(gopath_method, paste('cluster_',l ,'_',cmethods[m],'.txt', sep="")), quote=F, row.names=F, sep='\t')
-  # write.table(data.frame(gene=FDR05[,1], FDR=FDR05[,3]), file=file.path(gopath_method, paste('cluster_',l ,'_',cmethods[m],'.txt', sep="")), quote=F, row.names=F, sep='\t')
-
 }
 }
 dev.off()
-##print(paste(colnames(cmat)[k], 'groups:  median', length(levels(DE_counts$median)), '  ward', length(levels(DE_counts$ward)), '  complete', length(levels(DE_counts$complete)), '  average', length(levels(DE_counts$average)), '  ward2', length(levels(DE_counts$ward.D2)), '  mcquitty', length(levels(DE_counts$mcquitty)), '  centroid', length(levels(DE_counts$centroid)), '  centroid', length(levels(DE_counts$centroid)),sep=" "))
 
 write.table(DE_counts, file=file.path(outpath, paste('clusters',FDR2use, '_', sub_analyse, '_',colnames(cmat)[k], '.txt', sep="")), quote=F, row.names=F, sep='\t')
 }
 }
-
-
-# heatmaps all
-#for(k in 1:ncol(cmat)) {
-#cmat_subset <- subset(cmat, cmat[[colnames(cmat)[k]]]!=0)
-#design_subset <- design[sort(design$group) %in% sort(row.names(cmat_subset)),]
-
-#length(as.character(design_subset$sample))
-#rownames(restab_logCPM) <- restab_logCPM$gene
-#DE_counts <- restab_logCPM
-#DE_counts_relevant <- subset(DE_counts, select=as.character(design_subset$sample))
-#row.names(DE_counts_relevant) <- NULL
-
-#colnames(DE_counts_relevant) <- paste(colnames(DE_counts_relevant), '\n', design_subset$group)
- #if (nrow(DE_counts_relevant) > 2) {
-
-#pdf(file.path(outpath, paste('Heatmap_All_', colnames(cmat)[k], '_', sub_analyse, '.pdf', sep="")), width=8, height=8)
-#cmethods <- c('median', 'average', 'ward.D', 'complete') # complete ward.D average median ward.D2 mcquitty centroid single
-
-# for(m in 1:length(cmethods)) {
-#d <- as.matrix(DE_counts_relevant)
-#myheatcol <- colorpanel(100, cbred,'white', cbblue) # choose a color palette for the heat map
-#distmatrix <- as.dist(1-cor(t(d), method="pearson"))
-#hr <- hclust(distmatrix, method=cmethods[m])  # plot(hr)
-#mycl <- cutreeDynamic(hr, distM=as.matrix(distmatrix)) # dynamic tree cut
-#clusterCols <- rainbow(length(unique(mycl))) # get a color palette equal to the number of clusters
-# # myClusterSideBar <- clusterCols[mycl] # create vector of colors for side bar, old code
-#myClusterSideBar <- as.character(as.numeric(mycl))
-#heatmap.2(d, col=myheatcol, Rowv=reorder(as.dendrogram(hr), wts=mycl), keysize=1.3, scale="row", density.info="density", trace="none", cexCol=0.7, cexRow=0.6, RowSideColors = myClusterSideBar, main=paste(sub_analyse, cmethods[m], strsplit(colnames(cmat)[k], '\\.')[[1]][1], 'vs', strsplit(colnames(cmat)[k], '\\.')[[1]][2], FDR2use), srtCol=45, key.title=NA)
-#legend(x=0.15,y=1.12, legend = unique(mycl), col = unique(as.numeric(mycl)), lty= 1, lwd = 3, cex=.5, title="clusters", xpd=T)
-#DE_counts[[ cmethods[m] ]] = as.factor(mycl)
-#gopath_method <- file.path(outpath, paste('GO_All_', colnames(cmat)[k],'/',cmethods[m], sep=""))
-#dir.create(gopath_method)
-#
- #for(l in 1:length( levels (DE_counts[[cmethods[m]]] ) ) ) {
-#FDR05 <- data.frame(gene=DE_counts$gene, cluster=DE_counts[[cmethods[m]]], FDR=DE_counts[[paste('FDR.',colnames(cmat)[k], sep="")]] )
-# write.table(data.frame(gene=FDR05[,1], FDR=FDR05[,3]), file=file.path(gopath_method, paste('cluster_',l ,'_',cmethods[m],'.txt', sep="")), quote=F, row.names=F, sep='\t')
- #}
- #}
- #dev.off()
-
-# print(paste(colnames(cmat)[k], 'groups:  median', length(levels(DE_counts$median)), '  ward', length(levels(DE_counts$ward)), '  complete', length(levels(DE_counts$complete)), '  average', length(levels(DE_counts$average)), '  ward2', length(levels(DE_counts$ward.D2)), '  mcquitty', length(levels(DE_counts$mcquitty)), '  centroid', length(levels(DE_counts$centroid)), '  centroid', length(levels(DE_counts$centroid)),sep=" "))
-
-# write.table(DE_counts, file=file.path(outpath, paste('clusters_All_', sub_analyse, '_',colnames(cmat)[k], '.txt', sep="")), quote=F, row.names=F, sep='\t')
-# }
-#}
-
-
-# all - takes long and not too useful so commented out
- #for(k in 1:ncol(cmat)) {
- #pdf(file.path(outpath, paste('Heatmap_all_', colnames(cmat)[k], '_', sub_analyse, '.pdf', sep="")), width=8, height=8)
- #cmat_subset <- subset(cmat, cmat[[colnames(cmat)[k]]]!=0)
- #row.names(cmat_subset)
-# # str(design)
-# design_subset <- design[design$group %in% row.names(cmat_subset),]
-
-# length(as.character(design_subset$sample))
-
- #DE_counts <- restab_logCPM
- #DE_counts_relevant <- subset(DE_counts, select=as.character(design_subset$sample))
- ## row.names(DE_counts_relevant) <- NULL
-# colnames(DE_counts_relevant) <- paste(colnames(DE_counts_relevant), '\n', design_subset$group)
-# heatmap.2(as.matrix(DE_counts_relevant), col=colorpanel(100, cbred,'white',cbblue), scale="row", key=T, keysize=1.3, density.info="density", trace="none", cexCol=0.5, cexRow=0.6, main=paste(sub_analyse, strsplit(colnames(cmat)[k], '\\.')[[1]][1], 'vs', strsplit(colnames(cmat)[k], '\\.')[[1]][2], 'All'), srtCol=45, key.title=NA)
- #dev.off()
- #}

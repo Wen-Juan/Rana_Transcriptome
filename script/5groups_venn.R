@@ -9,15 +9,15 @@ library(lattice)
 library("SuperExactTest")
 
 #for the shared female-biased genes across five stages.
-setwd <-'/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/'
-datapath <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/'
-results <- '/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/'
+setwd <-'~/Rana_Transcriptome/'
+datapath <- '~/Rana_Transcriptome/input/'
+results <- '~/Rana_Transcriptome/output/'
 
 #for tissues from developmental stages, shared female-biased genes
-all_sbias <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/venn_diag/de_0.05_1_Am_alltissues.txt", header = TRUE)
+all_sbias <- read.table("~/Rana_Transcriptome/input/venn_diag/de_0.05_1_Am_alltissues.txt", header = TRUE)
 str(all_sbias)
 
-all_ortholog_sbias <- read.table("/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/venn_diag/de_0.05_1_orthol_sbun_fi.txt", header = TRUE)
+all_ortholog_sbias <- read.table("~/Rana_Transcriptome/input/venn_diag/de_0.05_1_orthol_sbun_fi.txt", header = TRUE)
 str(all_ortholog_sbias)
 
 ###orhologs based on venn diagram for sex-biased gene expression
@@ -37,7 +37,7 @@ venn.plot0 <- venn.diagram(list(G23 = as.character(sbias_g23), G27 = as.characte
 grid.arrange(gTree(children=venn.plot0),ncol = 1 )
 
 venn_sbias_out0 <- arrangeGrob(gTree(children=venn.plot0),ncol = 1 )
-ggsave(file="shared_sbias_larva_orthologs.pdf", venn_sbias_out0, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_sbias_larva_orthologs.pdf", venn_sbias_out0, path = "~/Rana_Transcriptome/output/figures/")
 
 
 sbias_brain <-all_ortholog_sbias$gid[all_ortholog_sbias$stage=='Brain']
@@ -54,7 +54,7 @@ venn.plot1 <- venn.diagram(list(Gonad = as.character(sbias_gonad), Brain = as.ch
 grid.arrange(gTree(children=venn.plot1),ncol = 1 )
 
 venn_sbias_out1 <- arrangeGrob(gTree(children=venn.plot1),ncol = 1 )
-ggsave(file="shared_sbias_adult_orthologs.pdf", venn_sbias_out1, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_sbias_adult_orthologs.pdf", venn_sbias_out1, path = "~/Rana_Transcriptome/output/figures/")
 
 ##############
 ############## LARVA
@@ -82,7 +82,7 @@ venn.plot0 <- venn.diagram(list(G23 = as.character(sbias_g23), G27 = as.characte
 grid.arrange(gTree(children=venn.plot0),ncol = 1 )
 
 venn_fbias_out0 <- arrangeGrob(gTree(children=venn.plot0),ncol = 1 )
-ggsave(file="shared_sbias_larva.pdf", venn_fbias_out0, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_sbias_larva.pdf", venn_fbias_out0, path = "~/Rana_Transcriptome/output/figures/")
 
 ##investigate shared sex-biased genes between G43 and G46 and the direction of sex bias.
 sbias_g43 <- larva_sbias$gid[larva_sbias$stage=='G43']
@@ -97,7 +97,7 @@ venn.plot1 <- venn.diagram(list(G43=as.character(sbias_g43), G46=as.character(sb
 
 grid.arrange(gTree(children=venn.plot1),ncol = 1 )
 venn_fbias_out0 <- arrangeGrob(gTree(children=venn.plot1),ncol = 1 )
-ggsave(file="shared_sbias_g43g46.pdf", venn_fbias_out0, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_sbias_g43g46.pdf", venn_fbias_out0, path = "~/Rana_Transcriptome/output/figures/")
 
 list_g43g46 <- list(G43=as.character(sbias_g43), G46=as.character(sbias_g46))
 overlap_g43g46 <- calculate.overlap(list_g43g46)
@@ -118,7 +118,7 @@ res=supertest(share_5stage, n=total3)
 plot(res, Layout="landscape", degree=2:5, sort.by="size")
 summary(res)
 
-write.csv(summary(res)$Table, file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/5stage_sb_testbychance.csv", row.names=FALSE)
+write.csv(summary(res)$Table, file="~/Rana_Transcriptome/output/figures/5stage_sb_testbychance.csv", row.names=FALSE)
 ##
 ##################
 #######larvae shared female-biased genes
@@ -143,7 +143,7 @@ grid.arrange(gTree(children=venn.plot),ncol = 1 )
 
 ## to output to pdf
 venn_fbias_out <- arrangeGrob(gTree(children=venn.plot),ncol = 1 )
-ggsave(file="shared_fbias_larva.pdf", venn_fbias_out, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_fbias_larva.pdf", venn_fbias_out, path = "~/Rana_Transcriptome/output/figures/")
 
 
 ##############
@@ -168,7 +168,7 @@ venn.plot1 <- venn.diagram(list(G23 = as.character(mbias_g23), G27 = as.characte
 grid.arrange(gTree(children=venn.plot1),ncol = 1 )
 
 venn_fbias_out1 <- arrangeGrob(gTree(children=venn.plot1),ncol = 1 )
-ggsave(file="shared_mbias_larva.pdf", venn_fbias_out1, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_mbias_larva.pdf", venn_fbias_out1, path = "~/Rana_Transcriptome/output/figures/")
 
 ##############
 ############## ADULT
@@ -195,7 +195,7 @@ venn.plot2 <- venn.diagram(list(Gonad = as.character(adult_gonad), Brain = as.ch
 grid.arrange(gTree(children=venn.plot2),ncol = 1 )
 
 venn_fbias_out2 <- arrangeGrob(gTree(children=venn.plot2),ncol = 1 )
-ggsave(file="shared_sbias_adult.pdf", venn_fbias_out2, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_sbias_adult.pdf", venn_fbias_out2, path = "~/Rana_Transcriptome/output/figures/")
 
 #extract overlap list between gonad and liver tissues
 gonad_liver <- list(Gonad = as.character(adult_gonad), Liver = as.character(adult_liver))
@@ -210,7 +210,7 @@ gonad_G46 <- list(Gonad = as.character(adult_gonad), G46=as.character(sbias_g46)
 gobrain_G46 <- calculate.overlap(gonad_G46)
 gonad_G46_list <- gobrain_G46$a3
 
-write.table(gonad_G46_list, file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/input/venn_diag/gonadg46_sb_overlap.txt", row.names=FALSE)
+write.table(gonad_G46_list, file="~/Rana_Transcriptome/input/venn_diag/gonadg46_sb_overlap.txt", row.names=FALSE)
 
 #################
 #######adult shared female-biased genes
@@ -233,7 +233,7 @@ venn.plot3 <- venn.diagram(list(Gonad = as.character(adult_fgonad), Brain = as.c
 grid.arrange(gTree(children=venn.plot3),ncol = 1 )
 
 venn_fbias_out3 <- arrangeGrob(gTree(children=venn.plot3),ncol = 1 )
-ggsave(file="shared_fbias_adult.pdf", venn_fbias_out3, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_fbias_adult.pdf", venn_fbias_out3, path = "~/Rana_Transcriptome/output/figures/")
 
 #################
 #######adult shared male-biased genes
@@ -256,7 +256,7 @@ venn.plot4 <- venn.diagram(list(Gonad = as.character(adult_mgonad), Brain = as.c
 grid.arrange(gTree(children=venn.plot4),ncol = 1 )
 
 venn_fbias_out4 <- arrangeGrob(gTree(children=venn.plot4),ncol = 1 )
-ggsave(file="shared_mbias_adult.pdf", venn_fbias_out4, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_mbias_adult.pdf", venn_fbias_out4, path = "~/Rana_Transcriptome/output/figures/")
 
 
 #################
@@ -282,7 +282,7 @@ venn.plot5 <- venn.diagram(list(Gonad = as.character(adult_sgonad), G46 = as.cha
 grid.arrange(gTree(children=venn.plot5),ncol = 1 )
 
 venn_fbias_out5 <- arrangeGrob(gTree(children=venn.plot5),ncol = 1 )
-ggsave(file="shared_sbias_G46gonad.pdf", venn_fbias_out5, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_sbias_G46gonad.pdf", venn_fbias_out5, path = "~/Rana_Transcriptome/output/figures/")
 
 ################
 #######G46 and gonad shared female-biased genes
@@ -301,7 +301,7 @@ venn.plot6 <- venn.diagram(list(Gonad = as.character(adult_fgonad), G46 = as.cha
 grid.arrange(gTree(children=venn.plot6),ncol = 1 )
 
 venn_fbias_out6 <- arrangeGrob(gTree(children=venn.plot6),ncol = 1 )
-ggsave(file="shared_fbias_G46gonad.pdf", venn_fbias_out6, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_fbias_G46gonad.pdf", venn_fbias_out6, path = "~/Rana_Transcriptome/output/figures/")
 
 ################
 #######G46 and gonad shared male-biased genes
@@ -316,7 +316,7 @@ venn.plot7 <- venn.diagram(list(Gonad = as.character(adult_mgonad), G46 = as.cha
 grid.arrange(gTree(children=venn.plot7),ncol = 1 )
 
 venn_fbias_out7 <- arrangeGrob(gTree(children=venn.plot7),ncol = 1 )
-ggsave(file="shared_mbias_G46gonad.pdf", venn_fbias_out7, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_mbias_G46gonad.pdf", venn_fbias_out7, path = "~/Rana_Transcriptome/output/figures/")
 
 
 #################
@@ -332,7 +332,7 @@ venn.plot8 <- venn.diagram(list(G43 = as.character(sbias_g43), G46 = as.characte
 grid.arrange(gTree(children=venn.plot8),ncol = 1 )
 
 venn_fbias_out8 <- arrangeGrob(gTree(children=venn.plot8),ncol = 1 )
-ggsave(file="shared_sbias_g43g46adults.pdf", venn_fbias_out8, path = "/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/")
+ggsave(file="shared_sbias_g43g46adults.pdf", venn_fbias_out8, path = "~/Rana_Transcriptome/output/figures/")
 
 
 #test whether the overlap is greater than by chance.
@@ -348,7 +348,7 @@ res=supertest(share_gonadG46, n=total3)
 plot(res, Layout="landscape", sort.by="size")
 summary(res)
 
-write.csv(summary(res)$Table, file="/Users/Wen-Juan/my_postdoc/useful_scripts/Rana_Transcriptome/output/figures/gonadg46_sb_testbychance.csv", row.names=FALSE)
+write.csv(summary(res)$Table, file="~/Rana_Transcriptome/output/figures/gonadg46_sb_testbychance.csv", row.names=FALSE)
 
 #correction for multiple test.
 Pvals = c(0.000013, 0.0002, 0.04,0.4) ### vector of pvals
