@@ -1,3 +1,0 @@
-GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
-GO:0034663	endoplasmic reticulum chaperone complex	5	2	0.02	79	0.00015	0.153	0.00015	out_CC
-GO:0005578	proteinaceous extracellular matrix	201	4	0.79	14	0.00782	0.019	0.00782	out_CC

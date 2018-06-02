@@ -1,9 +1,0 @@
-GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
-GO:0005179	hormone activity	22	3	0.15	20	0.00044	0.00489	0.00044	out_MF
-GO:0047023	androsterone dehydrogenase activity	5	2	0.03	165	0.00046	0.09021	0.00046	out_MF
-GO:0004022	alcohol dehydrogenase (NAD) activity	8	2	0.06	1	0.00127	1.7e-05	0.00127	out_MF
-GO:0020037	heme binding	132	5	0.91	10	0.00208	0.00188	0.00208	out_MF
-GO:0008395	steroid hydroxylase activity	40	3	0.28	3	0.00256	0.00019	0.00256	out_MF
-GO:0004181	metallocarboxypeptidase activity	15	2	0.1	6	0.00463	0.00044	0.00463	out_MF
-GO:0005506	iron ion binding	162	5	1.12	5	0.00502	0.00022	0.00502	out_MF
-GO:0015020	glucuronosyltransferase activity	21	2	0.14	97	0.00901	0.04420	0.00901	out_MF

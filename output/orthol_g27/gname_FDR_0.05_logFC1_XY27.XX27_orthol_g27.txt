@@ -1,4 +1,0 @@
-x
-pgc-like.1
-LOC100492996
-siglec15

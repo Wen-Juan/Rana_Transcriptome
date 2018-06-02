@@ -1,7 +1,0 @@
-GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
-GO:0052696	flavonoid glucuronidation	7	2	0.05	185	0.00085	0.0475	0.00085	out_BP
-GO:0052697	xenobiotic glucuronidation	7	2	0.05	186	0.00085	0.0475	0.00085	out_BP
-GO:0035358	regulation of peroxisome proliferator ac...	8	2	0.05	128	0.00113	0.0320	0.00113	out_BP
-GO:0007586	digestion	39	3	0.25	6	0.00201	0.0012	0.00201	out_BP
-GO:0071361	cellular response to ethanol	15	2	0.1	298	0.00412	0.0733	0.00412	out_BP
-GO:0006699	bile acid biosynthetic process	21	2	0.14	32	0.00804	0.0073	0.00804	out_BP

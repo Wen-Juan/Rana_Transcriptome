@@ -1,8 +1,0 @@
-GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
-GO:0003735	structural constituent of ribosome	136	97	80.98	1	0.0027	5.5e-07	0.0027	out_MF
-GO:0019843	rRNA binding	50	40	29.77	14	0.0063	0.0097	0.0018	out_MF
-GO:0008013	beta-catenin binding	55	42	32.75	9	0.0067	0.0052	0.0067	out_MF
-GO:0001784	phosphotyrosine residue binding	22	19	13.1	18	0.0067	0.0135	0.0067	out_MF
-GO:0016779	nucleotidyltransferase activity	113	73	67.29	7	0.0074	0.0043	0.1576	out_MF
-GO:0005070	SH3/SH2 adaptor activity	32	26	19.06	11	0.0079	0.0074	0.0079	out_MF
-GO:0048306	calcium-dependent protein binding	32	26	19.06	60	0.0079	0.0409	0.0079	out_MF

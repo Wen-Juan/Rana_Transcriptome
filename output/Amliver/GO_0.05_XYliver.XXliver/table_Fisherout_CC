@@ -1,3 +1,0 @@
-GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
-GO:0005615	extracellular space	1159	20	11.97	10	0.0019	0.014	0.012	out_CC
-GO:0031090	organelle membrane	1488	13	15.36	1	0.0100	5.8e-05	0.790	out_CC

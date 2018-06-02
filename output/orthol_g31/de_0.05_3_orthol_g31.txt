@@ -1,1 +1,0 @@
-gid	gname	chr	start	end	logCPM	logFC.XY31.XX31	PV.XY31.XX31	FDR.XY31.XX31

@@ -29,7 +29,10 @@ Prank_and_PAML.sh
 for_loop_codeml.sh
 
 ### Step 5 Tissue specificity Tau calculation, investigating relationship between Tau with dN/dS, and between Tau and sex bias.
-
+see the scripts in folder /script/
+tau.R
+5groups_venn.R
+Expression_slidingwindow.r
 
 ### Step6 Gene ontology analysis
 see the scripts in folder /script/
@@ -37,3 +40,6 @@ GO_analysis_05.sh
 GO_BP.R
 GO_CC.R
 GO_MF.R
+
+### Step7 Sex bias gene expression in RPKM and related analysis
+RPKM.R

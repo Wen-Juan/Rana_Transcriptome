@@ -1,3 +1,0 @@
-GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
-GO:0005615	extracellular space	1159	10	5.76	17	0.0049	0.028	0.053	out_CC
-GO:0043186	P granule	5	1	0.02	342	0.0246	0.673	0.025	out_CC

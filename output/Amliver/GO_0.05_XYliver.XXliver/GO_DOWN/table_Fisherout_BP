@@ -1,9 +1,0 @@
-GO.ID	Term	Annotated	Significant	Expected	Rank in topgoKS	topgoFisher	topgoKS	classicFisher	cluster
-GO:0034383	low-density lipoprotein particle clearan...	10	2	0.05	1027	0.00094	0.221	0.00094	out_BP
-GO:0071276	cellular response to cadmium ion	12	2	0.06	1199	0.00137	0.257	0.00137	out_BP
-GO:0034377	plasma lipoprotein particle assembly	13	2	0.06	1265	0.00162	0.272	0.00162	out_BP
-GO:0009725	response to hormone	387	7	1.81	1109	0.00434	0.240	0.00195	out_BP
-GO:0001539	cilium or flagellum-dependent cell motil...	14	2	0.07	567	0.00458	0.137	0.00188	out_BP
-GO:0032570	response to progesterone	23	2	0.11	503	0.00509	0.120	0.00509	out_BP
-GO:1900026	positive regulation of substrate adhesio...	26	2	0.12	1580	0.00648	0.338	0.00648	out_BP
-GO:0003341	cilium movement	32	2	0.15	111	0.00972	0.029	0.00972	out_BP

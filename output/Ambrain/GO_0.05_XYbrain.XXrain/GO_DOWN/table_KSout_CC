@@ -1,5 +1,0 @@
-GO.ID	Term	Annotated	Significant	Expected	Rank in topgoFisher	topgoKS	topgoFisher	classicFisher	cluster
-GO:0005747	mitochondrial respiratory chain complex ...	21	0	0.11	94	0.00033	1.000	1.000	out_CC
-GO:0034774	secretory granule lumen	63	2	0.33	29	0.00113	0.044	0.044	out_CC
-GO:0005762	mitochondrial large ribosomal subunit	24	0	0.13	95	0.00463	1.000	1.000	out_CC
-GO:0070469	respiratory chain	45	0	0.24	96	0.00730	1.000	1.000	out_CC
