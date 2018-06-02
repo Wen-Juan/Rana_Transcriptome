@@ -1,3 +1,0 @@
-model_coefficients	XY46/SR46
-Am_46_M	1
-Am_46_SR	-1

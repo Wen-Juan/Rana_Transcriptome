@@ -1,3 +1,0 @@
-model_coefficients	XY43/XX43
-Am_43_M	1
-Am_43_F	-1

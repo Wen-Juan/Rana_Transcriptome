@@ -1,3 +1,0 @@
-model_coefficients	XYtestis/XXovary
-F_O	-1
-M_T	1

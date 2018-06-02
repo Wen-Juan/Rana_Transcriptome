@@ -1,7 +1,0 @@
-sample	pop	stage	sex	group
-"Am2_231"	"Am"	"23"	"F"	"Am_23_F"
-"Am2_233"	"Am"	"23"	"M"	"Am_23_M"
-"Am4_231"	"Am"	"23"	"M"	"Am_23_M"
-"Am4_232"	"Am"	"23"	"F"	"Am_23_F"
-"Am5_231"	"Am"	"23"	"M"	"Am_23_M"
-"Am5_232"	"Am"	"23"	"F"	"Am_23_F"
