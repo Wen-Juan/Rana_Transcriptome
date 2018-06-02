@@ -1,65 +1,14 @@
-# Rana_Transcriptome
-This projects intends to make a complete transcriptome, including 5 developmental stages and 3 adult tissues. We are focusing on sex-biased genes temporal dynamics through development, tissue-specific sex-biased gene expression, detecting dosage compensation, sex chromosome divergence etc.
+## Rana_Transcriptome
+This projects intends to assemble the most comprehensive transcriptome of Rana temporaria, collecting samples from five developmental stages and three adult tissues. This allows the study of sex-biased gene expression throughout development, and its effect on the rate of gene evolution while accounting for pleiotropic expression, which is known to negatively correlate with evolutionary rate.
 
-# A brief pipeline for this project is as follows:
+## A brief pipeline for this project is as follows:
 
-# Step1: Transcriptome assembly with Trinity
-AmmMT_HIMin1.fasta - full transciptome-masked using Dan's db at 75% - 61,835 transcripts
-#sample used to assembly:
-Froglets:
-Am2_231_L1
-Am2_274_L1
-Am2_314_L3
-Am2_433_L3
-Am2_463_L3
-Male - just 1 male - A8:
-A8MB - brain
-A8ML - liver
-A8MT - testes
-Female - two females - A8 (couple to male A8), A12
-A12FB - brain
-A8FL1 - liver
-A8FO2 - ovaries
+### Step1: Transcriptome is first assembled with Trinity v2.3.0. Following a few filtering steps, transcripts were filtered with possible transposable element insertions by masking the transcriptome assembly using a custom repeat library for Rana temporaria using RepeatMasker, only retaining transcripts that were at least 75% unmasked.
 
-# Step2: Quantifying abundances of transcripts from RNA-Seq with Kallisto
-#separate developmental stages and adult tissues
-Total samples:
-developmental stages: 5
-stage female male: at least 3 per sex per stage, 35 samples in total.
-adults:
-9 pairs, 3 tissues, 29 libraries (almost 5 replicates per tissue per sex)
-#Step2.1: developmental stages
+### Step2: Quantifying abundances of transcripts from RNA-Seq with Kallisto v0.43.0.
 
-# index the transcriptome
-module add UHTS/Analysis/kallisto/0.43.0
-kallisto index -i am_transcripts.idx /scratch/beegfs/monthly/wjma/amm_rna/expression/AmmMT_HIMin1.fasta
+### Step 3 Analyse differential (sex-biased) gene expression with edgeR v3.4.
 
-# quantify transcript counts
-#for each stage, do the quantification using the following scripts.
-module add UHTS/Analysis/kallisto/0.43.0
-for f in Am2_23*_pairedR1.fastq
-do
-kallisto quant -i /scratch/beegfs/monthly/wjma/amm_rna/expression/am_transcripts.idx -o /scratch/beegfs/monthly/wjma/amm_rna/expression/kallisto_am/${f%%_pairedR1.fastq} -b 1000 ${f%%_pairedR1.fastq}_pairedR1.fastq ${f%%_pairedR1.fastq}_pairedR2.fastq
-done
-...
-#Step2.2:adult tissues for quantifying gene expression.
+### Step 4 Gene divergence analysis (dN/dS), with PRANK v140603 and codeml in PAML.
 
-# Create gene expression matrix.
-module add UHTS/Assembler/trinityrnaseq/2.4.0
-module add UHTS/Analysis/kallisto/0.43.0
-module add R/3.3.2
-
-/software/UHTS/Assembler/trinityrnaseq/2.1.1/util/abundance_estimates_to_matrix.pl \
---est_method kallisto  --out_prefix Amm_ \
-Am2_231_L1/abundance.tsv \
-Am2_233_L1/abundance.tsv \
-Am2_274_L1/abundance.tsv \
-...
-
-# Step 3 Analyse differential (sex-biased) gene expression with edgeR.
-
-# Step 4 Gene divergence analysis (dN/dS), with PRANK v140603 and codeml in PAML.
-
-# Step 5 Dosage compensation analysis 
-
-# Step 6 Faster-X effects 
+### Step 5 Tissue specificity Tau calculation, investigating relationship between Tau with dN/dS, and between Tau and sex bias.
