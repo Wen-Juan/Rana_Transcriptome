@@ -1,4 +1,4 @@
-## Rana_Transcriptome
+## Rana temporaria_transcriptome_sex bias_tissue specificity
 This projects intends to assemble the most comprehensive transcriptome of Rana temporaria, collecting samples from five developmental stages and three adult tissues. This allows the study of sex-biased gene expression throughout development, and its effect on the rate of gene evolution while accounting for pleiotropic expression, which is known to negatively correlate with evolutionary rate.
 
 ## A brief pipeline for this project is as follows:
