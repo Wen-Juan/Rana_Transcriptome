@@ -3,7 +3,8 @@ This projects intends to assemble the most comprehensive transcriptome of Rana t
 
 ## A brief pipeline for this project is as follows:
 
-### Step1: Transcriptome is first assembled with Trinity v2.3.0. Following a few filtering steps, transcripts were filtered with possible transposable element insertions by masking the transcriptome assembly using a custom repeat library for Rana temporaria using RepeatMasker, only retaining transcripts that were at least 75% unmasked.
+### Step1: Transcriptome is first assembled with Trinity v2.3.0. 
+Following a few filtering steps, transcripts were filtered with possible transposable element insertions by masking the transcriptome assembly using a custom repeat library for Rana temporaria using RepeatMasker, only retaining transcripts that were at least 75% unmasked.
 the custom repeat library can be found in folder /TE_library
 TE_repeats.fasta
 
